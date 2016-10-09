@@ -18,7 +18,8 @@ The following section describes the behaviour of the FlatFindr Application. This
 3. Advertisements in General (open, display, bookmarks etc.)
 4. Searching Ads
 5. Alerts
-
+6. Visiting times
+7. Messaging with Advertiser
 
 #### 2.1.2 User Management
 The following section provides an overview of the basic behavior of becoming a member of FlatFindr.
@@ -44,7 +45,7 @@ The following section provides a high-level overview of how to publish a flat ad
 |10   | Add Visiting times to ads         | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add possible visiting times to the add. The advertiser can first choose a day from the calender and then define a time period (hh:mm) when the visiting of the flat is possible. The advertiser can add as many visiting time periods as wished. <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise       | LOW |
 |11   | Edit ads                          | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Member has a published ad</li></ul><br>**Expected**<br>The advertiser can edit the information provided during ad publishing afterwards by selecting 'Edit ad' on the page of the corresponding advertisement. <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise                                           | LOW |
 
-#### 2.1.2 Advertisements in General (open, display, bookmarks etc.)
+#### 2.1.3 Advertisements in General (open, display, bookmarks etc.)
 The following section provides an overview of the handling of ads once they are published i.e. the displaying, different tools to manage the ads etc. 
 
 | ID  | Title                              | Description                      | Priority |
@@ -67,7 +68,7 @@ The following section provides a high-level overview of the different search fun
 | 21 | Filter the results                 | **Condition to show**<ul><li> User has searched for a flat </li></ul><br>**Expected**<br>Next to the list view of the search results, there is a tool for filtering the results. Firstly, it displays the initial search criterias, so the search can be detailed even further more without going back to the search view. Below, the user can add additional search criteria such as move in / move out date, flat charactersistics such as wifi, smokers etc. After ticking/adding the filters and selecting the filter button, the search results are reduced to the once matching the new filter criterias.  <br><br>**Main Actor**<br>User searching for a flat                                                                                  | HIGH |
 | 22 | Sorting the results                 | **Condition to show**<ul><li> User has searched for a flat </li></ul><br>**Expected**<br>Above the list view of the search results there is a drop-down where the user can add sorting criteria. User should be able to sort according to price, move in date and date of ad creation (all of them ascending and descending). <br><br>**Main Actor**<br>User searching for a flat                                                                                                    | MED |
 
-#### 2.1.4 Alerts
+#### 2.1.5 Alerts
 Alerts are a kind of automatic search. The following section explains the main use cases of this feature. 
 
 | ID  | Title                              | Description                      | Priority |
@@ -75,11 +76,34 @@ Alerts are a kind of automatic search. The following section explains the main u
 | 23 | Create alerts                       | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Opened Alerts section in menu</li></ul><br>**Expected**<br>User can create an alert by setting up the criteria for matching new flats/ads (similar to search criterias). If a new ad is published matching the search criteria, an alert will be send to the user. <br><br>**Main Actor**<br>User with existing member account.                                                   | MED |
 | 24 | List all active alerts             | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Opened Alerts section in menu</li></ul><br>**Expected**<br>Below the alerts creation section, all active alerts are listed and can be managed i.e. deleted.  <br><br>**Main Actor**<br>User with existing member account.                                                                 | MED |
 
+#### 2.1.6 Visiting times
+Members can manage and arange visits with interested renters. The following section shall point out the main uses cases behind
+
+| ID  | Title                              | Description                      | Priority |
+|:--- |:-----------------------------------|:---------------------------------|:---------|
+| 25 | Send enquiry for visiting           | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Ad with visiting times set up</li></ul><br>**Expected**<br>If the advertiser has setup visiting times (see ID 10) in his ad, then logged in users can send an enquiry for a certain (or as many as he wished) time period. The enquiry will be sent to the advertiser for acceptance. After the enquiry for a specific visiting time has been sent, the label changes to 'Enquiry sent' <br><br>**Main Actor**<br>User with existing member account                   | MED |
+| 26 | Manage Enquiries for visiting        | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Ad with visiting times set up</li><li>user sent enquiry to visit at certain time</li></ul><br>**Expected**<br>All enquiries sent by interested users to visit the flat at a certain visiting time are shown listed in the menu under 'Enquiries'. The Advertiser can then see the sender of the enquiry (username), the affected ad, selected visiting time and the date the enquiry was sent. The advertiser then can either accept or decline the enquire for the visit. The selection can be undone until the page is refreshed. Afterwards, the decision is shown in the table with the visits and the user is informed corespondingly. Accepted visitors are added to the scheduler (see ID 27) <br><br>**Main Actor**<br>User with existing member account i.e. Advertiser  | HIGH |
+| 27 | List advertisers presentations      | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Visiting times set up (ID 10) </li></ul><br>**Expected**<br>Each visiting time that was setup during publishing of the ad, there is a line in the scheduler (Menu point). For each visit entry in the table there is the option to see the ad and the list of  visitors (see ID 29)for this specific visit. <br><br>**Main Actor**<br>User with existing member account i.e. Advertiser      | MED |
+| 28 | List own visits                    | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Sent enquiry for an ad/visiting time </li><li>Enquiry accepted by Advertiser</li></ul><br>**Expected**<br>All accepted enquiries for visiting rooms/flats are shown in the scheduler in the 'Your visits' section. They show the address of each flat, the arranged date and time of the visit and a shortcut to the ad page. <br><br>**Main Actor**<br>User with existing member account i.e. Advertiser      | MED |
+| 29 | Show visitors                    | **Condition to show**<ul><li>         Member</li><li>Logged In</li><li>Sent enquiry for an ad/visiting time </li><li>Enquiry accepted by Advertiser</li></ul><br>**Expected**<br>For each visit in the scheduler (see ID 26), the advertiser can list the visitors. The visitors are shown in a tbale indicating their Full name, username, shortcut to their profile and a 5-Star rating system. In the rating system, the advertiser can rank his visitors and choose the best suiting.  <br><br>**Main Actor**<br>User with existing member account i.e. Advertiser     | MED |
+
+#### 2.1.7 Messaging with Advertiser
+In order to better arrange visits and clarfiy questions about flats, there is the possibilty to contact an advertiser. The main use cases in this respect are listed below.
+
+| ID  | Title                              | Description                      | Priority |
+|:--- |:-----------------------------------|:---------------------------------|:---------|
+| 30 | Contact Advertiser                  | **Condition to show**<ul><li>         Member</li><li>Logged In</li><li>Opened ad page of flat</li></ul><br>**Expected**<br>In the advertiser section of each ad, logged in users can choose to contact the advertiser. If selected a pop up will open where the user has to type in the subject of his message and the message itself. The advertiser can see the message in the 'Messages' section in the menu (see ID 31). <br><br>**Main Actor**<br>User with existing member account | MED |
+| 31 | Receive and open Messages           | **Condition to show**<ul><li>         Member</li><li>Logged In</li><li>Advertiser of a flat</li><li>user sent message</li></ul><br>**Expected**<br>In the messaging section, new messages are shown in the inbox, indicating the subject, sender, recipient and date. If one message is selected, a preview of the message is shown below. Sent messages can be viewed similarly in the 'Sent' Section. <br><br>**Main Actor**<br>Advertiser                             | MED |
+| 32 | Advertisers new Messages           | **Condition to show**<ul><li>         Member</li><li>Logged In</li><li>Advertiser</li><li>Messaging section in menu</li></ul><br>**Expected**<br>Similarly to ID 30, the advertiser can select 'New' in the messaging section. A pop up will open where he can type in the username of a user (if not exsting there will be an error), subject and message.  <br><br>**Main Actor**<br>Advertiser                                                            | MED |
+| 32 | New message indicator             | **Condition to show**<ul><li>         Member</li><li>Logged In</li><li>Unread message received</li></ul><br>**Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix, e.g. One unread Message would be 'Messages (1)'. After reading the message, the brackets disappear.  <br><br>**Main Actor**<br>User with existing account                                                                         | LOW |
+
+
 Sampel table for extension. 
 
 | ID  | Title                              | Description                      | Priority |
 |:--- |:-----------------------------------|:---------------------------------|:---------|
 | newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
+
 
 Specific requirements
 ---------------------

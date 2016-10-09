@@ -14,6 +14,10 @@ Introduction
 ### 2.1 Use cases
 The following section describes the behaviour of the FlatFindr Application. This should provide a high-level overview of the use cases and give an impression abou the main conceptual ideas behind. The use cases are grouped as follows: 
 1. User Management
+2. Publish Ads
+3. Advertisements in General (open, display, bookmarks etc.)
+4. Searching Ads
+5. Alerts
 
 
 #### 2.1.2 User Management
@@ -28,7 +32,6 @@ The following section provides an overview of the basic behavior of becoming a m
 |5    | Members can edit the profile      |**Condition to show**<ul><li>Member (existing account) </li><li>user navigates to public profile page</li></ul><br>**Expected**<br>Members can change the personal information provided during sign up by selecting "Edit profile". All personal information such as name, e-mail and password can be changed. Futhermore, the user can add a personal description in the 'About me' entry field. <br><br>**Main Actor**<br>User with existing Member Account                                                                                     | LOW |
 |6   | Members can access public profiles |**Condition to show**<ul><li>Member (existing account) </li><li> Member opens the add of another member and selects 'Visit profile'</li></ul><br>**Expected**<br>Member can see the public profile of the other member. Visible information are the username (e-mail address), the name and the personal description (About me).<br><br>**Main Actor**<br>User with existing Member Account                                                                                      | LOW |
 
-
 #### 2.1.2 Publish Flat Ads
 The following section provides a high-level overview of how to publish a flat ad in the FlatFinder application. 
 
@@ -39,13 +42,44 @@ The following section provides a high-level overview of how to publish a flat ad
 |8   | Add Preferences to ads                | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add an open text about their preferences in a new room mate, e.g. 'Student of computer science' or 'Must me male'.  <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise| LOW |
 |9   | Add Pictures to ads                | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add pictures of the flat/room to the add. The advertiser can upload pictures from his local computer. After uploading, the form presents the picutres as tables indicating their size and name. By selecting 'Delete' the uploaded picutre can be removed again. There is currently no limit in the amount of files to be uploaded <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise       | LOW |
 |10   | Add Visiting times to ads         | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add possible visiting times to the add. The advertiser can first choose a day from the calender and then define a time period (hh:mm) when the visiting of the flat is possible. The advertiser can add as many visiting time periods as wished. <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise       | LOW |
+|11   | Edit ads                          | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Member has a published ad</li></ul><br>**Expected**<br>The advertiser can edit the information provided during ad publishing afterwards by selecting 'Edit ad' on the page of the corresponding advertisement. <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise                                           | LOW |
+
+#### 2.1.2 Advertisements in General (open, display, bookmarks etc.)
+The following section provides an overview of the handling of ads once they are published i.e. the displaying, different tools to manage the ads etc. 
+
+| ID  | Title                              | Description                      | Priority |
+|:--- |:-----------------------------------|:---------------------------------|:---------|
+| 12  | Latest ads displayed on home section | **Condition to show**<ul><li> FlatFinder opened on homescreen </li><li> at least one ad published</li></ul><br>**Expected**<br>The latest four ads are published directly on the landing page of Flatfindr, with the latest up on the top. They show the title of the add, type of flat, location and price.  <br><br>**Main Actor**<br>Flatfindr Application                              | MED |
+| 13   | Open ads from landing page         | **Condition to show**<ul><li> at least one ad on landing page </li><li> user selecting the title of the ad</li></ul><br>**Expected**<br>The flat page opens showing all the details and information provided by the advertiser during publishing of the ad.  <br><br>**Main Actor**<br>User (either with or without account)                             | HIGH |
+| 14 | Show advertiser on ad page           | **Condition to show**<ul><li> opened ad page</li></ul><br>**Expected**<br>On the bottom of the ad page, the advertiser himself is shown. Logged in users can visit the profile of the advertiser and contact him. Non-logged in user can only see the username.   <br><br>**Main Actor**<br>Users (with exsting account or without                                                                   | LOW |
+| 15 | Members can send enquiries to visit  | **Condition to show**<ul><li> opened ad page</li><li>Member</li><li>Logged in</li></ul><br>**Expected**<br>In the section visiting times of the ad page, the logged in user can choose a date for his visit and select it to send the advertiser an equiry.<br><br>**Main Actor**<br>Users with existing Member account (logged in)                                                                  | LOW |
+| 16 | Members can contact advertiser       | **Condition to show**<ul><li> opened ad page</li><li>Member</li><li>Logged in</li></ul><br>**Expected**<br>In the section 'Advertiser' of the ad page, the logged in user can choose whether to visit the advertiser's profile or to contact the advertiser.<br><br>**Main Actor**<br>Users with existing Member account (logged in)                                          | LOW |
+| 17 | Bookmark ads                         | **Condition to show**<ul><li> opened ad page</li><li>Member</li><li>Logged in</li><li>Visitor is not the Advertiser of the ad</li></ul><br>**Expected**<br>On top of the ad page next to the tile, the user can select bookmark to remeber the ad. The ad will then be display in the menu 'My Rooms' in the section 'My bookmarks'<br><br>**Main Actor**<br>Users with existing Member account (logged in)                                                                 | LOW |
+| 18 | Remove Bookmarks                       | **Condition to show**<ul><li> opened ad page</li><li>Member</li><li>Logged in</li><li>Visitor is not the Advertiser of the ad</li><li>Bookmarked ad</li></ul><br>**Expected**<br>User can remove bookmark at the same location where he bookmarked it (see ID 17). <br><br>**Main Actor**<br>Users with existing Member account and bookmarks (logged in)                                    | LOW |
+| 19 | Own ads listed in 'My Rooms'        | **Condition to show**<ul><li>Member</li><li>Logged in</li><li>Published at least one ad</li></ul><br>**Expected**<br>All the published ads of a member are shown in the menu 'My Rooms' under the section 'My Advertisements'. <br><br>**Main Actor**<br>Advertisers                                                                               | LOW |
+
+#### 2.1.4 Search Ads
+The following section provides a high-level overview of the different search functionalities provided to find the right flat. 
+
+| ID  | Title                              | Description                      | Priority |
+|:--- |:-----------------------------------|:---------------------------------|:---------|
+| 20 | Searching for a flat/ad             | **Condition to show**<ul><li> User selects 'Search' label in menu bar </li></ul><br>**Expected**<br>Search page opens where user can set different search criterias. First of all, he can choose between looking for a room or a studio. Other search criterias include general location and radius around this location and the max. price. After selecting search, the matches are shown in a list view. Selecting the ad title will open the advertisement. <br><br>**Main Actor**<br>User searching for a flat                                                           | HIGH |
+| 21 | Filter the results                 | **Condition to show**<ul><li> User has searched for a flat </li></ul><br>**Expected**<br>Next to the list view of the search results, there is a tool for filtering the results. Firstly, it displays the initial search criterias, so the search can be detailed even further more without going back to the search view. Below, the user can add additional search criteria such as move in / move out date, flat charactersistics such as wifi, smokers etc. After ticking/adding the filters and selecting the filter button, the search results are reduced to the once matching the new filter criterias.  <br><br>**Main Actor**<br>User searching for a flat                                                                                  | HIGH |
+| 22 | Sorting the results                 | **Condition to show**<ul><li> User has searched for a flat </li></ul><br>**Expected**<br>Above the list view of the search results there is a drop-down where the user can add sorting criteria. User should be able to sort according to price, move in date and date of ad creation (all of them ascending and descending). <br><br>**Main Actor**<br>User searching for a flat                                                                                                    | MED |
+
+#### 2.1.4 Alerts
+Alerts are a kind of automatic search. The following section explains the main use cases of this feature. 
+
+| ID  | Title                              | Description                      | Priority |
+|:--- |:-----------------------------------|:---------------------------------|:---------|
+| 23 | Create alerts                       | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Opened Alerts section in menu</li></ul><br>**Expected**<br>User can create an alert by setting up the criteria for matching new flats/ads (similar to search criterias). If a new ad is published matching the search criteria, an alert will be send to the user. <br><br>**Main Actor**<br>User with existing member account.                                                   | MED |
+| 24 | List all active alerts             | **Condition to show**<ul><li> Member</li><li>Logged In</li><li>Opened Alerts section in menu</li></ul><br>**Expected**<br>Below the alerts creation section, all active alerts are listed and can be managed i.e. deleted.  <br><br>**Main Actor**<br>User with existing member account.                                                                 | MED |
 
 Sampel table for extension. 
 
 | ID  | Title                              | Description                      | Priority |
 |:--- |:-----------------------------------|:---------------------------------|:---------|
 | newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
-
 
 Specific requirements
 ---------------------

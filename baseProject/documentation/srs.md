@@ -18,6 +18,7 @@ The following section describes the behaviour of the FlatFindr Application. This
 
 #### 2.1.2 User Management
 The following section provides an overview of the basic behavior of becoming a member of FlatFindr. 
+
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |

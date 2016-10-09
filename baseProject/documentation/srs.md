@@ -29,7 +29,7 @@ The following section provides an overview of the basic behavior of becoming a m
 |6   | Members can access public profiles |**Condition to show**<ul><li>Member (existing account) </li><li> Member opens the add of another member and selects 'Visit profile'</li></ul><br>**Expected**<br>Member can see the public profile of the other member. Visible information are the username (e-mail address), the name and the personal description (About me).<br><br>**Main Actor**<br>User with existing Member Account                                                                                      | LOW |
 
 
-#### 2.1.2 Publish Ads
+#### 2.1.2 Publish Flat Ads
 The following section provides a high-level overview of how to publish a flat ad in the FlatFinder application. 
 | ID  | Title                              | Description                      | Priority |
 |:--- |:-----------------------------------|:---------------------------------|:---------|
@@ -38,11 +38,6 @@ The following section provides a high-level overview of how to publish a flat ad
 |8   | Add Preferences to ads                | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add an open text about their preferences in a new room mate, e.g. 'Student of computer science' or 'Must me male'.  <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise| LOW |
 |9   | Add Pictures to ads                | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add pictures of the flat/room to the add. The advertiser can upload pictures from his local computer. After uploading, the form presents the picutres as tables indicating their size and name. By selecting 'Delete' the uploaded picutre can be removed again. There is currently no limit in the amount of files to be uploaded <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise       | LOW |
 |10   | Add Visiting times to ads         | **Condition to show**<ul><li> Member </li><li> Logged in </li><li> Publish ad form opened</li></ul><br>**Expected**<br>Optionally, advertisers can add possible visiting times to the add. The advertiser can first choose a day from the calender and then define a time period (hh:mm) when the visiting of the flat is possible. The advertiser can add as many visiting time periods as wished. <br><br>**Main Actor**<br>User with exsting member account i.e. Advertise       | LOW |
-
-Sampel table for extension. 
-| ID  | Title                              | Description                      | Priority |
-|:--- |:-----------------------------------|:---------------------------------|:---------|
-| newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
 
 
 

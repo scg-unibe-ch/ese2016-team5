@@ -18,9 +18,9 @@ The following section describes the behaviour of the FlatFindr Application. This
 
 
 #### 2.1.2 User Management
-| ID | Title         | Description  | Priority 
+| ID | Title         | Description  | Priority |
 | -- |:-----------------------------:|:-------------------------:|---:|
-| 1  | Login possibilty on start page|**Condition to Show**<ul><li>User is not logged in</li><li>User is on start page of FlatFindr</li></ul><br><br>**Expected** Login label is shown in the menu bar in upper right hand corner. When customer selects the login label, the login page is shown, where he can login.<br><br>**Main Actor** Member (not logged in) and User who wants to sign up. | Med
+| 1  | Login possibilty on start page|**Condition to Show**<ul><li>User is not logged in</li><li>User is on start page of FlatFindr</li></ul><br><br>**Expected** Login label is shown in the menu bar in upper right hand corner. When customer selects the login label, the login page is shown, where he can login.<br><br>**Main Actor** Member (not logged in) and User who wants to sign up. | Med |
 
 
 

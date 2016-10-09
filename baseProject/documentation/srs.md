@@ -1,3 +1,14 @@
+Software Requirement Specification
+==================================
+
+Introduction
+------------
+### Purpose
+### Stakeholders
+### Definitions
+### System overview
+### References
+
 ## 2. Overall description
 -------------------
 ### 2.1 Use cases
@@ -16,3 +27,9 @@ The following section provides an overview of the basic behavior of becoming a m
 |5    | Members can edit the profile      |**Condition to show**<ul><li>Member (existing account) </li><li>user navigates to public profile page</li></ul><br>**Expected**<br>Members can change the personal information provided during sign up by selecting "Edit profile". All personal information such as name, e-mail and password can be changed. Futhermore, the user can add a personal description in the 'About me' entry field. <br><br>**Main Actor**<br>User with existing Member Account                                                                                     | LOW |
 |6   | Members can access public profiles |**Condition to show**<ul><li>Member (existing account) </li><li> Member opens the add of another member and selects 'Visit profile'</li></ul><br>**Expected**<br>Member can see the public profile of the other member. Visible information are the username (e-mail address), the name and the personal description (About me).<br><br>**Main Actor**<br>User with existing Member Account                                                                                      | LOW |
 | newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
+
+
+Specific requirements
+---------------------
+### Functional requirements
+### Non-functional requirements (external, performance, etc.)

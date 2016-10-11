@@ -1,14 +1,21 @@
 Software Requirement Specification
 ==================================
 
-Introduction
+1. Introduction
 ------------
-### Purpose
-### Stakeholders
-### Definitions
-### System overview
-### References
-
+### 1.1 Purpose
+This SRS is for the use of the developers and the customer of the Flatfinder application. The content declares the specification of the project which have to be uphold by the customer and the developers.
+### 1.2 Stakeholders
+This Software Project will be developed for the ESE/SCG group of the University of Bern. They will have all the rights of the the code and the publishing.
+### 1.3 Definitions
+Ad: Advertisement
+SW: Software
+### 1.4  Overview
+Chapter 2 displays the customer specifications and wishes important for this project.
+Chapter 3 is targeted to the developers and shows the specific requirements.
+### 1.5 References
+This specification references to the follwing link where all the tasks are listed: 
+[Link to the Project description page on github](https://github.com/scg-unibe-ch/ese2016/wiki/Project-Description "Github ESE Project Description Homepage")
 ## 2. Overall description
 -------------------
 ### 2.1 Use cases
@@ -105,7 +112,7 @@ Sample table for extension.
 | newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
 
 
-Specific requirements
+3. Specific requirements
 ---------------------
-### Functional requirements
-### Non-functional requirements (external, performance, etc.)
+### 3. 1 Functional requirements
+### 3.2 Non-functional requirements (external, performance, etc.)

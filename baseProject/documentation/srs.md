@@ -1,13 +1,13 @@
 Software Requirement Specification
 ==================================
 
-Introduction
+1. Introduction
 ------------
-### Purpose
-### Stakeholders
-### Definitions
-### System overview
-### References
+### 1.1 Purpose
+### 1.2 Stakeholders
+### 1.3 Definitions
+### 1.4 System overview
+### 1.5 References
 
 ## 2. Overall description
 -------------------
@@ -105,7 +105,7 @@ Sampel table for extension.
 | newID | newTitle| **Condition to show**<ul><li> item1 </li><li> item 2 </li><li> item 3 </li></ul><br>**Expected**<br>TEXT <br><br>**Main Actor**<br>TEXT | PRIO |
 
 
-Specific requirements
+3. Specific requirements
 ---------------------
-### Functional requirements
-### Non-functional requirements (external, performance, etc.)
+### 3. 1 Functional requirements
+### 3.2 Non-functional requirements (external, performance, etc.)

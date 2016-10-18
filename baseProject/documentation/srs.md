@@ -136,15 +136,18 @@ See questions below.
 
 4. Questions
 ------------
+Asked: 
+* Ads for properties to be sold: What are differences in respect to their fields, compared to rentals? - *Just be reasonsable*
+* Auctions: Which specific features / modes are to be supported (e.g. direct buy, ...)? - *Plain auction, nothing fancy*
+* Closing: What happens if a deal is established, both, in reference to rentals and sells. - *Nothing, really... except probably a message to inform the parties*
+* Extend search to include more filter critieria - which ones? - *the more important ones of those already in the filter that shows with the results*
+* Should features for site admins be planned? Their capabilities would include unrestricted user, flat- and property management. - *Not at this stage*
+* Alerts: When normal users get alerts "a bit late" - how much late? - *No clear answer, make it an option*
+
+Not asked:
 * Messaging: Should users be able to respond conveniently to messages?
-* Ads for properties to be sold: What are differences in respect to their fields, compared to rentals?
-* Auctions: Which specific features / modes are to be supported (e.g. direct buy, ...)?
 * Can ads be removed again (particularly during auctions)?
-* Closing: What happens if a deal is established, both, in reference to rentals and sells. 
 * Can alerts be modified?
-* Extend search to include more filter critieria - which ones?
-* Should features for site admins be planned? Their capabilities would include unrestricted user, flat- and property management.
-* Alerts: When normal users get alerts "a bit late" - how much late?
 * Search results list: What does "a bit higher" for premium users entail? Should they be highlighted?
 * Non-functional requirements:
 	* Plattform for it to run on?

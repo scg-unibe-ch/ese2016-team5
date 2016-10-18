@@ -132,14 +132,22 @@ Probable distinct requirements:
 * New message indicator (from above)
 * Distinction between regular and premium users.
 
-
-#### 3.1.5 Alerts
-Alerts are a kind of automatic search. The following section explains the main use cases of this feature. 
+#### 3.1.1 User Management
+| Title                              | Description                      | Status |
+|:-----------------------------------|:---------------------------------|:---------|
+| Users without account can sign up  | **Expected**<br>Required informations is  first name and last name, which will be displayed publically later on, e-mail address (username), password and gender. After successful creation of the account, user is back on login page and can login using his created credentials (email / password).<br>Constraints: If e-mail addresss is already in use, display error message.<br><br>**Main Actor**<br>User with no existing account.                                     | I |
+| Log in     |**Expected**<br>On login page, the user can enter his e-mail address and password. Expected behavior: User is logged in, user menu has changed.<br>Check for valid login, if not, return error message.<br><br>**Main Actor**<br>NLIU| I |
+| Logged in users can logout        |**Expected**<br>User can select logout in the menu. Afterwards, he is logged out of the application i.e. does not have member privileges anymore.<br><br>**Main Actor**<br>LIU                                  | I |
+| Users can edit the profile      |**Expected**<br>User can change his personal information through a standard form.<br><br>**Todo**<br>- Changes to the e-mail address gives a bug.<br>- Changes in general are not updated.<br>- Avatar cannot be defined.<br><br> **Main Actor**<br>LIU                                                                                     | PI |
+| Users can access public profiles |**Expected**<br>Member can see the public profile of the other member. Visible information are the username (e-mail address), the name and the personal description (About me).<br><br>**Main Actor**<br>LIU                                                                                      | I |
+#### 3.1.2 Publish Flat Ads
+The following section provides a high-level overview of how to publish a flat ad in the FlatFinder application. 
 
 | Title                              | Description                      | Status |
 |:-----------------------------------|:---------------------------------|:---------|
-| Create alerts                       | **Expected**<br>User can create an alert by setting up the criteria for matching new flats/ads (similar to search criterias). If the criteria are valid (either "Room", "Studio" or both selected and a City selected), a new alert is created and added to the user's "active alerts". Whenever a new ad is published matching the search criteria, an alert will be sent to the user. <br><br>**Main Actor**<br>LoggedInUsers                                                   | i |
-| Manage active alerts             | **Expected**<br>Below the alerts creation section, all active alerts are listed. If the "Delete"-Button is pressed, the alert is removed from the "active alerts". <br><br>**Main Actor**<br>LoggedInUsers                                                                 | i |
+| Logged in users can publish ads            | **Trigger**<ul><li>'Publish Ads' in menu bar selected</li></ul>**Expected**<br>A member can publish flat ads. In the publishing form, the user has to fill in various information which are required to publish the ad.<br><br>**Sections**<br>General info<br><ul><li>Ad Title</li><li>Street</li><li>City / Zip code</li><li>Move-in date: Display calendar when clicking into field</li><li>Move-out date: Display calendar when clicking into field</li><li>Price per Month</li><li>Square meters</li><li>Type: Radio buttons [Room, Studio, Property]</li><li>Offer Type: Radio buttons [Rent, Auction]</li></ul>Room Description<ul><li>Characteristics: Checkboxes</li><li>Room Description: Textarea</li></ul>Roommates (Optional)<ul><li>Add by email: Textfield to search for existing accounts with a +-button to add them.</li><li>Additional roommates: Textarea for description</li></ul>Preferences (Optional)<ul><li>Preferences: Textarea</li></ul>Pictures (Optional)<ul><li>Picture: File upload field.</li><li>Picture overview: Grid showing name and size with option to delete image. Images are displayed immediately.</li></ul>Visiting times (Optional)<ul><li>Visiting times: Dates with calendar, to- and from times as text fields</li></ul><br>**Main Actor**<br>LIU                                                 | HIGH |
+| Edit ads                          | **Trigger**<ul><li>'Edit ad' in 'My rooms' clicked</li></ul>**Condition to show**<ul><li> Member has a published ad</li></ul>**Expected**<br>User can edit ad. Same rules as above apply. <br><br>**Main Actor**<br>LIU                                                 | PI |
+
 #### 3.1.4 Search and Display Ads
 The following section provides a high-level overview of the different search functionalities provided to find the right flat. 
 
@@ -150,6 +158,15 @@ The following section provides a high-level overview of the different search fun
 | Filter the results                 |**Expected**<br>Next to the list view of the search results, there is a tool for filtering the results. Firstly, it displays the initial search criterias, so the search can be detailed even further more without going back to the search view. Below, the user can add additional search criteria such as move in / move out date, flat charactersistics such as wifi, smokers etc. After ticking/adding the filters and selecting the filter button, the search results are reduced to the once matching the new filter criterias.  <br><br>**Main Actor**<br>NotLoggedInUser, LoggedInUser                                                                                  | i |
 | Sorting the results                 |**Expected**<br>Above the list view of the search results there is a drop-down where the user can add sorting criteria. User should be able to sort according to price, move in date and date of ad creation (all of them ascending and descending). <br><br>**Main Actor**<br>NotLoggedInUser, LoggedInUser                                                                                                    | i |
 | Display an ad                       | **Expected**<br>Upon clicking on the ad, a detailed view containing all the information is being displayed to the user. <br><br>**Main Actor**<br>NotLoggedInUser, LoggedInUser                                                                                                                                       | i |
+
+#### 3.1.5 Alerts
+Alerts are a kind of automatic search. The following section explains the main use cases of this feature. 
+
+| Title                              | Description                      | Status |
+|:-----------------------------------|:---------------------------------|:---------|
+| Create alerts                       | **Expected**<br>User can create an alert by setting up the criteria for matching new flats/ads (similar to search criterias). If the criteria are valid (either "Room", "Studio" or both selected and a City selected), a new alert is created and added to the user's "active alerts". Whenever a new ad is published matching the search criteria, an alert will be sent to the user. <br><br>**Main Actor**<br>LoggedInUsers                                                   | i |
+| Manage active alerts             | **Expected**<br>Below the alerts creation section, all active alerts are listed. If the "Delete"-Button is pressed, the alert is removed from the "active alerts". <br><br>**Main Actor**<br>LoggedInUsers                                                                 | i |
+
 #### 3.1.6 Visitations
 Advertisers can manage and arange visits with interested renters. The following section shall point out the main use cases behind
 

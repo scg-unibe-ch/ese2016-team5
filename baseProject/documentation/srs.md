@@ -103,10 +103,10 @@ In order to better arrange visits and clarfiy questions about flats, there is th
 
 | Title                              | Description                      | Priority |
 |:-----------------------------------|:---------------------------------|:---------|
-| Contact Advertiser                  | **Expected**<br>In the advertiser section of each ad, logged in users can choose to contact the advertiser. If selected a pop up will open where the user has to type in the subject of his message and the message itself. <br><br>**Main Actor**<br>LIU | MED |
-| Receive and open Messages           | **Expected**<br>In the messaging section, new messages are shown in the inbox, indicating the subject, sender, recipient and date. If one message is selected, a preview of the message is shown below. Sent messages can be viewed similarly in the 'Sent' Section.<br><br>**Main Actor**<br>LIU                            | MED |
+| Contact Advertiser                  | **Expected**<br>In the advertiser section of each ad, logged in users can choose to contact the advertiser. <br><br>**Main Actor**<br>LIU | MED |
+| Receive and open Messages           | **Expected**<br>In the messaging section, new messages are shown in the inbox, indicating the subject, sender, recipient and date. <br><br>**Main Actor**<br>LIU                            | MED |
 | Create new message           | **Expected**<br>Similarly to "Contact Advertiser", a user can select 'New' in the messaging section. A pop up will open where he can type in the username of another user (if not exsting there will be an error), subject and message.  <br><br>**Main Actor**<br>LIU                                                            | MED |
-| New message indicator             | **Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix, e.g. One unread Message would be 'Messages (1)'. After reading the message, the brackets disappear.  <br><br>**Main Actor**<br>LIU | LOW |
+| New message indicator             | **Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix.   <br><br>**Main Actor**<br>LIU | LOW |
 
 ### 2.2 Actor Characteristics
 
@@ -183,6 +183,16 @@ Advertisers can manage and arange visits with interested renters. The following 
 | List own visits                    | **Expected**<br>All accepted enquiries for visiting rooms/flats are shown in the scheduler in the 'Your visits' section. They show the address of each flat, the arranged date and time of the visit and a shortcut to the ad page. <br><br>**Main Actor**<br>LIU      | I |
 | Show visitors                    | **Expected**<br>For each visit in the scheduler, the advertiser can list the visitors. The visitors are shown in a table indicating their full name, username, shortcut to their profile and a 5-Star rating system. In the rating system, the advertiser can rank his visitors and choose the best suiting.  <br><br>**Main Actor**<br>LIU     | I |
 | Display overview list of most promising visitors           | **Expected**<br>A list of most promising visitors can be displayed for each room which is automatically generated based on the individual ratings. <br><br>**Main Actor**<br>LIU    | I |
+
+#### 3.1.7 Messaging with Advertiser
+In order to better arrange visits and clarfiy questions about flats, there is the possibilty to contact an advertiser. The main use cases in this respect are listed below.
+
+| Title                              | Description                      | Priority |
+|:-----------------------------------|:---------------------------------|:---------|
+| Contact Advertiser                  | **Expected**<br>In the advertiser section of each ad, logged in users can choose to contact the advertiser. If selected a pop up will open where the user has to type in the subject of his message and the message itself. <br><br>**Main Actor**<br>LIU | I |
+| Receive and open Messages           | **Expected**<br>In the messaging section, new messages are shown in the inbox, indicating the subject, sender, recipient and date. If one message is selected, a preview of the message is shown below. Sent messages can be viewed similarly in the 'Sent' Section.<br><br>**Main Actor**<br>LIU                            | I |
+| Create new message           | **Expected**<br>Similarly to "Contact Advertiser", a user can select 'New' in the messaging section. A pop up will open where he can type in the username of another user (if not exsting there will be an error), subject and message.  <br><br>**Main Actor**<br>LIU                                                            | I |
+| New message indicator             | **Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix, e.g. One unread Message would be 'Messages (1)'. After reading the message, the brackets disappear.  <br><br>**Main Actor**<br>LIU | I |
 
 ### 3.2 Non-functional requirements (external, performance, etc.)
 

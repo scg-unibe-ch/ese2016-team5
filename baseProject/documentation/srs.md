@@ -197,12 +197,14 @@ Asked:
 * Extend search to include more filter critieria - which ones? - *the more important ones of those already in the filter that shows with the results*
 * Should features for site admins be planned? Their capabilities would include unrestricted user, flat- and property management. - *Not at this stage*
 * Alerts: When normal users get alerts "a bit late" - how much late? - *No clear answer, make it an option*
+* How are deals established - *Send an e-mail to both parties and remove ad*
 
 Not asked:
 * Messaging: Should users be able to respond conveniently to messages?
 * Can ads be removed again (particularly during auctions)?
 * Can alerts be modified?
 * Search results list: What does "a bit higher" for premium users entail? Should they be highlighted?
+* Add creation/edit form: How to deal with the fact that some fields may be needed only for 'rent', or 'auction', respectively? Should some fields be shown / hidden dynamically?
 * Non-functional requirements:
 	* Plattform for it to run on?
 		* Backup solutions?
@@ -213,5 +215,7 @@ Not asked:
 	
 5. Todo
 -------
-* Talk about how deals are established and add to description.
-* Add creation/edit form: How to deal with the fact that some fields may be needed only for 'rent', or 'auction', respectively? Should some fields be shown / hidden dynamically?
+* Auction (send mail whenever bid is surpassed)
+* Grey out old auctions
+* Search (include filters)
+* Kill roommates

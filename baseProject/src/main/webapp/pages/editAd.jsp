@@ -145,7 +145,7 @@
 
 <input type="hidden" name="adId" value="${ad.id }" />
 
-<<<<<<< HEAD
+
         <fieldset>
             <legend>General info</legend>
             <table class="placeAdTable">
@@ -232,6 +232,7 @@
                 </tr>
             </table>
         </fieldset>
+
 
 	<br />
 	<fieldset>

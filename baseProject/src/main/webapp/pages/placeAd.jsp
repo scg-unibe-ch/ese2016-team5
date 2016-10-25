@@ -129,7 +129,6 @@
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
 	enctype="multipart/form-data">
 
-<<<<<<< HEAD
         <fieldset>
             <legend>General info</legend>
             <table class="placeAdTable">
@@ -208,7 +207,6 @@
                 </tr>
             </table>
         </fieldset>
-
 
 	<br />
 	<fieldset>

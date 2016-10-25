@@ -11,7 +11,9 @@ import org.hibernate.validator.constraints.NotBlank;
 public class SearchForm {
 
 	private boolean filtered;
+
 	private boolean filteredOffer; 
+
 
 	// studio: true, room: false
 	private boolean studio;

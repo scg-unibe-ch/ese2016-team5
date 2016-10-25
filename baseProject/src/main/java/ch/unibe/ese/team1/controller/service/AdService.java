@@ -75,7 +75,9 @@ public class AdService {
 		ad.setStreet(placeAdForm.getStreet());
 
 		ad.setStudio(placeAdForm.getStudio());
-
+		
+		ad.setForSale(placeAdForm.getForSale()); 
+		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
@@ -129,7 +131,7 @@ public class AdService {
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
-
+		
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
 		ad.setRoommates(placeAdForm.getRoommates());
@@ -144,6 +146,7 @@ public class AdService {
 		ad.setCable(placeAdForm.getCable());
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
+		
 		
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
@@ -256,8 +259,33 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-
-		// we use this method if we are looking for rooms AND studios
+		
+		// we use this method if we are looking for rooms AND studios AND Sales AND Rent
+		
+		//use this method if we are looking for renting and sales offers
+		/*if(searchForm.getBothRentAndSale()){
+			//used if room and studio is selected, then the price is relevant
+			if(searchForm.getBothRoomAndStudio()){
+				results = adDao
+						.findByPrizePerMonthLessThan(
+								searchForm.getPrize() + 1);
+			}else{ //used when either room or studio is selected
+				results = adDao
+						.findByStudioAndPrizePerMonthLessThan(
+								searchForm.getStudio(), searchForm.getPrize() + 1);
+			}
+		}else{ // either for renting or sales offers are searched for
+			if(searchForm.getBothRoomAndStudio()){ // but both room and studio are selected
+				results = adDao
+						.findBySaleAndPrizeLessThan(
+								searchForm.getForSale(), searchForm.getPrize() + 1);
+			}else{ // either room or studio selected
+				results = adDao
+						.findBySaleAndStudioAndPrizeLessThan(
+								searchForm.getForSale(), searchForm.getStudio(), searchForm.getPrize() + 1);
+			}
+		}*/
+		
 		if (searchForm.getBothRoomAndStudio()) {
 			results = adDao
 					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
@@ -267,7 +295,8 @@ public class AdService {
 			results = adDao.findByStudioAndPrizePerMonthLessThan(
 					searchForm.getStudio(), searchForm.getPrize() + 1);
 		}
-
+		
+	
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 
@@ -315,7 +344,7 @@ public class AdService {
 				.collect(Collectors.toList());
 
 		// filter for additional criteria
-		if (searchForm.getFiltered()) {
+		if (searchForm.getFiltered() || searchForm.getFilteredOffer()) {
 			// prepare date filtering - by far the most difficult filter
 			Date earliestInDate = null;
 			Date latestInDate = null;
@@ -441,6 +470,7 @@ public class AdService {
 						iterator.remove();
 				}
 			}
+			
 		}
 		return locatedResults;
 	}

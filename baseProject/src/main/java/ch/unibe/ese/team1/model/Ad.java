@@ -53,7 +53,7 @@ public class Ad {
 
 	@Column(nullable = true)
 	private int prizePerMonth;
-
+	
 	@Column(nullable = false)
 	private int squareFootage;
 
@@ -98,7 +98,11 @@ public class Ad {
 
 	@Column(nullable = false)
 	private boolean internet;
-
+	
+	//True if for sale, false if for rent. 
+	@Column(nullable = false)
+	private boolean forSale; 
+	
 	// true if studio, false if room
 	@Column(nullable = false)
 	private boolean studio;
@@ -169,6 +173,14 @@ public class Ad {
 
 	public void setStudio(boolean studio) {
 		this.studio = studio;
+	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+	
+	public void setForSale(boolean forSale){
+		this.forSale = forSale; 
 	}
 
 	public boolean getSmokers() {

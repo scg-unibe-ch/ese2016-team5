@@ -145,6 +145,7 @@
 
 <input type="hidden" name="adId" value="${ad.id }" />
 
+<<<<<<< HEAD
         <fieldset>
             <legend>General info</legend>
             <table class="placeAdTable">
@@ -300,7 +301,7 @@
 						</c:when>
 						<c:otherwise>
 							<form:checkbox id="field-cellar" path="cellar" /><label>Cellar
-						or Atticd</label>
+						or Attic</label>
 						</c:otherwise>
 					</c:choose>
 				</td>

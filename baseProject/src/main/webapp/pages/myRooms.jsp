@@ -48,7 +48,12 @@
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+						<p>
+							<b><c:choose>
+									<c:when test="${ad.forSale}">For Sale</c:when>
+									<c:otherwise>For Rent</c:otherwise>
+								</c:choose></b>
+						</p> <br />
 						<p>Move-in date: ${ad.moveInDate }</p>
 					</div>
 				</div>
@@ -90,7 +95,12 @@
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+						<p>
+							<b><c:choose>
+									<c:when test="${ad.forSale}">For Sale</c:when>
+									<c:otherwise>For Rent</c:otherwise>
+								</c:choose></b>
+						</p> <br />
 						<p>Move-in date: ${ad.moveInDate }</p>
 					</div>
 				</div>

@@ -43,7 +43,12 @@
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+						<p>
+							<b><c:choose>
+									<c:when test="${ad.forSale}">For Sale</c:when>
+									<c:otherwise>For Rent</c:otherwise>
+								</c:choose></b>
+						</p><br />
 
 						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 							type="date" pattern="dd.MM.yyyy" />

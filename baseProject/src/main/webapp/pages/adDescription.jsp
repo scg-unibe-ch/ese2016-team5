@@ -157,6 +157,16 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
+		<tr> 
+			<td><h2>Offer Type</h2></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.forSale}">For Sale</c:when>
+					<c:otherwise>For Rent</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		
 		<tr>
 			<td><h2>Type</h2></td>
 			<td>

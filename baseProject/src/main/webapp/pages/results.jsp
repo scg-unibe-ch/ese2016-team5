@@ -32,9 +32,38 @@ function validateType(form)
 		neither.checked = false;
 		type.checked = studio.checked;
 	}
-	filtered.checked = true;
+	
+	filtered.checked = false;
 }
 </script>
+
+<script>
+function validateSaleType(form)
+{
+	var forRent = document.getElementById('forRent');
+	var forSale = document.getElementById('forSale');
+	var neither = document.getElementById('neitherOffer');
+	var both = document.getElementById('bothRentAndSales');
+	var type = document.getElementById('typeOffer');
+	var filtered = document.getElementById('filteredOffer');
+	
+	if(forRent.checked && forSale.checked) {
+		both.checked = true;
+		neither.checked = false;
+	}
+	else if(!forRent.checked && !forSale.checked) {
+		both.checked = false;
+		neither.checked = true;
+	}
+	else {
+		both.checked = false;
+		neither.checked = false;
+		type.checked = forSale.checked;
+	}
+	filteredOffer.checked = false;
+}
+</script>
+
 
 <script>
 /*
@@ -160,7 +189,12 @@ function sort_div_attribute() {
 					</div>
 					<div class="resultRight">
 						<h2>CHF ${ad.prizePerMonth }</h2>
-						<br /> <br />
+						<p>
+							<b><c:choose>
+									<c:when test="${ad.forSale}">For Sale</c:when>
+									<c:otherwise>For Rent</c:otherwise>
+								</c:choose></b>
+						</p> <br />
 
 						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 							type="date" pattern="dd.MM.yyyy" />
@@ -178,6 +212,15 @@ function sort_div_attribute() {
 
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
+		<form:checkbox name="forRent" id="forRent" path="forRentHelper" /><label>for Rent</label>
+		<form:checkbox name="forSale" id="forSale" path="forSaleHelper" /><label>for Sale</label>
+		
+		<form:checkbox style="display:none" name="neitherOffer" id="neitherOffer" path="noRentNoSale" />
+		<form:checkbox style="display:none" name="bothOffer" id="bothRentAndSale" path="bothRentAndSale" />
+		<form:checkbox style="display:none" name="offerType" id="offerType" path="forSale" />
+		<form:checkbox style="display:none" name="filteredOffer" id="filteredOffer" path="filteredOffer" />
+		<form:errors path="noRentNoSale" cssClass="validationErrorText" /> <br />
+		
 		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
 	
@@ -256,7 +299,7 @@ function sort_div_attribute() {
 		</table>
 			
 		
-		<button type="submit" onClick="validateType(this.form)">Filter</button>	
+		<button type="submit" onClick="validateType(this.form);validateSaleType(this.form)" >Filter</button>	
 		<button type="reset">Cancel</button>
 	</div>
 </form:form>

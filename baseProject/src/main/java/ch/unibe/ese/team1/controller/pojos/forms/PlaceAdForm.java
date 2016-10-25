@@ -26,7 +26,7 @@ public class PlaceAdForm {
 
 //	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
-
+	
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
 
@@ -47,6 +47,9 @@ public class PlaceAdForm {
 	
 	//true if studio, false if room
 	private boolean studio;
+	
+	//true if for Sale, false if for Rent
+	private boolean forSale; 
 	
 	private boolean smokers;
 	private boolean animals;
@@ -260,6 +263,15 @@ public class PlaceAdForm {
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+	
+	public void setForSale(boolean forSale){
+		this.forSale = forSale;
+	}
+	
 
 	public List<String> getRegisteredRoommateEmails() {
 		return registeredRoommateEmails;
@@ -276,4 +288,5 @@ public class PlaceAdForm {
 	public void setVisits(List<String> visits) {
 		this.visits = visits;
 	}
+
 }

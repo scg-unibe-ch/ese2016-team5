@@ -11,9 +11,13 @@ import org.hibernate.validator.constraints.NotBlank;
 public class SearchForm {
 
 	private boolean filtered;
+	private boolean filteredOffer; 
 
 	// studio: true, room: false
 	private boolean studio;
+	
+	// for Sale: True, for rent: false
+	private boolean forSale; 
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -26,7 +30,12 @@ public class SearchForm {
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
-
+	
+	@AssertFalse(message = "Please select either or both types")
+	private boolean noRentNoSale; 
+	
+	private boolean bothRentAndSale; 
+	
 	@AssertFalse(message = "Please select either or both types")
 	private boolean noRoomNoStudio;
 
@@ -54,6 +63,30 @@ public class SearchForm {
 
 	public void setPrize(Integer prize) {
 		this.prize = prize;
+	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+	
+	public void setForSale(boolean forSale){
+		this.forSale = forSale;  
+	}
+	
+	public boolean getNoRentNoSale(){
+		return noRentNoSale; 
+	}
+	
+	public void setNoRentNoSale(boolean noRentNoSale){
+		this.noRentNoSale = noRentNoSale; 
+	}
+	
+	public boolean getBothRentAndSale(){
+		return bothRentAndSale; 
+	}
+	
+	public void setBothRentAndSale(boolean bothRentAndSale){
+		this.bothRentAndSale = bothRentAndSale; 
 	}
 
 	public boolean getStudio() {
@@ -91,11 +124,19 @@ public class SearchForm {
 	public void setFiltered(boolean filtered) {
 		this.filtered = filtered;
 	}
+	
+	public boolean getFilteredOffer(){
+		return filteredOffer;
+	}
+	
+	public void setFilteredOffer(boolean filteredOffer){
+		this.filteredOffer = filteredOffer; 
+	}
 
 	private String earliestMoveInDate;
 	private String latestMoveInDate;
 	private String earliestMoveOutDate;
-	private String latestMoveOutDate;
+	private String latestMoveOutDate; 
 
 	private boolean smokers;
 	private boolean animals;
@@ -111,6 +152,10 @@ public class SearchForm {
 
 	// the ugly stuff
 	private boolean studioHelper;
+	
+	
+	private boolean forRentHelper; 
+	private boolean forSaleHelper; 
 
 	public boolean getSmokers() {
 		return smokers;
@@ -230,5 +275,21 @@ public class SearchForm {
 
 	public void setRoomHelper(boolean helper) {
 		this.roomHelper = helper;
+	}
+	
+	public boolean getForRentHelper(){
+		return forRentHelper; 
+	}
+	
+	public void setForRentHelper(boolean helper){
+		this.forRentHelper = helper; 
+	}
+	
+	public boolean getForSaleHelper(){
+		return forSaleHelper; 
+	}
+	
+	public void setForSaleHelper(boolean helper){
+		this.forSaleHelper = helper; 
 	}
 }

@@ -55,9 +55,38 @@ function validateType(form)
 		neither.checked = false;
 		type.checked = studio.checked;
 	}
+	
 	filtered.checked = false;
 }
 </script>
+
+<script>
+function validateSaleType(form)
+{
+	var forRent = document.getElementById('forRent');
+	var forSale = document.getElementById('forSale');
+	var neither = document.getElementById('neitherOffer');
+	var both = document.getElementById('bothRentAndSales');
+	var type = document.getElementById('typeOffer');
+	var filtered = document.getElementById('filteredOffer');
+	
+	if(forRent.checked && forSale.checked) {
+		both.checked = true;
+		neither.checked = false;
+	}
+	else if(!forRent.checked && !forSale.checked) {
+		both.checked = false;
+		neither.checked = true;
+	}
+	else {
+		both.checked = false;
+		neither.checked = false;
+		type.checked = forSale.checked;
+	}
+	filteredOffer.checked = false;
+}
+</script>
+
 
 <h1>Search for an ad</h1>
 <hr />
@@ -66,6 +95,19 @@ function validateType(form)
 	id="searchForm" autocomplete="off">
 
 	<fieldset>
+		<label for="type-offer">Offer Type:</label>
+		<form:checkbox name="forRent" id="forRent" path="forRentHelper" /><label>For Rent</label>
+		<form:checkbox name="forSale" id="forSale" path="forSaleHelper" /><label>For Sale</label>
+		
+		<form:checkbox style="display:none" name="neitherOffer" id="neitherOffer" path="noRentNoSale" />
+		<form:checkbox style="display:none" name="bothOffer" id="bothRentAndSale" path="bothRentAndSale" />
+		<form:checkbox style="display:none" name="offerType" id="offerType" path="forSale" />
+		<form:checkbox style="display:none" name="filteredOffer" id="filteredOffer" path="filteredOffer" />
+		<form:errors path="noRentNoSale" cssClass="validationErrorText" />
+		
+		<br/>
+		
+		<label for="type-offer">Type:</label>
 		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
 		
@@ -95,7 +137,7 @@ function validateType(form)
 		<form:errors path="prize" cssClass="validationErrorText" />
 		<br />
 
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
+		<button type="submit" tabindex="7" onClick="validateType(this.form);validateSaleType(this.form)">Search</button>
 		<button type="reset" tabindex="8">Cancel</button>
 	</fieldset>
 

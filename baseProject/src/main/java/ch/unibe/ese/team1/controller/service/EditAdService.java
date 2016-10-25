@@ -92,8 +92,27 @@ public class EditAdService {
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
+                        
+			if (placeAdForm.getAuctionEndingDate().length() >= 1) {
+				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(0, 2));
+				int monthEndingDate = Integer.parseInt(placeAdForm
+						.getAuctionEndingDate().substring(3, 5));
+				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(6, 10));
+                                int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(11, 13));
+                                int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(14, 16));
+				calendar.set(yearEndingDate, monthEndingDate - 1, dayEndingDate, hourEndingDate, minEndingDate, 0);
+				ad.setAuctionEndingDate(calendar.getTime());
+			}
 		} catch (NumberFormatException e) {
 		}
+                
+                ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
+                ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+                ad.setOfferType(placeAdForm.getOfferType());
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());

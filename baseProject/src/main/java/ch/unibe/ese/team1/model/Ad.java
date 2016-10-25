@@ -51,7 +51,7 @@ public class Ad {
 	@Column(nullable = true)
 	private Date moveOutDate;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private int prizePerMonth;
 
 	@Column(nullable = false)
@@ -113,6 +113,48 @@ public class Ad {
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
+        // Auctions & Direct sell
+        
+        @Temporal(TemporalType.TIMESTAMP)
+        @Column(nullable = true)
+	private Date auctionEndingDate;
+        
+        @Column(nullable = true)
+	private int directBuyPrize;
+        
+        @Column(nullable = true)
+	private int auctionStartingPrize;
+        
+        @Column(nullable = false)
+        private int offerType;
+        
+        public Date getAuctionEndingDate() {
+            return auctionEndingDate;
+        }
+        public void setAuctionEndingDate(Date auctionEndingDate) {
+            this.auctionEndingDate = auctionEndingDate;
+        }
+        public int getDirectBuyPrize() {
+            return directBuyPrize;
+        }
+        public void setDirectBuyPrize(int prize) {
+            this.directBuyPrize = prize;
+        }
+        public int getAuctionStartingPrize() {
+            return auctionStartingPrize;
+        }
+        public void setAuctionStartingPrize(int prize) {
+            this.auctionStartingPrize = prize;
+        }
+        public int getOfferType() {
+            return offerType;
+        }
+        public void setOfferType(int offerType) {
+            this.offerType = offerType;
+        }
+        
+        
+        
 	public Date getCreationDate() {
 		return creationDate;
 	}

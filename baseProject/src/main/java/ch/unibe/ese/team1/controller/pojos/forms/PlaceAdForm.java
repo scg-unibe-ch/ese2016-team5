@@ -24,7 +24,7 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+//	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
@@ -59,6 +59,39 @@ public class PlaceAdForm {
 	private boolean internet;
 	
 	private List<String> visits;
+        
+        // Auction & Direct Buy
+        private String auctionEndingDate;
+        private int directBuyPrize;
+        private int auctionStartingPrize;
+        private int offerType;
+        
+        public String getAuctionEndingDate() {
+            return auctionEndingDate;
+        }
+        public void setAuctionEndingDate(String auctionEndingDate) {
+            this.auctionEndingDate = auctionEndingDate;
+        }
+        public int getDirectBuyPrize() {
+            return directBuyPrize;
+        }
+        public void setDirectBuyPrize(int prize) {
+            this.directBuyPrize = prize;
+        }
+        public int getAuctionStartingPrize() {
+            return auctionStartingPrize;
+        }
+        public void setAuctionStartingPrize(int prize) {
+            this.auctionStartingPrize = prize;
+        }
+        public int getOfferType() {
+            return offerType;
+        }
+        public void setOfferType(int offerType) {
+            this.offerType = offerType;
+        }
+        
+        
 
 	public String getCity() {
 		return city;

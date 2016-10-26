@@ -51,9 +51,9 @@ public class Ad {
 	@Column(nullable = true)
 	private Date moveOutDate;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private int prizePerMonth;
-
+	
 	@Column(nullable = false)
 	private int squareFootage;
 
@@ -64,13 +64,6 @@ public class Ad {
 	@Column(nullable = false)
 	@Lob
 	private String preferences;
-
-	@Column(nullable = false)
-	private String roommates;
-
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> registeredRoommates;
 
 	@Column(nullable = false)
 	private boolean smokers;
@@ -102,6 +95,10 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean dishwasher;
 
+	//True if for sale, false if for rent. 
+	@Column(nullable = false)
+	private boolean forSale; 
+	
 	// true if studio, false if room
 	@Column(nullable = false)
 	private boolean studio;
@@ -116,6 +113,48 @@ public class Ad {
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
+        // Auctions & Direct sell
+        
+        @Temporal(TemporalType.TIMESTAMP)
+        @Column(nullable = true)
+	private Date auctionEndingDate;
+        
+        @Column(nullable = true)
+	private int directBuyPrize;
+        
+        @Column(nullable = true)
+	private int auctionStartingPrize;
+        
+        @Column(nullable = false)
+        private int offerType;
+        
+        public Date getAuctionEndingDate() {
+            return auctionEndingDate;
+        }
+        public void setAuctionEndingDate(Date auctionEndingDate) {
+            this.auctionEndingDate = auctionEndingDate;
+        }
+        public int getDirectBuyPrize() {
+            return directBuyPrize;
+        }
+        public void setDirectBuyPrize(int prize) {
+            this.directBuyPrize = prize;
+        }
+        public int getAuctionStartingPrize() {
+            return auctionStartingPrize;
+        }
+        public void setAuctionStartingPrize(int prize) {
+            this.auctionStartingPrize = prize;
+        }
+        public int getOfferType() {
+            return offerType;
+        }
+        public void setOfferType(int offerType) {
+            this.offerType = offerType;
+        }
+        
+        
+        
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -130,6 +169,14 @@ public class Ad {
 
 	public void setStudio(boolean studio) {
 		this.studio = studio;
+	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+	
+	public void setForSale(boolean forSale){
+		this.forSale = forSale; 
 	}
 
 	public boolean getSmokers() {
@@ -272,14 +319,6 @@ public class Ad {
 		this.preferences = preferences;
 	}
 
-	public String getRoommates() {
-		return roommates;
-	}
-
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
-
 	public List<AdPicture> getPictures() {
 		return pictures;
 	}
@@ -329,14 +368,6 @@ public class Ad {
 			return moveInDate;
 		else
 			return moveOutDate;
-	}
-
-	public List<User> getRegisteredRoommates() {
-		return registeredRoommates;
-	}
-
-	public void setRegisteredRoommates(List<User> registeredRoommates) {
-		this.registeredRoommates = registeredRoommates;
 	}
 
 	public List<Visit> getVisits() {

@@ -9,6 +9,7 @@
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.iframe-transport.js"></script>
 <script src="/js/jquery.fileupload.js"></script>
+<script src="/js/jquery-ui-timepicker-addon.js"></script>
 
 <script src="/js/pictureUpload.js"></script>
 
@@ -42,36 +43,6 @@
 			dateFormat : 'dd-mm-yy'
 		});
 		
-
-		$("#addbutton").click(function() {
-			var text = $("#roomFriends").val();
-			var alreadyAdded = $("#addedRoommates").html();
-			if(validateForm(text)) {
-				$.post("/profile/placeAd/validateEmail",{email: text, alreadyIn: alreadyAdded}, function(data) {
-					if(validateForm(data)) {
-						var index = $("#roommateCell input.roommateInput").length;
-						$("#roommateCell").append("<input class='roommateInput' type='hidden' name='registeredRoommateEmails[" + index + "]' value='" + data + "' />");
-						$("#addedRoommates").append(data + "; ");
-					} else {
-						alert(data);
-					}});
-			}
-			else {
-				alert("Please enter an e-mail adress");
-			}
-			 
-			// Validates the input for Email Syntax
-			function validateForm(text) {
-			    var positionAt = text.indexOf("@");
-			    var positionDot = text.lastIndexOf(".");
-			    if (positionAt< 1 || positionDot<positionAt+2 || positionDot+2>=text.length) {
-			        return false;
-			    } else {
-			    	return true;
-			    }
-			}
-		});
-		
 		$("#addVisitButton").click(function() {
 			var date = $("#field-visitDay").val();
 			if(date == ""){
@@ -102,7 +73,19 @@
 			var input = "<input type='hidden' value='" + newVisit + "' name='visits[" + index + "]' />";
 			
 			$("#addedVisits").append(label + input);
+                        
 		});
+                
+                $('#type-rent, #type-auction, #type-direct').click(function() {
+                    var showType = 'ot-' + $(this).attr('id').replace('type-', '');
+                    $('.ot-rent, .ot-auction, .ot-direct').hide();
+                    $('.' + showType).show();
+                });
+
+                $('#field-auctionEndingDate').datetimepicker({
+                    dateFormat : 'dd-mm-yy',
+                    hour: (new Date()).getHours()
+                });
 	});
 </script>
 
@@ -116,60 +99,84 @@
 	action="/profile/placeAd" id="placeAdForm" autocomplete="off"
 	enctype="multipart/form-data">
 
-	<fieldset>
-		<legend>General info</legend>
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="field-title">Ad Title</label></td>
-				<td><label for="type-room">Type:</label></td>
-			</tr>
-
-			<tr>
-				<td><form:input id="field-title" path="title"
-						placeholder="Ad Title" /></td>
-				<td><form:radiobutton id="type-room" path="studio" value="0"
-						checked="checked" />Room <form:radiobutton id="type-studio"
-						path="studio" value="1" />Studio</td>
-			</tr>
-
-			<tr>
-				<td><label for="field-street">Street</label></td>
-				<td><label for="field-city">City / Zip code</label></td>
-			</tr>
-
-			<tr>
-				<td><form:input id="field-street" path="street"
-						placeholder="Street" /></td>
-				<td><form:input id="field-city" path="city" placeholder="City" />
-					<form:errors path="city" cssClass="validationErrorText" /></td>
-			</tr>
-
-			<tr>
-				<td><label for="moveInDate">Move-in date</label></td>
-				<td><label for="moveOutDate">Move-out date (optional)</label></td>
-			</tr>
-			<tr>
-				<td><form:input type="text" id="field-moveInDate"
-						path="moveInDate" /></td>
-				<td><form:input type="text" id="field-moveOutDate"
-						path="moveOutDate" /></td>
-			</tr>
-
-			<tr>
-				<td><label for="field-Prize">Prize per month</label></td>
-				<td><label for="field-SquareFootage">Square Meters</label></td>
-			</tr>
-			<tr>
-				<td><form:input id="field-Prize" type="number" path="prize"
-						placeholder="Prize per month" step="50" /> <form:errors
-						path="prize" cssClass="validationErrorText" /></td>
-				<td><form:input id="field-SquareFootage" type="number"
-						path="squareFootage" placeholder="Prize per month" step="5" /> <form:errors
-						path="squareFootage" cssClass="validationErrorText" /></td>
-			</tr>
-		</table>
-	</fieldset>
-
+        <fieldset>
+            <legend>General info</legend>
+            <table class="placeAdTable">
+                <tr>
+                    <td>
+                        <label for="field-title">Ad Title</label>
+                        <form:input id="field-title" path="title" placeholder="Ad Title" />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="type-rent">Offer Type:</label>
+                        <form:radiobutton id="type-rent" path="offerType" value="0" checked="checked" />Rent
+                        <form:radiobutton id="type-auction" path="offerType" value="1" />Auction
+                        <form:radiobutton id="type-direct" path="offerType" value="2" />Direct
+                    </td>
+                    <td>
+                        <label for="type-room">Property Type:</label>
+                        <form:radiobutton id="type-room" path="studio" value="0" checked="checked" />Room
+                        <form:radiobutton id="type-studio" path="studio" value="1" />Studio
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="field-street">Street</label>
+                        <form:input id="field-street" path="street" placeholder="Street" />
+                    </td>
+                    <td>
+                        <label for="field-city">City / Zip code *</label>
+                        <form:input id="field-city" path="city" placeholder="City" />
+                        <form:errors path="city" cssClass="validationErrorText" />
+                    </td>
+                </tr>
+                <tr>
+                <tr class="ot-rent">
+                    <td>
+                        <label for="moveInDate">Move-in date</label>
+                        <form:input type="text" id="field-moveInDate" path="moveInDate" />
+                    </td>
+                    <td>
+                        <label for="moveOutDate">Move-out date (optional)</label>
+                        <form:input type="text" id="field-moveOutDate" path="moveOutDate" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="ot-rent">
+                            <label for="field-Prize">Prize per month</label>
+                            <form:input id="field-Prize" type="number" path="prize" placeholder="Prize per month" step="50" />
+                            <form:errors path="prize" cssClass="validationErrorText" />
+                        </span>
+                        <span class="ot-direct">
+                            <label for="field-DirectBuyPrize">Prize</label>
+                            <form:input id="field-DirectBuyPrize" type="number" path="directBuyPrize" placeholder="Prize" step="50" />
+                        </span>
+                        <span class="ot-auction">
+                            <label for="field-StartingPrize">Starting Prize</label>
+                            <form:input id="field-StartingPrize" type="number" path="auctionStartingPrize" placeholder="Starting Prize" step="50" />
+                        </span>
+                    </td>
+                    <td>
+                        <span class="ot-auction">
+                            <label for="field-auctionEndingDate">Ending Date</label>
+                            <form:input id="field-auctionEndingDate" path="auctionEndingDate" placeholder="Ending Date" />
+                        </span>                      
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="field-SquareFootage">Square Meters *</label>
+                        <form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Prize per month" step="5" />
+                        <form:errors path="squareFootage" cssClass="validationErrorText" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
 
 	<br />
 	<fieldset>
@@ -210,38 +217,6 @@
 		<form:textarea path="roomDescription" rows="10" cols="100"
 			placeholder="Room Description" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
-	</fieldset>
-
-	<br />
-	<fieldset>
-		<legend>Roommates (optional)</legend>
-		<p>If your roommates have an account, simply add them by email.</p>
-
-		<table class="placeAdTable">
-			<tr>
-				<td><label for="roomFriends">Add by email</label></td>
-			</tr>
-
-			<tr>
-				<td id="roommateCell"><form:input type="text" id="roomFriends"
-						path="roomFriends" placeholder="email" />
-
-					<div id="addbutton" class="smallPlusButton">+</div></td>
-			</tr>
-			<tr>
-				<td><p id="addedRoommates" path="addedRoommates">Added
-						roommates:</p></td>
-			</tr>
-		</table>
-
-		<br />
-		<p>If the roommates do not have accounts or you wish to give
-			further information, you can add a text in which you describe the
-			roommates.</p>
-		<br/>
-		<form:textarea path="roommates" rows="10" cols="100"
-			placeholder="Roommates" />
-		<form:errors path="roommates" cssClass="validationErrorText" />
 	</fieldset>
 
 	<br />

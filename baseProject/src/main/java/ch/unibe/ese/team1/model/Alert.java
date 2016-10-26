@@ -38,10 +38,19 @@ public class Alert {
 
 	@Column
 	private boolean room;
-
+	
 	@Column
 	private boolean bothRoomAndStudio;
+	
+	@Column 
+	private boolean forSale; 
+	
+	@Column 
+	private boolean forRent; 
 
+	@Column 
+	private boolean bothRentAndSale; 
+	
 	public long getId() {
 		return id;
 	}
@@ -112,5 +121,29 @@ public class Alert {
 
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
+	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+
+	public void setForSale(boolean forSale){
+		this.forSale = forSale; 
+	}
+		
+	public boolean getForRent(){
+		return forRent; 
+	}
+		
+	public void setForRent(boolean forRent){
+		this.forRent = forRent; 
+	}
+	
+	public boolean getBothRentAndSale(){
+		return bothRentAndSale; 
+	}
+	
+	public void setBothRentAndSale(boolean bothRentAndSale){
+		this.bothRentAndSale = bothRentAndSale; 
 	}
 }

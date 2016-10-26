@@ -61,6 +61,9 @@ public class AlertService {
 		alert.setRoom(alertForm.getRoom());
 		alert.setStudio(alertForm.getStudio());
 		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
+		alert.setForRent(alertForm.getForRent()); 
+		alert.setForSale(alertForm.getForSale());
+		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setUser(user);
 		alertDao.save(alert);
 	}
@@ -93,7 +96,7 @@ public class AlertService {
 		Iterator<Alert> alertIterator = alerts.iterator();
 		while (alertIterator.hasNext()) {
 			Alert alert = alertIterator.next();
-			if (typeMismatchWith(ad, alert) || radiusMismatchWith(ad, alert)
+			if (typeMismatchWith(ad, alert) || radiusMismatchWith(ad, alert) || saleMismatchWith(ad, alert) 
 					|| ad.getUser().equals(alert.getUser()))
 				alertIterator.remove();
 		}
@@ -144,8 +147,19 @@ public class AlertService {
 		if (!alert.getBothRoomAndStudio()
 				&& ad.getStudio() != alert.getStudio())
 			mismatch = true;
+		
 		return mismatch;
 	}
+	
+	/** Checks if an ad is conforming to the criteria in an alert. */
+	private boolean saleMismatchWith(Ad ad, Alert alert){
+		boolean mismatch = false; 
+		if (!alert.getBothRentAndSale()
+				&& ad.getForSale() != alert.getForSale())
+			mismatch = true; 
+		return mismatch; 
+	}
+	
 
 	/**
 	 * Checks whether an ad is for a place too far away from the alert.
@@ -185,5 +199,10 @@ public class AlertService {
 	//for testing
 	public boolean typeMismatch(Ad ad, Alert alert) {
 		return typeMismatchWith(ad, alert);
+	}
+	
+	//for testing 
+	public boolean saleMismatch(Ad ad, Alert alert){
+		return saleMismatchWith(ad, alert); 
 	}
 }

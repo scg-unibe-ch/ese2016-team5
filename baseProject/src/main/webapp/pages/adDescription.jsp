@@ -157,6 +157,16 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
+		<tr> 
+			<td><h2>Offer Type</h2></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.forSale}">For Sale</c:when>
+					<c:otherwise>For Rent</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		
 		<tr>
 			<td><h2>Type</h2></td>
 			<td>
@@ -222,43 +232,6 @@
 		<div class="adDescDiv">
 			<h2>Room Description</h2>
 			<p>${shownAd.roomDescription}</p>
-		</div>
-		<br />
-
-		<div class="adDescDiv">
-			<h2>Roommates</h2>
-			<p>${shownAd.roommates}</p>
-			<c:forEach var="mate" items="${shownAd.registeredRoommates}">
-				<div class="roommate">
-				<table id="mate">
-					<tr>
-						<td>
-						<a href="/user?id=${mate.id}">
-						<c:choose>
-							<c:when test="${mate.picture.filePath != null}">
-								<img src="${mate.picture.filePath}">
-							</c:when>
-							<c:otherwise>
-								<img src="/img/avatar.png">
-							</c:otherwise>
-						</c:choose>
-						</a>
-						</td>
-						<td>${mate.firstName} ${mate.lastName}</td>
-						<td>${mate.username}</td>
-						<td>
-						<c:choose>
-							<c:when test="${mate.gender == 'MALE'}">
-								male
-							</c:when>
-							<c:otherwise>
-								female
-							</c:otherwise>
-						</c:choose></td>
-					</tr>
-				</table>
-			</div>
-			</c:forEach>
 		</div>
 		<br />
 

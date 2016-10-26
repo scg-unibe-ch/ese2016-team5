@@ -33,6 +33,9 @@ public class AlertTestDataSaver {
 		alert.setBothRoomAndStudio(true);
 		alert.setRoom(true);
 		alert.setStudio(true);
+		alert.setBothRentAndSale(true);
+		alert.setForSale(true);
+		alert.setForRent(true);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
 		alert.setPrice(1500);
@@ -44,6 +47,9 @@ public class AlertTestDataSaver {
 		alert.setBothRoomAndStudio(false);
 		alert.setRoom(true);
 		alert.setStudio(false);
+		alert.setBothRentAndSale(false);
+		alert.setForSale(false);
+		alert.setForRent(true);
 		alert.setCity("Zürich");
 		alert.setZipcode(8000);
 		alert.setPrice(1000);
@@ -57,6 +63,9 @@ public class AlertTestDataSaver {
 		alert.setBothRoomAndStudio(false);
 		alert.setRoom(false);
 		alert.setStudio(true);
+		alert.setBothRentAndSale(true);
+		alert.setForSale(true);
+		alert.setForRent(true);
 		alert.setCity("Luzern");
 		alert.setZipcode(6003);
 		alert.setPrice(900);

@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css"
 	media="only screen and (max-device-width: 480px)"
 	href="/css/smartphone.css" />
+<link href="../../css/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" />
 
 <Title>FlatFindr</Title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

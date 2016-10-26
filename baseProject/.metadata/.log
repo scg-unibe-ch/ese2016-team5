@@ -1,0 +1,114 @@
+!SESSION 2016-10-23 10:22:46.650 -----------------------------------------------
+eclipse.buildId=4.5.0.I20150603-2000
+java.version=1.8.0_20
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=de_CH
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/timospring/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/timospring/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 1 4 2016-10-23 10:24:37.730
+!MESSAGE The error reporting server is not available. Error reporting will be disabled until next restart. Version: 1.0.0.v20150617-0732
+!STACK 0
+org.eclipse.epp.internal.logging.aeri.ui.l10n.Logs$LogTraceException
+	at org.eclipse.epp.internal.logging.aeri.ui.l10n.Logs$LogTraceException.newTrace(Logs.java:382)
+	at org.eclipse.epp.internal.logging.aeri.ui.l10n.Logs.log(Logs.java:134)
+	at org.eclipse.epp.internal.logging.aeri.ui.l10n.Logs.log(Logs.java:126)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.CheckServerAvailabilityJob.run(CheckServerAvailabilityJob.java:53)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.p2.director 2 10054 2016-10-23 10:24:45.534
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE Software being installed: artificial_root 1.0.0.v1477211083696
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-23 10:24:45.534
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE Eclipse IDE for Java Developers 4.5.0.20150621-1200 (epp.package.java 4.5.0.20150621-1200)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE Eclipse IDE for Java Developers 4.6.0.20160613-1800 (epp.package.java 4.6.0.20160613-1800)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE Eclipse IDE for Java Developers 4.6.1.20160913-0645 (epp.package.java 4.6.1.20160913-0645)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE Eclipse IDE for Java Developers 4.6.1.20161007-1200 (epp.package.java 4.6.1.20161007-1200)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-23 10:24:45.534
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE From: artificial_root 1.0.0.v1477211083696
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE To: epp.package.java [4.5.0,4.6.0)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-23 10:24:45.534
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE From: artificial_root 1.0.0.v1477211083696
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-23 10:24:45.534
+!MESSAGE To: epp.package.java [4.6.0,4.7.0)
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 18 2016-10-23 10:25:26.465
+!MESSAGE Updating the index from remote failed. Version: 1.0.0.v20150617-0732
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseUpdateJob.getEtag(ProblemsDatabaseUpdateJob.java:95)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.ProblemsDatabaseUpdateJob.run(ProblemsDatabaseUpdateJob.java:58)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 6 2016-10-23 10:25:26.468
+!MESSAGE Failed to determine ETAG for remote problems database. Stopping update. Version: 1.0.0.v20150617-0732
+!SESSION 2016-10-25 07:37:15.799 -----------------------------------------------
+eclipse.buildId=4.5.0.I20150603-2000
+java.version=1.8.0_20
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=de_CH
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/timospring/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/timospring/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.epp.logging.aeri.ui 2 23 2016-10-25 07:37:50.780
+!MESSAGE The server availability check failed Version: 1.0.0.v20150617-0732
+!STACK 0
+java.net.UnknownHostException: dev.eclipse.org: unknown error
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(InetAddress.java:907)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1302)
+	at java.net.InetAddress.getAllByName0(InetAddress.java:1255)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1171)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1105)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:102)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:319)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:363)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:219)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:86)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at org.apache.http.client.fluent.Executor.execute(Executor.java:206)
+	at org.eclipse.epp.internal.logging.aeri.ui.log.CheckServerAvailabilityJob.run(CheckServerAvailabilityJob.java:48)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.p2.director 2 10054 2016-10-25 07:38:05.751
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE Software being installed: artificial_root 1.0.0.v1477373884112
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-25 07:38:05.751
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE Eclipse IDE for Java Developers 4.5.0.20150621-1200 (epp.package.java 4.5.0.20150621-1200)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE Eclipse IDE for Java Developers 4.6.0.20160613-1800 (epp.package.java 4.6.0.20160613-1800)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE Eclipse IDE for Java Developers 4.6.1.20160913-0645 (epp.package.java 4.6.1.20160913-0645)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE Eclipse IDE for Java Developers 4.6.1.20161007-1200 (epp.package.java 4.6.1.20161007-1200)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-25 07:38:05.751
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE From: artificial_root 1.0.0.v1477373884112
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE To: epp.package.java [4.5.0,4.6.0)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-25 07:38:05.751
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE From: artificial_root 1.0.0.v1477373884112
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-25 07:38:05.751
+!MESSAGE To: epp.package.java [4.6.0,4.7.0)

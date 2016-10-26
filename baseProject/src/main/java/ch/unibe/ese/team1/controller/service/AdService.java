@@ -75,7 +75,9 @@ public class AdService {
 		ad.setStreet(placeAdForm.getStreet());
 
 		ad.setStudio(placeAdForm.getStudio());
-
+		
+		ad.setForSale(placeAdForm.getForSale()); 
+		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
@@ -106,15 +108,32 @@ public class AdService {
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
+			if (placeAdForm.getAuctionEndingDate().length() >= 1) {
+				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(0, 2));
+				int monthEndingDate = Integer.parseInt(placeAdForm
+						.getAuctionEndingDate().substring(3, 5));
+				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(6, 10));
+                                int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(11, 13));
+                                int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
+						.substring(14, 16));
+				calendar.set(yearEndingDate, monthEndingDate - 1, dayEndingDate, hourEndingDate, minEndingDate, 0);
+				ad.setAuctionEndingDate(calendar.getTime());
+			}
 		} catch (NumberFormatException e) {
 		}
+                
+                ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
+                ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+                ad.setOfferType(placeAdForm.getOfferType());
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
-
+		
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
-		ad.setRoommates(placeAdForm.getRoommates());
 
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -128,6 +147,7 @@ public class AdService {
 		ad.setInternet(placeAdForm.getInternet());
 		ad.setDishwasher(placeAdForm.getDishwasher());
 		
+		
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!
@@ -139,20 +159,6 @@ public class AdService {
 			pictures.add(picture);
 		}
 		ad.setPictures(pictures);
-
-		/*
-		 * Roommates are saved in the form as strings. They need to be converted
-		 * into Users and saved as a List which will be accessible through the
-		 * ad object itself.
-		 */
-		List<User> registeredUserRommates = new LinkedList<>();
-		if (placeAdForm.getRegisteredRoommateEmails() != null) {
-			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
-				User roommateUser = userService.findUserByUsername(userEmail);
-				registeredUserRommates.add(roommateUser);
-			}
-		}
-		ad.setRegisteredRoommates(registeredUserRommates);
 
 		// visits
 		List<Visit> visits = new LinkedList<>();
@@ -239,8 +245,33 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
-
-		// we use this method if we are looking for rooms AND studios
+		
+		// we use this method if we are looking for rooms AND studios AND Sales AND Rent
+		
+		//use this method if we are looking for renting and sales offers
+		/*if(searchForm.getBothRentAndSale()){
+			//used if room and studio is selected, then the price is relevant
+			if(searchForm.getBothRoomAndStudio()){
+				results = adDao
+						.findByPrizePerMonthLessThan(
+								searchForm.getPrize() + 1);
+			}else{ //used when either room or studio is selected
+				results = adDao
+						.findByStudioAndPrizePerMonthLessThan(
+								searchForm.getStudio(), searchForm.getPrize() + 1);
+			}
+		}else{ // either for renting or sales offers are searched for
+			if(searchForm.getBothRoomAndStudio()){ // but both room and studio are selected
+				results = adDao
+						.findBySaleAndPrizeLessThan(
+								searchForm.getForSale(), searchForm.getPrize() + 1);
+			}else{ // either room or studio selected
+				results = adDao
+						.findBySaleAndStudioAndPrizeLessThan(
+								searchForm.getForSale(), searchForm.getStudio(), searchForm.getPrize() + 1);
+			}
+		}*/
+		
 		if (searchForm.getBothRoomAndStudio()) {
 			results = adDao
 					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
@@ -250,7 +281,8 @@ public class AdService {
 			results = adDao.findByStudioAndPrizePerMonthLessThan(
 					searchForm.getStudio(), searchForm.getPrize() + 1);
 		}
-
+		
+	
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 
@@ -298,7 +330,7 @@ public class AdService {
 				.collect(Collectors.toList());
 
 		// filter for additional criteria
-		if (searchForm.getFiltered()) {
+		if (searchForm.getFiltered() || searchForm.getFilteredOffer()) {
 			// prepare date filtering - by far the most difficult filter
 			Date earliestInDate = null;
 			Date latestInDate = null;

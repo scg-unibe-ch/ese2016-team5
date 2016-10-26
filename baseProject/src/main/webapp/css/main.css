@@ -476,6 +476,13 @@ footer nav ul li {
 	width: 80%;
 }
 
+#placeAdForm fieldset:first-child label { /* That's a bit ridiculous, but the original HTML is really... weird... */
+    display: block;
+    margin-bottom: 4px;
+}
+#placeAdForm .ot-direct, #placeAdForm .ot-auction {
+    display: none;
+}
 /* -------------------------------------------------------------------- */
 /* signup.jsp */
 #signupForm {

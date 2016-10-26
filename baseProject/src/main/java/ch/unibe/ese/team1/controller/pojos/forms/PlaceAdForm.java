@@ -24,9 +24,9 @@ public class PlaceAdForm {
 	
 	private String moveOutDate;
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
+//	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
-
+	
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
 
@@ -34,19 +34,15 @@ public class PlaceAdForm {
 	private String roomDescription;
 
 	private String preferences;
-
-	// optional free text description
-	private String roommates;
-	
-	// First user are added as strings, then transformed
-	// to Users and added to the DB in through adService
-	private List<String> registeredRoommateEmails;
 	
 	// optional for input
 	private String roomFriends;
 	
 	//true if studio, false if room
 	private boolean studio;
+	
+	//true if for Sale, false if for Rent
+	private boolean forSale; 
 	
 	private boolean smokers;
 	private boolean animals;
@@ -60,6 +56,39 @@ public class PlaceAdForm {
 	private boolean dishwasher;
 	
 	private List<String> visits;
+        
+        // Auction & Direct Buy
+        private String auctionEndingDate;
+        private int directBuyPrize;
+        private int auctionStartingPrize;
+        private int offerType;
+        
+        public String getAuctionEndingDate() {
+            return auctionEndingDate;
+        }
+        public void setAuctionEndingDate(String auctionEndingDate) {
+            this.auctionEndingDate = auctionEndingDate;
+        }
+        public int getDirectBuyPrize() {
+            return directBuyPrize;
+        }
+        public void setDirectBuyPrize(int prize) {
+            this.directBuyPrize = prize;
+        }
+        public int getAuctionStartingPrize() {
+            return auctionStartingPrize;
+        }
+        public void setAuctionStartingPrize(int prize) {
+            this.auctionStartingPrize = prize;
+        }
+        public int getOfferType() {
+            return offerType;
+        }
+        public void setOfferType(int offerType) {
+            this.offerType = offerType;
+        }
+        
+        
 
 	public String getCity() {
 		return city;
@@ -99,14 +128,6 @@ public class PlaceAdForm {
 
 	public void setSquareFootage(int squareFootage) {
 		this.squareFootage = squareFootage;
-	}
-
-	public String getRoommates() {
-		return roommates;
-	}
-
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
 	}
 
 	public boolean isSmokers() {
@@ -236,15 +257,15 @@ public class PlaceAdForm {
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
-
-	public List<String> getRegisteredRoommateEmails() {
-		return registeredRoommateEmails;
+	
+	public boolean getForSale(){
+		return forSale; 
 	}
-
-	public void setRegisteredRoommateEmails(List<String> registeredRoommateEmails) {
-		this.registeredRoommateEmails = registeredRoommateEmails;
+	
+	public void setForSale(boolean forSale){
+		this.forSale = forSale;
 	}
-
+	
 	public List<String> getVisits() {
 		return visits;
 	}
@@ -252,4 +273,5 @@ public class PlaceAdForm {
 	public void setVisits(List<String> visits) {
 		this.visits = visits;
 	}
+
 }

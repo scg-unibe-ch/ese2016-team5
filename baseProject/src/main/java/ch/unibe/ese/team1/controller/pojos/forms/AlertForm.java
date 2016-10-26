@@ -16,6 +16,9 @@ public class AlertForm {
 
 	private boolean studio;
 	private boolean room;
+	
+	private boolean forSale; 
+	private boolean forRent; 
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -35,6 +38,11 @@ public class AlertForm {
 	private boolean noRoomNoStudio;
 
 	private boolean bothRoomAndStudio;
+	
+	@AssertFalse(message = "Please select either or both types")
+	private boolean noRentNoSale;
+
+	private boolean bothRentAndSale;
 
 	public String getCity() {
 		return city;
@@ -97,6 +105,38 @@ public class AlertForm {
 
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
+	}
+	
+	public boolean getForSale(){
+		return forSale; 
+	}
+
+	public void setForSale (boolean forSale){
+		this.forSale = forSale; 
+	}
+
+	public boolean getForRent(){
+		return forRent; 
+	}
+
+	public void setForRent(boolean forRent){
+		this.forRent = forRent; 
+	}
+
+	public boolean getNoRentNoSale(){
+		return noRentNoSale; 
+	}
+	
+	public void setNoRentNoSale(boolean noRentNoSale){
+		this.noRentNoSale = noRentNoSale; 
+	}
+	
+	public boolean getBothRentAndSale(){
+		return bothRentAndSale; 
+	}
+	
+	public void setBothRentAndSale(boolean bothRentAndSale){
+		this.bothRentAndSale = bothRentAndSale; 
 	}
 	
 	public User getUser() {

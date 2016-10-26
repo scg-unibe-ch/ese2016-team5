@@ -106,6 +106,7 @@ public class SearchForm {
 	private boolean cable;
 	private boolean garage;
 	private boolean internet;
+	private boolean dishwasher;
 
 	private boolean roomHelper;
 
@@ -182,6 +183,14 @@ public class SearchForm {
 
 	public void setInternet(boolean internet) {
 		this.internet = internet;
+	}
+	
+	public boolean getDishwasher() {
+		return dishwasher;
+	}
+
+	public void setDishwasher(boolean dishwasher) {
+		this.dishwasher = dishwasher;
 	}
 
 	public String getEarliestMoveInDate() {

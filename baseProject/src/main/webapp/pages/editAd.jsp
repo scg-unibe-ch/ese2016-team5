@@ -327,6 +327,18 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
+				
+				<td>
+					<c:choose>
+						<c:when test="${ad.dishwasher}">
+							<form:checkbox id="field-dishwasher" path="dishwasher"  checked="checked" /><label>WiFi available
+							</label>
+						</c:when>
+						<c:otherwise>
+							<form:checkbox id="field-dishwasher" path="dishwasher" /><label>WiFi available</label>
+						</c:otherwise>
+					</c:choose>
+				</td>
 			</tr>
 
 		</table>

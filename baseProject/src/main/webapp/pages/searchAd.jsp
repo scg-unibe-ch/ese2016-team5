@@ -96,7 +96,9 @@ function validateType(form)
 		<br />
 
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
-		<button type="reset" tabindex="8">Cancel</button>
+		<a href="searchAdvancedAd"><button type="button" tabindex="8" value="/searchAdvancedAd">Advanced Search</button></a>
+		<button type="reset" tabindex="9">Cancel</button>
+		
 	</fieldset>
 
 </form:form>

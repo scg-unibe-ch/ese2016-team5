@@ -36,6 +36,14 @@ public class SearchController {
 		ModelAndView model = new ModelAndView("searchAd");
 		return model;
 	}
+	
+	
+	/** Shows the search advanced ad page. */
+	@RequestMapping(value = "/searchAdvancedAd", method = RequestMethod.GET)
+	public ModelAndView searchAdvancedAd() {
+		ModelAndView model = new ModelAndView("searchAdvancedAd");
+		return model;
+	}
 
 	/**
 	 * Gets the results when filtering the ads in the database by the parameters

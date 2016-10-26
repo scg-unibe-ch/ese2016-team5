@@ -112,6 +112,7 @@ public class EditAdService {
 		ad.setCable(placeAdForm.getCable());
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
+		ad.setDishwasher(placeAdForm.getDishwasher());
 
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be

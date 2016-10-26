@@ -339,7 +339,17 @@
 				</c:choose>
 			</td>
 		</tr>
-
+		
+		<tr>
+			<td><h2>Dishwasher available</h2></td>
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.dishwasher}"><img src="/img/check-mark.png"></c:when>
+					<c:otherwise><img src="/img/check-mark-negative.png"></c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		
 		<tr>
 			<td><h2>Cable TV</h2></td>
 			<td>

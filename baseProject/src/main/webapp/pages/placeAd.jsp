@@ -201,10 +201,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td><form:checkbox id="field-internet" path="internet"
-						value="1" /><label>WiFi available</label></td>
+				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi available</label></td>
+			
+				<td><form:checkbox id="field-dishwasher" path="dishwasher" value="1" /><label>Dishwasher available</label></td>
 			</tr>
-
 		</table>
 		<br />
 		<form:textarea path="roomDescription" rows="10" cols="100"

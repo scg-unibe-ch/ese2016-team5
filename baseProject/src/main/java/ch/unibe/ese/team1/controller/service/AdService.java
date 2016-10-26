@@ -126,6 +126,7 @@ public class AdService {
 		ad.setCable(placeAdForm.getCable());
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
+		ad.setDishwasher(placeAdForm.getDishwasher());
 		
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
@@ -423,6 +424,17 @@ public class AdService {
 						iterator.remove();
 				}
 			}
+			
+			// dishwasher
+			if (searchForm.getDishwasher()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getDishwasher())
+						iterator.remove();
+				}
+			}
+			
 		}
 		return locatedResults;
 	}

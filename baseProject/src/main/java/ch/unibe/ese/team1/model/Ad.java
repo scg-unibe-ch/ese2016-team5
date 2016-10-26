@@ -98,6 +98,9 @@ public class Ad {
 
 	@Column(nullable = false)
 	private boolean internet;
+	
+	@Column(nullable = false)
+	private boolean dishwasher;
 
 	// true if studio, false if room
 	@Column(nullable = false)
@@ -199,6 +202,14 @@ public class Ad {
 
 	public void setInternet(boolean internet) {
 		this.internet = internet;
+	}
+	
+	public boolean getDishwasher() {
+		return dishwasher;
+	}
+
+	public void setDishwasher(boolean dishwasher) {
+		this.dishwasher = dishwasher;
 	}
 
 	public long getId() {
@@ -358,4 +369,6 @@ public class Ad {
 			return false;
 		return true;
 	}
+
+	
 }

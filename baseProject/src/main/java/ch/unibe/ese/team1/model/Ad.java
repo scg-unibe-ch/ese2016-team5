@@ -66,13 +66,6 @@ public class Ad {
 	private String preferences;
 
 	@Column(nullable = false)
-	private String roommates;
-
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> registeredRoommates;
-
-	@Column(nullable = false)
 	private boolean smokers;
 
 	@Column(nullable = false)
@@ -315,14 +308,6 @@ public class Ad {
 		this.preferences = preferences;
 	}
 
-	public String getRoommates() {
-		return roommates;
-	}
-
-	public void setRoommates(String roommates) {
-		this.roommates = roommates;
-	}
-
 	public List<AdPicture> getPictures() {
 		return pictures;
 	}
@@ -372,14 +357,6 @@ public class Ad {
 			return moveInDate;
 		else
 			return moveOutDate;
-	}
-
-	public List<User> getRegisteredRoommates() {
-		return registeredRoommates;
-	}
-
-	public void setRegisteredRoommates(List<User> registeredRoommates) {
-		this.registeredRoommates = registeredRoommates;
 	}
 
 	public List<Visit> getVisits() {

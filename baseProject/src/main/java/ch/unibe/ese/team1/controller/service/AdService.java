@@ -134,7 +134,6 @@ public class AdService {
 		
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
-		ad.setRoommates(placeAdForm.getRoommates());
 
 		// ad description values
 		ad.setSmokers(placeAdForm.isSmokers());
@@ -159,20 +158,6 @@ public class AdService {
 			pictures.add(picture);
 		}
 		ad.setPictures(pictures);
-
-		/*
-		 * Roommates are saved in the form as strings. They need to be converted
-		 * into Users and saved as a List which will be accessible through the
-		 * ad object itself.
-		 */
-		List<User> registeredUserRommates = new LinkedList<>();
-		if (placeAdForm.getRegisteredRoommateEmails() != null) {
-			for (String userEmail : placeAdForm.getRegisteredRoommateEmails()) {
-				User roommateUser = userService.findUserByUsername(userEmail);
-				registeredUserRommates.add(roommateUser);
-			}
-		}
-		ad.setRegisteredRoommates(registeredUserRommates);
 
 		// visits
 		List<Visit> visits = new LinkedList<>();

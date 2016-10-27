@@ -30,7 +30,7 @@
 		<hr />			
 			<c:forEach var="ad" items="${ownAdvertisements}">
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
+								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
 					<div class="resultLeft">
 						<a href="<c:url value='/ad?id=${ad.id}' />"><img
 							src="${ad.pictures[0].filePath}" /></a>
@@ -53,13 +53,17 @@
 									<c:when test="${ad.forSale}">For Sale</c:when>
 									<c:otherwise>For Rent</c:otherwise>
 								</c:choose></b>
-						</p> <br />
-						<p>Move-in date: ${ad.moveInDate }</p>
+						</p>
+                                                <div>
+                                                    <p style="margin: 20px 0 0 0">Move-in date: ${ad.moveInDate }</p>
+                                                    <p>Creation date: ${ad.creationDate }</p>
+                                                </div>
 					</div>
 				</div>
 			</c:forEach>
 			<br /> <br />
-		</div>		
+		</div>	
+            
 	</c:otherwise>
 </c:choose>
 
@@ -77,7 +81,7 @@
 		<hr />			
 			<c:forEach var="ad" items="${bookmarkedAdvertisements}">
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
+								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
 					<div class="resultLeft">
 						<a href="<c:url value='/ad?id=${ad.id}' />"><img
 							src="${ad.pictures[0].filePath}" /></a>
@@ -100,8 +104,11 @@
 									<c:when test="${ad.forSale}">For Sale</c:when>
 									<c:otherwise>For Rent</c:otherwise>
 								</c:choose></b>
-						</p> <br />
-						<p>Move-in date: ${ad.moveInDate }</p>
+						</p>
+                                                <div>
+                                                    <p style="margin: 20px 0 0 0">Move-in date: ${ad.moveInDate }</p>
+                                                    <p>Creation date: ${ad.creationDate }</p>
+                                                </div>
 					</div>
 				</div>
 			</c:forEach>
@@ -109,5 +116,16 @@
 	</c:otherwise>
 </c:choose>
 
-
+<script type="text/javascript">
+    var days = 300;
+    $('.resultAd').each(function(i, elm) {
+        var date = $(elm).data('creation').split('-');
+        var ad = (new Date(date[0], date[1], date[2])).getTime();
+        var now = (new Date()).getTime();
+        if (now - ad > 86400*1000*days) {
+            $(elm).addClass('old');
+        }
+    });
+</script>
+                
 <c:import url="template/footer.jsp" />

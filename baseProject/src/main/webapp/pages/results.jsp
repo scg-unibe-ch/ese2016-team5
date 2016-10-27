@@ -143,6 +143,7 @@ function sort_div_attribute() {
 		$("#field-latestMoveOutDate").datepicker({
 			dateFormat : 'dd-mm-yy'
 		});
+                
 	});
 </script>
 
@@ -171,7 +172,7 @@ function sort_div_attribute() {
 		<div id="resultsDiv" class="resultsDiv">			
 			<c:forEach var="ad" items="${results}">
 				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-								data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}">
+						data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
 					<div class="resultLeft">
 						<a href="<c:url value='/ad?id=${ad.id}' />"><img
 							src="${ad.pictures[0].filePath}" /></a>
@@ -199,10 +200,28 @@ function sort_div_attribute() {
 						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 							type="date" pattern="dd.MM.yyyy" />
 
-						<p>Move-in date: ${formattedMoveInDate }</p>
+                                                <div>
+                                                    <p style="margin: 20px 0 0 0">Move-in date: ${ad.moveInDate }</p>
+                                                    <p>Creation date: ${ad.creationDate }</p>
+                                                </div>
 					</div>
+                                      
 				</div>
+     
 			</c:forEach>
+                    
+                        <script type="text/javascript">
+                            var days = 300;
+                            $('.resultAd').each(function(i, elm) {
+                                var date = $(elm).data('creation').split('-');
+                                var ad = (new Date(date[0], date[1], date[2])).getTime();
+                                var now = (new Date()).getTime();
+                                if (now - ad > 86400*1000*days) {
+                                    $(elm).addClass('old');
+                                }
+                            });
+                        </script>
+                    
 		</div>
 	</c:otherwise>
 </c:choose>

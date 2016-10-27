@@ -582,6 +582,10 @@ footer nav ul li {
 	border-width: 3px;
 	border-radius: 10px;
 }
+#resultsDiv .resultAd.old {
+    border-color: grey;
+    background-color: #F1F1F1;
+}
 
 #resultsDiv div:first-child {
 	margin-top: 0px;

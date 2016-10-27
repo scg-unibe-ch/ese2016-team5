@@ -394,6 +394,17 @@ header nav {
 	font-size: 1.3em;
 }
 
+/* Horizontal Menu */
+.admin_menu {
+    font-size: 0.8em;
+    width: auto;
+    padding: 0 5px;
+}
+.admin_menu.right {
+    border-right: 1px solid white;
+    padding-right: 15px;
+}
+
 footer {
 	color: white;
 	background: #2dc16d;

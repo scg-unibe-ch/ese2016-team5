@@ -65,12 +65,6 @@
 						%>
 						</a>
 							<ul>
-								<li><a href="/profile/placeAd">Place an ad</a></li>
-								<li><a href="/profile/myRooms">My rooms</a></li>
-								<li><a id="messageLink" href="/profile/messages"></a></li>
-								<li><a href="/profile/enquiries">Enquiries</a></li>
-								<li><a href="/profile/schedule">Schedule</a></li>
-								<li><a href="/profile/alerts">Alerts</a></li>
 								<li>
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
@@ -82,6 +76,16 @@
 					</c:otherwise>
 				</c:choose>
 				<li><a href="<c:url value='/searchAd' />">Search</a></li>
+                                <c:choose>
+                                <c:when test="${loggedIn}">
+                                    <li class="admin_menu right"><a href="/profile/alerts">Alerts</a></li>
+                                    <li class="admin_menu"><a href="/profile/schedule">Schedule</a></li>
+                                    <li class="admin_menu"><a href="/profile/enquiries">Enquiries</a></li>
+                                    <li class="admin_menu"><a id="messageLink" href="/profile/messages"></a></li>
+                                    <li class="admin_menu"><a href="/profile/myRooms">My rooms</a></li>
+                                    <li class="admin_menu"><a href="/profile/placeAd">Place an ad</a></li>
+                                </c:when>
+                                </c:choose>
 			</ul>
 		</nav>
 	</div>

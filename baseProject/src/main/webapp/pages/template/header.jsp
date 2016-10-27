@@ -34,6 +34,8 @@
 }
 </style>
 
+<link rel='shortcut icon' type='image/x-icon' href='/img/favicon.ico' />
+
 </head>
 
 <!-- check if user is logged in -->

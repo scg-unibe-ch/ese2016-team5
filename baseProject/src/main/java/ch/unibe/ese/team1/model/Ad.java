@@ -128,6 +128,16 @@ public class Ad {
         @Column(nullable = false)
         private int offerType;
         
+        @Column(nullable = false)
+        private int status=1;
+        
+        public void setStatus(int status) {
+            this.status = status;
+        }
+        public int getStatus() {
+            return this.status;
+        }
+        
         public Date getAuctionEndingDate() {
             return auctionEndingDate;
         }

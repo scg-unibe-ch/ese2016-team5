@@ -218,7 +218,8 @@ public class AdService {
 	 */
 	@Transactional
 	public Iterable<Ad> getNewestAds(int newest) {
-		Iterable<Ad> allAds = adDao.findAll();
+		//Iterable<Ad> allAds = adDao.findAll();
+		Iterable<Ad> allAds = adDao.findByStatus(1);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
 			ads.add(ad);
@@ -360,6 +361,14 @@ public class AdService {
 			} catch (Exception e) {
 			}
 
+                        // Only get results with status = 1 (not my fault that's so ugly!!)
+                        Iterator<Ad> statusIterator = locatedResults.iterator();
+                        while (statusIterator.hasNext()) {
+                                Ad ad = statusIterator.next();
+                                if (ad.getStatus() != 1)
+                                        statusIterator.remove();
+                        }
+                        
 			// filtering by dates
 			locatedResults = validateDate(locatedResults, true, earliestInDate,
 					latestInDate);

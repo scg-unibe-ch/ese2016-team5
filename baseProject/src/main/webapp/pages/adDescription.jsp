@@ -229,8 +229,18 @@
                     
                 <c:when test="${shownAd.offerType == 2}">
                     <tr>
-                        <td>Direct buy</td>
-                        <td></td>
+                        <td><h2>Direct buy</h2></td>
+                        <td>
+             	           <c:choose>
+								<c:when test="${loggedIn}">
+									<c:if test="${loggedInUserEmail == shownAd.user.username }">
+										<a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
+											<button type="button">Buy directly</button>
+										</a>
+									</c:if>
+								</c:when>
+							</c:choose>
+                        </td>
                     </tr>
                 </c:when>
                     

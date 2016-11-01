@@ -189,5 +189,12 @@ public class AdController {
 //
 //		return model;
 	}
+        
+        @RequestMapping(value = "/profile/DirectBuy", method = RequestMethod.GET)
+    	@Transactional
+    	@ResponseBody
+    	public String DirectBuy(@RequestParam("id") long id, Principal principal) {
+        	return "redirect:/ad?id=" + id;
+        }
 
 }

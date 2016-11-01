@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ch.unibe.ese.team1.controller.pojos.forms.MessageForm;
+import ch.unibe.ese.team1.controller.pojos.forms.PlaceBidForm;
 import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.BookmarkService;
 import ch.unibe.ese.team1.controller.service.MessageService;
@@ -23,6 +24,11 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * This controller handles all requests concerning displaying ads and
@@ -151,6 +157,37 @@ public class AdController {
 		}
 
 		return model;
+	}
+        
+        /**
+         * Handles the placing of bids
+         */
+        @RequestMapping(value = "/profile/placeBid", method = RequestMethod.POST)
+        /*public ModelAndView placeBid(@Valid PlaceBidForm placeBidForm,
+                                     BindingResult result,
+                                     Principal principal,
+                                     RedirectAttributes redirectAttributes,
+                                     @RequestParam long adId) { */
+        public String placeBid(@ModelAttribute("shownAd") @Validated Ad ad, BindingResult result, Principal principal, final RedirectAttributes redirectAttributes, @RequestParam long adId) {
+            
+            String username = principal.getName();
+            User user = userService.findUserByUsername(username);
+            
+            adService.saveBid(ad, user, adId);
+            //Ad ad = editAdService.saveFrom(placeAdForm, fileNames, user, adId);
+            return "redirect:/ad?id=" + adId;
+            
+//		ModelAndView model = new ModelAndView("placeAd");
+//		if (!result.hasErrors()) {
+//			String username = principal.getName();
+//			User user = userService.findUserByUsername(username);
+//
+//			model = new ModelAndView("redirect:/ad?id=" + adId);
+//			redirectAttributes.addFlashAttribute("confirmationMessage",
+//					"Ad edited successfully. You can take a look at it below.");
+//		}
+//
+//		return model;
 	}
 
 }

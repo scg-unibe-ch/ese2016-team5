@@ -270,6 +270,8 @@ button {
 	margin: auto;
 	padding: 10px 20px;
 	border-color: #030303;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 4px;
 }
 
 .negative-message {
@@ -278,6 +280,8 @@ button {
 	margin: auto;
 	padding: 10px 20px;
 	border-color: #030303;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 4px;
 }
 
 .confirmation-message img {
@@ -417,6 +421,7 @@ header ul li ul {
 header ul li:hover ul {
 	display: block;
 	opacity: 1.0;
+        background-color: rgba(255,255,255,0.7);
 }
 
 header nav {

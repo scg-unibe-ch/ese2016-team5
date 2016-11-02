@@ -92,39 +92,23 @@ function validateSaleType(form)
 <hr />
 
 <form:form method="post" modelAttribute="searchForm" action="/results"
-	id="searchForm" autocomplete="off">
+	id="filterForm" autocomplete="off">
 
-	<fieldset>
-		<label for="type-offer">Offer Type:</label>
-		<form:checkbox name="forRent" id="forRent" path="forRentHelper" /><label>For Rent</label>
-		<form:checkbox name="forSale" id="forSale" path="forSaleHelper" /><label>For Sale</label>
-		
-		<form:checkbox style="display:none" name="neitherOffer" id="neitherOffer" path="noRentNoSale" />
-		<form:checkbox style="display:none" name="bothOffer" id="bothRentAndSale" path="bothRentAndSale" />
-		<form:checkbox style="display:none" name="offerType" id="offerType" path="forSale" />
-		<form:checkbox style="display:none" name="filteredOffer" id="filteredOffer" path="filteredOffer" />
-		<form:errors path="noRentNoSale" cssClass="validationErrorText" />
-		
-		<br/>
-		
-		<label for="type-offer">Type:</label>
+	<div id="searchDiv">
 		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
-		
+	
 		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
 		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
 		<form:checkbox style="display:none" name="type" id="type" path="studio" />
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />
-		
-		<br />
-		
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
+	
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />
-		<form:errors path="city" cssClass="validationErrorText" />
-		
-
+		<form:errors path="city" cssClass="validationErrorText" /><br />
+			
 		<label for="radius">Within radius of (max.):</label>
 		<form:input id="radiusInput" type="number" path="radius"
 			placeholder="e.g. 5" step="5" />
@@ -134,15 +118,62 @@ function validateSaleType(form)
 		<form:input id="prizeInput" type="number" path="prize"
 			placeholder="e.g. 5" step="50" />
 		CHF
-		<form:errors path="prize" cssClass="validationErrorText" />
-		<br />
-
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Search</button>
-		<a href="searchAdvancedAd"><button type="button" tabindex="8" value="/searchAdvancedAd">Advanced Search</button></a>
-		<button type="reset" tabindex="9">Cancel</button>
+		<form:errors path="prize" cssClass="validationErrorText" /><br />
 		
-	</fieldset>
-
+		<hr class="slim">		
+		
+		<table style="width: 80%">
+			<tr>
+				<td><label for="earliestMoveInDate">Earliest move-in date</label></td>
+				<td><label for="earliestMoveOutDate">Earliest move-out date (optional)</label></td>
+			</tr>
+			<tr>
+				<td><form:input type="text" id="field-earliestMoveInDate"
+						path="earliestMoveInDate" /></td>
+				<td><form:input type="text" id="field-earliestMoveOutDate"
+						path="earliestMoveOutDate" /></td>
+			</tr>
+			<tr>
+				<td><label for="latestMoveInDate">Latest move-in date</label></td>
+				<td><label for="latestMoveOutDate">Latest move-out date (optional)</label></td>
+			</tr>
+			<tr>
+				<td><form:input type="text" id="field-latestMoveInDate"
+						path="latestMoveInDate" /></td>
+				<td><form:input type="text" id="field-latestMoveOutDate"
+						path="latestMoveOutDate" /></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-smoker" path="smokers" value="1" /><label>Smoking inside
+						allowed</label></td>
+				<td><form:checkbox id="field-animals" path="animals" value="1" /><label>Animals
+						inside allowed</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-garden" path="garden" value="1" /><label>Garden
+						(co-use)</label></td>
+				<td><form:checkbox id="field-balcony" path="balcony" value="1" /><label>Balcony
+						or Patio</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-cellar" path="cellar" value="1" /><label>Cellar
+						or Attic</label></td>
+				<td><form:checkbox id="field-furnished" path="furnished"
+						value="1" /><label>Furnished</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-cable" path="cable" value="1" /><label>Cable TV</label></td>
+				<td><form:checkbox id="field-garage" path="garage" value="1" /><label>Garage</label></td>
+			</tr>
+			<tr>
+				<td><form:checkbox id="field-internet" path="internet" value="1" /><label>WiFi</label></td>
+				<td><form:checkbox id="field-dishwasher" path="dishwasher" value="1" /><label>Dishwasher</label></td>
+			</tr>
+		</table>
+		
+		<button type="submit" onClick="validateType(this.form)">Search</button>	
+		<button type="reset">Cancel</button>
+		</div>
 </form:form>
 
 <c:import url="template/footer.jsp" />

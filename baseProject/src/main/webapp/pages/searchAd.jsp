@@ -35,55 +35,8 @@
 <script>
 function validateType(form)
 {
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	var type = document.getElementById('type');
 	var filtered = document.getElementById('filtered');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = studio.checked;
-	}
-	
-	filtered.checked = false;
-}
-</script>
-
-<script>
-function validateSaleType(form)
-{
-	var forRent = document.getElementById('forRent');
-	var forSale = document.getElementById('forSale');
-	var neither = document.getElementById('neitherOffer');
-	var both = document.getElementById('bothRentAndSales');
-	var type = document.getElementById('typeOffer');
-	var filtered = document.getElementById('filteredOffer');
-	
-	if(forRent.checked && forSale.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!forRent.checked && !forSale.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = forSale.checked;
-	}
-	filteredOffer.checked = false;
+	filtered.checked = true;
 }
 </script>
 
@@ -95,15 +48,19 @@ function validateSaleType(form)
 	id="filterForm" autocomplete="off">
 
 	<div id="searchDiv">
-		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
-	
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:checkbox style="display:none" name="type" id="type" path="studio" />
+		<label for="type-offer">Offer Type:</label>
+		<form:checkbox name="forRent" id="forRent" path="forRent" /><label>For Rent</label>
+		<form:checkbox name="forSale" id="forSale" path="forSale" /><label>For Sale</label>
+		<form:checkbox name="forAuction" id="forAuction" path="forAuction" /><label>For Auction</label><br>
+		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />
+		
+		<label for="type-offer">Type:</label>
+		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
 		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
 	
+
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />

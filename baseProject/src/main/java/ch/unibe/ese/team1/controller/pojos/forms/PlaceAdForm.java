@@ -38,11 +38,12 @@ public class PlaceAdForm {
 	// optional for input
 	private String roomFriends;
 	
-	//true if studio, false if room
 	private boolean studio;
+	private boolean room;
 	
-	//true if for Sale, false if for Rent
 	private boolean forSale; 
+	private boolean forRent; 
+	private boolean forAuction;
 	
 	private boolean smokers;
 	private boolean animals;
@@ -258,12 +259,36 @@ public class PlaceAdForm {
 		this.studio = studio;
 	}
 	
+	public boolean getRoom() {
+		return room;
+	}
+
+	public void setRoom(boolean room) {
+		this.room = room;
+	}
+	
 	public boolean getForSale(){
 		return forSale; 
 	}
 	
 	public void setForSale(boolean forSale){
 		this.forSale = forSale;
+	}
+	
+	public boolean getForRent(){
+		return forRent; 
+	}
+	
+	public void setForRent(boolean forRent){
+		this.forRent = forRent; 
+	}
+	
+	public boolean getForAuction(){
+		return forAuction; 
+	}
+	
+	public void setForAuction(boolean forAuction){
+		this.forAuction = forAuction; 
 	}
 	
 	public List<String> getVisits() {

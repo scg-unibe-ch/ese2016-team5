@@ -75,8 +75,13 @@ public class AdService {
 		ad.setStreet(placeAdForm.getStreet());
 
 		ad.setStudio(placeAdForm.getStudio());
+		ad.setRoom(placeAdForm.getRoom());
 		
 		ad.setForSale(placeAdForm.getForSale()); 
+		
+		ad.setForRent(placeAdForm.getForRent());
+		
+		ad.setForAuction(placeAdForm.getForAuction());
 		
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -260,44 +265,29 @@ public class AdService {
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
 		Iterable<Ad> results = null;
+		boolean sale = searchForm.getForSale();
+		boolean rent = searchForm.getForRent(); 
+		boolean auction = searchForm.getForAuction(); 
 		
-		// we use this method if we are looking for rooms AND studios AND Sales AND Rent
-		
-		//use this method if we are looking for renting and sales offers
-		/*if(searchForm.getBothRentAndSale()){
-			//used if room and studio is selected, then the price is relevant
-			if(searchForm.getBothRoomAndStudio()){
-				results = adDao
-						.findByPrizePerMonthLessThan(
-								searchForm.getPrize() + 1);
-			}else{ //used when either room or studio is selected
-				results = adDao
-						.findByStudioAndPrizePerMonthLessThan(
-								searchForm.getStudio(), searchForm.getPrize() + 1);
-			}
-		}else{ // either for renting or sales offers are searched for
-			if(searchForm.getBothRoomAndStudio()){ // but both room and studio are selected
-				results = adDao
-						.findBySaleAndPrizeLessThan(
-								searchForm.getForSale(), searchForm.getPrize() + 1);
-			}else{ // either room or studio selected
-				results = adDao
-						.findBySaleAndStudioAndPrizeLessThan(
-								searchForm.getForSale(), searchForm.getStudio(), searchForm.getPrize() + 1);
-			}
-		}*/
-		
-		if (searchForm.getBothRoomAndStudio()) {
-			results = adDao
-					.findByPrizePerMonthLessThan(searchForm.getPrize() + 1);
+		if(sale && !rent && !auction){
+			results = adDao.findByForSale(sale);
+		}else if (!sale && rent && !auction){
+			results = adDao.findByForRent(rent);
+		}else if (!sale && !rent && auction){
+			results = adDao.findByForAuction(auction); 
+		}else if (sale && rent && !auction){
+			results = adDao.findByForSaleAndForRent(sale, rent); 
+		}else if (sale && !rent && auction){
+			results = adDao.findByForSaleAndForAuction(sale, auction);
+		}else if (!sale && rent && auction){
+			results = adDao.findByForRentAndForAuction(rent, auction); 
+		}else if (sale && rent && auction){
+			results = adDao.findByForSaleAndForRentAndForAuction(sale, rent, auction); 
+		}else{
+			results = adDao.findAll(); 
 		}
-		// we use this method if we are looking EITHER for rooms OR for studios
-		else {
-			results = adDao.findByStudioAndPrizePerMonthLessThan(
-					searchForm.getStudio(), searchForm.getPrize() + 1);
-		}
+
 		
-	
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 
@@ -345,7 +335,7 @@ public class AdService {
 				.collect(Collectors.toList());
 
 		// filter for additional criteria
-		if (searchForm.getFiltered() || searchForm.getFilteredOffer()) {
+		if (searchForm.getFiltered()) {
 			// prepare date filtering - by far the most difficult filter
 			Date earliestInDate = null;
 			Date latestInDate = null;
@@ -375,13 +365,13 @@ public class AdService {
 			} catch (Exception e) {
 			}
 
-                        // Only get results with status = 1 (not my fault that's so ugly!!)
-                        Iterator<Ad> statusIterator = locatedResults.iterator();
-                        while (statusIterator.hasNext()) {
-                                Ad ad = statusIterator.next();
-                                if (ad.getStatus() != 1)
-                                        statusIterator.remove();
-                        }
+            // Only get results with status = 1 (not my fault that's so ugly!!)
+            Iterator<Ad> statusIterator = locatedResults.iterator();
+            while (statusIterator.hasNext()) {
+            	Ad ad = statusIterator.next();
+                if (ad.getStatus() != 1)
+                statusIterator.remove();
+            }
                         
 			// filtering by dates
 			locatedResults = validateDate(locatedResults, true, earliestInDate,
@@ -390,7 +380,39 @@ public class AdService {
 					earliestOutDate, latestOutDate);
 
 			// filtering for the rest
-			// smokers
+			boolean room = searchForm.getRoom(); 
+			boolean studio = searchForm.getStudio(); 
+			
+			if (room && !studio) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getStudio() && ad.getRoom())
+						iterator.remove();
+				}
+			}else if (!room && studio) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getRoom() && ad.getStudio())
+						iterator.remove();
+				}
+			}else if (room && studio) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (ad.getRoom() && ad.getStudio())
+						iterator.remove();
+				}
+			}else if (!room && !studio) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getRoom() && !ad.getStudio())
+						iterator.remove();
+				}
+			}
+			
 			if (searchForm.getSmokers()) {
 				Iterator<Ad> iterator = locatedResults.iterator();
 				while (iterator.hasNext()) {
@@ -493,6 +515,10 @@ public class AdService {
 		}
 		return locatedResults;
 	}
+
+	
+		
+
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,
 			Date earliestDate, Date latestDate) {

@@ -195,7 +195,7 @@ function sort_div_attribute() {
 									<c:when test="${ad.forSale}">For Sale</c:when>
 									<c:otherwise>For Rent</c:otherwise>
 								</c:choose></b>
-						</p> <br />
+						</p> 
 
 						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
 							type="date" pattern="dd.MM.yyyy" />

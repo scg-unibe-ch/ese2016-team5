@@ -54,5 +54,9 @@
 		
 	</c:otherwise>
 </c:choose>
-
+<script type="text/javascript">
+$(function() {
+   $('#field-email').focus(); 
+});
+</script>
 <c:import url="template/footer.jsp" />

@@ -167,6 +167,24 @@ public class AdController {
             User user = userService.findUserByUsername(username);
             
             adService.saveBid(ad, user, adId);
+            
+            Ad activeAd = adService.getAdById(adId);
+            String title = activeAd.getTitle();
+            int bid = activeAd.getLastBid();
+            String bidder = principal.getName();
+            String seller = activeAd.getUser().getUsername();
+            String subjectBidder = "Bidding confirmation: " + bid + " on '" + title + "'";
+            String subjectSeller = "New bid: " + bid + " on '" + title + "'";
+            String textBidder = "Congratulations! Your bid was accepted!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+            String textSeller = "Congratulations! Someone just placed a bid on your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+            User bidderObj = userService.findUserByUsername(bidder);
+            User sellerObj = userService.findUserByUsername(seller);
+
+            messageService.sendMessage(sellerObj, bidderObj, subjectBidder, textBidder);
+            messageService.sendMessage(bidderObj, sellerObj, subjectSeller, textSeller);
+
+            redirectAttributes.addFlashAttribute("confirmationMessage", "Congratulations! Your bid was accepted!");           
+            
             return "redirect:/ad?id=" + adId;
 
 	}

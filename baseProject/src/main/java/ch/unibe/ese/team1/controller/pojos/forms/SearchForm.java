@@ -1,6 +1,5 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,14 +11,12 @@ public class SearchForm {
 
 	private boolean filtered;
 
-	private boolean filteredOffer; 
-
-
-	// studio: true, room: false
 	private boolean studio;
+	private boolean room;
 	
-	// for Sale: True, for rent: false
-	private boolean forSale; 
+	private boolean forSale;
+	private boolean forRent; 
+	private boolean forAuction;
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -32,16 +29,6 @@ public class SearchForm {
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
-	
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRentNoSale; 
-	
-	private boolean bothRentAndSale; 
-	
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
-
-	private boolean bothRoomAndStudio;
 
 	public String getCity() {
 		return city;
@@ -75,22 +62,22 @@ public class SearchForm {
 		this.forSale = forSale;  
 	}
 	
-	public boolean getNoRentNoSale(){
-		return noRentNoSale; 
+	public boolean getForRent(){
+		return forRent; 
 	}
 	
-	public void setNoRentNoSale(boolean noRentNoSale){
-		this.noRentNoSale = noRentNoSale; 
+	public void setForRent(boolean forRent){
+		this.forRent = forRent; 
 	}
 	
-	public boolean getBothRentAndSale(){
-		return bothRentAndSale; 
+	public boolean getForAuction(){
+		return forAuction; 
 	}
 	
-	public void setBothRentAndSale(boolean bothRentAndSale){
-		this.bothRentAndSale = bothRentAndSale; 
+	public void setForAuction(boolean forAuction){
+		this.forAuction = forAuction; 
 	}
-
+	
 	public boolean getStudio() {
 		return studio;
 	}
@@ -98,22 +85,15 @@ public class SearchForm {
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
-
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
+	
+	public boolean getRoom() {
+		return room;
 	}
 
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
+	public void setRoom(boolean room) {
+		this.room = room;
 	}
 
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
-	}
 
 	// //////////////////
 	// Filtered results//
@@ -125,14 +105,6 @@ public class SearchForm {
 
 	public void setFiltered(boolean filtered) {
 		this.filtered = filtered;
-	}
-	
-	public boolean getFilteredOffer(){
-		return filteredOffer;
-	}
-	
-	public void setFilteredOffer(boolean filteredOffer){
-		this.filteredOffer = filteredOffer; 
 	}
 
 	private String earliestMoveInDate;
@@ -150,15 +122,6 @@ public class SearchForm {
 	private boolean garage;
 	private boolean internet;
 	private boolean dishwasher;
-
-	private boolean roomHelper;
-
-	// the ugly stuff
-	private boolean studioHelper;
-	
-	
-	private boolean forRentHelper; 
-	private boolean forSaleHelper; 
 
 	public boolean getSmokers() {
 		return smokers;
@@ -270,37 +233,5 @@ public class SearchForm {
 
 	public void setLatestMoveOutDate(String latestMoveOutDate) {
 		this.latestMoveOutDate = latestMoveOutDate;
-	}
-
-	public boolean getStudioHelper() {
-		return studioHelper;
-	}
-
-	public void setStudioHelper(boolean helper) {
-		this.studioHelper = helper;
-	}
-
-	public boolean getRoomHelper() {
-		return roomHelper;
-	}
-
-	public void setRoomHelper(boolean helper) {
-		this.roomHelper = helper;
-	}
-	
-	public boolean getForRentHelper(){
-		return forRentHelper; 
-	}
-	
-	public void setForRentHelper(boolean helper){
-		this.forRentHelper = helper; 
-	}
-	
-	public boolean getForSaleHelper(){
-		return forSaleHelper; 
-	}
-	
-	public void setForSaleHelper(boolean helper){
-		this.forSaleHelper = helper; 
 	}
 }

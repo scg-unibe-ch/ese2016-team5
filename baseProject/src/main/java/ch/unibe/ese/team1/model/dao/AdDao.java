@@ -14,15 +14,17 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 	public Iterable<Ad> findByStudioAndPrizePerMonthLessThan(boolean studio,
 			int i);
 	
-	/** this will be used if either rent or sale is selected */
-	//public Iterable<Ad> findBySaleAndPrizeLessThan(boolean forSale,int i);
-	
-	/** this will be used if either rent or sale and either room or studio is selected*/
-	//public Iterable<Ad> findBySaleAndStudioAndPrizeLessThan(boolean forSale, boolean studio, int i);
+	public Iterable<Ad> findByForSale(boolean forSale); 
+	public Iterable<Ad> findByForRent(boolean forRent); 
+	public Iterable<Ad> findByForAuction(boolean forAuction); 
+	public Iterable<Ad> findByForSaleAndForAuction(boolean forSale, boolean forAuction);
+	public Iterable<Ad> findByForSaleAndForRent(boolean forSale, boolean forRent);
+	public Iterable<Ad> findByForRentAndForAuction(boolean forRent, boolean forAuction); 
+	public Iterable<Ad> findByForSaleAndForRentAndForAuction(boolean forSale, boolean forRent, boolean forAuction);
 	
 	public Iterable<Ad> findByUser(User user);
         
-        public Iterable<Ad> findByStatus(int status);
+    public Iterable<Ad> findByStatus(int status);
 
 	
 	

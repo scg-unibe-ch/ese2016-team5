@@ -94,14 +94,21 @@ public class Ad {
 	
 	@Column(nullable = false)
 	private boolean dishwasher;
-
-	//True if for sale, false if for rent. 
+	
 	@Column(nullable = false)
 	private boolean forSale; 
 	
-	// true if studio, false if room
+	@Column(nullable = false)
+	private boolean forRent; 
+	
+	@Column(nullable = false)
+	private boolean forAuction; 
+	
 	@Column(nullable = false)
 	private boolean studio;
+	
+	@Column(nullable = false)
+	private boolean room;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -181,12 +188,36 @@ public class Ad {
 		this.studio = studio;
 	}
 	
+	public boolean getRoom() {
+		return room;
+	}
+
+	public void setRoom(boolean room) {
+		this.room = room;
+	}
+	
 	public boolean getForSale(){
 		return forSale; 
 	}
 	
 	public void setForSale(boolean forSale){
 		this.forSale = forSale; 
+	}
+	
+	public boolean getForRent(){
+		return forRent; 
+	}
+	
+	public void setForRent(boolean forRent){
+		this.forRent = forRent; 
+	}
+	
+	public boolean getForAuction(){
+		return forAuction; 
+	}
+	
+	public void setForAuction(boolean forAuction){
+		this.forAuction = forAuction; 
 	}
 
 	public boolean getSmokers() {

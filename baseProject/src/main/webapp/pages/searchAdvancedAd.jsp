@@ -43,8 +43,8 @@
 			radius.value = "5";
 	});
 </script>
-<script>
 
+<script>
 function showHideTable()
 {
    if (document.getElementById("loginTable").style.display == "none" ) {
@@ -61,27 +61,9 @@ function showHideTable()
 <script>
 function validateType(form)
 {
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	var type = document.getElementById('type');
 	var filtered = document.getElementById('filtered');
 	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-		type.checked = studio.checked;
-	}
-	filtered.checked = false;
+	filtered.checked = true;
 }
 </script>
 
@@ -94,14 +76,14 @@ function validateType(form)
 	id="filterForm" autocomplete="off">
 
 	<fieldset>
-		<form:checkbox name="room" id="room" path="roomHelper" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studioHelper" /><label>Studio</label>
-	
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:checkbox style="display:none" name="type" id="type" path="studio" />
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
+		<label for="type-offer">Offer Type:</label>
+		<form:checkbox name="forRent" id="forRent" path="forRent" /><label>For Rent</label>
+		<form:checkbox name="forSale" id="forSale" path="forSale" /><label>For Sale</label>
+		<form:checkbox name="forAuction" id="forAuction" path="forAuction" /><label>For Auction</label><br>
+		
+		<label for="type-offer">Type:</label>
+		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 	
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"

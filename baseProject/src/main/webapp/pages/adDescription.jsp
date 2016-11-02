@@ -233,11 +233,9 @@
                         <td>
              	           <c:choose>
 								<c:when test="${loggedIn}">
-									<c:if test="${loggedInUserEmail == shownAd.user.username }">
-										<a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
-											<button type="button">Buy directly</button>
-										</a>
-									</c:if>
+									<a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
+										<button type="button">Buy directly</button>
+									</a>
 								</c:when>
 							</c:choose>
                         </td>

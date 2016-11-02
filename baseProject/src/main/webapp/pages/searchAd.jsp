@@ -48,17 +48,17 @@ function validateType(form)
 	id="filterForm" autocomplete="off">
 
 	<div id="searchDiv">
+            
 		<label for="type-offer">Offer Type:</label>
 		<form:checkbox name="forRent" id="forRent" path="forRent" /><label>For Rent</label>
 		<form:checkbox name="forSale" id="forSale" path="forSale" /><label>For Sale</label>
-		<form:checkbox name="forAuction" id="forAuction" path="forAuction" /><label>For Auction</label><br>
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" />
+		<form:checkbox name="forAuction" id="forAuction" path="forAuction" /><label>For Auction</label><br />
 		
 		<label for="type-offer">Type:</label>
 		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /> <br />
+		<br />
 	
 
 		<label for="city">City / zip code:</label>

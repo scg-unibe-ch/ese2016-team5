@@ -12,32 +12,36 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, b, i, fieldset,
 /* Global element styling & global classes */
 p {
 	margin-bottom: 10px;
+	opacity: 1.0;
 }
 
 h1 {
 	margin-bottom: 10px;
 	font-size: 2em;
+	    text-shadow: 0px 0px 21px rgba(255,255,255,7.5)
 }
 
 h2 {
 	font-size: 1.5em;
 	margin-bottom: 10px;
+	    text-shadow: 0px 0px 21px rgba(255,255,255,7.5)
 }
 
 hr {
-	color: #2dc16d;
-	background-color: #2dc16d;
+	color: #030303;
+	background-color: #030303;
 	height: 4px;
 	margin-bottom: 40px;
+	    text-shadow: 0px 0px 21px rgba(255,255,255,7.5);
 }
 
 .link {
-	color: #48db88;
+	color: #525252;
 	text-decoration: none;
 }
 
 .link:hover {
-	color: #62f4a1;
+	color: #808080;
 }
 
 .slim {
@@ -72,9 +76,16 @@ pre a {
 /*Header is fixed to 60px from top, so with padding of 60px,
 we fix the body in the exactly right position*/
 body {
-	color: gray;
+	
+	background: url(/img/background.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 	padding-top: 60px;
 	padding-bottom: 40px;
+	padding-left: 150px;
+	padding-right: 150px;
 	min-width: 1100px;
 }
 
@@ -88,24 +99,25 @@ but not in one String (i.e. in the header) */
 .left {
 	display: inline-block;
 	float: left;
-	padding-left: 8px;
-	margin-top: 5px;
+	padding-left: 30px;
+	opacity: 1.0;
 }
 
 .right {
 	display: inline-block;
 	float: right;
 	padding-right: 8px;
+	opacity: 1.0;
 }
 
 .styledTable {
-	background-color: #3dc16d;
+	background-color: #808080;
 	border-radius: 5px;
 	margin-top: 20px;
 }
 
 .styledTable th {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 }
 
@@ -117,7 +129,8 @@ but not in one String (i.e. in the header) */
 input, select, textarea {
 	margin-right: 10px;
 	margin-bottom: 10px;
-	padding-left: 2px;
+	padding: 4px 5px;
+    border-radius: 4px;
 }
 
 input[type="number"] {
@@ -129,7 +142,7 @@ label {
 }
 
 button {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	padding: 5px 10px;
 	border-radius: 5px;
@@ -145,7 +158,7 @@ button {
 }
 
 .button {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	padding: 5px 10px;
 	border-radius: 5px;
@@ -157,7 +170,7 @@ button {
 .smallPlusButton {
 	display: inline;
 	font-decoration: none;
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	width: 15px;
 	height: 15px;
@@ -174,7 +187,7 @@ button {
 	padding: 0px 5px 0px 5px;
 	border-width: 2px;
 	border-radius: 10px;
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-style: solid; 
 	color: grey;
 	font-size: 0.9em;
@@ -192,22 +205,22 @@ button {
 }
 
 button:hover {
-	color: #2dc16d;
+	color: #030303;
 	background-color: white;
-	border-color: #2dc16d;
+	border-color: #030303;
 	cursor: pointer;
 }
 
 .button:hover {
-	color: #2dc16d;
+	color: #030303;
 	background-color: white;
-	border-color: #2dc16d;
+	border-color: #030303;
 }
 
 .smallPlusButton:hover {
-	color: #2dc16d;
+	color: #030303;
 	background-color: white;
-	border-color: #2dc16d;
+	border-color: #030303;
 	cursor: pointer;
 }
 
@@ -224,6 +237,7 @@ button:hover {
 fieldset {
 	padding: 20px;
 	margin-bottom: 10px;
+	background-color: rgba(255,255,255,0.5);
 }
 
 legend {
@@ -255,7 +269,9 @@ button {
 	width: 20%;
 	margin: auto;
 	padding: 10px 20px;
-	border-color: #2dc16d;
+	border-color: #030303;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 4px;
 }
 
 .negative-message {
@@ -263,7 +279,9 @@ button {
 	width: 20%;
 	margin: auto;
 	padding: 10px 20px;
-	border-color: #2dc16d;
+	border-color: #030303;
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 4px;
 }
 
 .confirmation-message img {
@@ -278,10 +296,12 @@ button {
 
 /* -------------------------------------------------------------------- */
 /* Header & Footer */
+
 header {
-	color: white;
-	background: #2dc16d;
+	color: black;
+	background: #ffffff;
 	position: fixed;
+	opacity: 0.8;
 	top: 0px;
 	left: 0px;
 	right: 0px;
@@ -292,22 +312,26 @@ header {
 
 header a {
 	text-decoration: none;
-	color: white;
+	color: black;
+	opacity: 1.0;
 }
 
 header h1 {
 	margin-top: 10px;
 	margin-left: 10px;
 	font-size: 2.8em;
+	opacity: 1.0;
 }
 
 header h1 a {
-	color: white;
+	color: black;
+	opacity: 1.0;
 }
 
 header ul {
 	padding: 0;
 	list-style: none;
+	opacity: 1.0;
 }
 
 header ul li {
@@ -317,33 +341,39 @@ header ul li {
 	line-height: 21px;
 	margin-top: 20px;
 	text-align: center;
+	opacity: 1.0;
 }
 
 #profile_picture {
 	width: 170px;
 	margin-top: 0px;
+	opacity: 1.0;
 }
 
 #profile_picture_editPage {
 	float: left;
 	width: 340px;
 	margin-top: 0px;
+	opacity: 1.0;
 }
 
 #profile_picture_publicProfile {
 	float: left;
 	width: 340px;
 	margin-top: 0px;
+	opacity: 1.0;
 }
 
 #profile_picture img {
 	width: 60px;
 	height: 60px;
 	float: left;
+	opacity: 1.0;
 }
 
 #profile_picture a {
 	height: 60px;
+	opacity: 1.0;
 }
 
 #profile_picture .text {
@@ -351,40 +381,47 @@ header ul li {
 	height: 100%;
 	margin-top: 10px;
 	margin-right: 10px;
+	opacity: 1.0;
 }
 
 #profile_picture ul li {
 	margin-top: 0px;
 	float: none;
 	width: 100%;
+	opacity: 1.0;
 }
 
 #profile_picture ul li a {
 	height: 25px;
 	text-align: left;
+	opacity: 1.0;
 }
 
 header ul li a {
 	display: block;
 	padding: 5px 10px;
-	color: #fff;
-	background: #2dc16d;
+	color: #000000;
 	text-decoration: none;
+	opacity: 1.0;
 }
 
 header ul li a:hover {
-	color: #fff;
-	background: #48db88;
+	color: #000000;
+	background: #999999;
+	opacity: 1.0;
 }
 
 /* it does hide the drop down menu */
 header ul li ul {
 	display: none;
+	opacity: 1.0;
 }
 
 /*only when you hover over the unordered list item -> dropdown visible */
 header ul li:hover ul {
 	display: block;
+	opacity: 1.0;
+        background-color: rgba(255,255,255,0.7);
 }
 
 header nav {
@@ -392,6 +429,7 @@ header nav {
 	float: right;
 	padding: 0px 15px;
 	font-size: 1.3em;
+	opacity: 1.0;
 }
 
 /* Horizontal Menu */
@@ -399,40 +437,46 @@ header nav {
     font-size: 0.8em;
     width: auto;
     padding: 0 5px;
+	opacity: 1.0;
 }
 .admin_menu.right {
     border-right: 1px solid white;
     padding-right: 15px;
+	opacity: 1.0;
 }
 
 footer {
-	color: white;
-	background: #2dc16d;
+	color: black;
+	background: #ffffff;
 	position: fixed;
-	bottom: 0px;
+	opacity: 0.4;
+	bottom: 10px;
 	left: 0px;
 	right: 0px;
-	height: 30px;
+	height: 25px;
 	text-align: center;
-	padding-top: 10px;
 }
 
 footer nav {
 	margin-top: 8px;
+	opacity: 1.0;
 }
 
 footer .link {
-	color: #AFFFEE;
+	color: #000000;
+	opacity: 1.0;
 }
 
 footer .link:hover {
-	color: white;
+	color: #999999;
+	opacity: 1.0;
 }
 
 footer nav ul li {
 	display: inline-block;
 	float: center;
 	padding: 0px 15px;
+	opacity: 1.0;
 }
 
 /* -------------------------------------------------------------------- */
@@ -531,10 +575,19 @@ footer nav ul li {
 }
 
 /* -------------------------------------------------------------------- */
+/* searchAd.jsp */
+#searchDiv {
+	border-style: none;
+	background-color: rgba(255,255,255,0.7);
+	padding: 15px;
+}
+
+
+/* -------------------------------------------------------------------- */
 /* results.jsp */
 #resultTable {
 	border-radius: 5px;
-	background-color: #2dc16d;
+	background-color: #030303;
 }
 
 #resultTable tr {
@@ -542,7 +595,7 @@ footer nav ul li {
 }
 
 #resultTable th {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	padding: 5px;
 }
@@ -573,9 +626,10 @@ footer nav ul li {
 	padding: 10px;
 	margin-top: 10px;
 	border-style: solid;
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-width: 3px;
 	border-radius: 10px;
+	background-color: rgba(255,255,255,0.5);
 }
 
 #resultsDiv {
@@ -584,18 +638,18 @@ footer nav ul li {
 	float: left;
 }
 
-#resultsDiv div {
+#resultsDiv > div {
 	height: 100px;
 	padding: 10px;
 	margin-top: 20px;
 	border-style: solid;
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-width: 3px;
 	border-radius: 10px;
+	background-color: rgba(255,255,255,0.7);
 }
 #resultsDiv .resultAd.old {
     border-color: grey;
-    background-color: #F1F1F1;
 }
 
 #resultsDiv div:first-child {
@@ -753,15 +807,16 @@ footer nav ul li {
 }
 
 .adDescDiv {
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
 	padding: 15px;
+	background-color: rgba(255,255,255,0.7);
 }
 
 .thinButton {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	padding: 2px 10px;
 	border-radius: 5px;
@@ -824,11 +879,12 @@ footer nav ul li {
 	width: 10%;
 	height: 70%;
 	margin-left: 30px;
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
 	padding: 15px;
+	background-color: rgba(255,255,255,0.7);
 }
 
 #folders h2 {
@@ -837,19 +893,20 @@ footer nav ul li {
 }
 
 #folders h2:hover {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	cursor: pointer;
 }
 
 #messageDetail {
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-radius: 5px;
 	border-width: 3px;
 	border-style: solid;
 	padding: 30px;
 	width: 80%;
 	margin: auto;
+	background-color: rgba(255,255,255,0.7);
 }
 
 #messageDetail p {
@@ -857,7 +914,7 @@ footer nav ul li {
 }
 
 #folders a:hover {
-	background-color: #2dc16d;
+	background-color: #030303;
 	color: white;
 	cursor: pointer;
 }
@@ -980,6 +1037,8 @@ footer nav ul li {
 #userDiv {
 	width: 40%;
 	margin: 0 auto;
+	background-color: rgba(255,255,255,0.7);
+	padding: 15px;
 }
 
 #userDiv img{
@@ -1011,7 +1070,7 @@ footer nav ul li {
 	content: "\2605";
 	position: absolute;
 	left: 0; 
-	color: #2dc16d;
+	color: #030303;
 	width: 1.1em;
 }
 
@@ -1025,7 +1084,7 @@ footer nav ul li {
 .pictureThumbnail{
 	width: 200px;
 	border-style: dashed;
-	border-color: #2dc16d;
+	border-color: #030303;
 	border-width: 2px;
 	text-align:center;
 	float: left;

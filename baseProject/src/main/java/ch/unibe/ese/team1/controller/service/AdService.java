@@ -199,7 +199,21 @@ public class AdService {
 
 		return ad;
 	}
-
+        
+        @Transactional
+        public Ad saveBid(Ad adFormData, User user, long adId) {
+            
+            Ad ad = getAdById(adId);
+            ad.setLastBid(adFormData.getLastBid());
+            ad.setLastBidder(user);
+            
+            Calendar calendar = Calendar.getInstance();
+            ad.setLastBidDate(calendar.getTime());
+            
+            adDao.save(ad);
+            return ad;
+        }
+        
 	/**
 	 * Gets the ad that has the given id.
 	 * 

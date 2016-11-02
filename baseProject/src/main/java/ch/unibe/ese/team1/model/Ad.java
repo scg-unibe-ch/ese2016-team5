@@ -43,7 +43,7 @@ public class Ad {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	@Temporal(TemporalType.DATE)
 	private Date moveInDate;
 
@@ -121,7 +121,6 @@ public class Ad {
 	private List<Visit> visits;
 
         // Auctions & Direct sell
-        
         @Temporal(TemporalType.TIMESTAMP)
         @Column(nullable = true)
 	private Date auctionEndingDate;
@@ -135,6 +134,16 @@ public class Ad {
         @Column(nullable = false)
         private int offerType;
         
+        @ManyToOne(optional = true)
+	private User lastBidder;
+        
+        @Column(nullable = true)
+        private int lastBid;
+        
+        @Column(nullable = true)
+        private Date lastBidDate;
+        
+        // Status
         @Column(nullable = false)
         private int status=1;
         
@@ -168,6 +177,24 @@ public class Ad {
         }
         public void setOfferType(int offerType) {
             this.offerType = offerType;
+        }
+        public User getLastBidder() {
+            return this.lastBidder;
+        }
+        public void setLastBidder(User user) {
+            this.lastBidder = user;
+        }
+        public int getLastBid() {
+            return this.lastBid;
+        }
+        public void setLastBid(int lastBid) {
+            this.lastBid = lastBid;
+        }
+        public Date getLastBidDate() {
+            return this.lastBidDate;
+        }
+        public void setLastBidDate(Date lastBidDate) {
+            this.lastBidDate = lastBidDate;
         }
         
         

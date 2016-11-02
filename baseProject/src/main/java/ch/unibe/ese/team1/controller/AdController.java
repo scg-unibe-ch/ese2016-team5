@@ -23,6 +23,10 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * This controller handles all requests concerning displaying ads and
@@ -152,5 +156,49 @@ public class AdController {
 
 		return model;
 	}
+        
+        /**
+         * Handles the placing of bids
+         */
+        @RequestMapping(value = "/profile/placeBid", method = RequestMethod.POST)
+        public String placeBid(@ModelAttribute("shownAd") @Validated Ad ad, BindingResult result, Principal principal, final RedirectAttributes redirectAttributes, @RequestParam long adId) {
+            
+            String username = principal.getName();
+            User user = userService.findUserByUsername(username);
+            
+            adService.saveBid(ad, user, adId);
+            return "redirect:/ad?id=" + adId;
+
+	}
+        
+        /**
+         * Handles direct buying of properties by performing the following actions:
+         * 1. Sets ad status to 0 (inactive)
+         * 2. Generates two messages to be sent to both parties and sends them
+         * 3. Reloads the page and displays a message
+         */
+        @RequestMapping(value = "/profile/DirectBuy", method = RequestMethod.GET)
+    	public String DirectBuy(@RequestParam("id") long id, Principal principal, RedirectAttributes redirectAttributes) {
+        	
+        	Ad ad = adService.getAdById(id);
+        	ad.setStatus(0);
+        	
+        	String address = ad.getStreet();
+        	String city = ad.getCity();
+        	String buyerUsername = principal.getName();
+        	String sellerUsername = ad.getUser().getUsername();
+        	String subjectBuyer = "You have bought a property in "+city+" at "+address+".";
+        	String subjectSeller = "Your property in "+city+" at "+address+" has been sold.";
+        	String textBuyer = "Congratulations.\nYou have bought an actual property that exists in the real world. And you have done this with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nYour property is located in "+city+" at"+address+". Please contact the user "+sellerUsername+" to conclude your bargain.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Flatfindr system.\nPPS: Isn't the Internet amazing?";
+        	String textSeller = "Congratulations.\nYour actual property that exists in the real world has been bought. And this was done with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nThe property you sold is located in "+city+" at"+address+". Please contact the user "+buyerUsername+" to conclude your sale.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Flatfindr system.\nPPS: Isn't the Internet amazing?";
+        	User buyer = userService.findUserByUsername(buyerUsername);
+        	User seller = userService.findUserByUsername(sellerUsername);
+        	
+        	messageService.sendMessage(seller, buyer, subjectBuyer, textBuyer);
+        	messageService.sendMessage(buyer, seller, subjectSeller, textSeller);
+        	
+        	redirectAttributes.addFlashAttribute("confirmationMessage", "You have successfully bought this property. Check your message inbox for further details.");
+        	return "redirect:/ad?id=" + id;
+        }
 
 }

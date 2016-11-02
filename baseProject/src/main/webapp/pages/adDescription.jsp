@@ -130,6 +130,14 @@
 			var="formattedMoveOutDate" type="date" pattern="dd.MM.yyyy" />
 	</c:otherwise>
 </c:choose>
+<c:choose>
+    <c:when test="${empty shownAd.auctionEndingDate}">
+        <c:set var="formattedAuctionEndingDate" value="" />
+    </c:when>
+    <c:otherwise>
+        <fmt:formatDate value="${shownAd.auctionEndingDate}" var="formattedAuctionEndingDate" type="date" pattern="dd.MM.yyyy HH:mm" />
+    </c:otherwise>
+</c:choose>
 
 
 <h1 id="shownAdTitle">${shownAd.title}
@@ -157,6 +165,85 @@
 	<br>
 
 	<table id="adDescTable" class="adDescDiv">
+
+
+
+
+            <c:choose>
+
+                <c:when test="${shownAd.offerType == 1}">
+                    
+                    <jsp:useBean id="now" class="java.util.Date" />
+                    
+                    
+                    <c:choose>
+                        <c:when test="${ shownAd.lastBid != 0 }"><c:set var="currentPrize" value="${shownAd.lastBid}" /></c:when>
+                        <c:otherwise><c:set var="currentPrize" value="${shownAd.auctionStartingPrize}" /></c:otherwise>
+                    </c:choose>
+
+                    <tr>
+                        <td><h2>Place your bid</h2></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${shownAd.auctionEndingDate ge now}">
+                                    <form:form method="post" modelAttribute="shownAd" action="/profile/placeBid" id="placeBidForm" autocomplete="off">
+                                        <input type="hidden" name="adId" value="${shownAd.id}" />
+                                        <form:input type="text" id="field-lastBid" path="lastBid" value="${currentPrize + 100}" />
+                                        <button type="submit">Submit</button>
+                                        <p style="color: #AE0000" id="placeBidFormError"></p>
+                                    </form:form>
+                                        <script type="text/javascript">
+                                            $('#placeBidForm button').click(function() {
+                                                if ($('#field-lastBid').val() <= ${currentPrize}) {
+                                                    $('#placeBidFormError').text('Your bid needs to be greater than the current prize of ' + ${currentPrize} + '!');
+                                                    return false;
+                                                } else {
+                                                    return true; 
+                                                }
+                                            });
+                                            
+                                            $('#field-lastBid').keydown(function() {
+                                                $('#placeBidFormError').text('');
+                                            });
+                                        </script>
+
+                                </c:when>
+                                <c:otherwise>
+                                    <p>This auction has expired!</p>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h2>Current price</h2></td>
+                        <td>${currentPrize}</td>
+                    </tr>
+                    <tr>
+                        <td><h2>Ending date</h2></td>
+                        <td>${formattedAuctionEndingDate}</td>
+                    </tr>
+                    <tr><td colspan="2"><hr style="margin-bottom: auto" /></td></tr>
+                    
+                </c:when>
+                    
+                <c:when test="${shownAd.offerType == 2}">
+                    <tr>
+                        <td><h2>Direct buy</h2></td>
+                        <td>
+             	           <c:choose>
+								<c:when test="${loggedIn}">
+									<a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
+										<button type="button">Buy directly</button>
+									</a>
+								</c:when>
+							</c:choose>
+                        </td>
+                    </tr>
+                </c:when>
+                    
+            </c:choose>
+            
 		<tr> 
 			<td><h2>Offer Type</h2></td>
 			<td>

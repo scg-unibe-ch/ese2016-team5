@@ -1,6 +1,7 @@
 package ch.unibe.ese.team1.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -23,6 +24,8 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
+import ch.unibe.ese.team1.model.dao.AdDao;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -37,6 +40,9 @@ public class AdController {
 
 	@Autowired
 	private AdService adService;
+	
+	@Autowired
+	private AdDao adDao;
 	
 	@Autowired
 	private UserService userService;
@@ -67,6 +73,48 @@ public class AdController {
 		return model;
 	}
 
+	/**
+	 * Clears the old auctions by setting the status of the ad to 0 and sends the messages to the both parties
+	 * 
+	 * @return return to index
+	 */
+	@RequestMapping(value = "/ad/clearOldAuctions", method = RequestMethod.GET)
+	public String clearOldAuctions() {
+		
+		Date date = new Date();
+		Iterable<Ad> oldAuctions = adDao.findByStatusAndAuctionEndingDateBefore(1, date);
+		for (Ad ad : oldAuctions){
+	       if(ad.getLastBidder() == null){
+	    	   long adId = ad.getId();
+	    	   String title = ad.getTitle();
+	    	   User seller = ad.getUser();
+	    	   String subjectSeller = "Unfortunately your property wasn't sell during the auction";
+	    	   String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+	    	   messageService.sendMessage(seller, seller, subjectSeller, textSeller);
+	    	   ad.setStatus(0);
+	    	   adDao.save(ad);
+	    	   
+	       }
+	       else	{
+	    	   long adId = ad.getId();
+	    	   String title = ad.getTitle();
+	    	   int bid = ad.getLastBid();
+	    	   User bidder = ad.getLastBidder();
+	    	   User seller = ad.getUser();
+	    	   String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
+	    	   String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
+	    	   String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+	    	   String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+	    	   messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
+	    	   messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
+	    	   ad.setStatus(0);
+	    	   adDao.save(ad);
+			}
+		}
+		return "redirect:/";
+		
+	}
+	
 	/**
 	 * Gets the ad description page for the ad with the given id and also
 	 * validates and persists the message passed as post data.
@@ -218,5 +266,7 @@ public class AdController {
         	redirectAttributes.addFlashAttribute("confirmationMessage", "You have successfully bought this property. Check your message inbox for further details.");
         	return "redirect:/ad?id=" + id;
         }
+        
+        
 
 }

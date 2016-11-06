@@ -40,7 +40,8 @@
 <table class="editProfileTable">
 	<tr>
 		<td class="spacingTable"><label for="user-name">Username:</label><a>&emsp;</a>
-		<form:input id="user-name" path="username" value="${currentUser.username}" /></td>
+                    ${currentUser.username}
+		<form:hidden id="user-name" path="username" value="${currentUser.username}" /></td>
 		
 	</tr>
 	<tr>

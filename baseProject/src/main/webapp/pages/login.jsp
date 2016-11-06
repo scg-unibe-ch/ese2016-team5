@@ -33,7 +33,9 @@
 			<button type="submit">Login</button>
 		</form>
 		<br />
-		<h2>Test users</h2>
+		<h2 style="position: relative">Test users
+                    <div style="position: absolute; top: 38px; left: 350px; font-size: 16px; font-style: italic">&lt;-- Click for quick login! :-)</div>
+                </h2>
 
 		<ul class="test-users">
 			<li>Email: <i>ese@unibe.ch</i>, password: <i>ese</i></li>
@@ -57,6 +59,16 @@
 <script type="text/javascript">
 $(function() {
    $('#field-email').focus(); 
+   
+    $('.test-users li')
+        .css('cursor', 'pointer')
+        .click(function() {
+            var data = $(this).children('i');
+            $('#field-email').val($(data).eq(0).text());
+            $('#field-password').val($(data).eq(1).text());
+            $('#login-form').submit();
+        });
+   
 });
 </script>
 <c:import url="template/footer.jsp" />

@@ -72,12 +72,28 @@
 			$("#addedVisits").append(label + input);
 		});
                 
+                // Offer Type
+                function offerTypeShowProperFields(type) {
+                    console.log(type);
+                    $('.ot-rent, .ot-auction, .ot-direct').hide();
+                    $('.' + type).show();
+                }
+                
+                // Set on click
                 $('#type-rent, #type-auction, #type-direct').click(function() {
                     var showType = 'ot-' + $(this).attr('id').replace('type-', '');
-                    $('.ot-rent, .ot-auction, .ot-direct').hide();
-                    $('.' + showType).show();
+                    offerTypeShowProperFields(showType);
                 });
                 
+                // Set on load
+                var offerType = ${ad.offerType};
+                var showType;
+                if (offerType === 0) showType = 'ot-rent';
+                if (offerType === 1) showType = 'ot-auction';
+                if (offerType === 2) showType = 'ot-direct';
+                offerTypeShowProperFields(showType);
+
+                // Auction Ending Date
                 $('#field-auctionEndingDate').datetimepicker({
                     dateFormat : 'dd-mm-yy',
                     hour: (new Date()).getHours()
@@ -113,15 +129,30 @@
                     <td>
                         <label for="field-title">Ad Title</label>
                         <form:input id="field-title" path="title" value="${ad.title}" />
+                        <form:errors path="title" cssClass="validationErrorText" />
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>
                         <label for="type-rent">Offer Type:</label>
-                        <form:radiobutton id="type-rent" path="offerType" value="0" checked="checked" />Rent
-                        <form:radiobutton id="type-auction" path="offerType" value="1" />Auction
-                        <form:radiobutton id="type-direct" path="offerType" value="2" />Direct
+                        <c:choose>
+                            <c:when test="${ad.offerType == 0}">
+                                <form:radiobutton id="type-rent" path="offerType" value="0" checked="checked" />Rent
+                                <form:radiobutton id="type-auction" path="offerType" value="1" />Auction
+                                <form:radiobutton id="type-direct" path="offerType" value="2" />Direct
+                            </c:when>
+                            <c:when test="${ad.offerType == 1}">
+                                <form:radiobutton id="type-rent" path="offerType" value="0" />Rent
+                                <form:radiobutton id="type-auction" path="offerType" value="1" checked="checked" />Auction
+                                <form:radiobutton id="type-direct" path="offerType" value="2" />Direct
+                            </c:when>
+                            <c:when test="${ad.offerType == 2}">
+                                <form:radiobutton id="type-rent" path="offerType" value="0" />Rent
+                                <form:radiobutton id="type-auction" path="offerType" value="1" />Auction
+                                <form:radiobutton id="type-direct" path="offerType" value="2" checked="checked" />Direct
+                            </c:when>
+                        </c:choose>
                     </td>
                     <td>
                         <label for="type-room">Property Type:</label>
@@ -139,8 +170,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="field-street">Street</label>
+                        <label for="field-street">Street *</label>
                         <form:input id="field-street" path="street" value="${ad.street}" />
+                        <form:errors path="street" cssClass="validationErrorText" />
                     </td>
                     <td>
                         <label for="field-city">City / Zip code *</label>
@@ -151,8 +183,9 @@
                 <tr>
                 <tr class="ot-rent">
                     <td>
-                        <label for="moveInDate">Move-in date</label>
+                        <label for="moveInDate">Move-in date *</label>
                         <form:input type="text" id="field-moveInDate" path="moveInDate" value="${formattedMoveInDate}" />
+                        <form:errors path="moveInDate" cssClass="validationErrorText" />
                     </td>
                     <td>
                         <label for="moveOutDate">Move-out date (optional)</label>
@@ -162,13 +195,14 @@
                 <tr>
                     <td>
                         <span class="ot-rent">
-                            <label for="field-Prize">Prize per month</label>
+                            <label for="field-Prize">Prize per month *</label>
                             <form:input id="field-Prize" type="number" path="prize" placeholder="Prize per month" step="50" value="${ad.prizePerMonth}" />
                             <form:errors path="prize" cssClass="validationErrorText" />
                         </span>
                         <span class="ot-direct">
-                            <label for="field-DirectBuyPrize">Prize</label>
+                            <label for="field-DirectBuyPrize">Prize *</label>
                             <form:input id="field-DirectBuyPrize" type="number" path="directBuyPrize" placeholder="Prize" step="50" value="${ad.directBuyPrize}" />
+                            <form:errors path="directBuyPrize" cssClass="validationErrorText" />
                         </span>
                         <span class="ot-auction">
                             <label for="field-StartingPrize">Starting Prize</label>
@@ -177,8 +211,9 @@
                     </td>
                     <td>
                         <span class="ot-auction">
-                            <label for="field-auctionEndingDate">Ending Date</label>
+                            <label for="field-auctionEndingDate">Ending Date *</label>
                             <form:input id="field-auctionEndingDate" path="auctionEndingDate" placeholder="Ending Date" value="${formattedAuctionEndingDate}" />
+                            <form:errors path="auctionEndingDate" cssClass="validationErrorText" />
                         </span>     
                     </td>
                 </tr>

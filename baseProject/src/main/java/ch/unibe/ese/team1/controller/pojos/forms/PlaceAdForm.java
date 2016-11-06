@@ -1,6 +1,7 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
 import java.util.List;
+import ch.unibe.ese.team1.controller.pojos.forms.validation.AdFormOfferTypeFields;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 
 /** This form is used when a user wants to place a new ad. */
+@AdFormOfferTypeFields
 public class PlaceAdForm {
 	
 	@NotBlank(message = "Required")
@@ -300,3 +302,5 @@ public class PlaceAdForm {
 	}
 
 }
+
+

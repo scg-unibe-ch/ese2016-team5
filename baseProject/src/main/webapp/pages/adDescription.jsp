@@ -186,27 +186,33 @@
                         <td>
                             <c:choose>
                                 <c:when test="${shownAd.auctionEndingDate ge now}">
-                                    <form:form method="post" modelAttribute="shownAd" action="/profile/placeBid" id="placeBidForm" autocomplete="off">
-                                        <input type="hidden" name="adId" value="${shownAd.id}" />
-                                        <form:input type="text" id="field-lastBid" path="lastBid" value="${currentPrize + 100}" />
-                                        <button type="submit">Submit</button>
-                                        <p style="color: #AE0000" id="placeBidFormError"></p>
-                                    </form:form>
-                                        <script type="text/javascript">
-                                            $('#placeBidForm button').click(function() {
-                                                if ($('#field-lastBid').val() <= ${currentPrize}) {
-                                                    $('#placeBidFormError').text('Your bid needs to be greater than the current prize of ' + ${currentPrize} + '!');
-                                                    return false;
-                                                } else {
-                                                    return true; 
-                                                }
-                                            });
-                                            
-                                            $('#field-lastBid').keydown(function() {
-                                                $('#placeBidFormError').text('');
-                                            });
-                                        </script>
+                                    <c:choose>
+                                        <c:when test="${loggedInUserEmail != shownAd.user.username }">
+                                            <form:form method="post" modelAttribute="shownAd" action="/profile/placeBid" id="placeBidForm" autocomplete="off">
+                                                <input type="hidden" name="adId" value="${shownAd.id}" />
+                                                <form:input type="text" id="field-lastBid" path="lastBid" value="${currentPrize + 100}" />
+                                                <button type="submit">Submit</button>
+                                                <p style="color: #AE0000" id="placeBidFormError"></p>
+                                            </form:form>
+                                            <script type="text/javascript">
+                                                $('#placeBidForm button').click(function() {
+                                                    if ($('#field-lastBid').val() <= ${currentPrize}) {
+                                                        $('#placeBidFormError').text('Your bid needs to be greater than the current prize of ' + ${currentPrize} + '!');
+                                                        return false;
+                                                    } else {
+                                                        return true; 
+                                                    }
+                                                });
 
+                                                $('#field-lastBid').keydown(function() {
+                                                    $('#placeBidFormError').text('');
+                                                });
+                                            </script>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>This ad belongs to you, so you cannot place bids!</p>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:when>
                                 <c:otherwise>
                                     <p>This auction has expired!</p>

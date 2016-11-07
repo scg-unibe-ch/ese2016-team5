@@ -248,6 +248,7 @@ public class AdController {
         	
         	Ad ad = adService.getAdById(id);
         	ad.setStatus(0);
+                adDao.save(ad);
         	
         	String address = ad.getStreet();
         	String city = ad.getCity();

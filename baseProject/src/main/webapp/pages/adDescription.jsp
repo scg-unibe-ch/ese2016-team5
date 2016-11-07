@@ -230,32 +230,45 @@
                         <td>${formattedAuctionEndingDate}</td>
                     </tr>
                     <tr><td colspan="2"><hr style="margin-bottom: auto" /></td></tr>
-                    
+
                 </c:when>
-                    
+
                 <c:when test="${shownAd.offerType == 2}">
                     <tr>
                         <td><h2>Direct buy</h2></td>
                         <td>
-             	           <c:choose>
-								<c:when test="${loggedIn}">
-									<a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
-										<button type="button">Buy directly</button>
-									</a>
-								</c:when>
-							</c:choose>
+                            <c:choose>
+                                <c:when test="${shownAd.status == 0}">This property is sold!</c:when>
+                                <c:otherwise>
+                                    <c:choose>
+                                        <c:when test="${loggedIn}">
+                                            <c:choose>
+                                                <c:when test="${loggedInUserEmail == shownAd.user.username }">
+                                                    <p>This property belongs to you; you cannot buy it.</p>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
+                                                        <button type="button">CHF ${shownAd.directBuyPrize}<br /><strong style="border-top:1px solid white;padding-top:4px;margin-top:4px;display:block">Buy directly</strong></button>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+                                    </c:choose>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:when>
-                    
+
             </c:choose>
             
 		<tr> 
 			<td><h2>Offer Type</h2></td>
 			<td>
 				<c:choose>
-					<c:when test="${shownAd.forSale}">For Sale</c:when>
-					<c:otherwise>For Rent</c:otherwise>
+					<c:when test="${shownAd.offerType == 0}">For Rent</c:when>
+					<c:when test="${shownAd.offerType == 1}">Auction</c:when>
+					<c:otherwise>Direct Buy</c:otherwise>
 				</c:choose>
 			</td>
 		</tr>

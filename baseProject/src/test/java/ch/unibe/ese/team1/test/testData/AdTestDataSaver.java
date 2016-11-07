@@ -60,6 +60,9 @@ public class AdTestDataSaver {
 		Date moveOutDate4 = formatter.parse("01.07.2015");
 		Date moveOutDate5 = formatter.parse("30.09.2016");
 		
+		Date auctionEndingDate = formatter.parse("31.12.2017");
+		
+		
 		String roomDescription1 = "The room is a part of 3.5 rooms apartment completely renovated"
 				+ "in 2010 at Kramgasse, Bern. The apartment is about 50 m2 on 1st floor."
 				+ "Apt is equipped modern kitchen, hall and balcony. Near to shops and public"
@@ -73,10 +76,7 @@ public class AdTestDataSaver {
 
 		Ad adBern = new Ad();
 		adBern.setZipcode(3011);
-		adBern.setMoveInDate(moveInDate1);
 		adBern.setCreationDate(creationDate1);
-		adBern.setMoveOutDate(moveOutDate1);
-		adBern.setPrizePerMonth(400);
 		adBern.setSquareFootage(50);
 		adBern.setStudio(false);
 		adBern.setRoom(true);
@@ -98,6 +98,10 @@ public class AdTestDataSaver {
 		adBern.setCable(true);
 		adBern.setGarage(true);
 		adBern.setInternet(true);
+		adBern.setDishwasher(true);
+		adBern.setAuctionEndingDate(auctionEndingDate);
+		adBern.setAuctionStartingPrize(30000);
+		adBern.setOfferType(1);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));
@@ -121,14 +125,13 @@ public class AdTestDataSaver {
 		
 		Ad adBern2 = new Ad();
 		adBern2.setZipcode(3012);
-		adBern2.setMoveInDate(moveInDate2);
 		adBern2.setCreationDate(creationDate2);
-		adBern2.setMoveOutDate(moveOutDate4);
-		adBern2.setPrizePerMonth(700);
+		adBern2.setDirectBuyPrize(300000);
 		adBern2.setSquareFootage(60);
 		adBern2.setStudio(true);
 		adBern2.setRoom(false);
 		adBern2.setForAuction(false);
+		adBern2.setOfferType(2);
 		adBern2.setForRent(false);
 		adBern2.setForSale(true);
 		adBern2.setSmokers(false);
@@ -146,6 +149,7 @@ public class AdTestDataSaver {
 		adBern2.setCable(false);
 		adBern2.setGarage(false);
 		adBern2.setInternet(true);
+		adBern2.setDishwasher(true);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern2, "/img/test/ad2_1.jpg"));
 		pictures.add(createPicture(adBern2, "/img/test/ad2_2.jpg"));
@@ -167,16 +171,16 @@ public class AdTestDataSaver {
 		
 		Ad adBasel = new Ad();
 		adBasel.setZipcode(4051);
-		adBasel.setMoveInDate(moveInDate3);
-		adBasel.setMoveOutDate(moveOutDate2);
 		adBasel.setCreationDate(creationDate3);
-		adBasel.setPrizePerMonth(480);
-		adBasel.setSquareFootage(10);
+		adBasel.setAuctionStartingPrize(500000);
+		adBasel.setAuctionEndingDate(auctionEndingDate);
+		adBasel.setSquareFootage(100);
 		adBasel.setStudio(true);
 		adBasel.setRoom(false);
 		adBasel.setForAuction(true);
 		adBasel.setForRent(false);
 		adBasel.setForSale(false);
+		adBasel.setOfferType(1);
 		adBasel.setSmokers(true);
 		adBasel.setAnimals(false);
 		adBasel.setRoomDescription(studioDescription3);
@@ -192,6 +196,7 @@ public class AdTestDataSaver {
 		adBasel.setCable(false);
 		adBasel.setGarage(false);
 		adBasel.setInternet(false);
+		adBasel.setDishwasher(true);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBasel, "/img/test/ad3_1.jpg"));
 		pictures.add(createPicture(adBasel, "/img/test/ad3_2.jpg"));
@@ -214,6 +219,7 @@ public class AdTestDataSaver {
 		adOlten.setCreationDate(creationDate4);
 		adOlten.setPrizePerMonth(430);
 		adOlten.setSquareFootage(60);
+		adOlten.setOfferType(0);
 		adOlten.setStudio(true);
 		adOlten.setRoom(false);
 		adOlten.setForAuction(false);
@@ -234,6 +240,7 @@ public class AdTestDataSaver {
 		adOlten.setCable(true);
 		adOlten.setGarage(false);
 		adOlten.setInternet(false);
+		adOlten.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adOlten, "/img/test/ad4_1.png"));
 		pictures.add(createPicture(adOlten, "/img/test/ad4_2.png"));
@@ -250,16 +257,15 @@ public class AdTestDataSaver {
 		
 		Ad adNeuchâtel = new Ad();
 		adNeuchâtel.setZipcode(2000);
-		adNeuchâtel.setMoveInDate(moveInDate5);
-		adNeuchâtel.setMoveOutDate(moveOutDate3);
 		adNeuchâtel.setCreationDate(creationDate5);
-		adNeuchâtel.setPrizePerMonth(410);
+		adNeuchâtel.setDirectBuyPrize(150000);
 		adNeuchâtel.setSquareFootage(40);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setRoom(false);
 		adNeuchâtel.setForAuction(false);
 		adNeuchâtel.setForRent(false);
 		adNeuchâtel.setForSale(true);
+		adNeuchâtel.setOfferType(2);
 		adNeuchâtel.setSmokers(true);
 		adNeuchâtel.setAnimals(false);
 		adNeuchâtel.setRoomDescription(studioDescription5);
@@ -275,6 +281,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCable(false);
 		adNeuchâtel.setGarage(false);
 		adNeuchâtel.setInternet(true);
+		adNeuchâtel.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_1.jpg"));
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_2.jpg"));
@@ -301,6 +308,8 @@ public class AdTestDataSaver {
 		adBiel.setForSale(false);
 		adBiel.setSmokers(true);
 		adBiel.setAnimals(false);
+		adBiel.setOfferType(0);
+		adBiel.setDishwasher(true);
 		adBiel.setRoomDescription(studioDescription6);
 		adBiel.setPreferences(roomPreferences6);
 		adBiel.setUser(ese);
@@ -335,14 +344,14 @@ public class AdTestDataSaver {
 
 		Ad adZurich = new Ad();
 		adZurich.setZipcode(8000);
-		adZurich.setMoveInDate(moveInDate7);
 		adZurich.setCreationDate(creationDate7);
-		adZurich.setMoveOutDate(moveOutDate5);
-		adZurich.setPrizePerMonth(480);
+		adZurich.setAuctionEndingDate(auctionEndingDate);
+		adZurich.setAuctionStartingPrize(75000);
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
 		adZurich.setRoom(true);
 		adZurich.setForAuction(true);
+		adZurich.setOfferType(1);
 		adZurich.setForRent(false);
 		adZurich.setForSale(false);
 		adZurich.setSmokers(false);
@@ -360,6 +369,7 @@ public class AdTestDataSaver {
 		adZurich.setCable(true);
 		adZurich.setGarage(true);
 		adZurich.setInternet(true);
+		adZurich.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adZurich, "/img/test/ad1_3.jpg"));
 		pictures.add(createPicture(adZurich, "/img/test/ad1_2.jpg"));
@@ -384,13 +394,14 @@ public class AdTestDataSaver {
 		
 		Ad adLuzern = new Ad();
 		adLuzern.setZipcode(6000);
-		adLuzern.setMoveInDate(moveInDate8);
+		adLuzern.setAuctionEndingDate(auctionEndingDate);
+		adLuzern.setAuctionStartingPrize(50000);
 		adLuzern.setCreationDate(creationDate2);
-		adLuzern.setPrizePerMonth(700);
 		adLuzern.setSquareFootage(60);
 		adLuzern.setStudio(true);
 		adLuzern.setRoom(false);
 		adLuzern.setForAuction(true);
+		adLuzern.setOfferType(1);
 		adLuzern.setForRent(false);
 		adLuzern.setForSale(false);
 		adLuzern.setSmokers(false);
@@ -408,6 +419,7 @@ public class AdTestDataSaver {
 		adLuzern.setCable(false);
 		adLuzern.setGarage(false);
 		adLuzern.setInternet(true);
+		adLuzern.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_3.jpg"));
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_2.jpg"));
@@ -429,12 +441,11 @@ public class AdTestDataSaver {
 		
 		Ad adAarau = new Ad();
 		adAarau.setZipcode(5000);
-		adAarau.setMoveInDate(moveInDate3);
-		adAarau.setMoveOutDate(moveOutDate4);
 		adAarau.setCreationDate(creationDate8);
-		adAarau.setPrizePerMonth(800);
+		adAarau.setDirectBuyPrize(50000);
 		adAarau.setSquareFootage(26);
 		adAarau.setStudio(true);
+		adAarau.setOfferType(2);
 		adAarau.setRoom(false);
 		adAarau.setForAuction(false);
 		adAarau.setForRent(false);
@@ -454,6 +465,7 @@ public class AdTestDataSaver {
 		adAarau.setCable(false);
 		adAarau.setGarage(false);
 		adAarau.setInternet(false);
+		adAarau.setDishwasher(true);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adAarau, "/img/test/ad3_3.jpg"));
 		pictures.add(createPicture(adAarau, "/img/test/ad3_2.jpg"));
@@ -480,6 +492,7 @@ public class AdTestDataSaver {
 		adDavos.setPrizePerMonth(1100);
 		adDavos.setSquareFootage(74);
 		adDavos.setStudio(false);
+		adDavos.setOfferType(0);
 		adDavos.setRoom(true);
 		adDavos.setForAuction(false);
 		adDavos.setForRent(true);
@@ -499,6 +512,7 @@ public class AdTestDataSaver {
 		adDavos.setCable(true);
 		adDavos.setGarage(false);
 		adDavos.setInternet(false);
+		adDavos.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adDavos, "/img/test/ad4_3.png"));
 		pictures.add(createPicture(adDavos, "/img/test/ad4_2.png"));
@@ -515,13 +529,14 @@ public class AdTestDataSaver {
 		
 		Ad adLausanne = new Ad();
 		adLausanne.setZipcode(1000);
-		adLausanne.setMoveInDate(moveInDate5);
-		adLausanne.setMoveOutDate(moveOutDate3);
+		adLausanne.setAuctionEndingDate(auctionEndingDate);
+		adLausanne.setAuctionStartingPrize(350);
 		adLausanne.setCreationDate(creationDate5);
 		adLausanne.setPrizePerMonth(360);
-		adLausanne.setSquareFootage(8);
+		adLausanne.setSquareFootage(16);
 		adLausanne.setStudio(false);
 		adLausanne.setRoom(true);
+		adLausanne.setOfferType(1);
 		adLausanne.setForAuction(true);
 		adLausanne.setForRent(false);
 		adLausanne.setForSale(false);
@@ -540,6 +555,7 @@ public class AdTestDataSaver {
 		adLausanne.setCable(false);
 		adLausanne.setGarage(false);
 		adLausanne.setInternet(false);
+		adLausanne.setDishwasher(true);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_3.jpg"));
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_2.jpg"));
@@ -563,6 +579,7 @@ public class AdTestDataSaver {
 		adLocarno.setRoom(false);
 		adLocarno.setForAuction(false);
 		adLocarno.setForRent(true);
+		adLocarno.setOfferType(0);
 		adLocarno.setForSale(false);
 		adLocarno.setSmokers(true);
 		adLocarno.setAnimals(false);
@@ -579,6 +596,7 @@ public class AdTestDataSaver {
 		adLocarno.setCable(false);
 		adLocarno.setGarage(false);
 		adLocarno.setInternet(false);
+		adLocarno.setDishwasher(true);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_3.png"));
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_2.png"));

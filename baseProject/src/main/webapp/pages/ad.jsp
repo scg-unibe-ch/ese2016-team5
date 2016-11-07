@@ -15,7 +15,7 @@
             <i>
                 <c:choose>
                     <c:when test="${ad.studio}">Studio</c:when>
-                    <c:otherwise>Room</c:otherwise>
+                    <c:when test="${ad.room}">Room</c:when>
                 </c:choose>
             </i>
         </p>
@@ -43,7 +43,7 @@
                 <c:choose>
                     <c:when test="${ad.offerType == 0}">For Rent</c:when>
                     <c:when test="${ad.offerType == 1}">Auction</c:when>
-                    <c:when test="${ad.offerType == 2}">Direct Buy</c:when>
+                    <c:when test="${ad.offerType == 2}">For Sale</c:when>
                 </c:choose>
             </b>
         </p>

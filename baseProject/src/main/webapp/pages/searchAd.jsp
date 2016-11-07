@@ -50,13 +50,13 @@ function validateType(form)
 	<div id="searchDiv">
             
 		<label for="type-offer">Offer Type:</label>
-		<form:checkbox name="forRent" id="forRent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="forSale" id="forSale" path="forSale" /><label>For Sale</label>
-		<form:checkbox name="forAuction" id="forAuction" path="forAuction" /><label>For Auction</label><br />
+		<form:checkbox name="type-rent" id="forRent" path="forRent" /><label>For Rent</label>
+		<form:checkbox name="type-sale" id="forSale" path="forSale" /><label>For Sale</label>
+		<form:checkbox name="type-auction" id="forAuction" path="forAuction" /><label>For Auction</label><br />
 		
 		<label for="type-offer">Type:</label>
-		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
+		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
 		<br />
 	

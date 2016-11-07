@@ -92,7 +92,7 @@ public class AdService {
 		// java.util.Calendar uses a month range of 0-11 instead of the
 		// XMLGregorianCalendar which uses 1-12
 		try {
-			if (placeAdForm.getMoveInDate().length() >= 1) {
+			if (placeAdForm.getForRent() && placeAdForm.getMoveInDate().length() >= 1) {
 				int dayMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
 						.substring(0, 2));
 				int monthMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
@@ -103,7 +103,7 @@ public class AdService {
 				ad.setMoveInDate(calendar.getTime());
 			}
 
-			if (placeAdForm.getMoveOutDate().length() >= 1) {
+			if (placeAdForm.getForRent() && placeAdForm.getMoveOutDate().length() >= 1) {
 				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
 						.substring(0, 2));
 				int monthMoveOut = Integer.parseInt(placeAdForm
@@ -113,7 +113,7 @@ public class AdService {
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
-			if (placeAdForm.getAuctionEndingDate().length() >= 1) {
+			if (placeAdForm.getForAuction() &&placeAdForm.getAuctionEndingDate().length() >= 1) {
 				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
 						.substring(0, 2));
 				int monthEndingDate = Integer.parseInt(placeAdForm
@@ -130,9 +130,9 @@ public class AdService {
 		} catch (NumberFormatException e) {
 		}
                 
-                ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
-                ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
-                ad.setOfferType(placeAdForm.getOfferType());
+        ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
+        ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+        ad.setOfferType(placeAdForm.getOfferType());
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
@@ -387,14 +387,14 @@ public class AdService {
 				Iterator<Ad> iterator = locatedResults.iterator();
 				while (iterator.hasNext()) {
 					Ad ad = iterator.next();
-					if (!ad.getStudio() && ad.getRoom())
+					if (ad.getRoom())
 						iterator.remove();
 				}
 			}else if (!room && studio) {
 				Iterator<Ad> iterator = locatedResults.iterator();
 				while (iterator.hasNext()) {
 					Ad ad = iterator.next();
-					if (!ad.getRoom() && ad.getStudio())
+					if (ad.getStudio())
 						iterator.remove();
 				}
 			}else if (room && studio) {

@@ -675,7 +675,6 @@ footer nav ul li {
 
 #resultsDiv .resultRight {
 	float: right;
-	width: 20%;
 	text-align: right;
 	padding-right: 5px;
 }
@@ -1102,4 +1101,42 @@ footer nav ul li {
 
 .pictureThumbnail button{
 	margin: 10px 0;
+}
+
+/*----------------------*/
+/* ad.jsp */
+.adDates {
+    margin-top: 10px;
+}
+.adDates p {
+    margin: 0;
+}
+.resultAd .resultRight h2 {
+    margin-bottom: 4px;
+}
+.resultAd {
+    position: relative;
+}
+.resultAd .expired {
+    display: none;
+}
+.resultAd.inactive .expired {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 7px 0 0 7px;
+}
+.resultAd.inactive .expired span {
+    transform: rotate(-90deg);
+    display: block;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    position: absolute;
+    left: -16px;
+    top: 46px;
 }

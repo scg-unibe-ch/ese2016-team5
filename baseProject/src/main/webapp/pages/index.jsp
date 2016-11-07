@@ -25,37 +25,7 @@
 		<div id="resultsDiv" class="resultsDiv">	
 			<h2>Our newest ads:</h2>		
 			<c:forEach var="ad" items="${newest}">
-				<div class="resultAd">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title}</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-								</c:choose></i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<p>
-							<b><c:choose>
-									<c:when test="${ad.forSale}">For Sale</c:when>
-									<c:otherwise>For Rent</c:otherwise>
-								</c:choose></b>
-						</p><br />
-
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
-
-						<p>Move-in date: ${formattedMoveInDate }</p>
-					</div>
-				</div>
+                            <%@include file="ad.jsp"%>
 			</c:forEach>
 		</div>
 	</c:otherwise>

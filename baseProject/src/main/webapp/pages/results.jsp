@@ -124,46 +124,7 @@ function sort_div_attribute() {
 	<c:otherwise>
 		<div id="resultsDiv" class="resultsDiv">			
 			<c:forEach var="ad" items="${results}">
-				<div class="resultAd" data-price="${ad.prizePerMonth}" 
-						data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
-					<div class="resultLeft">
-						<a href="<c:url value='/ad?id=${ad.id}' />"><img
-							src="${ad.pictures[0].filePath}" /></a>
-						<h2>
-							<a class="link" href="<c:url value='/ad?id=${ad.id}' />">${ad.title }</a>
-						</h2>
-						<p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
-						<br />
-						<p>
-							<i><c:choose>
-									<c:when test="${ad.studio}">Studio</c:when>
-									<c:otherwise>Room</c:otherwise>
-									
-								</c:choose></i>
-						</p>
-					</div>
-					<div class="resultRight">
-						<h2>CHF ${ad.prizePerMonth }</h2>
-						<p>
-							<b><c:choose>
-									<c:when test="${ad.forSale}">For Sale</c:when>
-									<c:when test="${ad.forRent}">Auction</c:when>
-									<c:otherwise>For Rent</c:otherwise>
-								</c:choose></b>
-
-						</p>
-
-						<fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate"
-							type="date" pattern="dd.MM.yyyy" />
-
-                                                <div>
-                                                    <p style="margin: 20px 0 0 0">Move-in date: ${ad.moveInDate }</p>
-                                                    <p>Creation date: ${ad.creationDate }</p>
-                                                </div>
-					</div>
-                                      
-				</div>
-     
+                            <%@include file="ad.jsp"%>
 			</c:forEach>
                     
                         <script type="text/javascript">

@@ -41,7 +41,7 @@
         <p>
             <b>
                 <c:choose>
-                    <c:when test="${ad.offerType == 0}">For Sale</c:when>
+                    <c:when test="${ad.offerType == 0}">For Rent</c:when>
                     <c:when test="${ad.offerType == 1}">Auction</c:when>
                     <c:when test="${ad.offerType == 2}">Direct Buy</c:when>
                 </c:choose>

@@ -113,7 +113,7 @@ public class AdService {
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
-			if (placeAdForm.getForAuction() &&placeAdForm.getAuctionEndingDate().length() >= 1) {
+			if (placeAdForm.getForAuction() && placeAdForm.getAuctionEndingDate().length() >= 1) {
 				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
 						.substring(0, 2));
 				int monthEndingDate = Integer.parseInt(placeAdForm

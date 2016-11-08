@@ -679,7 +679,7 @@ footer nav ul li {
 #resultsDiv .resultRight {
 	float: right;
 	text-align: right;
-	padding-right: 5px;
+	padding-right: 0;
 }
 
 /* -------------------------------------------------------------------- */

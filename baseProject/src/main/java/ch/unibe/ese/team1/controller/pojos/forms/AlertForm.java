@@ -17,6 +17,7 @@ public class AlertForm {
 	private boolean studio;
 	private boolean room;
 	
+	private int offerType; 
 
 
 	@NotBlank(message = "Required")
@@ -33,7 +34,7 @@ public class AlertForm {
 	
 	private int zipCode;
 
-	/*
+	
 	@AssertFalse(message = "Please select either or both types")
 	private boolean noRoomNoStudio;
 
@@ -43,7 +44,7 @@ public class AlertForm {
 	private boolean noRentNoSale;
 
 	private boolean bothRentAndSale;
-	 */
+	 
 	public String getCity() {
 		return city;
 	}
@@ -90,8 +91,16 @@ public class AlertForm {
 	public void setRoom(boolean room) {
 		this.room = room;
 	}
+	
+	public int getOfferType(){
+		return offerType;
+	}
+	
+	public void setOfferType(int offerType){
+		this.offerType = offerType; 
+	}
 
-	/*public boolean getNoRoomNoStudio() {
+	public boolean getNoRoomNoStudio() {
 		return noRoomNoStudio;
 	}
 
@@ -105,7 +114,7 @@ public class AlertForm {
 
 	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
 		this.bothRoomAndStudio = bothRoomAndStudio;
-	}*/
+	}
 	
 	public User getUser() {
 		return user;

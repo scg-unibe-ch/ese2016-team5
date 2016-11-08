@@ -39,6 +39,9 @@ public class Alert {
 	@Column
 	private boolean room;
 	
+	@Column 
+	private int offerType; 
+	
 	@Column
 	private boolean bothRoomAndStudio;
 	
@@ -145,5 +148,13 @@ public class Alert {
 	
 	public void setBothRentAndSale(boolean bothRentAndSale){
 		this.bothRentAndSale = bothRentAndSale; 
+	}
+	
+	public int getOfferType(){
+		return offerType; 
+	}
+	
+	public void setOfferType(int offerType){
+		this.offerType = offerType; 
 	}
 }

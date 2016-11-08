@@ -35,17 +35,6 @@ function typeOfAlert(alert) {
 		return "Room"
 }	
 </script>
-
-<script>
-function typeOfOfferAlert(alert) {
-	if(alert.getBothRentAndSale())
-		return "Both"
-	else if(alert.getForSale())
-		return "For Sale"
-	else 
-		return "For Rent"
-}	
-</script>
 	
 <script>
 	$(document).ready(function() {
@@ -78,21 +67,17 @@ function typeOfOfferAlert(alert) {
 	id="alertForm" autocomplete="off">
 
 	<fieldset>	
-		<label for="offertype">Offer Type:</label>
-		<form:checkbox name="forRent" id="forRent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="forSale" id="forSale" path="forSale" /><label>For Sale</label>
+		<label for="type-offer">Offer Type:</label>
+		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
+		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
+		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
+		<br />
 		
-		<form:checkbox style="display:none" name="neither" id="neitherOffer" path="noRentNoSale" />
-		<form:checkbox style="display:none" name="both" id="bothOffer" path="bothRentAndSale" />
-		<form:errors path="noRentNoSale" cssClass="validationErrorText" /><br/>
-			
-		<label for="type">Type:</label>
-		<form:checkbox name="room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="studio" id="studio" path="studio" /><label>Studio</label>
-		
-		<form:checkbox style="display:none" name="neither" id="neither" path="noRoomNoStudio" />
-		<form:checkbox style="display:none" name="both" id="both" path="bothRoomAndStudio" />
-		<form:errors path="noRoomNoStudio" cssClass="validationErrorText" /><br />
+		<label for="type-offer">Type:</label>
+		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
+		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
+		<br />
 		
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
@@ -111,7 +96,7 @@ function typeOfOfferAlert(alert) {
 		<form:errors path="price" cssClass="validationErrorText" />
 		<br />
 
-		<button type="submit" tabindex="7" onClick="validateOfferType(this.form);validateType(this.form)">Subscribe</button>
+		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
 		<button type="reset" tabindex="8">Cancel</button>
 	</fieldset>
 

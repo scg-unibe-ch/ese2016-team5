@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="status" value="active" />
 <c:if test="${ad.status == 0}">
     <c:set var="status" value="inactive" />
@@ -49,8 +50,15 @@
         </p>
         <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate" type="date" pattern="dd.MM.yyyy" />
         <div class="adDates">
-            <p>Move-in date: ${ad.moveInDate }</p>
-            <p>Last update: ${ad.creationDate}</p>
+            <c:if test="${ad.offerType == 0}">
+                <p>Move-in date: ${ad.moveInDate }</p>
+            </c:if>
+            <c:if test="${ad.offerType == 1}">
+                <fmt:formatDate value="${ad.auctionEndingDate}" var="formattedEndingDate" type="date" pattern="dd.MM.yyyy" />
+                <p>Ending date: ${formattedEndingDate}</p>
+            </c:if>
+            <fmt:formatDate value="${ad.creationDate}" var="formattedCreationDate" type="date" pattern="dd.MM.yyyy" />
+            <p>Last update: ${formattedCreationDate}</p>
         </div>
     </div>
         <div class="expired">

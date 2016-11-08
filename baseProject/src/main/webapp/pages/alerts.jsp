@@ -27,12 +27,12 @@ function validateType(form)
 
 <script>
 function typeOfAlert(alert) {
-	if(alert.getBothRoomAndStudio())
-		return "Both"
-	else if(alert.getStudio())
-		return "Studio"
+	if(alert.getOfferType() == 0)
+		return "Rent"
+	else if(alert.getOfferType() == 1)
+		return "Auction"
 	else 
-		return "Room"
+		return "Sale"
 }	
 </script>
 	
@@ -66,7 +66,8 @@ function typeOfAlert(alert) {
 <form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
 	id="alertForm" autocomplete="off">
 
-	<fieldset>	
+	<div id="searchDiv">
+            
 		<label for="type-offer">Offer Type:</label>
 		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
 		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
@@ -78,27 +79,26 @@ function typeOfAlert(alert) {
 		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
 		<br />
-		
+	
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />
-		<form:errors path="city" cssClass="validationErrorText" />
-		
+		<form:errors path="city" cssClass="validationErrorText" /><br />
+			
 		<label for="radius">Within radius of (max.):</label>
 		<form:input id="radiusInput" type="number" path="radius"
 			placeholder="e.g. 5" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="price">Price (max.):</label>
-		<form:input id="priceInput" type="number" path="price"
+		<br /> <label for="prize">Price (max.):</label>
+		<form:input id="prizeInput" type="number" path="prize"
 			placeholder="e.g. 5" step="50" />
 		CHF
-		<form:errors path="price" cssClass="validationErrorText" />
-		<br />
+		<form:errors path="prize" cssClass="validationErrorText" /><br />
 
 		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
 		<button type="reset" tabindex="8">Cancel</button>
-	</fieldset>
+	</div>
 
 </form:form> <br />
 <h2>Your active alerts</h2>
@@ -124,28 +124,15 @@ function typeOfAlert(alert) {
 			<tr>
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothRentAndSale}">
-						Both
-					</c:when>
-					<c:when test="${alert.forSale}">
-						For Sale
-					</c:when>
-					<c:otherwise>
-						For Rent
-					</c:otherwise>
-				</c:choose>
+                    <c:when test="${alert.offerType == 0}">For Rent</c:when>
+                    <c:when test="${alert.offerType == 1}">Auction</c:when>
+                    <c:when test="${alert.offerType == 2}">For Sale</c:when>
+                </c:choose>
 				</td>
 				<td>
 				<c:choose>
-					<c:when test="${alert.bothRoomAndStudio}">
-						Both
-					</c:when>
-					<c:when test="${alert.studio}">
-						Studio
-					</c:when>
-					<c:otherwise>
-						Room
-					</c:otherwise>
+					<c:when test="${alert.room}">Room</c:when>
+					<c:otherwise>Studio</c:otherwise>
 				</c:choose>
 				</td>
 				<td>${alert.city}</td>

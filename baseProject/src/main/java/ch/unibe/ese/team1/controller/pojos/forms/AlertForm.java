@@ -34,17 +34,6 @@ public class AlertForm {
 	
 	private int zipCode;
 
-	
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRoomNoStudio;
-
-	private boolean bothRoomAndStudio;
-	
-	@AssertFalse(message = "Please select either or both types")
-	private boolean noRentNoSale;
-
-	private boolean bothRentAndSale;
-	 
 	public String getCity() {
 		return city;
 	}
@@ -98,22 +87,6 @@ public class AlertForm {
 	
 	public void setOfferType(int offerType){
 		this.offerType = offerType; 
-	}
-
-	public boolean getNoRoomNoStudio() {
-		return noRoomNoStudio;
-	}
-
-	public void setNoRoomNoStudio(boolean noRoomNoStudio) {
-		this.noRoomNoStudio = noRoomNoStudio;
-	}
-
-	public boolean getBothRoomAndStudio() {
-		return bothRoomAndStudio;
-	}
-
-	public void setBothRoomAndStudio(boolean bothRoomAndStudio) {
-		this.bothRoomAndStudio = bothRoomAndStudio;
 	}
 	
 	public User getUser() {

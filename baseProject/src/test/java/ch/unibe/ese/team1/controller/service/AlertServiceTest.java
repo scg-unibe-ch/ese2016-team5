@@ -58,11 +58,9 @@ public class AlertServiceTest {
 		// Create 2 alerts for Adolf Ogi
 		Alert alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(false);
 		alert.setRoom(false);
 		alert.setStudio(true);
-		alert.setForRent(true);
-		alert.setForSale(false);
+		alert.setOfferType(0);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
 		alert.setPrice(1500);
@@ -71,11 +69,9 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setBothRoomAndStudio(true);
 		alert.setRoom(true);
 		alert.setStudio(true);
-		alert.setForRent(false); 
-		alert.setForSale(true); 
+		alert.setOfferType(2);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
 		alert.setPrice(1000);
@@ -106,11 +102,9 @@ public class AlertServiceTest {
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(false);
 		alert.setRoom(false);
 		alert.setStudio(true);
-		alert.setForRent(true); 
-		alert.setForSale(false);
+		alert.setOfferType(0);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
 		alert.setPrice(1500);
@@ -119,11 +113,9 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setBothRoomAndStudio(true);
 		alert.setRoom(true);
 		alert.setStudio(true);
-		alert.setForRent(false); 
-		alert.setForSale(true); 
+		alert.setOfferType(2); 
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
 		alert.setPrice(1000);
@@ -143,7 +135,8 @@ public class AlertServiceTest {
 		oltenResidence.setPrizePerMonth(1200);
 		oltenResidence.setSquareFootage(42);
 		oltenResidence.setStudio(false);
-		//oltenResidence.setForSale(true); 
+		oltenResidence.setRoom(true);
+		oltenResidence.setOfferType(2);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
@@ -165,8 +158,6 @@ public class AlertServiceTest {
 		assertTrue(alertService.radiusMismatch(oltenResidence, alertList.get(1)));
 		assertTrue(alertService.typeMismatch(oltenResidence, alertList.get(0)));
 		assertFalse(alertService.typeMismatch(oltenResidence, alertList.get(1)));
-		assertTrue(alertService.saleMismatch(oltenResidence, alertList.get(0))); 
-		assertFalse(alertService.saleMismatch(oltenResidence, alertList.get(1)));
 	}
 	
 	//Lean user creating method

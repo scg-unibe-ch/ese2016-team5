@@ -48,10 +48,10 @@
                 </c:choose>
             </b>
         </p>
-        <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate" type="date" pattern="dd.MM.yyyy" />
         <div class="adDates">
             <c:if test="${ad.offerType == 0}">
-                <p>Move-in date: ${ad.moveInDate }</p>
+                <fmt:formatDate value="${ad.moveInDate}" var="formattedMoveInDate" type="date" pattern="dd.MM.yyyy" />
+                <p>Move-in date: ${formattedMoveInDate}</p>
             </c:if>
             <c:if test="${ad.offerType == 1}">
                 <fmt:formatDate value="${ad.auctionEndingDate}" var="formattedEndingDate" type="date" pattern="dd.MM.yyyy" />

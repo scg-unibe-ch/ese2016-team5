@@ -296,15 +296,19 @@
 			<td>${formattedMoveInDate}</td>
 		</tr>
 
-		<tr>
-			<td><h2>Move-out Date</h2></td>
-			<td>${formattedMoveOutDate}</td>
-		</tr>
+		<c:choose>
+			<c:when test="${shownAd.offerType == 0}">
+				<tr>
+					<td><h2>Move-out Date</h2></td>
+					<td>${formattedMoveOutDate}</td>
+				</tr>
 
-		<tr>
-			<td><h2>Monthly Rent</h2></td>
-			<td>${shownAd.prizePerMonth}&#32;CHF</td>
-		</tr>
+				<tr>
+					<td><h2>Monthly Rent</h2></td>
+					<td>${shownAd.prizePerMonth}&#32;CHF</td>
+				</tr>
+			</c:when>
+		</c:choose>
 
 		<tr>
 			<td><h2>Square Meters</h2></td>

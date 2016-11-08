@@ -11,24 +11,22 @@ import org.hibernate.validator.constraints.NotBlank;
 /** This form is used when a user wants to place a new ad. */
 @AdFormOfferTypeFields
 public class PlaceAdForm {
-	
+
 	@NotBlank(message = "Required")
 	private String title;
-	
+
 	@NotBlank(message = "Required")
 	private String street;
-	
+
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
 	private String city;
-	
-	//@NotBlank(message = "Required")
+
 	private String moveInDate;
-	
+
 	private String moveOutDate;
 
-//	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int prize;
-	
+
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
 
@@ -36,17 +34,13 @@ public class PlaceAdForm {
 	private String roomDescription;
 
 	private String preferences;
-	
+
 	// optional for input
 	private String roomFriends;
-	
+
 	private boolean studio;
 	private boolean room;
-	
-	private boolean forSale; 
-	private boolean forRent; 
-	private boolean forAuction;
-	
+
 	private boolean smokers;
 	private boolean animals;
 	private boolean garden;
@@ -57,41 +51,46 @@ public class PlaceAdForm {
 	private boolean garage;
 	private boolean internet;
 	private boolean dishwasher;
-	
+
 	private List<String> visits;
-        
-        // Auction & Direct Buy
-        private String auctionEndingDate;
-        private int directBuyPrize;
-        private int auctionStartingPrize;
-        private int offerType;
-        
-        public String getAuctionEndingDate() {
-            return auctionEndingDate;
-        }
-        public void setAuctionEndingDate(String auctionEndingDate) {
-            this.auctionEndingDate = auctionEndingDate;
-        }
-        public int getDirectBuyPrize() {
-            return directBuyPrize;
-        }
-        public void setDirectBuyPrize(int prize) {
-            this.directBuyPrize = prize;
-        }
-        public int getAuctionStartingPrize() {
-            return auctionStartingPrize;
-        }
-        public void setAuctionStartingPrize(int prize) {
-            this.auctionStartingPrize = prize;
-        }
-        public int getOfferType() {
-            return offerType;
-        }
-        public void setOfferType(int offerType) {
-            this.offerType = offerType;
-        }
-        
-        
+
+	// Auction & Direct Buy
+	private String auctionEndingDate;
+	private int directBuyPrize;
+	private int auctionStartingPrize;
+	private int offerType;
+
+	public String getAuctionEndingDate() {
+		return auctionEndingDate;
+	}
+
+	public void setAuctionEndingDate(String auctionEndingDate) {
+		this.auctionEndingDate = auctionEndingDate;
+	}
+
+	public int getDirectBuyPrize() {
+		return directBuyPrize;
+	}
+
+	public void setDirectBuyPrize(int prize) {
+		this.directBuyPrize = prize;
+	}
+
+	public int getAuctionStartingPrize() {
+		return auctionStartingPrize;
+	}
+
+	public void setAuctionStartingPrize(int prize) {
+		this.auctionStartingPrize = prize;
+	}
+
+	public int getOfferType() {
+		return offerType;
+	}
+
+	public void setOfferType(int offerType) {
+		this.offerType = offerType;
+	}
 
 	public String getCity() {
 		return city;
@@ -148,7 +147,7 @@ public class PlaceAdForm {
 	public void setAnimals(boolean animals) {
 		this.animals = animals;
 	}
-	
+
 	public boolean getGarden() {
 		return garden;
 	}
@@ -164,7 +163,7 @@ public class PlaceAdForm {
 	public void setBalcony(boolean balcony) {
 		this.balcony = balcony;
 	}
-	
+
 	public boolean getCellar() {
 		return cellar;
 	}
@@ -172,7 +171,7 @@ public class PlaceAdForm {
 	public void setCellar(boolean cellar) {
 		this.cellar = cellar;
 	}
-	
+
 	public boolean isFurnished() {
 		return furnished;
 	}
@@ -188,7 +187,7 @@ public class PlaceAdForm {
 	public void setCable(boolean cable) {
 		this.cable = cable;
 	}
-	
+
 	public boolean getGarage() {
 		return garage;
 	}
@@ -204,7 +203,7 @@ public class PlaceAdForm {
 	public void setInternet(boolean internet) {
 		this.internet = internet;
 	}
-	
+
 	public boolean getDishwasher() {
 		return dishwasher;
 	}
@@ -252,15 +251,15 @@ public class PlaceAdForm {
 	public void setRoomFriends(String roomFriends) {
 		this.roomFriends = roomFriends;
 	}
-	
+
 	public boolean getStudio() {
 		return studio;
 	}
-	
+
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
-	
+
 	public boolean getRoom() {
 		return room;
 	}
@@ -268,31 +267,7 @@ public class PlaceAdForm {
 	public void setRoom(boolean room) {
 		this.room = room;
 	}
-	
-	public boolean getForSale(){
-		return forSale; 
-	}
-	
-	public void setForSale(boolean forSale){
-		this.forSale = forSale;
-	}
-	
-	public boolean getForRent(){
-		return forRent; 
-	}
-	
-	public void setForRent(boolean forRent){
-		this.forRent = forRent; 
-	}
-	
-	public boolean getForAuction(){
-		return forAuction; 
-	}
-	
-	public void setForAuction(boolean forAuction){
-		this.forAuction = forAuction; 
-	}
-	
+
 	public List<String> getVisits() {
 		return visits;
 	}
@@ -302,5 +277,3 @@ public class PlaceAdForm {
 	}
 
 }
-
-

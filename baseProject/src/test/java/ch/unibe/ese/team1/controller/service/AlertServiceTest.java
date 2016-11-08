@@ -143,7 +143,7 @@ public class AlertServiceTest {
 		oltenResidence.setPrizePerMonth(1200);
 		oltenResidence.setSquareFootage(42);
 		oltenResidence.setStudio(false);
-		oltenResidence.setForSale(true); 
+		//oltenResidence.setForSale(true); 
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");

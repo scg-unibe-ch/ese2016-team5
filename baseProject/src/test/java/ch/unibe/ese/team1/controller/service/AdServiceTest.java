@@ -61,7 +61,7 @@ public class AdServiceTest {
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
 		placeAdForm.setStudio(true);
-		placeAdForm.setForSale(true);
+		placeAdForm.setOfferType(2);
 		placeAdForm.setSmokers(true);
 		placeAdForm.setAnimals(false);
 		placeAdForm.setGarden(true);
@@ -91,7 +91,7 @@ public class AdServiceTest {
 		}
 		
 		//Testing
-		assertTrue(ad.getForSale());
+		assertEquals(2, ad.getOfferType());
 		assertTrue(ad.getSmokers());
 		assertFalse(ad.getAnimals());
 		assertEquals("Bern", ad.getCity());

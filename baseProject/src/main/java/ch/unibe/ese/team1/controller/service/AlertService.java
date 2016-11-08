@@ -60,10 +60,10 @@ public class AlertService {
 		alert.setRadius(alertForm.getRadius());
 		alert.setRoom(alertForm.getRoom());
 		alert.setStudio(alertForm.getStudio());
-		alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
-		alert.setForRent(alertForm.getForRent()); 
-		alert.setForSale(alertForm.getForSale());
-		alert.setBothRentAndSale(alertForm.getBothRentAndSale());
+		//alert.setBothRoomAndStudio(alertForm.getBothRoomAndStudio());
+		//alert.setForRent(alertForm.getForRent()); 
+		//alert.setForSale(alertForm.getForSale());
+		//alert.setBothRentAndSale(alertForm.getBothRentAndSale());
 		alert.setUser(user);
 		alertDao.save(alert);
 	}
@@ -154,9 +154,9 @@ public class AlertService {
 	/** Checks if an ad is conforming to the criteria in an alert. */
 	private boolean saleMismatchWith(Ad ad, Alert alert){
 		boolean mismatch = false; 
-		if (!alert.getBothRentAndSale()
+		/*if (!alert.getBothRentAndSale()
 				&& ad.getForSale() != alert.getForSale())
-			mismatch = true; 
+			mismatch = true; */
 		return mismatch; 
 	}
 	

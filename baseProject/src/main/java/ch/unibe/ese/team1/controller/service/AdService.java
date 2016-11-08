@@ -62,9 +62,8 @@ public class AdService {
 	 *            currently logged in user
 	 */
 	@Transactional
-	public Ad saveFrom(PlaceAdForm placeAdForm, List<String> filePaths,
-			User user) {
-		
+	public Ad saveFrom(PlaceAdForm placeAdForm, List<String> filePaths, User user) {
+
 		Ad ad = new Ad();
 
 		Date now = new Date();
@@ -76,67 +75,51 @@ public class AdService {
 
 		ad.setStudio(placeAdForm.getStudio());
 		ad.setRoom(placeAdForm.getRoom());
-		
-		ad.setForSale(placeAdForm.getForSale()); 
-		
-		ad.setForRent(placeAdForm.getForRent());
-		
-		ad.setForAuction(placeAdForm.getForAuction());
-		
+
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
 		ad.setZipcode(Integer.parseInt(zip));
 		ad.setCity(placeAdForm.getCity().substring(7));
-		
+
 		Calendar calendar = Calendar.getInstance();
 		// java.util.Calendar uses a month range of 0-11 instead of the
 		// XMLGregorianCalendar which uses 1-12
 		try {
-			if (placeAdForm.getForRent() && placeAdForm.getMoveInDate().length() >= 1) {
-				int dayMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(0, 2));
-				int monthMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(3, 5));
-				int yearMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(6, 10));
+			if (placeAdForm.getOfferType() == 0 && placeAdForm.getMoveInDate().length() >= 1) {
+				int dayMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(0, 2));
+				int monthMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(3, 5));
+				int yearMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(6, 10));
 				calendar.set(yearMoveIn, monthMoveIn - 1, dayMoveIn);
 				ad.setMoveInDate(calendar.getTime());
 			}
 
-			if (placeAdForm.getForRent() && placeAdForm.getMoveOutDate().length() >= 1) {
-				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(0, 2));
-				int monthMoveOut = Integer.parseInt(placeAdForm
-						.getMoveOutDate().substring(3, 5));
-				int yearMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(6, 10));
+			if (placeAdForm.getOfferType() == 0 && placeAdForm.getMoveOutDate().length() >= 1) {
+				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(0, 2));
+				int monthMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(3, 5));
+				int yearMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(6, 10));
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
-			if (placeAdForm.getForAuction() && placeAdForm.getAuctionEndingDate().length() >= 1) {
-				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(0, 2));
-				int monthEndingDate = Integer.parseInt(placeAdForm
-						.getAuctionEndingDate().substring(3, 5));
-				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(6, 10));
-                                int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(11, 13));
-                                int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(14, 16));
+
+			if (placeAdForm.getOfferType() == 1 && placeAdForm.getAuctionEndingDate().length() >= 1) {
+				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(0, 2));
+				int monthEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(3, 5));
+				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(6, 10));
+				int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(11, 13));
+				int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(14, 16));
 				calendar.set(yearEndingDate, monthEndingDate - 1, dayEndingDate, hourEndingDate, minEndingDate, 0);
 				ad.setAuctionEndingDate(calendar.getTime());
 			}
 		} catch (NumberFormatException e) {
 		}
-                
-        ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
-        ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
-        ad.setOfferType(placeAdForm.getOfferType());
+
+		ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
+		ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+		ad.setOfferType(placeAdForm.getOfferType());
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
-		
+
 		ad.setRoomDescription(placeAdForm.getRoomDescription());
 		ad.setPreferences(placeAdForm.getPreferences());
 
@@ -151,8 +134,7 @@ public class AdService {
 		ad.setGarage(placeAdForm.getGarage());
 		ad.setInternet(placeAdForm.getInternet());
 		ad.setDishwasher(placeAdForm.getDishwasher());
-		
-		
+
 		/*
 		 * Save the paths to the picture files, the pictures are assumed to be
 		 * uploaded at this point!
@@ -194,26 +176,26 @@ public class AdService {
 		}
 
 		ad.setUser(user);
-		
+
 		adDao.save(ad);
 
 		return ad;
 	}
-        
-        @Transactional
-        public Ad saveBid(Ad adFormData, User user, long adId) {
-            
-            Ad ad = getAdById(adId);
-            ad.setLastBid(adFormData.getLastBid());
-            ad.setLastBidder(user);
-            
-            Calendar calendar = Calendar.getInstance();
-            ad.setLastBidDate(calendar.getTime());
-            
-            adDao.save(ad);
-            return ad;
-        }
-        
+
+	@Transactional
+	public Ad saveBid(Ad adFormData, User user, long adId) {
+
+		Ad ad = getAdById(adId);
+		ad.setLastBid(adFormData.getLastBid());
+		ad.setLastBidder(user);
+
+		Calendar calendar = Calendar.getInstance();
+		ad.setLastBidDate(calendar.getTime());
+
+		adDao.save(ad);
+		return ad;
+	}
+
 	/**
 	 * Gets the ad that has the given id.
 	 * 
@@ -237,7 +219,6 @@ public class AdService {
 	 */
 	@Transactional
 	public Iterable<Ad> getNewestAds(int newest) {
-		//Iterable<Ad> allAds = adDao.findAll();
 		Iterable<Ad> allAds = adDao.findByStatus(1);
 		List<Ad> ads = new ArrayList<Ad>();
 		for (Ad ad : allAds)
@@ -264,30 +245,46 @@ public class AdService {
 	 */
 	@Transactional
 	public Iterable<Ad> queryResults(SearchForm searchForm) {
-		Iterable<Ad> results = null;
-		boolean sale = searchForm.getForSale();
-		boolean rent = searchForm.getForRent(); 
-		boolean auction = searchForm.getForAuction(); 
+		Iterable<Ad> salesResults = null; 
+		Iterable<Ad> auctionResults = null; 
+		Iterable<Ad> rentResults = null; 
 		
-		if(sale && !rent && !auction){
-			results = adDao.findByForSale(sale);
-		}else if (!sale && rent && !auction){
-			results = adDao.findByForRent(rent);
-		}else if (!sale && !rent && auction){
-			results = adDao.findByForAuction(auction); 
-		}else if (sale && rent && !auction){
-			results = adDao.findByForSaleAndForRent(sale, rent); 
-		}else if (sale && !rent && auction){
-			results = adDao.findByForSaleAndForAuction(sale, auction);
-		}else if (!sale && rent && auction){
-			results = adDao.findByForRentAndForAuction(rent, auction); 
-		}else if (sale && rent && auction){
-			results = adDao.findByForSaleAndForRentAndForAuction(sale, rent, auction); 
-		}else{
-			results = adDao.findAll(); 
+		List<Ad> rentAds = new ArrayList<>(); 
+		List<Ad> auctionAds = new ArrayList<>(); 
+		List<Ad> salesAds = new ArrayList<>(); 
+		
+		int[] offerType = searchForm.getOfferType();
+		
+		for(int i = 0; i < offerType.length; i++){
+			if (offerType[i] == 0){
+				rentResults = adDao.findByOfferType(0);
+				for (Ad ad : rentResults) {
+					rentAds.add(ad);
+				}
+			}if (offerType[i] == 1){
+				auctionResults = adDao.findByOfferType(1); 
+				for (Ad ad : auctionResults) {
+					auctionAds.add(ad);
+				}
+			}if(offerType[i] == 2){
+				salesResults = adDao.findByOfferType(2);
+				for (Ad ad : salesResults) {
+					salesAds.add(ad);
+				}
+			}
+		}	
+		
+		List<Ad> locatedResults = new ArrayList<>();
+		if(!rentAds.isEmpty()){
+			locatedResults.addAll(rentAds);
+		}
+		if(!auctionAds.isEmpty()){
+			locatedResults.addAll(auctionAds);
+		}
+		if(!salesAds.isEmpty()){
+			locatedResults.addAll(salesAds);
 		}
 
-		
 		// filter out zipcode
 		String city = searchForm.getCity().substring(7);
 
@@ -295,12 +292,6 @@ public class AdService {
 		// lowest zip code
 		Location searchedLocation = geoDataService.getLocationsByCity(city)
 				.get(0);
-
-		// create a list of the results and of their locations
-		List<Ad> locatedResults = new ArrayList<>();
-		for (Ad ad : results) {
-			locatedResults.add(ad);
-		}
 
 		final int earthRadiusKm = 6380;
 		List<Location> locations = geoDataService.getAllLocations();
@@ -511,17 +502,11 @@ public class AdService {
 						iterator.remove();
 				}
 			}
-			
 		}
 		return locatedResults;
 	}
 
-	
-		
-
-
-	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut,
-			Date earliestDate, Date latestDate) {
+	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut, Date earliestDate, Date latestDate) {
 		if (ads.size() > 0) {
 			// Move-in dates
 			// Both an earliest AND a latest date to compare to

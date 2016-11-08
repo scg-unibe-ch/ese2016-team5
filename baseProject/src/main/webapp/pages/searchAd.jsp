@@ -50,9 +50,10 @@ function validateType(form)
 	<div id="searchDiv">
             
 		<label for="type-offer">Offer Type:</label>
-		<form:checkbox name="type-rent" id="forRent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="type-sale" id="forSale" path="forSale" /><label>For Sale</label>
-		<form:checkbox name="type-auction" id="forAuction" path="forAuction" /><label>For Auction</label><br />
+		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
+		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
+		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
+		<br />
 		
 		<label for="type-offer">Type:</label>
 		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
@@ -60,7 +61,6 @@ function validateType(form)
 		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
 		<br />
 	
-
 		<label for="city">City / zip code:</label>
 		<form:input type="text" name="city" id="city" path="city"
 			placeholder="e.g. Bern" tabindex="3" />

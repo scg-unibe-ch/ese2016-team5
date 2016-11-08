@@ -13,10 +13,7 @@ public class SearchForm {
 
 	private boolean studio;
 	private boolean room;
-	
-	private boolean forSale;
-	private boolean forRent; 
-	private boolean forAuction;
+	private int[] offerType = new int[3];
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -30,6 +27,13 @@ public class SearchForm {
 	@Min(value = 0, message = "In your dreams.")
 	private Integer prize;
 
+	 public int[] getOfferType() {
+         return offerType;
+     }
+     public void setOfferType(int[] offerType) {
+         this.offerType = offerType;
+     }
+     
 	public String getCity() {
 		return city;
 	}
@@ -53,31 +57,7 @@ public class SearchForm {
 	public void setPrize(Integer prize) {
 		this.prize = prize;
 	}
-	
-	public boolean getForSale(){
-		return forSale; 
-	}
-	
-	public void setForSale(boolean forSale){
-		this.forSale = forSale;  
-	}
-	
-	public boolean getForRent(){
-		return forRent; 
-	}
-	
-	public void setForRent(boolean forRent){
-		this.forRent = forRent; 
-	}
-	
-	public boolean getForAuction(){
-		return forAuction; 
-	}
-	
-	public void setForAuction(boolean forAuction){
-		this.forAuction = forAuction; 
-	}
-	
+
 	public boolean getStudio() {
 		return studio;
 	}

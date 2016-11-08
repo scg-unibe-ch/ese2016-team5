@@ -149,10 +149,10 @@ function sort_div_attribute() {
 	<div id="filterDiv">
 		<h2>Filter results:</h2>
 		<label for="type-offer">Offer Type:</label>
-		<form:checkbox name="type-rent" id="forRent" path="forRent" /><label>For Rent</label>
-		<form:checkbox name="type-sale" id="forSale" path="forSale" /><label>For Sale</label>
-		<form:checkbox name="type-auction" id="forAuction" path="forAuction" /><label>For Auction</label><br />
-		
+		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
+		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
+		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
+		<br />
 		<label for="type-offer">Type:</label>
 		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>

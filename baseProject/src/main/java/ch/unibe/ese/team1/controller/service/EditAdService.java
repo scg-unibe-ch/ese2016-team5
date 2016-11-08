@@ -48,8 +48,7 @@ public class EditAdService {
 	 *            currently logged in user
 	 */
 	@Transactional
-	public Ad saveFrom(PlaceAdForm placeAdForm, List<String> filePaths,
-			User user, long adId) {
+	public Ad saveFrom(PlaceAdForm placeAdForm, List<String> filePaths, User user, long adId) {
 
 		Ad ad = adService.getAdById(adId);
 
@@ -61,8 +60,7 @@ public class EditAdService {
 		ad.setStreet(placeAdForm.getStreet());
 
 		ad.setStudio(placeAdForm.getStudio());
-		
-		ad.setForSale(placeAdForm.getForSale());
+		ad.setRoom(placeAdForm.getRoom());
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -74,47 +72,36 @@ public class EditAdService {
 		// XMLGregorianCalendar which uses 1-12
 		try {
 			if (placeAdForm.getMoveInDate().length() >= 1) {
-				int dayMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(0, 2));
-				int monthMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(3, 5));
-				int yearMoveIn = Integer.parseInt(placeAdForm.getMoveInDate()
-						.substring(6, 10));
+				int dayMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(0, 2));
+				int monthMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(3, 5));
+				int yearMoveIn = Integer.parseInt(placeAdForm.getMoveInDate().substring(6, 10));
 				calendar.set(yearMoveIn, monthMoveIn - 1, dayMoveIn);
 				ad.setMoveInDate(calendar.getTime());
 			}
 
 			if (placeAdForm.getMoveOutDate().length() >= 1) {
-				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(0, 2));
-				int monthMoveOut = Integer.parseInt(placeAdForm
-						.getMoveOutDate().substring(3, 5));
-				int yearMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate()
-						.substring(6, 10));
+				int dayMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(0, 2));
+				int monthMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(3, 5));
+				int yearMoveOut = Integer.parseInt(placeAdForm.getMoveOutDate().substring(6, 10));
 				calendar.set(yearMoveOut, monthMoveOut - 1, dayMoveOut);
 				ad.setMoveOutDate(calendar.getTime());
 			}
-                        
+
 			if (placeAdForm.getAuctionEndingDate().length() >= 1) {
-				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(0, 2));
-				int monthEndingDate = Integer.parseInt(placeAdForm
-						.getAuctionEndingDate().substring(3, 5));
-				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(6, 10));
-                                int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(11, 13));
-                                int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate()
-						.substring(14, 16));
+				int dayEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(0, 2));
+				int monthEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(3, 5));
+				int yearEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(6, 10));
+				int hourEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(11, 13));
+				int minEndingDate = Integer.parseInt(placeAdForm.getAuctionEndingDate().substring(14, 16));
 				calendar.set(yearEndingDate, monthEndingDate - 1, dayEndingDate, hourEndingDate, minEndingDate, 0);
 				ad.setAuctionEndingDate(calendar.getTime());
 			}
 		} catch (NumberFormatException e) {
 		}
-                
-                ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
-                ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
-                ad.setOfferType(placeAdForm.getOfferType());
+
+		ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
+		ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+		ad.setOfferType(placeAdForm.getOfferType());
 
 		ad.setPrizePerMonth(placeAdForm.getPrize());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());

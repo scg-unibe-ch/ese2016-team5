@@ -20,46 +20,8 @@ function deleteAlert(button) {
 <script>
 function validateType(form)
 {
-	var room = document.getElementById('room');
-	var studio = document.getElementById('studio');
-	var neither = document.getElementById('neither');
-	var both = document.getElementById('both');
-	
-	if(room.checked && studio.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!room.checked && !studio.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-	}
-}
-</script>
-
-<script>
-function validateOfferType(form){
-{
-	var forRent = document.getElementById('forRent');
-	var forSale = document.getElementById('forSale');
-	var neither = document.getElementById('neitherOffer');
-	var both = document.getElementById('bothOffer');
-	
-	if(forRent.checked && forSale.checked) {
-		both.checked = true;
-		neither.checked = false;
-	}
-	else if(!forRent.checked && !forSale.checked) {
-		both.checked = false;
-		neither.checked = true;
-	}
-	else {
-		both.checked = false;
-		neither.checked = false;
-	}
+	var filtered = document.getElementById('filtered');
+	filtered.checked = true;
 }
 </script>
 

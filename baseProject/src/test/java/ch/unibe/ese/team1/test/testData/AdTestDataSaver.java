@@ -80,9 +80,6 @@ public class AdTestDataSaver {
 		adBern.setSquareFootage(50);
 		adBern.setStudio(false);
 		adBern.setRoom(true);
-		adBern.setForAuction(true);
-		adBern.setForRent(false);
-		adBern.setForSale(false);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
 		adBern.setRoomDescription(roomDescription1);
@@ -130,10 +127,7 @@ public class AdTestDataSaver {
 		adBern2.setSquareFootage(60);
 		adBern2.setStudio(true);
 		adBern2.setRoom(false);
-		adBern2.setForAuction(false);
 		adBern2.setOfferType(2);
-		adBern2.setForRent(false);
-		adBern2.setForSale(true);
 		adBern2.setSmokers(false);
 		adBern2.setAnimals(true);
 		adBern2.setRoomDescription(studioDescription2);
@@ -177,9 +171,6 @@ public class AdTestDataSaver {
 		adBasel.setSquareFootage(100);
 		adBasel.setStudio(true);
 		adBasel.setRoom(false);
-		adBasel.setForAuction(true);
-		adBasel.setForRent(false);
-		adBasel.setForSale(false);
 		adBasel.setOfferType(1);
 		adBasel.setSmokers(true);
 		adBasel.setAnimals(false);
@@ -222,9 +213,6 @@ public class AdTestDataSaver {
 		adOlten.setOfferType(0);
 		adOlten.setStudio(true);
 		adOlten.setRoom(false);
-		adOlten.setForAuction(false);
-		adOlten.setForRent(true);
-		adOlten.setForSale(false);
 		adOlten.setSmokers(true);
 		adOlten.setAnimals(false);
 		adOlten.setRoomDescription(studioDescription4);
@@ -262,9 +250,6 @@ public class AdTestDataSaver {
 		adNeuchâtel.setSquareFootage(40);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setRoom(false);
-		adNeuchâtel.setForAuction(false);
-		adNeuchâtel.setForRent(false);
-		adNeuchâtel.setForSale(true);
 		adNeuchâtel.setOfferType(2);
 		adNeuchâtel.setSmokers(true);
 		adNeuchâtel.setAnimals(false);
@@ -303,9 +288,6 @@ public class AdTestDataSaver {
 		adBiel.setSquareFootage(10);
 		adBiel.setStudio(false);
 		adBiel.setRoom(true);
-		adBiel.setForAuction(false);
-		adBiel.setForRent(true);
-		adBiel.setForSale(false);
 		adBiel.setSmokers(true);
 		adBiel.setAnimals(false);
 		adBiel.setOfferType(0);
@@ -350,10 +332,7 @@ public class AdTestDataSaver {
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
 		adZurich.setRoom(true);
-		adZurich.setForAuction(true);
 		adZurich.setOfferType(1);
-		adZurich.setForRent(false);
-		adZurich.setForSale(false);
 		adZurich.setSmokers(false);
 		adZurich.setAnimals(false);
 		adZurich.setRoomDescription(roomDescription7);
@@ -400,10 +379,7 @@ public class AdTestDataSaver {
 		adLuzern.setSquareFootage(60);
 		adLuzern.setStudio(true);
 		adLuzern.setRoom(false);
-		adLuzern.setForAuction(true);
 		adLuzern.setOfferType(1);
-		adLuzern.setForRent(false);
-		adLuzern.setForSale(false);
 		adLuzern.setSmokers(false);
 		adLuzern.setAnimals(false);
 		adLuzern.setRoomDescription(studioDescription8);
@@ -447,9 +423,6 @@ public class AdTestDataSaver {
 		adAarau.setStudio(true);
 		adAarau.setOfferType(2);
 		adAarau.setRoom(false);
-		adAarau.setForAuction(false);
-		adAarau.setForRent(false);
-		adAarau.setForSale(true);
 		adAarau.setSmokers(true);
 		adAarau.setAnimals(false);
 		adAarau.setRoomDescription(studioDescription9);
@@ -494,9 +467,6 @@ public class AdTestDataSaver {
 		adDavos.setStudio(false);
 		adDavos.setOfferType(0);
 		adDavos.setRoom(true);
-		adDavos.setForAuction(false);
-		adDavos.setForRent(true);
-		adDavos.setForSale(false);
 		adDavos.setSmokers(true);
 		adDavos.setAnimals(false);
 		adDavos.setRoomDescription(studioDescription10);
@@ -537,9 +507,6 @@ public class AdTestDataSaver {
 		adLausanne.setStudio(false);
 		adLausanne.setRoom(true);
 		adLausanne.setOfferType(1);
-		adLausanne.setForAuction(true);
-		adLausanne.setForRent(false);
-		adLausanne.setForSale(false);
 		adLausanne.setSmokers(true);
 		adLausanne.setAnimals(false);
 		adLausanne.setRoomDescription(studioDescription11);
@@ -577,10 +544,7 @@ public class AdTestDataSaver {
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(true);
 		adLocarno.setRoom(false);
-		adLocarno.setForAuction(false);
-		adLocarno.setForRent(true);
 		adLocarno.setOfferType(0);
-		adLocarno.setForSale(false);
 		adLocarno.setSmokers(true);
 		adLocarno.setAnimals(false);
 		adLocarno.setRoomDescription(studioDescription12);

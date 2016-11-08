@@ -38,7 +38,7 @@ public class Ad {
 
 	@Column(nullable = false)
 	private String city;
-	
+
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
@@ -53,7 +53,7 @@ public class Ad {
 
 	@Column(nullable = true)
 	private int prizePerMonth;
-	
+
 	@Column(nullable = false)
 	private int squareFootage;
 
@@ -91,22 +91,13 @@ public class Ad {
 
 	@Column(nullable = false)
 	private boolean internet;
-	
+
 	@Column(nullable = false)
 	private boolean dishwasher;
-	
-	@Column(nullable = false)
-	private boolean forSale; 
-	
-	@Column(nullable = false)
-	private boolean forRent; 
-	
-	@Column(nullable = false)
-	private boolean forAuction; 
-	
+
 	@Column(nullable = false)
 	private boolean studio;
-	
+
 	@Column(nullable = false)
 	private boolean room;
 
@@ -116,89 +107,101 @@ public class Ad {
 
 	@ManyToOne(optional = false)
 	private User user;
-	
+
 	@OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Visit> visits;
 
-        // Auctions & Direct sell
-        @Temporal(TemporalType.TIMESTAMP)
-        @Column(nullable = true)
+	// Auctions & Direct sell
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = true)
 	private Date auctionEndingDate;
-        
-        @Column(nullable = true)
+
+	@Column(nullable = true)
 	private int directBuyPrize;
-        
-        @Column(nullable = true)
+
+	@Column(nullable = true)
 	private int auctionStartingPrize;
-        
-        @Column(nullable = false)
-        private int offerType;
-        
-        @ManyToOne(optional = true)
+
+	@Column(nullable = false)
+	private int offerType;
+
+	@ManyToOne(optional = true)
 	private User lastBidder;
-        
-        @Column(nullable = true)
-        private int lastBid;
-        
-        @Column(nullable = true)
-        private Date lastBidDate;
-        
-        // Status
-        @Column(nullable = false)
-        private int status=1;
-        
-        public void setStatus(int status) {
-            this.status = status;
-        }
-        public int getStatus() {
-            return this.status;
-        }
-        
-        public Date getAuctionEndingDate() {
-            return auctionEndingDate;
-        }
-        public void setAuctionEndingDate(Date auctionEndingDate) {
-            this.auctionEndingDate = auctionEndingDate;
-        }
-        public int getDirectBuyPrize() {
-            return directBuyPrize;
-        }
-        public void setDirectBuyPrize(int prize) {
-            this.directBuyPrize = prize;
-        }
-        public int getAuctionStartingPrize() {
-            return auctionStartingPrize;
-        }
-        public void setAuctionStartingPrize(int prize) {
-            this.auctionStartingPrize = prize;
-        }
-        public int getOfferType() {
-            return offerType;
-        }
-        public void setOfferType(int offerType) {
-            this.offerType = offerType;
-        }
-        public User getLastBidder() {
-            return this.lastBidder;
-        }
-        public void setLastBidder(User user) {
-            this.lastBidder = user;
-        }
-        public int getLastBid() {
-            return this.lastBid;
-        }
-        public void setLastBid(int lastBid) {
-            this.lastBid = lastBid;
-        }
-        public Date getLastBidDate() {
-            return this.lastBidDate;
-        }
-        public void setLastBidDate(Date lastBidDate) {
-            this.lastBidDate = lastBidDate;
-        }
-        
-        
-        
+
+	@Column(nullable = true)
+	private int lastBid;
+
+	@Column(nullable = true)
+	private Date lastBidDate;
+
+	// Status
+	@Column(nullable = false)
+	private int status = 1;
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public Date getAuctionEndingDate() {
+		return auctionEndingDate;
+	}
+
+	public void setAuctionEndingDate(Date auctionEndingDate) {
+		this.auctionEndingDate = auctionEndingDate;
+	}
+
+	public int getDirectBuyPrize() {
+		return directBuyPrize;
+	}
+
+	public void setDirectBuyPrize(int prize) {
+		this.directBuyPrize = prize;
+	}
+
+	public int getAuctionStartingPrize() {
+		return auctionStartingPrize;
+	}
+
+	public void setAuctionStartingPrize(int prize) {
+		this.auctionStartingPrize = prize;
+	}
+
+	public int getOfferType() {
+		return offerType;
+	}
+
+	public void setOfferType(int offerType) {
+		this.offerType = offerType;
+	}
+
+	public User getLastBidder() {
+		return this.lastBidder;
+	}
+
+	public void setLastBidder(User user) {
+		this.lastBidder = user;
+	}
+
+	public int getLastBid() {
+		return this.lastBid;
+	}
+
+	public void setLastBid(int lastBid) {
+		this.lastBid = lastBid;
+	}
+
+	public Date getLastBidDate() {
+		return this.lastBidDate;
+	}
+
+	public void setLastBidDate(Date lastBidDate) {
+		this.lastBidDate = lastBidDate;
+	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -214,37 +217,13 @@ public class Ad {
 	public void setStudio(boolean studio) {
 		this.studio = studio;
 	}
-	
+
 	public boolean getRoom() {
 		return room;
 	}
 
 	public void setRoom(boolean room) {
 		this.room = room;
-	}
-	
-	public boolean getForSale(){
-		return forSale; 
-	}
-	
-	public void setForSale(boolean forSale){
-		this.forSale = forSale; 
-	}
-	
-	public boolean getForRent(){
-		return forRent; 
-	}
-	
-	public void setForRent(boolean forRent){
-		this.forRent = forRent; 
-	}
-	
-	public boolean getForAuction(){
-		return forAuction; 
-	}
-	
-	public void setForAuction(boolean forAuction){
-		this.forAuction = forAuction; 
 	}
 
 	public boolean getSmokers() {
@@ -318,7 +297,7 @@ public class Ad {
 	public void setInternet(boolean internet) {
 		this.internet = internet;
 	}
-	
+
 	public boolean getDishwasher() {
 		return dishwasher;
 	}
@@ -469,5 +448,4 @@ public class Ad {
 		return true;
 	}
 
-	
 }

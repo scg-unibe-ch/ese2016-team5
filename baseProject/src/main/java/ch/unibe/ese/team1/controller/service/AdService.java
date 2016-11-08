@@ -374,34 +374,11 @@ public class AdService {
 			boolean room = searchForm.getRoom(); 
 			boolean studio = searchForm.getStudio(); 
 			
-			if (room && !studio) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (ad.getRoom())
-						iterator.remove();
-				}
-			}else if (!room && studio) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (ad.getStudio())
-						iterator.remove();
-				}
-			}else if (room && studio) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (ad.getRoom() && ad.getStudio())
-						iterator.remove();
-				}
-			}else if (!room && !studio) {
-				Iterator<Ad> iterator = locatedResults.iterator();
-				while (iterator.hasNext()) {
-					Ad ad = iterator.next();
-					if (!ad.getRoom() && !ad.getStudio())
-						iterator.remove();
-				}
+			Iterator<Ad> roomIterator = locatedResults.iterator();
+			while (roomIterator.hasNext()) {
+				Ad ad = roomIterator.next();
+				if ((ad.getRoom() && !room) || (ad.getStudio() && !studio)) 
+					roomIterator.remove();	
 			}
 			
 			if (searchForm.getSmokers()) {

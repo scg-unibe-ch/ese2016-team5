@@ -30,7 +30,7 @@ public class AlertTestDataSaver {
 		// 2 Alerts for the ese test-user
 		Alert alert = new Alert();
 		alert.setUser(ese);
-		alert.setRoom(true);
+		alert.setRoom(false);
 		alert.setStudio(true);
 		alert.setOfferType(0);
 		alert.setCity("Bern");

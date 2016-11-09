@@ -18,14 +18,6 @@ function deleteAlert(button) {
 </script>
 
 <script>
-function validateType(form)
-{
-	var filtered = document.getElementById('filtered');
-	filtered.checked = true;
-}
-</script>
-
-<script>
 function typeOfAlert(alert) {
 	if(alert.getOfferType() == 0)
 		return "Rent"
@@ -67,16 +59,15 @@ function typeOfAlert(alert) {
 
 <div id="searchDiv">
     		<label for="type-offer">Offer Type:</label>
-		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
-		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
-		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
+		<form:radiobutton name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
+		<form:radiobutton name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
+		<form:radiobutton name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
 		<br />
                 
                 
  		<label for="type-offer">Type:</label>
-		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
-		<!--form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" /-->
+		<form:radiobutton name="type-room" id="room" path="room" /><label>Room</label>
+		<form:radiobutton name="type-studio" id="studio" path="studio" /><label>Studio</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>
@@ -98,7 +89,7 @@ function typeOfAlert(alert) {
 		<form:input id="priceInput" type="number" path="price" placeholder="e.g. 5" step="50" /> CHF
 		<form:errors path="price" cssClass="validationErrorText" /><br />
                 
-                		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
+                		<button type="submit" tabindex="7">Subscribe</button>
 		<button type="reset" tabindex="8">Cancel</button>
     
     
@@ -135,8 +126,10 @@ function typeOfAlert(alert) {
 				</td>
 				<td>
 				<c:choose>
+					<c:when test="${alert.room and alert.studio}">Both</c:when>
 					<c:when test="${alert.room}">Room</c:when>
-					<c:otherwise>Studio</c:otherwise>
+					<c:when test="${alert.studio}">Studio</c:when>
+					<c:otherwise>none</c:otherwise>
 				</c:choose>
 				</td>
 				<td>${alert.city}</td>

@@ -144,6 +144,10 @@ public class AlertService {
 		if(ad.getOfferType() != alert.getOfferType()){
 			mismatch = true; 
 		}
+		if(ad.getStudio() != alert.getStudio()){
+			mismatch = true;
+		}
+		
 		return mismatch;
 	}
 	

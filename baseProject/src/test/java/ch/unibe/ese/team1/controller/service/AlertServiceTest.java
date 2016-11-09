@@ -258,7 +258,7 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setRoom(true);
+		alert.setRoom(false);
 		alert.setStudio(true);
 		alert.setOfferType(2);
 		alert.setCity("Bern");

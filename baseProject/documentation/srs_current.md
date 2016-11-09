@@ -73,14 +73,39 @@ The following section provides a high-level overview of the different search fun
 | Title                              | Description                      | Priority |
 |:-----------------------------------|:---------------------------------|:---------|
 | Searching for a flat/ad             | **Expected**<br>Search page opens where user can set different search criterias (including the option to search for properties to be sold). <br><br>**Main Actor**<br>LIU, NLIU                                                     | HIGH |
-| Advanced Searching for a flat/ad             | **Expected**<br> The advanced Search page opens when you click the button. An 'Extended Search'-section is now available similar to the search criterias earlier found at the filter criterias.<br><br>**Main Actor**<br>LIU, NLIU                                                     | HIGH |
-| Create an alert off a search         |**Expected**<br>A new alert can be created by clicking a button near the search criterias.<br><br>**Main Actor**<br>LIU | LOW |
+| Advanced Searching for a flat/ad             | **Expected**<br> The advanced Search page opens below the normal search entry fields. So, an 'Extended Search'-section is now available similar to the search criterias earlier found at the filter criterias.<br><br>**Main Actor**<br>LIU, NLIU                                                     | HIGH |
+| ~~Create an alert off a search         |**Expected**<br>A new alert can be created by clicking a button near the search criterias.<br><br>**Main Actor**<br>LIU | LOW |~~
 | Filter the results                 |**Expected**<br>Next to the list view of the search results, there is a tool for filtering the results with different criterias.<br><br>**Main Actor**<br>LIU, NLIU                                                                                  | MED |
 | Sorting the results                 |**Expected**<br>Above the list view of the search results there is a drop-down where the user can add sorting criteria.<br><br>**Main Actor**<br>LIU, NLIU                                                                                                    | MED |
-| Display an ad                       | **Expected**<br>Upon clicking on the ad, a detailed view containing all the information is being displayed to the user. For auctions, additional fields are being shown like this: ![Auction Form](auction_bidding_mockup.jpg)
- <br><br>**Main Actor**<br>LIU, NLIU                                                                                                                                       | HIGH |
+| Display an ad                       | **Expected**<br>Upon clicking on the ad, a detailed view containing all the information is being displayed to the user. For auctions, additional fields are being shown like this: ![Auction Form](auction_bidding_mockup.jpg)<br><br>**Main Actor**<br>LIU, NLIU                                                                                                                                       | HIGH |
 
-#### 2.1.5 Alerts
+####2.1.5 Offer Types
+There are three types of object offers: For renting, for auction and for sale. For renting will include a monthly price and a move in date. If the object is for auction, then users can bit on the object to buy it. If the object is for sale, then there is simply a fixed price payd by the user. 
+
+#####2.1.5.1 Renting Type
+| Title                              | Description                      | Priority |
+|:-----------------------------------|:---------------------------------|:---------|
+| Create Renting Ads                    | **Expected**<br>User can create an object/ad for rent, by selecting for rent in the publishing form. He is required to set a monthly price/rent and a move in date.<br><br>**Main Actor**<br>LIU                                                   | MED |
+
+#####2.1.5.1 Auction Type
+| Title                              | Description                      | Priority |
+|:-----------------------------------|:---------------------------------|:---------|
+| Create Auction Ads                    | **Expected**<br>User can create an object/ad for auction, by selecting for auction in the publishing form. He is required to set a starting price for the auction and a due date for the auction to end<br><br>**Main Actor**<br>LIU                                                   | MED |
+| Bidding on auction ads                    | **Expected**<br>Interested users have the possibility to place a bid on an ad available for auction (if the due date is not yet reached). <br><br>**Main Actor**<br>LIU                                                   | MED |
+| Inform Publisher of auction ads about bids                 | **Expected**<br>Once an ad is bid on, then the publisher of the ad is being informed about the bid. <br><br>**Main Actor**<br>LIU                                                   | MED |
+| Inform Bidder of auction ads about overbid                  | **Expected**<br>Users who bid on the object, are informed if there is a new higher bid on the object<br><br>**Main Actor**<br>LIU                                                   | MED |
+| Inform Winner of auction                 | **Expected**<br>At the end of the auction, the seller and the highest bidder are informed.<br><br>**Main Actor**<br>LIU                                                   | MED |
+| Display Bids on ad page                    | **Expected**<br>The ad page shows the currently highest bid and gives you the possibility to overbid.<br><br>**Main Actor**<br>LIU                                                   | MED |
+
+#####2.1.5.1 Sale Type
+| Title                              | Description                      | Priority |
+|:-----------------------------------|:---------------------------------|:---------|
+| Create Sale Ads                    | **Expected**<br>User can create an object/ad for sale, by selecting for sale in the publishing form. He is required to set a fixed sales price.<br><br>**Main Actor**<br>LIU                                                   | MED |
+| Buy object                  | **Expected**<br>Users can buy the object using the buy button<br><br>**Main Actor**<br>LIU                                                   | MED |
+| Messages to seller                  | **Expected**<br>Messages for the buyer and seller are triggered once the object is sold.<br><br>**Main Actor**<br>LIU                                                   | MED |
+
+
+#### 2.1.6 Alerts
 Alerts are a kind of automatic search. The following section explains the main use cases of this feature. 
 
 | Title                              | Description                      | Priority |
@@ -88,7 +113,7 @@ Alerts are a kind of automatic search. The following section explains the main u
 | Create alerts                       | **Expected**<br>Users can create an alert by setting up the criteria for matching new flats/ads. Whenever a new ad is published matching the search criteria, an alert will be sent to the user. <br><br>**Main Actor**<br>LIU                                                   | MED |
 | Manage active alerts             | **Expected**<br>Below the alerts creation section, active alerts are listed and can be deleted via a button.  <br><br>**Main Actor**<br>LIU | MED |
 
-#### 2.1.6 Visitation
+#### 2.1.7 Visitation
 Advertisers can manage and arange visits with interested renters. The following section shall point out the main use cases behind
 
 | Title                              | Description                      | Priority |
@@ -100,7 +125,7 @@ Advertisers can manage and arange visits with interested renters. The following 
 | Show visitors                    | **Expected**<br>For each visit in the scheduler, the advertiser can list the visitors in a table and can use a rating system. <br><br>**Main Actor**<br>LIU     | MED |
 | Display overview list of most promising visitors           | **Expected**<br>A list of most promising visitors can be displayed for each room which is automatically generated based on the individual ratings. <br><br>**Main Actor**<br>LIU    | MED |
 
-#### 2.1.7 Messaging with Advertiser
+#### 2.1.8 Messaging with Advertiser
 In order to better arrange visits and clarfiy questions about flats, there is the possibilty to contact an advertiser. The main use cases in this respect are listed below.
 
 | Title                              | Description                      | Priority |

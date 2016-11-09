@@ -255,7 +255,7 @@ Not asked:
 	
 5. Todo
 -------
-* ~~Auction (send mail whenever bid is surpassed)
-* Grey out old auctions
-* Search (include filters)
-* Kill roommates~~
+* ~~Auction (send mail whenever bid is surpassed)~~
+* ~~Grey out old auctions~~
+* ~~Search (include filters)~~
+* ~~Kill roommates~~

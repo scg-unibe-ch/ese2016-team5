@@ -66,8 +66,8 @@ function typeOfAlert(alert) {
                 
                 
  		<label for="type-offer">Type:</label>
-		<form:radiobutton name="type-room" id="room" path="room" /><label>Room</label>
-		<form:radiobutton name="type-studio" id="studio" path="studio" /><label>Studio</label>
+		<form:radiobutton name="type-room" id="room" path="studio" value="false" /><label>Room</label>
+		<form:radiobutton name="type-studio" id="studio" path="studio" value="true" /><label>Studio</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>
@@ -126,10 +126,8 @@ function typeOfAlert(alert) {
 				</td>
 				<td>
 				<c:choose>
-					<c:when test="${alert.room and alert.studio}">Both</c:when>
-					<c:when test="${alert.room}">Room</c:when>
 					<c:when test="${alert.studio}">Studio</c:when>
-					<c:otherwise>none</c:otherwise>
+					<c:otherwise>Room</c:otherwise>
 				</c:choose>
 				</td>
 				<td>${alert.city}</td>

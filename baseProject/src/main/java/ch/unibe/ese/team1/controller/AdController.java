@@ -89,7 +89,7 @@ public class AdController {
 	    	   String title = ad.getTitle();
 	    	   User seller = ad.getUser();
 	    	   String subjectSeller = "Unfortunately your property wasn't sell during the auction";
-	    	   String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+	    	   String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
 	    	   messageService.sendMessage(seller, seller, subjectSeller, textSeller);
 	    	   ad.setStatus(0);
 	    	   adDao.save(ad);
@@ -103,8 +103,8 @@ public class AdController {
 	    	   User seller = ad.getUser();
 	    	   String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
 	    	   String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
-	    	   String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
-	    	   String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+	    	   String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+	    	   String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
 	    	   messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
 	    	   messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
 	    	   ad.setStatus(0);
@@ -223,8 +223,8 @@ public class AdController {
             String seller = activeAd.getUser().getUsername();
             String subjectBidder = "Bidding confirmation: " + bid + " on '" + title + "'";
             String subjectSeller = "New bid: " + bid + " on '" + title + "'";
-            String textBidder = "Congratulations! Your bid was accepted!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
-            String textSeller = "Congratulations! Someone just placed a bid on your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder + "\nURL: <a href='http://localhost:8080/ad?id=" + adId + "'>" + "http://localhost:8080/ad?id=" + adId + "</a>";
+            String textBidder = "Congratulations! Your bid was accepted!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+            String textSeller = "Congratulations! Someone just placed a bid on your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
             User bidderObj = userService.findUserByUsername(bidder);
             User sellerObj = userService.findUserByUsername(seller);
 

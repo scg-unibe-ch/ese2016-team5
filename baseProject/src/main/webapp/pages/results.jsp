@@ -168,11 +168,11 @@ function sort_div_attribute() {
 			placeholder="e.g. 5" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize"
+		<br /> <label for="price">Price (max.):</label>
+		<form:input id="priceInput" type="number" path="price"
 			placeholder="e.g. 5" step="50" />
 		CHF
-		<form:errors path="prize" cssClass="validationErrorText" /><br />
+		<form:errors path="price" cssClass="validationErrorText" /><br />
 		
 		<hr class="slim">		
 		

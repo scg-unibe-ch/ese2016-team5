@@ -99,11 +99,11 @@ public class EditAdService {
 		} catch (NumberFormatException e) {
 		}
 
-		ad.setDirectBuyPrize(placeAdForm.getDirectBuyPrize());
-		ad.setAuctionStartingPrize(placeAdForm.getAuctionStartingPrize());
+		ad.setDirectBuyPrice(placeAdForm.getDirectBuyPrice());
+		ad.setAuctionStartingPrice(placeAdForm.getAuctionStartingPrice());
 		ad.setOfferType(placeAdForm.getOfferType());
 
-		ad.setPrizePerMonth(placeAdForm.getPrize());
+		ad.setPricePerMonth(placeAdForm.getPrice());
 		ad.setSquareFootage(placeAdForm.getSquareFootage());
 
 		ad.setRoomDescription(placeAdForm.getRoomDescription());

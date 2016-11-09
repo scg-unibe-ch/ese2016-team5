@@ -52,7 +52,7 @@ public class Ad {
 	private Date moveOutDate;
 
 	@Column(nullable = true)
-	private int prizePerMonth;
+	private int pricePerMonth;
 
 	@Column(nullable = false)
 	private int squareFootage;
@@ -117,10 +117,10 @@ public class Ad {
 	private Date auctionEndingDate;
 
 	@Column(nullable = true)
-	private int directBuyPrize;
+	private int directBuyPrice;
 
 	@Column(nullable = true)
-	private int auctionStartingPrize;
+	private int auctionStartingPrice;
 
 	@Column(nullable = false)
 	private int offerType;
@@ -154,20 +154,20 @@ public class Ad {
 		this.auctionEndingDate = auctionEndingDate;
 	}
 
-	public int getDirectBuyPrize() {
-		return directBuyPrize;
+	public int getDirectBuyPrice() {
+		return directBuyPrice;
 	}
 
-	public void setDirectBuyPrize(int prize) {
-		this.directBuyPrize = prize;
+	public void setDirectBuyPrice(int price) {
+		this.directBuyPrice = price;
 	}
 
-	public int getAuctionStartingPrize() {
-		return auctionStartingPrize;
+	public int getAuctionStartingPrice() {
+		return auctionStartingPrice;
 	}
 
-	public void setAuctionStartingPrize(int prize) {
-		this.auctionStartingPrize = prize;
+	public void setAuctionStartingPrice(int price) {
+		this.auctionStartingPrice = price;
 	}
 
 	public int getOfferType() {
@@ -334,12 +334,12 @@ public class Ad {
 		this.moveOutDate = moveOutDate;
 	}
 
-	public int getPrizePerMonth() {
-		return prizePerMonth;
+	public int getPricePerMonth() {
+		return pricePerMonth;
 	}
 
-	public void setPrizePerMonth(int prizePerMonth) {
-		this.prizePerMonth = prizePerMonth;
+	public void setPricePerMonth(int pricePerMonth) {
+		this.pricePerMonth = pricePerMonth;
 	}
 
 	public int getSquareFootage() {

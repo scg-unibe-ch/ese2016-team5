@@ -85,7 +85,7 @@ public class AlertService {
 	 */
 	@Transactional
 	public void triggerAlerts(Ad ad) {
-		int adPrice = ad.getPrizePerMonth();
+		int adPrice = ad.getPricePerMonth();
 		Iterable<Alert> alerts = alertDao.findByPriceGreaterThan(adPrice - 1);
 
 		// loop through all ads with matching city and price range, throw out

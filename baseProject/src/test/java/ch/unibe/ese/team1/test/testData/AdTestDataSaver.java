@@ -97,7 +97,7 @@ public class AdTestDataSaver {
 		adBern.setInternet(true);
 		adBern.setDishwasher(true);
 		adBern.setAuctionEndingDate(auctionEndingDate);
-		adBern.setAuctionStartingPrize(30000);
+		adBern.setAuctionStartingPrice(30000);
 		adBern.setOfferType(1);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
@@ -123,7 +123,7 @@ public class AdTestDataSaver {
 		Ad adBern2 = new Ad();
 		adBern2.setZipcode(3012);
 		adBern2.setCreationDate(creationDate2);
-		adBern2.setDirectBuyPrize(300000);
+		adBern2.setDirectBuyPrice(300000);
 		adBern2.setSquareFootage(60);
 		adBern2.setStudio(true);
 		adBern2.setRoom(false);
@@ -166,7 +166,7 @@ public class AdTestDataSaver {
 		Ad adBasel = new Ad();
 		adBasel.setZipcode(4051);
 		adBasel.setCreationDate(creationDate3);
-		adBasel.setAuctionStartingPrize(500000);
+		adBasel.setAuctionStartingPrice(500000);
 		adBasel.setAuctionEndingDate(auctionEndingDate);
 		adBasel.setSquareFootage(100);
 		adBasel.setStudio(true);
@@ -208,7 +208,7 @@ public class AdTestDataSaver {
 		adOlten.setZipcode(4600);
 		adOlten.setMoveInDate(moveInDate4);
 		adOlten.setCreationDate(creationDate4);
-		adOlten.setPrizePerMonth(430);
+		adOlten.setPricePerMonth(430);
 		adOlten.setSquareFootage(60);
 		adOlten.setOfferType(0);
 		adOlten.setStudio(true);
@@ -246,7 +246,7 @@ public class AdTestDataSaver {
 		Ad adNeuchâtel = new Ad();
 		adNeuchâtel.setZipcode(2000);
 		adNeuchâtel.setCreationDate(creationDate5);
-		adNeuchâtel.setDirectBuyPrize(150000);
+		adNeuchâtel.setDirectBuyPrice(150000);
 		adNeuchâtel.setSquareFootage(40);
 		adNeuchâtel.setStudio(true);
 		adNeuchâtel.setRoom(false);
@@ -284,7 +284,7 @@ public class AdTestDataSaver {
 		adBiel.setMoveInDate(moveInDate6);
 		adBiel.setMoveOutDate(moveOutDate5);
 		adBiel.setCreationDate(creationDate6);
-		adBiel.setPrizePerMonth(480);
+		adBiel.setPricePerMonth(480);
 		adBiel.setSquareFootage(10);
 		adBiel.setStudio(false);
 		adBiel.setRoom(true);
@@ -328,7 +328,7 @@ public class AdTestDataSaver {
 		adZurich.setZipcode(8000);
 		adZurich.setCreationDate(creationDate7);
 		adZurich.setAuctionEndingDate(auctionEndingDate);
-		adZurich.setAuctionStartingPrize(75000);
+		adZurich.setAuctionStartingPrice(75000);
 		adZurich.setSquareFootage(32);
 		adZurich.setStudio(false);
 		adZurich.setRoom(true);
@@ -374,7 +374,7 @@ public class AdTestDataSaver {
 		Ad adLuzern = new Ad();
 		adLuzern.setZipcode(6000);
 		adLuzern.setAuctionEndingDate(auctionEndingDate);
-		adLuzern.setAuctionStartingPrize(50000);
+		adLuzern.setAuctionStartingPrice(50000);
 		adLuzern.setCreationDate(creationDate2);
 		adLuzern.setSquareFootage(60);
 		adLuzern.setStudio(true);
@@ -418,7 +418,7 @@ public class AdTestDataSaver {
 		Ad adAarau = new Ad();
 		adAarau.setZipcode(5000);
 		adAarau.setCreationDate(creationDate8);
-		adAarau.setDirectBuyPrize(50000);
+		adAarau.setDirectBuyPrice(50000);
 		adAarau.setSquareFootage(26);
 		adAarau.setStudio(true);
 		adAarau.setOfferType(2);
@@ -462,7 +462,7 @@ public class AdTestDataSaver {
 		adDavos.setZipcode(7260);
 		adDavos.setMoveInDate(moveInDate2);
 		adDavos.setCreationDate(creationDate4);
-		adDavos.setPrizePerMonth(1100);
+		adDavos.setPricePerMonth(1100);
 		adDavos.setSquareFootage(74);
 		adDavos.setStudio(false);
 		adDavos.setOfferType(0);
@@ -500,9 +500,9 @@ public class AdTestDataSaver {
 		Ad adLausanne = new Ad();
 		adLausanne.setZipcode(1000);
 		adLausanne.setAuctionEndingDate(auctionEndingDate);
-		adLausanne.setAuctionStartingPrize(350);
+		adLausanne.setAuctionStartingPrice(350);
 		adLausanne.setCreationDate(creationDate5);
-		adLausanne.setPrizePerMonth(360);
+		adLausanne.setPricePerMonth(360);
 		adLausanne.setSquareFootage(16);
 		adLausanne.setStudio(false);
 		adLausanne.setRoom(true);
@@ -540,7 +540,7 @@ public class AdTestDataSaver {
 		adLocarno.setMoveInDate(moveInDate6);
 		adLocarno.setMoveOutDate(moveOutDate5);
 		adLocarno.setCreationDate(creationDate6);
-		adLocarno.setPrizePerMonth(960);
+		adLocarno.setPricePerMonth(960);
 		adLocarno.setSquareFootage(42);
 		adLocarno.setStudio(true);
 		adLocarno.setRoom(false);

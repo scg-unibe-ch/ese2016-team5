@@ -11,7 +11,7 @@ import java.util.Date;
 public interface AdDao extends CrudRepository<Ad, Long> {
 	
 	/** this will be used if both rooms AND studios are searched */
-	public Iterable<Ad> findByPrizePerMonthLessThan (int prize);
+	public Iterable<Ad> findByPricePerMonthLessThan (int price);
 
 	/** this will be used if only rooms or studios are searched */
 	public Iterable<Ad> findByUser(User user);

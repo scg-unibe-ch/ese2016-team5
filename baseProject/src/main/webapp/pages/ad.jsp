@@ -3,7 +3,7 @@
 <c:if test="${ad.status == 0}">
     <c:set var="status" value="inactive" />
 </c:if>
-<div class="resultAd ${status}" data-price="${ad.prizePerMonth}" data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
+<div class="resultAd ${status}" data-price="${ad.pricePerMonth}" data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
     <div class="resultLeft">
         <a href="<c:url value='/ad?id=${ad.id}' />">
             <img src="${ad.pictures[0].filePath}" />
@@ -24,18 +24,18 @@
     <div class="resultRight">
         <h2>CHF
             <c:choose>
-                <c:when test="${ad.offerType == 0}">${ad.prizePerMonth}</c:when>
+                <c:when test="${ad.offerType == 0}">${ad.pricePerMonth}</c:when>
                 <c:when test="${ad.offerType == 1}">
                     <c:choose>
                         <c:when test="${ad.lastBidder == null}">
-                            ${ad.auctionStartingPrize}
+                            ${ad.auctionStartingPrice}
                         </c:when>
                         <c:otherwise>
                             ${ad.lastBid}
                         </c:otherwise>
                     </c:choose>
                 </c:when>
-                <c:when test="${ad.offerType == 2}">${ad.directBuyPrize}</c:when>
+                <c:when test="${ad.offerType == 2}">${ad.directBuyPrice}</c:when>
             </c:choose>
             
         </h2>

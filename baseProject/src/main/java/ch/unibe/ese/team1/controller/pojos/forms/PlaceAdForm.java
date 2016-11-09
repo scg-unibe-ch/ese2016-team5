@@ -25,7 +25,7 @@ public class PlaceAdForm {
 
 	private String moveOutDate;
 
-	private int prize;
+	private int price;
 
 	@Min(value = 1, message = "Has to be equal to 1 or more")
 	private int squareFootage;
@@ -56,8 +56,8 @@ public class PlaceAdForm {
 
 	// Auction & Direct Buy
 	private String auctionEndingDate;
-	private int directBuyPrize;
-	private int auctionStartingPrize;
+	private int directBuyPrice;
+	private int auctionStartingPrice;
 	private int offerType;
 
 	public String getAuctionEndingDate() {
@@ -68,20 +68,20 @@ public class PlaceAdForm {
 		this.auctionEndingDate = auctionEndingDate;
 	}
 
-	public int getDirectBuyPrize() {
-		return directBuyPrize;
+	public int getDirectBuyPrice() {
+		return directBuyPrice;
 	}
 
-	public void setDirectBuyPrize(int prize) {
-		this.directBuyPrize = prize;
+	public void setDirectBuyPrice(int price) {
+		this.directBuyPrice = price;
 	}
 
-	public int getAuctionStartingPrize() {
-		return auctionStartingPrize;
+	public int getAuctionStartingPrice() {
+		return auctionStartingPrice;
 	}
 
-	public void setAuctionStartingPrize(int prize) {
-		this.auctionStartingPrize = prize;
+	public void setAuctionStartingPrice(int price) {
+		this.auctionStartingPrice = price;
 	}
 
 	public int getOfferType() {
@@ -100,12 +100,12 @@ public class PlaceAdForm {
 		this.city = city;
 	}
 
-	public int getPrize() {
-		return prize;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setPrize(int prize) {
-		this.prize = prize;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getRoomDescription() {

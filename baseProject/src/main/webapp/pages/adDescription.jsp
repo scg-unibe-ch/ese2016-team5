@@ -177,8 +177,8 @@
                     
                     
                     <c:choose>
-                        <c:when test="${ shownAd.lastBid != 0 }"><c:set var="currentPrize" value="${shownAd.lastBid}" /></c:when>
-                        <c:otherwise><c:set var="currentPrize" value="${shownAd.auctionStartingPrize}" /></c:otherwise>
+                        <c:when test="${ shownAd.lastBid != 0 }"><c:set var="currentPrice" value="${shownAd.lastBid}" /></c:when>
+                        <c:otherwise><c:set var="currentPrice" value="${shownAd.auctionStartingPrice}" /></c:otherwise>
                     </c:choose>
 
                     <tr>
@@ -190,14 +190,14 @@
                                         <c:when test="${loggedInUserEmail != shownAd.user.username }">
                                             <form:form method="post" modelAttribute="shownAd" action="/profile/placeBid" id="placeBidForm" autocomplete="off">
                                                 <input type="hidden" name="adId" value="${shownAd.id}" />
-                                                <form:input type="text" id="field-lastBid" path="lastBid" value="${currentPrize + 100}" />
+                                                <form:input type="text" id="field-lastBid" path="lastBid" value="${currentPrice + 100}" />
                                                 <button type="submit">Submit</button>
                                                 <p style="color: #AE0000" id="placeBidFormError"></p>
                                             </form:form>
                                             <script type="text/javascript">
                                                 $('#placeBidForm button').click(function() {
-                                                    if ($('#field-lastBid').val() <= ${currentPrize}) {
-                                                        $('#placeBidFormError').text('Your bid needs to be greater than the current prize of ' + ${currentPrize} + '!');
+                                                    if ($('#field-lastBid').val() <= ${currentPrice}) {
+                                                        $('#placeBidFormError').text('Your bid needs to be greater than the current price of ' + ${currentPrice} + '!');
                                                         return false;
                                                     } else {
                                                         return true; 
@@ -223,7 +223,7 @@
                     </tr>
                     <tr>
                         <td><h2>Current price</h2></td>
-                        <td>${currentPrize}</td>
+                        <td>${currentPrice}</td>
                     </tr>
                     <tr>
                         <td><h2>Ending date</h2></td>
@@ -248,7 +248,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <a href="<c:url value='/profile/DirectBuy?id=${shownAd.id}' />">
-                                                        <button type="button">CHF ${shownAd.directBuyPrize}<br /><strong style="border-top:1px solid white;padding-top:4px;margin-top:4px;display:block">Buy directly</strong></button>
+                                                        <button type="button">CHF ${shownAd.directBuyPrice}<br /><strong style="border-top:1px solid white;padding-top:4px;margin-top:4px;display:block">Buy directly</strong></button>
                                                     </a>
                                                 </c:otherwise>
                                             </c:choose>
@@ -305,7 +305,7 @@
 
 				<tr>
 					<td><h2>Monthly Rent</h2></td>
-					<td>${shownAd.prizePerMonth}&#32;CHF</td>
+					<td>${shownAd.pricePerMonth}&#32;CHF</td>
 				</tr>
 			</c:when>
 		</c:choose>

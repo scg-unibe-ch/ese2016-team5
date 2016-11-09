@@ -162,18 +162,18 @@
                 <tr>
                     <td>
                         <span class="ot-rent">
-                            <label for="field-Prize">Prize per month *</label>
-                            <form:input id="field-Prize" type="number" path="prize" placeholder="Prize per month" step="50" />
-                            <form:errors path="prize" cssClass="validationErrorText" />
+                            <label for="field-price">Price per month *</label>
+                            <form:input id="field-price" type="number" path="price" placeholder="Price per month" step="50" />
+                            <form:errors path="price" cssClass="validationErrorText" />
                         </span>
                         <span class="ot-direct">
-                            <label for="field-DirectBuyPrize">Prize *</label>
-                            <form:input id="field-DirectBuyPrize" type="number" path="directBuyPrize" placeholder="Prize" step="50" />
-                            <form:errors path="directBuyPrize" cssClass="validationErrorText" />
+                            <label for="field-DirectBuyPrice">Price *</label>
+                            <form:input id="field-DirectBuyPrice" type="number" path="directBuyPrice" placeholder="Price" step="50" />
+                            <form:errors path="directBuyPrice" cssClass="validationErrorText" />
                         </span>
                         <span class="ot-auction">
-                            <label for="field-StartingPrize">Starting Prize *</label>
-                            <form:input id="field-StartingPrize" type="number" path="auctionStartingPrize" placeholder="Starting Prize" step="50" />
+                            <label for="field-StartingPrice">Starting price *</label>
+                            <form:input id="field-StartingPrice" type="number" path="auctionStartingPrice" placeholder="Starting Price" step="50" />
                         </span>
                     </td>
                     <td>
@@ -187,7 +187,7 @@
                 <tr>
                     <td>
                         <label for="field-SquareFootage">Square Meters *</label>
-                        <form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Prize per month" step="5" />
+                        <form:input id="field-SquareFootage" type="number" path="squareFootage" placeholder="Square Footage" step="5" />
                         <form:errors path="squareFootage" cssClass="validationErrorText" />
                     </td>
                     <td></td>

@@ -63,21 +63,20 @@ function typeOfAlert(alert) {
 <hr />
 
 <h2>Create new alert</h2><br />
-<form:form method="post" modelAttribute="alertForm" action="/profile/alerts"
-	id="alertForm" autocomplete="off">
+<form:form method="post" modelAttribute="alertForm" action="/profile/alerts" id="alertForm" autocomplete="off">
 
-	<div id="searchDiv">
-            
-		<label for="type-offer">Offer Type:</label>
+<div id="searchDiv">
+    		<label for="type-offer">Offer Type:</label>
 		<form:checkbox name="type-rent" id="forRent" path="offerType" value="0"/><label>For Rent</label>
 		<form:checkbox name="type-auction" id="forAuction" path="offerType" value = "1" /><label>For Auction</label>
 		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
 		<br />
-		
-		<label for="type-offer">Type:</label>
+                
+                
+ 		<label for="type-offer">Type:</label>
 		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
 		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
+		<!--form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" /-->
 		<br />
 	
 		<label for="city">City / zip code:</label>
@@ -90,15 +89,20 @@ function typeOfAlert(alert) {
 			placeholder="e.g. 5" step="5" />
 		km
 		<form:errors path="radius" cssClass="validationErrorText" />
-		<br /> <label for="prize">Price (max.):</label>
-		<form:input id="prizeInput" type="number" path="prize"
-			placeholder="e.g. 5" step="50" />
-		CHF
-		<form:errors path="prize" cssClass="validationErrorText" /><br />
+		<br /> 
 
-		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
+
+	
+                
+                <label for="priceInput">Price (max.):</label>
+		<form:input id="priceInput" type="number" path="price" placeholder="e.g. 5" step="50" /> CHF
+		<form:errors path="price" cssClass="validationErrorText" /><br />
+                
+                		<button type="submit" tabindex="7" onClick="validateType(this.form)">Subscribe</button>
 		<button type="reset" tabindex="8">Cancel</button>
-	</div>
+    
+    
+    </div>
 
 </form:form> <br />
 <h2>Your active alerts</h2>

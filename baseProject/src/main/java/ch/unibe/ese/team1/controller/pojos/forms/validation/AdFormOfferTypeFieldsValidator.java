@@ -28,8 +28,8 @@ public class AdFormOfferTypeFieldsValidator implements ConstraintValidator<AdFor
             if (adForm.getMoveInDate().equals("")) {
                 error("moveInDate", "Please indicate a move-in date");
             }
-            if (adForm.getPrize() < 1) {
-                error("prize", "Has to be greater than 0");                
+            if (adForm.getPrice() < 1) {
+                error("price", "Has to be greater than 0");                
             }
         }
         // Auction
@@ -59,8 +59,8 @@ public class AdFormOfferTypeFieldsValidator implements ConstraintValidator<AdFor
         }
         // Direct buy
         else if (adForm.getOfferType() == 2) {
-            if (adForm.getDirectBuyPrize() == 0) {
-                error("directBuyPrize", "You sure would want to get something for your property?");
+            if (adForm.getDirectBuyPrice() == 0) {
+                error("directBuyPrice", "You sure would want to get something for your property?");
             }
         }
 

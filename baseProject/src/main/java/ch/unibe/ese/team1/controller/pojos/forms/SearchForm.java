@@ -25,7 +25,7 @@ public class SearchForm {
 	
 	@NotNull(message = "Requires a number")
 	@Min(value = 0, message = "In your dreams.")
-	private Integer prize;
+	private Integer price;
 
 	 public int[] getOfferType() {
          return offerType;
@@ -50,12 +50,12 @@ public class SearchForm {
 		this.radius = radius;
 	}
 
-	public Integer getPrize() {
-		return prize;
+	public Integer getPrice() {
+		return price;
 	}
 
-	public void setPrize(Integer prize) {
-		this.prize = prize;
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 	public boolean getStudio() {

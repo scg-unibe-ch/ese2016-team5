@@ -98,6 +98,12 @@
                     dateFormat : 'dd-mm-yy',
                     hour: (new Date()).getHours()
                 });
+                
+                // Update radio for studio/room (I don't think this should be necessary... but it works...)
+                var checkType = 'type-' + ('true' === '${ad.studio}' ? 'studio' : 'room');
+                $('#' + checkType).click();
+                
+                
 	});
 </script>
 
@@ -156,16 +162,8 @@
                     </td>
                     <td>
                         <label for="type-room">Property Type:</label>
-                        <c:choose>
-                            <c:when test="${ad.studio == 'true'}">
-                                <form:radiobutton id="type-studio" path="studio" value="1" checked="checked" />Studio
-                                <form:radiobutton id="type-room" path="studio" value="0" />Room
-                            </c:when>
-                            <c:otherwise>
-                                <form:radiobutton id="type-room" path="studio" value="0" checked="checked" />Room
-                                <form:radiobutton id="type-studio" path="studio" value="1" />Studio
-                            </c:otherwise>
-                        </c:choose>
+                        <form:radiobutton id="type-studio" path="studio" value="1" />Studio
+                        <form:radiobutton id="type-room" path="studio" value="0" />Room
                     </td>
                 </tr>
                 <tr>

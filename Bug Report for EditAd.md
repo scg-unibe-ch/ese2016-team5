@@ -1,7 +1,7 @@
 ## Bug report
 
 ### Short description
-It is possible to delete a picture if an ad even you click on "Cancel".
+It is possible to delete a picture of an ad even you click on "Cancel".
 
 ### Reproduction
 - Go to myRooms

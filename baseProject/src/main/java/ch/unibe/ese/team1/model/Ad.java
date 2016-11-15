@@ -22,7 +22,7 @@ import org.hibernate.annotations.FetchMode;
 /** Describes an advertisement that users can place and search for. */
 @Entity
 public class Ad {
-
+    
 	@Id
 	@GeneratedValue
 	private long id;
@@ -94,12 +94,9 @@ public class Ad {
 
 	@Column(nullable = false)
 	private boolean dishwasher;
-
-	@Column(nullable = false)
-	private boolean studio;
-
-	@Column(nullable = false)
-	private boolean room;
+        
+        @Column (nullable = false)
+        private String type;
 
 	@Fetch(FetchMode.SELECT)
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -208,22 +205,6 @@ public class Ad {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
 	}
 
 	public boolean getSmokers() {
@@ -424,6 +405,14 @@ public class Ad {
 	public void setVisits(List<Visit> visits) {
 		this.visits = visits;
 	}
+        
+        public Type getType() {
+            return Type.valueOf(this.type);
+        }
+
+        public void setType(Type type) {
+            this.type = type.name();
+        }
 
 	@Override
 	public int hashCode() {

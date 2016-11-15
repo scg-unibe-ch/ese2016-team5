@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.AdPicture;
+import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
@@ -78,8 +79,7 @@ public class AdTestDataSaver {
 		adBern.setZipcode(3011);
 		adBern.setCreationDate(creationDate1);
 		adBern.setSquareFootage(50);
-		adBern.setStudio(false);
-		adBern.setRoom(true);
+                adBern.setType(Type.room);
 		adBern.setSmokers(false);
 		adBern.setAnimals(true);
 		adBern.setRoomDescription(roomDescription1);
@@ -125,8 +125,7 @@ public class AdTestDataSaver {
 		adBern2.setCreationDate(creationDate2);
 		adBern2.setDirectBuyPrice(300000);
 		adBern2.setSquareFootage(60);
-		adBern2.setStudio(true);
-		adBern2.setRoom(false);
+                adBern2.setType(Type.studio);
 		adBern2.setOfferType(2);
 		adBern2.setSmokers(false);
 		adBern2.setAnimals(true);
@@ -169,8 +168,7 @@ public class AdTestDataSaver {
 		adBasel.setAuctionStartingPrice(500000);
 		adBasel.setAuctionEndingDate(auctionEndingDate);
 		adBasel.setSquareFootage(100);
-		adBasel.setStudio(true);
-		adBasel.setRoom(false);
+                adBasel.setType(Type.studio);
 		adBasel.setOfferType(1);
 		adBasel.setSmokers(true);
 		adBasel.setAnimals(false);
@@ -211,8 +209,7 @@ public class AdTestDataSaver {
 		adOlten.setPricePerMonth(430);
 		adOlten.setSquareFootage(60);
 		adOlten.setOfferType(0);
-		adOlten.setStudio(true);
-		adOlten.setRoom(false);
+                adOlten.setType(Type.studio);
 		adOlten.setSmokers(true);
 		adOlten.setAnimals(false);
 		adOlten.setRoomDescription(studioDescription4);
@@ -248,8 +245,7 @@ public class AdTestDataSaver {
 		adNeuchâtel.setCreationDate(creationDate5);
 		adNeuchâtel.setDirectBuyPrice(150000);
 		adNeuchâtel.setSquareFootage(40);
-		adNeuchâtel.setStudio(true);
-		adNeuchâtel.setRoom(false);
+                adNeuchâtel.setType(Type.studio);
 		adNeuchâtel.setOfferType(2);
 		adNeuchâtel.setSmokers(true);
 		adNeuchâtel.setAnimals(false);
@@ -286,8 +282,7 @@ public class AdTestDataSaver {
 		adBiel.setCreationDate(creationDate6);
 		adBiel.setPricePerMonth(480);
 		adBiel.setSquareFootage(10);
-		adBiel.setStudio(false);
-		adBiel.setRoom(true);
+                adBiel.setType(Type.room);
 		adBiel.setSmokers(true);
 		adBiel.setAnimals(false);
 		adBiel.setOfferType(0);
@@ -330,8 +325,7 @@ public class AdTestDataSaver {
 		adZurich.setAuctionEndingDate(auctionEndingDate);
 		adZurich.setAuctionStartingPrice(75000);
 		adZurich.setSquareFootage(32);
-		adZurich.setStudio(false);
-		adZurich.setRoom(true);
+                adZurich.setType(Type.room);
 		adZurich.setOfferType(1);
 		adZurich.setSmokers(false);
 		adZurich.setAnimals(false);
@@ -377,8 +371,7 @@ public class AdTestDataSaver {
 		adLuzern.setAuctionStartingPrice(50000);
 		adLuzern.setCreationDate(creationDate2);
 		adLuzern.setSquareFootage(60);
-		adLuzern.setStudio(true);
-		adLuzern.setRoom(false);
+                adLuzern.setType(Type.property);
 		adLuzern.setOfferType(1);
 		adLuzern.setSmokers(false);
 		adLuzern.setAnimals(false);
@@ -420,9 +413,8 @@ public class AdTestDataSaver {
 		adAarau.setCreationDate(creationDate8);
 		adAarau.setDirectBuyPrice(50000);
 		adAarau.setSquareFootage(26);
-		adAarau.setStudio(true);
 		adAarau.setOfferType(2);
-		adAarau.setRoom(false);
+                adAarau.setType(Type.property);
 		adAarau.setSmokers(true);
 		adAarau.setAnimals(false);
 		adAarau.setRoomDescription(studioDescription9);
@@ -464,9 +456,8 @@ public class AdTestDataSaver {
 		adDavos.setCreationDate(creationDate4);
 		adDavos.setPricePerMonth(1100);
 		adDavos.setSquareFootage(74);
-		adDavos.setStudio(false);
 		adDavos.setOfferType(0);
-		adDavos.setRoom(true);
+                adDavos.setType(Type.room);
 		adDavos.setSmokers(true);
 		adDavos.setAnimals(false);
 		adDavos.setRoomDescription(studioDescription10);
@@ -504,8 +495,7 @@ public class AdTestDataSaver {
 		adLausanne.setCreationDate(creationDate5);
 		adLausanne.setPricePerMonth(360);
 		adLausanne.setSquareFootage(16);
-		adLausanne.setStudio(false);
-		adLausanne.setRoom(true);
+                adLausanne.setType(Type.room);
 		adLausanne.setOfferType(1);
 		adLausanne.setSmokers(true);
 		adLausanne.setAnimals(false);
@@ -542,8 +532,7 @@ public class AdTestDataSaver {
 		adLocarno.setCreationDate(creationDate6);
 		adLocarno.setPricePerMonth(960);
 		adLocarno.setSquareFootage(42);
-		adLocarno.setStudio(true);
-		adLocarno.setRoom(false);
+                adLocarno.setType(Type.studio);
 		adLocarno.setOfferType(0);
 		adLocarno.setSmokers(true);
 		adLocarno.setAnimals(false);

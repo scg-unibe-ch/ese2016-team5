@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team1.model.Alert;
+import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
@@ -30,8 +31,7 @@ public class AlertTestDataSaver {
 		// 2 Alerts for the ese test-user
 		Alert alert = new Alert();
 		alert.setUser(ese);
-		alert.setRoom(false);
-		alert.setStudio(true);
+                alert.setType(Type.studio);
 		alert.setOfferType(0);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
@@ -41,8 +41,7 @@ public class AlertTestDataSaver {
 		
 		alert = new Alert();
 		alert.setUser(ese);
-		alert.setRoom(true);
-		alert.setStudio(false);
+                alert.setType(Type.room);
 		alert.setOfferType(2);
 		alert.setCity("Zürich");
 		alert.setZipcode(8000);
@@ -54,8 +53,7 @@ public class AlertTestDataSaver {
 		// One alert for Jane Doe
 		alert = new Alert();
 		alert.setUser(jane);
-		alert.setRoom(false);
-		alert.setStudio(true);
+                alert.setType(Type.studio);
 		alert.setOfferType(1);
 		alert.setCity("Luzern");
 		alert.setZipcode(6003);

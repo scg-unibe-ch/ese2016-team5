@@ -19,6 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.Gender;
+import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.AdDao;
@@ -247,8 +248,7 @@ public class AlertServiceTest {
 		// Create 2 alerts for Adolf Ogi
 		Alert alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setRoom(false);
-		alert.setStudio(true);
+                alert.setType(Type.studio);
 		alert.setOfferType(0);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
@@ -258,8 +258,7 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(adolfOgi);
-		alert.setRoom(false);
-		alert.setStudio(true);
+                alert.setType(Type.studio);
 		alert.setOfferType(2);
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
@@ -291,8 +290,7 @@ public class AlertServiceTest {
 		// Create 2 alerts for Thomy F
 		Alert alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setRoom(false);
-		alert.setStudio(true);
+                alert.setType(Type.studio);
 		alert.setOfferType(0);
 		alert.setCity("Bern");
 		alert.setZipcode(3000);
@@ -302,8 +300,12 @@ public class AlertServiceTest {
 		
 		alert = new Alert();
 		alert.setUser(thomyF);
-		alert.setRoom(true);
-		alert.setStudio(true);
+                
+                // This test doesn't seem to make much sense.
+                alert.setType(Type.room);
+//		alert.setRoom(true);
+//		alert.setStudio(true);
+                
 		alert.setOfferType(2); 
 		alert.setCity("Bern");
 		alert.setZipcode(3002);
@@ -323,8 +325,7 @@ public class AlertServiceTest {
 		oltenResidence.setCreationDate(date);
 		oltenResidence.setPricePerMonth(1200);
 		oltenResidence.setSquareFootage(42);
-		oltenResidence.setStudio(false);
-		oltenResidence.setRoom(true);
+                oltenResidence.setType(Type.room);
 		oltenResidence.setOfferType(2);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);

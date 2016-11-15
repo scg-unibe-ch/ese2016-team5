@@ -130,9 +130,10 @@
                             <form:radiobutton id="type-direct" path="offerType" value="2" />Direct
                     </td>
                     <td>
-                        <label for="type-room">Property Type</label>
-                        <form:radiobutton id="type-room" path="studio" value="0" checked="checked" />Room
-                        <form:radiobutton id="type-studio" path="studio" value="1" />Studio
+                        <label for="type-room">Property Type *</label>
+                        <form:radiobutton id="type-room" path="type" value="room" checked="checked" />Room
+                        <form:radiobutton id="type-studio" path="type" value="studio" />Studio
+                        <form:radiobutton id="type-property" path="type" value="property" />Property
                     </td>
                 </tr>
                 <tr>

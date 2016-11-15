@@ -3,7 +3,13 @@
 <c:if test="${ad.status == 0}">
     <c:set var="status" value="inactive" />
 </c:if>
-<div class="resultAd ${status}" data-price="${ad.pricePerMonth}" data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
+
+<c:set var="userRole" value="standard" />
+<c:if test="${ad.getUser().isPremiumUser()}">
+    <c:set var="userRole" value="premium" />
+</c:if>
+    
+<div class="resultAd ${status} ${userRole}" data-price="${ad.pricePerMonth}" data-moveIn="${ad.moveInDate}" data-age="${ad.moveInDate}" data-creation="${ad.creationDate}">
     <div class="resultLeft">
         <a href="<c:url value='/ad?id=${ad.id}' />">
             <img src="${ad.pictures[0].filePath}" />
@@ -61,7 +67,10 @@
             <p>Last update: ${formattedCreationDate}</p>
         </div>
     </div>
-        <div class="expired">
+        <div class="info expired">
             <span>Expired</span>
+        </div>
+        <div class="info premium">
+            <span>Premium</span>
         </div>
 </div>

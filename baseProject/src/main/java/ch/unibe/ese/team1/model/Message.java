@@ -34,6 +34,10 @@ public class Message {
 	@JsonFormat(pattern = "HH:mm, dd.MM.yyyy", timezone = "CET" )
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateSent;
+        
+        @Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
+	private Date activationTime;
 
 	@ManyToOne
 	private User sender;
@@ -96,4 +100,12 @@ public class Message {
 	public void setRecipient(User recipient) {
 		this.recipient = recipient;
 	}
+        
+        public void setActivationTime(Date activationTime) {
+            this.activationTime = activationTime;
+        }
+
+        public Date getActivationTime() {
+            return activationTime;
+        }
 }

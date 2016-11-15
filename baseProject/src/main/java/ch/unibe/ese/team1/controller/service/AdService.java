@@ -480,6 +480,22 @@ public class AdService {
 				}
 			}
 		}
+                
+                /* Sort: Premium first */
+	        Collections.sort(locatedResults, new Comparator<Ad>() {
+                    @Override
+                    public int compare(Ad ad1, Ad ad2) {
+                        boolean ad1Premium = ad1.getUser().isPremiumUser();
+                        boolean ad2Premium = ad2.getUser().isPremiumUser();
+                        if (ad1Premium && !ad2Premium) {
+                            return -1;
+                        } else if (!ad1Premium && ad2Premium) {
+                            return 1;
+                        }
+                        return 0;
+                    }
+                });
+                
 		return locatedResults;
 	}
 

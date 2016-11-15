@@ -39,6 +39,9 @@ public class AlertService {
 
 	@Autowired
 	private GeoDataService geoDataService;
+        
+	@Autowired
+	private MessageService messageService;
 
 	/**
 	 * Persists a new alert with the data from the alert form to the database.
@@ -126,15 +129,11 @@ public class AlertService {
 
 		// send messages to all users with matching alerts
 		for (User user : users) {
-			Date now = new Date();
-			Message message = new Message();
-			message.setSubject("It's a match!");
-			message.setText(getAlertText(ad));
-			message.setSender(userDao.findByUsername("System"));
-			message.setRecipient(user);
-			message.setState(MessageState.UNREAD);
-			message.setDateSent(now);
-			messageDao.save(message);
+                    int deferredTime = 3600;
+                    if (user.isPremiumUser()) {
+                        deferredTime = 0;
+                    }
+                    messageService.sendMessage(userDao.findByUsername("System"), user, "It's a match!", getAlertText(ad), deferredTime);
 		}
 	}
 

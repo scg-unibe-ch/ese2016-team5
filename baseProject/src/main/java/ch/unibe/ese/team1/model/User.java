@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Iterator;
 
 /** Describes a user on the platform. */
 @Entity
@@ -114,6 +115,17 @@ public class User {
 	public Set<UserRole> getUserRoles() {
 		return userRoles;
 	}
+        
+        public boolean isPremiumUser() {
+            Iterator<UserRole> iterator = userRoles.iterator();
+            while (iterator.hasNext()) {
+                    UserRole userRole = iterator.next();
+                    if (userRole.getRole().equals("ROLE_PREMIUM")) {
+                        return true;
+                    }
+            }
+            return false;
+        }
 
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;

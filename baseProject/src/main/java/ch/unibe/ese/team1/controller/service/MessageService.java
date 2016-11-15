@@ -33,10 +33,15 @@ public class MessageService {
 	/** Gets all messages in the inbox of the given user, sorted newest to oldest */
 	@Transactional
 	public Iterable<Message> getInboxForUser(User user) {
+//		Iterable<Message> usersMessages = messageDao.findByRecipientAndActivationTimeGreaterThan(user, new Date());
 		Iterable<Message> usersMessages = messageDao.findByRecipient(user);
 		List<Message> messages = new ArrayList<Message>();
-		for(Message message: usersMessages)
+                Date now = new Date();
+		for(Message message: usersMessages) {
+                    if (message.getActivationTime().before(now)) {
 			messages.add(message);
+                    }
+                }
 		Collections.sort(messages, new Comparator<Message>(){
 			@Override
 			public int compare(Message message1, Message message2) {
@@ -103,18 +108,29 @@ public class MessageService {
 	 * @param subject the subject of the message
 	 * @param text the text of the message
 	 */
-	public void sendMessage(User sender, User recipient, String subject,
-			String text) {
-		Message message = new Message();
-		message.setDateSent(new Date());
-		message.setSender(sender);
-		message.setRecipient(recipient);
-		message.setSubject(subject);
-		message.setText(text);
-		message.setState(MessageState.UNREAD);
-		
-		messageDao.save(message);
+	public void sendMessage(User sender, User recipient, String subject, String text) {
+            insertMessage(sender, recipient, subject, text, new Date());
 	}
+        public void sendMessage(User sender, User recipient, String subject, String text, int activationTimeFromNow) {
+            Calendar future = Calendar.getInstance();
+            future.setTime(new Date());
+            future.add(Calendar.HOUR_OF_DAY, activationTimeFromNow/3600);
+
+            insertMessage(sender, recipient, subject, text, future.getTime());
+        }
+        
+        private void insertMessage(User sender, User recipient, String subject, String text, Date activationTime) {
+            Message message = new Message();
+            message.setDateSent(new Date());
+            message.setSender(sender);
+            message.setRecipient(recipient);
+            message.setSubject(subject);
+            message.setText(text);
+            message.setState(MessageState.UNREAD);
+            message.setActivationTime(activationTime);
+
+            messageDao.save(message);
+        }
 
 	/**
 	 * Sets the MessageState of a given Message to "READ".

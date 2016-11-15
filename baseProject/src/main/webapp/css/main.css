@@ -654,6 +654,9 @@ footer nav ul li {
 #resultsDiv .resultAd.old {
     border-color: grey;
 }
+#resultsDiv .resultAd.premium {
+    border-color: #0A4B83;
+}
 
 #resultsDiv div:first-child {
 	margin-top: 0px;
@@ -1120,26 +1123,36 @@ footer nav ul li {
 .resultAd {
     position: relative;
 }
-.resultAd .expired {
+
+/* Putting those info boxes partly on top of the image probably isn't the best idea...
+...the good thing is that it can easily be changed if someone has an idea. */
+.resultAd .info {
     display: none;
-}
-.resultAd.inactive .expired {
-    display: block;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 40px;
+    width: 30px;
     background-color: rgba(0,0,0,0.7);
     border-radius: 7px 0 0 7px;
 }
-.resultAd.inactive .expired span {
+.resultAd .info span {
     transform: rotate(-90deg);
     display: block;
     color: white;
     font-weight: bold;
     font-size: 19px;
     position: absolute;
-    left: -16px;
+    left: -26px;
     top: 46px;
+}
+.resultAd.inactive .info.expired {
+    display: block;
+}
+.resultAd.inactive .info.expired span {
+    left: -20px;
+}
+.resultAd.premium .info.premium {
+    display: block;
+    background-color: rgba(10,75,131,0.7);
 }

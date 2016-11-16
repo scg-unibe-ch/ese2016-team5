@@ -206,7 +206,10 @@ public class AdService {
 	 */
 	@Transactional
 	public Ad getAdById(long id) {
-		return adDao.findOne(id);
+		Ad ad = adDao.findOne(id);
+                ad.setViews(ad.getViews()+1);
+                adDao.save(ad);
+                return ad;
 	}
 
 	/** Returns all ads in the database */
@@ -539,8 +542,10 @@ public class AdService {
 					Iterator<Ad> iterator = ads.iterator();
 					while (iterator.hasNext()) {
 						Ad ad = iterator.next();
-						if (ad.getDate(inOrOut).compareTo(earliestDate) < 0)
-							iterator.remove();
+                                                if (ad.getOfferType() == 0) {
+                                                    if (ad.getDate(inOrOut).compareTo(earliestDate) < 0)
+                                                            iterator.remove();
+                                                }
 					}
 				}
 			}

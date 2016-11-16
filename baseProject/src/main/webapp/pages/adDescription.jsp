@@ -314,6 +314,7 @@
 			<td><h2>Ad created on</h2></td>
 			<td>${formattedCreationDate}</td>
 		</tr>
+                <tr><td><h2>Views</h2></td><td>${shownAd.views}</td></tr>
 	</table>
 </section>
 

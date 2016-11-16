@@ -99,6 +99,7 @@ public class AdTestDataSaver {
 		adBern.setAuctionEndingDate(auctionEndingDate);
 		adBern.setAuctionStartingPrice(30000);
 		adBern.setOfferType(1);
+                adBern.setViews(12);
 		List<AdPicture> pictures = new ArrayList<>();
 		pictures.add(createPicture(adBern, "/img/test/ad1_1.jpg"));
 		pictures.add(createPicture(adBern, "/img/test/ad1_2.jpg"));
@@ -148,6 +149,7 @@ public class AdTestDataSaver {
 		pictures.add(createPicture(adBern2, "/img/test/ad2_2.jpg"));
 		pictures.add(createPicture(adBern2, "/img/test/ad2_3.jpg"));
 		adBern2.setPictures(pictures);
+                adBern2.setViews(123);
 		adDao.save(adBern2);
 
 		String studioDescription3 = " In the center of Gundeli (5 Min. away from the"
@@ -191,6 +193,7 @@ public class AdTestDataSaver {
 		pictures.add(createPicture(adBasel, "/img/test/ad3_2.jpg"));
 		pictures.add(createPicture(adBasel, "/img/test/ad3_3.jpg"));
 		adBasel.setPictures(pictures);
+                adBasel.setViews(0);
 		adDao.save(adBasel);
 		
 		String studioDescription4 = "Flatshare of 3 persons. Flat with 5 rooms"
@@ -231,6 +234,7 @@ public class AdTestDataSaver {
 		pictures.add(createPicture(adOlten, "/img/test/ad4_2.png"));
 		pictures.add(createPicture(adOlten, "/img/test/ad4_3.png"));
 		adOlten.setPictures(pictures);
+                adOlten.setViews(56);
 		adDao.save(adOlten);
 
 		String studioDescription5 = "Studio meublé au 3ème étage, comprenant"
@@ -268,6 +272,7 @@ public class AdTestDataSaver {
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_2.jpg"));
 		pictures.add(createPicture(adNeuchâtel, "/img/test/ad5_3.jpg"));
 		adNeuchâtel.setPictures(pictures);
+                adNeuchâtel.setViews(938);
 		adDao.save(adNeuchâtel);
 
 		String studioDescription6 = "A place just for yourself in a very nice part of Biel."
@@ -300,6 +305,7 @@ public class AdTestDataSaver {
 		adBiel.setCable(false);
 		adBiel.setGarage(false);
 		adBiel.setInternet(false);
+                adBiel.setViews(34);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adBiel, "/img/test/ad6_1.png"));
 		pictures.add(createPicture(adBiel, "/img/test/ad6_2.png"));
@@ -342,6 +348,7 @@ public class AdTestDataSaver {
 		adZurich.setCable(true);
 		adZurich.setGarage(true);
 		adZurich.setInternet(true);
+                adZurich.setViews(389);
 		adZurich.setDishwasher(false);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adZurich, "/img/test/ad1_3.jpg"));
@@ -389,6 +396,7 @@ public class AdTestDataSaver {
 		adLuzern.setGarage(false);
 		adLuzern.setInternet(true);
 		adLuzern.setDishwasher(false);
+                adLuzern.setViews(23);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_3.jpg"));
 		pictures.add(createPicture(adLuzern, "/img/test/ad2_2.jpg"));
@@ -431,6 +439,7 @@ public class AdTestDataSaver {
 		adAarau.setGarage(false);
 		adAarau.setInternet(false);
 		adAarau.setDishwasher(true);
+                adAarau.setViews(1);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adAarau, "/img/test/ad3_3.jpg"));
 		pictures.add(createPicture(adAarau, "/img/test/ad3_2.jpg"));
@@ -474,6 +483,7 @@ public class AdTestDataSaver {
 		adDavos.setGarage(false);
 		adDavos.setInternet(false);
 		adDavos.setDishwasher(false);
+                adDavos.setViews(39);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adDavos, "/img/test/ad4_3.png"));
 		pictures.add(createPicture(adDavos, "/img/test/ad4_2.png"));
@@ -513,6 +523,7 @@ public class AdTestDataSaver {
 		adLausanne.setGarage(false);
 		adLausanne.setInternet(false);
 		adLausanne.setDishwasher(true);
+                adLausanne.setViews(932);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_3.jpg"));
 		pictures.add(createPicture(adLausanne, "/img/test/ad5_2.jpg"));
@@ -550,6 +561,7 @@ public class AdTestDataSaver {
 		adLocarno.setGarage(false);
 		adLocarno.setInternet(false);
 		adLocarno.setDishwasher(true);
+                adLocarno.setViews(329);
 		pictures = new ArrayList<>();
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_3.png"));
 		pictures.add(createPicture(adLocarno, "/img/test/ad6_2.png"));

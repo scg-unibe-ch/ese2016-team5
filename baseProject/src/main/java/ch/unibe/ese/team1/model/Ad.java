@@ -95,6 +95,12 @@ public class Ad {
 	@Column(nullable = false)
 	private boolean dishwasher;
         
+        @Column(nullable = false)
+        private int views;
+        
+        @Column(nullable = true)
+        private int bidAmount;
+        
         @Column (nullable = false)
         private String type;
 
@@ -412,6 +418,22 @@ public class Ad {
 
         public void setType(Type type) {
             this.type = type.name();
+        }
+        
+        public int getViews() {
+            return views;
+        }
+
+        public void setViews(int views) {
+            this.views = views;
+        }
+
+        public int getBidAmount() {
+            return bidAmount;
+        }
+
+        public void setBidAmount(int bidAmount) {
+            this.bidAmount = bidAmount;
         }
 
 	@Override

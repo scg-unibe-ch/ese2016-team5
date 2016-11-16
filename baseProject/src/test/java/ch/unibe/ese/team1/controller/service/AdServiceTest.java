@@ -57,7 +57,7 @@ public class AdServiceTest {
 		placeAdForm.setSquareFootage(50);
 		placeAdForm.setTitle("title");
 		placeAdForm.setStreet("Hauptstrasse 13");
-                placeAdForm.setType(Type.studio);
+        placeAdForm.setType(Type.studio);
 		placeAdForm.setOfferType(2);
 		placeAdForm.setSmokers(true);
 		placeAdForm.setAnimals(false);

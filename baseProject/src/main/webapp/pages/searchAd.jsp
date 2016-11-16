@@ -26,9 +26,24 @@
 		var radius = document.getElementById('radiusInput');
 		
 		if(price.value == null || price.value == "" || price.value == "0")
-			price.value = "500";
+			price.value = "1500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
-			radius.value = "5";
+			radius.value = "400";
+                    
+                    
+		$("#field-earliestMoveInDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-latestMoveInDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-earliestMoveOutDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-latestMoveOutDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+                
 	});
 </script>
 

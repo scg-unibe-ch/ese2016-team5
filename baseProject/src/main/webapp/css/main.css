@@ -1156,3 +1156,14 @@ footer nav ul li {
     display: block;
     background-color: rgba(10,75,131,0.7);
 }
+#map {
+    padding: 0 !important;
+}
+
+#map .mapInfo {
+    width: 300px;
+}
+#map .mapInfo img {
+    margin-right: 10px;
+    float: left;
+}

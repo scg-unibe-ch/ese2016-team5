@@ -106,8 +106,11 @@ public class BookmarkServiceTest {
 		adDao.save(ad);
 		
 		
+		
+		
 		assertEquals(book.getBookmarkStatus(ad, false, hans),3);
 		assertEquals(book.getBookmarkStatus(ad, true, hans),2);
+		
 		
 	}
 	

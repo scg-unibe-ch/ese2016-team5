@@ -16,7 +16,6 @@ import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.Location;
 import ch.unibe.ese.team1.model.Message;
 import ch.unibe.ese.team1.model.MessageState;
-import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
@@ -62,7 +61,8 @@ public class AlertService {
 
 		alert.setPrice(alertForm.getPrice());
 		alert.setRadius(alertForm.getRadius());
-                alert.setType(Type.valueOf(alertForm.getType()));
+		alert.setRoom(alertForm.getRoom());
+		alert.setStudio(alertForm.getStudio());
 		alert.setOfferType(alertForm.getOfferType());
 		alert.setUser(user);
 		alertDao.save(alert);
@@ -159,8 +159,7 @@ public class AlertService {
 		if(ad.getOfferType() != alert.getOfferType()){
 			mismatch = true; 
 		}
-	
-                if(ad.getType() != alert.getType()){
+		if(ad.getStudio() != alert.getStudio()){
 			mismatch = true;
 		}
 		

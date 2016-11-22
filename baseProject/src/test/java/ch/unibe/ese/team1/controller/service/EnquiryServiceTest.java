@@ -17,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
-import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.Visit;
@@ -139,7 +138,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setCreationDate(date);
 		oltenResidence.setPricePerMonth(1200);
 		oltenResidence.setSquareFootage(42);
-                oltenResidence.setType(Type.room);
+		oltenResidence.setStudio(false);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");
@@ -200,7 +199,7 @@ public class EnquiryServiceTest {
 		oltenResidence.setCreationDate(date);
 		oltenResidence.setPricePerMonth(1200);
 		oltenResidence.setSquareFootage(42);
-                oltenResidence.setType(Type.room);
+		oltenResidence.setStudio(false);
 		oltenResidence.setSmokers(true);
 		oltenResidence.setAnimals(false);
 		oltenResidence.setRoomDescription("blah");

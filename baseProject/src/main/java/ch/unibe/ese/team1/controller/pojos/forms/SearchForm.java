@@ -1,6 +1,5 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import ch.unibe.ese.team1.model.Type;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,8 +11,9 @@ public class SearchForm {
 
 	private boolean filtered;
 
+	private boolean studio;
+	private boolean room;
 	private int[] offerType = new int[3];
-        private String[] type = new String[3];
 
 	@NotBlank(message = "Required")
 	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
@@ -60,6 +60,22 @@ public class SearchForm {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public boolean getStudio() {
+		return studio;
+	}
+
+	public void setStudio(boolean studio) {
+		this.studio = studio;
+	}
+	
+	public boolean getRoom() {
+		return room;
+	}
+
+	public void setRoom(boolean room) {
+		this.room = room;
 	}
 
 
@@ -202,12 +218,4 @@ public class SearchForm {
 	public void setLatestMoveOutDate(String latestMoveOutDate) {
 		this.latestMoveOutDate = latestMoveOutDate;
 	}
-        
-         public String[] getType() {
-            return type;
-        }
-
-        public void setType(String[] type) {
-            this.type = type;
-        }
 }

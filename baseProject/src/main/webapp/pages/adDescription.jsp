@@ -275,7 +275,11 @@
 		
 		<tr>
 			<td><h2>Type</h2></td>
-			<td style="text-transform: capitalize">${shownAd.type}
+			<td>
+				<c:choose>
+					<c:when test="${shownAd.studio}">Studio</c:when>
+					<c:otherwise>Room</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 
@@ -314,7 +318,6 @@
 			<td><h2>Ad created on</h2></td>
 			<td>${formattedCreationDate}</td>
 		</tr>
-                <tr><td><h2>Views</h2></td><td>${shownAd.views}</td></tr>
 	</table>
 </section>
 

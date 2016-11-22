@@ -1,5 +1,4 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <c:set var="status" value="active" />
 <c:if test="${ad.status == 0}">
     <c:set var="status" value="inactive" />
@@ -20,7 +19,12 @@
         </h2>
         <p>${ad.street}, ${ad.zipcode} ${ad.city}</p>
         <p>
-            <i style="text-transform: capitalize">${ad.type}</i>
+            <i>
+                <c:choose>
+                    <c:when test="${ad.studio}">Studio</c:when>
+                    <c:when test="${ad.room}">Room</c:when>
+                </c:choose>
+            </i>
         </p>
     </div>
     <div class="resultRight">

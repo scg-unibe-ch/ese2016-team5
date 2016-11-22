@@ -2,7 +2,6 @@ package ch.unibe.ese.team1.controller.pojos.forms;
 
 import java.util.List;
 import ch.unibe.ese.team1.controller.pojos.forms.validation.AdFormOfferTypeFields;
-import ch.unibe.ese.team1.model.Type;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
@@ -38,7 +37,10 @@ public class PlaceAdForm {
 
 	// optional for input
 	private String roomFriends;
-        
+
+	private boolean studio;
+	private boolean room;
+
 	private boolean smokers;
 	private boolean animals;
 	private boolean garden;
@@ -52,8 +54,6 @@ public class PlaceAdForm {
 
 	private List<String> visits;
 
-        private Type type;
-        
 	// Auction & Direct Buy
 	private String auctionEndingDate;
 	private int directBuyPrice;
@@ -252,6 +252,22 @@ public class PlaceAdForm {
 		this.roomFriends = roomFriends;
 	}
 
+	public boolean getStudio() {
+		return studio;
+	}
+
+	public void setStudio(boolean studio) {
+		this.studio = studio;
+	}
+
+	public boolean getRoom() {
+		return room;
+	}
+
+	public void setRoom(boolean room) {
+		this.room = room;
+	}
+
 	public List<String> getVisits() {
 		return visits;
 	}
@@ -259,16 +275,5 @@ public class PlaceAdForm {
 	public void setVisits(List<String> visits) {
 		this.visits = visits;
 	}
-        
-        public Type getType() {
-            return type;
-        }
 
-        public void setType(String type) {
-            this.type = Type.valueOf(type);
-        }
-        
-        public void setType(Type type) {
-            this.type = type;
-        }
 }

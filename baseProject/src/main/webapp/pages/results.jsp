@@ -232,9 +232,8 @@ function sort_div_attribute() {
 		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
 		<br />
 		<label for="type-offer">Type:</label>
-		<form:checkbox name="type-room" id="room" path="type" value="room" /><label>Room</label>
-		<form:checkbox name="type-studio" id="studio" path="type" value="studio" /><label>Studio</label>
-		<form:checkbox name="type-property" id="property" path="type" value="property" /><label>Property</label>
+		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
+		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>

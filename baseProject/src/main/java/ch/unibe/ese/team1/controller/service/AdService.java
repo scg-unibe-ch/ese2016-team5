@@ -22,14 +22,12 @@ import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.AdPicture;
 import ch.unibe.ese.team1.model.Location;
-import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
-import java.util.Arrays;
 
 /** Handles all persistence operations concerning ad placement and retrieval. */
 @Service
@@ -75,7 +73,8 @@ public class AdService {
 
 		ad.setStreet(placeAdForm.getStreet());
 
-                ad.setType(placeAdForm.getType());
+		ad.setStudio(placeAdForm.getStudio());
+		ad.setRoom(placeAdForm.getRoom());
 
 		// take the zipcode - first four digits
 		String zip = placeAdForm.getCity().substring(0, 4);
@@ -206,10 +205,7 @@ public class AdService {
 	 */
 	@Transactional
 	public Ad getAdById(long id) {
-		Ad ad = adDao.findOne(id);
-                ad.setViews(ad.getViews()+1);
-                adDao.save(ad);
-                return ad;
+		return adDao.findOne(id);
 	}
 
 	/** Returns all ads in the database */
@@ -248,279 +244,260 @@ public class AdService {
 	 * @return an Iterable of all search results
 	 */
 	@Transactional
-	   public Iterable<Ad> queryResults(SearchForm searchForm) {
-            Iterable<Ad> salesResults = null;
-            Iterable<Ad> auctionResults = null;
-            Iterable<Ad> rentResults = null;
+	public Iterable<Ad> queryResults(SearchForm searchForm) {
+		Iterable<Ad> salesResults = null; 
+		Iterable<Ad> auctionResults = null; 
+		Iterable<Ad> rentResults = null; 
+		
+		List<Ad> rentAds = new ArrayList<>(); 
+		List<Ad> auctionAds = new ArrayList<>(); 
+		List<Ad> salesAds = new ArrayList<>(); 
+		
+		int[] offerType = searchForm.getOfferType();
+		
+		for(int i = 0; i < offerType.length; i++){
+			if (offerType[i] == 0){
+				rentResults = adDao.findByOfferType(0);
+				for (Ad ad : rentResults) {
+					rentAds.add(ad);
+				}
+			}if (offerType[i] == 1){
+				auctionResults = adDao.findByOfferType(1); 
+				for (Ad ad : auctionResults) {
+					auctionAds.add(ad);
+				}
+			}if(offerType[i] == 2){
+				salesResults = adDao.findByOfferType(2);
+				for (Ad ad : salesResults) {
+					salesAds.add(ad);
+				}
+			}
+		}	
+		
+		List<Ad> locatedResults = new ArrayList<>();
+		if(!rentAds.isEmpty()){
+			locatedResults.addAll(rentAds);
+		}
+		if(!auctionAds.isEmpty()){
+			locatedResults.addAll(auctionAds);
+		}
+		if(!salesAds.isEmpty()){
+			locatedResults.addAll(salesAds);
+		}
 
-            List<Ad> rentAds = new ArrayList<>();
-            List<Ad> auctionAds = new ArrayList<>();
-            List<Ad> salesAds = new ArrayList<>();
+		// filter out zipcode
+		String city = searchForm.getCity().substring(7);
 
-            int[] offerType = searchForm.getOfferType();
+		// get the location that the user searched for and take the one with the
+		// lowest zip code
+		Location searchedLocation = geoDataService.getLocationsByCity(city)
+				.get(0);
 
-            for (int i = 0; i < offerType.length; i++) {
-                if (offerType[i] == 0) {
-                    rentResults = adDao.findByOfferType(0);
-                    for (Ad ad : rentResults) {
-                        rentAds.add(ad);
-                    }
-                }
-                if (offerType[i] == 1) {
-                    auctionResults = adDao.findByOfferType(1);
-                    for (Ad ad : auctionResults) {
-                        auctionAds.add(ad);
-                    }
-                }
-                if (offerType[i] == 2) {
-                    salesResults = adDao.findByOfferType(2);
-                    for (Ad ad : salesResults) {
-                        salesAds.add(ad);
-                    }
-                }
+		final int earthRadiusKm = 6380;
+		List<Location> locations = geoDataService.getAllLocations();
+		double radSinLat = Math.sin(Math.toRadians(searchedLocation
+				.getLatitude()));
+		double radCosLat = Math.cos(Math.toRadians(searchedLocation
+				.getLatitude()));
+		double radLong = Math.toRadians(searchedLocation.getLongitude());
+
+		/*
+		 * calculate the distances (Java 8) and collect all matching zipcodes.
+		 * The distance is calculated using the law of cosines.
+		 * http://www.movable-type.co.uk/scripts/latlong.html
+		 */
+		List<Integer> zipcodes = locations
+				.parallelStream()
+				.filter(location -> {
+					double radLongitude = Math.toRadians(location
+							.getLongitude());
+					double radLatitude = Math.toRadians(location.getLatitude());
+					double distance = Math.acos(radSinLat
+							* Math.sin(radLatitude) + radCosLat
+							* Math.cos(radLatitude)
+							* Math.cos(radLong - radLongitude))
+							* earthRadiusKm;
+					return distance < searchForm.getRadius();
+				}).map(location -> location.getZip())
+				.collect(Collectors.toList());
+
+		locatedResults = locatedResults.stream()
+				.filter(ad -> zipcodes.contains(ad.getZipcode()))
+				.collect(Collectors.toList());
+
+		// filter for additional criteria
+		if (searchForm.getFiltered()) {
+			// prepare date filtering - by far the most difficult filter
+			Date earliestInDate = null;
+			Date latestInDate = null;
+			Date earliestOutDate = null;
+			Date latestOutDate = null;
+
+			// parse move-in and move-out dates
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			try {
+				earliestInDate = formatter.parse(searchForm
+						.getEarliestMoveInDate());
+			} catch (Exception e) {
+			}
+			try {
+				latestInDate = formatter
+						.parse(searchForm.getLatestMoveInDate());
+			} catch (Exception e) {
+			}
+			try {
+				earliestOutDate = formatter.parse(searchForm
+						.getEarliestMoveOutDate());
+			} catch (Exception e) {
+			}
+			try {
+				latestOutDate = formatter.parse(searchForm
+						.getLatestMoveOutDate());
+			} catch (Exception e) {
+			}
+
+            // Only get results with status = 1 (not my fault that's so ugly!!)
+            Iterator<Ad> statusIterator = locatedResults.iterator();
+            while (statusIterator.hasNext()) {
+            	Ad ad = statusIterator.next();
+                if (ad.getStatus() != 1)
+                statusIterator.remove();
             }
+                        
+			// filtering by dates
+			locatedResults = validateDate(locatedResults, true, earliestInDate,
+					latestInDate);
+			locatedResults = validateDate(locatedResults, false,
+					earliestOutDate, latestOutDate);
 
-            List<Ad> locatedResults = new ArrayList<>();
-            if (!rentAds.isEmpty()) {
-                locatedResults.addAll(rentAds);
-            }
-            if (!auctionAds.isEmpty()) {
-                locatedResults.addAll(auctionAds);
-            }
-            if (!salesAds.isEmpty()) {
-                locatedResults.addAll(salesAds);
-            }
+			// filtering for the rest
+			boolean room = searchForm.getRoom(); 
+			boolean studio = searchForm.getStudio(); 
+			
+			Iterator<Ad> roomIterator = locatedResults.iterator();
+			while (roomIterator.hasNext()) {
+				Ad ad = roomIterator.next();
+				if ((ad.getRoom() && !room) || (ad.getStudio() && !studio)) 
+					roomIterator.remove();	
+			}
+			
+			if (searchForm.getSmokers()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getSmokers())
+						iterator.remove();
+				}
+			}
 
-            // filter out zipcode
-            String city = searchForm.getCity().substring(7);
+			// animals
+			if (searchForm.getAnimals()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getAnimals())
+						iterator.remove();
+				}
+			}
 
-            // get the location that the user searched for and take the one with the
-            // lowest zip code
-            Location searchedLocation = geoDataService.getLocationsByCity(city)
-                    .get(0);
+			// garden
+			if (searchForm.getGarden()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getGarden())
+						iterator.remove();
+				}
+			}
 
-            final int earthRadiusKm = 6380;
-            List<Location> locations = geoDataService.getAllLocations();
-            double radSinLat = Math.sin(Math.toRadians(searchedLocation
-                    .getLatitude()));
-            double radCosLat = Math.cos(Math.toRadians(searchedLocation
-                    .getLatitude()));
-            double radLong = Math.toRadians(searchedLocation.getLongitude());
+			// balcony
+			if (searchForm.getBalcony()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getBalcony())
+						iterator.remove();
+				}
+			}
 
-            /*
-                     * calculate the distances (Java 8) and collect all matching zipcodes.
-                     * The distance is calculated using the law of cosines.
-                     * http://www.movable-type.co.uk/scripts/latlong.html
-             */
-            List<Integer> zipcodes = locations
-                    .parallelStream()
-                    .filter(location -> {
-                        double radLongitude = Math.toRadians(location
-                                .getLongitude());
-                        double radLatitude = Math.toRadians(location.getLatitude());
-                        double distance = Math.acos(radSinLat
-                                * Math.sin(radLatitude) + radCosLat
-                                * Math.cos(radLatitude)
-                                * Math.cos(radLong - radLongitude))
-                                * earthRadiusKm;
-                        return distance < searchForm.getRadius();
-                    }).map(location -> location.getZip())
-                    .collect(Collectors.toList());
+			// cellar
+			if (searchForm.getCellar()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getCellar())
+						iterator.remove();
+				}
+			}
 
-            locatedResults = locatedResults.stream()
-                    .filter(ad -> zipcodes.contains(ad.getZipcode()))
-                    .collect(Collectors.toList());
+			// furnished
+			if (searchForm.getFurnished()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getFurnished())
+						iterator.remove();
+				}
+			}
 
-            // filter for additional criteria
-            //if (searchForm.getFiltered()) {
-                // prepare date filtering - by far the most difficult filter
-                Date earliestInDate = null;
-                Date latestInDate = null;
-                Date earliestOutDate = null;
-                Date latestOutDate = null;
+			// cable
+			if (searchForm.getCable()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getCable())
+						iterator.remove();
+				}
+			}
 
-                // parse move-in and move-out dates
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    earliestInDate = formatter.parse(searchForm
-                            .getEarliestMoveInDate());
-                } catch (Exception e) {
-                }
-                try {
-                    latestInDate = formatter
-                            .parse(searchForm.getLatestMoveInDate());
-                } catch (Exception e) {
-                }
-                try {
-                    earliestOutDate = formatter.parse(searchForm
-                            .getEarliestMoveOutDate());
-                } catch (Exception e) {
-                }
-                try {
-                    latestOutDate = formatter.parse(searchForm
-                            .getLatestMoveOutDate());
-                } catch (Exception e) {
-                }
+			// garage
+			if (searchForm.getGarage()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getGarage())
+						iterator.remove();
+				}
+			}
 
-                // Only get results with status = 1 (not my fault that's so ugly!!)
-                Iterator<Ad> statusIterator = locatedResults.iterator();
-                while (statusIterator.hasNext()) {
-                    Ad ad = statusIterator.next();
-                    if (ad.getStatus() != 1) {
-                        statusIterator.remove();
-                    }
-                }
-
-                // filtering by dates
-                locatedResults = validateDate(locatedResults, true, earliestInDate,
-                        latestInDate);
-                locatedResults = validateDate(locatedResults, false,
-                        earliestOutDate, latestOutDate);
-
-                // filtering for the rest
-                String[] type = searchForm.getType();
-
-                Iterator<Ad> typeIterator = locatedResults.iterator();
-                while (typeIterator.hasNext()) {
-                    Ad ad = typeIterator.next();
-                    boolean remove = true;
-                    for(String t : type) {
-                        if (ad.getType().name().equals(t)) {
-                            remove = false;
+			// internet
+			if (searchForm.getInternet()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getInternet())
+						iterator.remove();
+				}
+			}
+			
+			// dishwasher
+			if (searchForm.getDishwasher()) {
+				Iterator<Ad> iterator = locatedResults.iterator();
+				while (iterator.hasNext()) {
+					Ad ad = iterator.next();
+					if (!ad.getDishwasher())
+						iterator.remove();
+				}
+			}
+		}
+                
+                /* Sort: Premium first */
+	        Collections.sort(locatedResults, new Comparator<Ad>() {
+                    @Override
+                    public int compare(Ad ad1, Ad ad2) {
+                        boolean ad1Premium = ad1.getUser().isPremiumUser();
+                        boolean ad2Premium = ad2.getUser().isPremiumUser();
+                        if (ad1Premium && !ad2Premium) {
+                            return -1;
+                        } else if (!ad1Premium && ad2Premium) {
+                            return 1;
                         }
+                        return 0;
                     }
-                    if (remove) {
-                        typeIterator.remove();
-                    }
-                }
-
-                if (searchForm.getSmokers()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getSmokers()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // animals
-                if (searchForm.getAnimals()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getAnimals()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // garden
-                if (searchForm.getGarden()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getGarden()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // balcony
-                if (searchForm.getBalcony()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getBalcony()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // cellar
-                if (searchForm.getCellar()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getCellar()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // furnished
-                if (searchForm.getFurnished()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getFurnished()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // cable
-                if (searchForm.getCable()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getCable()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // garage
-                if (searchForm.getGarage()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getGarage()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // internet
-                if (searchForm.getInternet()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getInternet()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-
-                // dishwasher
-                if (searchForm.getDishwasher()) {
-                    Iterator<Ad> iterator = locatedResults.iterator();
-                    while (iterator.hasNext()) {
-                        Ad ad = iterator.next();
-                        if (!ad.getDishwasher()) {
-                            iterator.remove();
-                        }
-                    }
-                }
-            //}
-
-            /* Sort: Premium first */
-            Collections.sort(locatedResults, new Comparator<Ad>() {
-                @Override
-                public int compare(Ad ad1, Ad ad2) {
-                    boolean ad1Premium = ad1.getUser().isPremiumUser();
-                    boolean ad2Premium = ad2.getUser().isPremiumUser();
-                    if (ad1Premium && !ad2Premium) {
-                        return -1;
-                    } else if (!ad1Premium && ad2Premium) {
-                        return 1;
-                    }
-                    return 0;
-                }
-            });
-
-            return locatedResults;
-        }
+                });
+                
+		return locatedResults;
+	}
 
 	private List<Ad> validateDate(List<Ad> ads, boolean inOrOut, Date earliestDate, Date latestDate) {
 		if (ads.size() > 0) {
@@ -542,10 +519,8 @@ public class AdService {
 					Iterator<Ad> iterator = ads.iterator();
 					while (iterator.hasNext()) {
 						Ad ad = iterator.next();
-                                                if (ad.getOfferType() == 0) {
-                                                    if (ad.getDate(inOrOut).compareTo(earliestDate) < 0)
-                                                            iterator.remove();
-                                                }
+						if (ad.getDate(inOrOut).compareTo(earliestDate) < 0)
+							iterator.remove();
 					}
 				}
 			}

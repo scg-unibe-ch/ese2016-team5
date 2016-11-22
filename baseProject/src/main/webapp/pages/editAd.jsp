@@ -99,6 +99,9 @@
                     hour: (new Date()).getHours()
                 });
                 
+                // Update radio for studio/room (I don't think this should be necessary... but it works...)
+                var checkType = 'type-' + ('true' === '${ad.studio}' ? 'studio' : 'room');
+                $('#' + checkType).click();
                 
                 
 	});
@@ -158,25 +161,9 @@
                         </c:choose>
                     </td>
                     <td>
-                        <label for="type-room">Property Type</label>
-                        <c:choose>
-                            <c:when test='${ad.type == "room"}'>
-                                <form:radiobutton id="type-room" path="type" value="room" checked="checked" />Room
-                                <form:radiobutton id="type-studio" path="type" value="studio" />Studio
-                                <form:radiobutton id="type-property" path="type" value="property" />Property
-                            </c:when>
-                            <c:when test='${ad.type == "studio"}'>
-                                <form:radiobutton id="type-room" path="type" value="room" />Room
-                                <form:radiobutton id="type-studio" path="type" value="studio" checked="checked" />Studio
-                                <form:radiobutton id="type-property" path="type" value="property" />Property
-                            </c:when>                            
-                            <c:when test='${ad.type == "property"}'>
-                                <form:radiobutton id="type-room" path="type" value="room" />Room
-                                <form:radiobutton id="type-studio" path="type" value="studio" />Studio
-                                <form:radiobutton id="type-property" path="type" value="property" checked="checked" />Property
-                            </c:when>
-                        </c:choose>
-
+                        <label for="type-room">Property Type:</label>
+                        <form:radiobutton id="type-studio" path="studio" value="1" />Studio
+                        <form:radiobutton id="type-room" path="studio" value="0" />Room
                     </td>
                 </tr>
                 <tr>

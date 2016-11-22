@@ -66,9 +66,8 @@ function typeOfAlert(alert) {
                 
                 
  		<label for="type-offer">Type:</label>
-		<form:radiobutton name="type-room" id="room" path="type" value="room" /><label>Room</label>
-		<form:radiobutton name="type-studio" id="studio" path="type" value="studio" /><label>Studio</label>
-		<form:radiobutton name="type-studio" id="studio" path="type" value="property" /><label>Property</label>
+		<form:radiobutton name="type-room" id="room" path="studio" value="false" /><label>Room</label>
+		<form:radiobutton name="type-studio" id="studio" path="studio" value="true" /><label>Studio</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>
@@ -125,8 +124,11 @@ function typeOfAlert(alert) {
                     <c:when test="${alert.offerType == 2}">For Sale</c:when>
                 </c:choose>
 				</td>
-				<td style="text-transform: capitalize">
-				${alert.type}
+				<td>
+				<c:choose>
+					<c:when test="${alert.studio}">Studio</c:when>
+					<c:otherwise>Room</c:otherwise>
+				</c:choose>
 				</td>
 				<td>${alert.city}</td>
 				<td>${alert.radius} km</td>

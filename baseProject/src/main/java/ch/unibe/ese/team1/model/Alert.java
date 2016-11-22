@@ -32,15 +32,12 @@ public class Alert {
 
 	@Column(nullable = false)
 	private int radius;
-
-	@Column
-	private boolean studio;
-
-	@Column
-	private boolean room;
 	
 	@Column 
 	private int offerType; 
+        
+        @Column (nullable = false)
+        private String type;
 	
 	public long getId() {
 		return id;
@@ -90,22 +87,6 @@ public class Alert {
 		this.price = price;
 	}
 
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
-
 	public int getOfferType(){
 		return offerType; 
 	}
@@ -113,4 +94,13 @@ public class Alert {
 	public void setOfferType(int offerType){
 		this.offerType = offerType; 
 	}
+        
+        public Type getType() {
+            return Type.valueOf(this.type);
+        }
+
+        public void setType(Type type) {
+            this.type = type.name();
+        }
+
 }

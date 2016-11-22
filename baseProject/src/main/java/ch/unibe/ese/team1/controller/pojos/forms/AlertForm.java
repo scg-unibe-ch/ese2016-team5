@@ -1,5 +1,6 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
+import ch.unibe.ese.team1.model.Type;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -14,8 +15,7 @@ public class AlertForm {
 	
 	private User user;
 
-	private boolean studio;
-	private boolean room;
+	private String type;
 	
 	private int offerType; 
 
@@ -64,22 +64,6 @@ public class AlertForm {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-
-	public boolean getStudio() {
-		return studio;
-	}
-
-	public void setStudio(boolean studio) {
-		this.studio = studio;
-	}
-
-	public boolean getRoom() {
-		return room;
-	}
-
-	public void setRoom(boolean room) {
-		this.room = room;
-	}
 	
 	public int getOfferType(){
 		return offerType;
@@ -96,4 +80,11 @@ public class AlertForm {
 	public void setUser(User user) {
 		this.user = user;
 	}
+                
+        public void setType(String type) {
+            this.type = type;
+        }
+        public String getType() {
+            return type;
+        }
 }

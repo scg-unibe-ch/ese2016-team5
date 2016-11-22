@@ -1160,10 +1160,19 @@ footer nav ul li {
     padding: 0 !important;
 }
 
-#map .mapInfo {
+#map .mapInfo, #mapHome .mapInfo {
     width: 300px;
 }
-#map .mapInfo img {
+#map .mapInfo img , #mapHome .mapInfo img {
     margin-right: 10px;
     float: left;
+    height: 100px;
+}
+#mapHome {
+    float: right;
+    border: 3px solid black;
+    width: 37%;
+    height: 300px;
+    margin-top: 54px;
+    border-radius: 10px;
 }

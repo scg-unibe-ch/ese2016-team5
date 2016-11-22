@@ -13,4 +13,8 @@ Die Testperson soll sich ihre eigene Unterkunft als Add erstellen und sie auf de
 
 
 *Scenario 3: Bidding*
+Die Testperson soll auf eine Add ihrer Wahl ein Gebot setzten.
+
+*Scenario 4: Map*
+Die Testperson soll nach einem Gebot in der Stadt Bern suchen auf der Map.
 

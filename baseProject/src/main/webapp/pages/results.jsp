@@ -9,80 +9,6 @@
 <c:import url="template/header.jsp" />
 <pre><a href="/">Home</a>   &gt;   <a href="/searchAd/">Search</a>   &gt;   Results</pre>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsq47dCVpI-c0Ct-PDLFdg0HWcIB-P69g&callback=initMap"></script>
-<script type="text/javascript">
-    
-    function initMap() {
-
-        $(function() {
-
-            var map = new google.maps.Map(document.getElementById('map'));
-            
-            var addresses = [];
-            <c:forEach var="ad" items="${results}">
-                var offerType;
-                if (0 === ${ad.offerType}) offerType = 'Rent';
-                if (1 === ${ad.offerType}) offerType = 'Auction';
-                if (2 === ${ad.offerType}) offerType = 'Buy';
-                addresses.push({
-                    address: "${ad.street}, ${ad.zipcode} ${ad.city}",
-                    title: "${ad.title}",
-                    id: ${ad.id},
-                    img: "${ad.pictures[0].filePath}",
-                    type: "${ad.type}".charAt(0).toUpperCase() + "${ad.type}".slice(1),
-                    offerType: offerType
-                });
-            </c:forEach>
-                
-            var latLngList = [];
-            var counter = 0;
-            for (var x = 0; x < addresses.length; x++) {
-                counter++;
-                (function(address) {
-                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+address.address+'&sensor=false', null, function (data) {
-                    var p = data.results[0].geometry.location
-                    var latlng = new google.maps.LatLng(p.lat, p.lng);
-                    latLngList.push(latlng);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map
-                    });
-                    marker.addListener('click', function() {
-                        if (typeof window.infoWindow !== 'undefined') {
-                            window.infoWindow.close();
-                        }
-                        window.infoWindow = new google.maps.InfoWindow({
-                            content:    '<div class="mapInfo"><a href="/ad?id=' + address.id + '"><img src="' + address.img + '" /></a>' + 
-                                        '<h2><a href="/ad?id=' + address.id + '">' + address.title + '</a></h3>' +
-                                        '<p>Type: ' + address.type + '</p>' + 
-                                        '<p>Offer Type: ' + address.offerType + '</p></div>'
-                        });
-                        window.infoWindow.open(map, marker);
-                    });
-                    
-                    counter--;
-                    if (counter === 0) {
-                        latlngbounds = new google.maps.LatLngBounds();
-
-                        latLngList.forEach(function(latLng){
-                           latlngbounds.extend(latLng);
-                        });
-
-                        map.setCenter(latlngbounds.getCenter());
-                        map.fitBounds(latlngbounds); 
-                    }
-                });
-                })(addresses[x]);
-            }
-            
-            
-        });
-        
-
-    }
-</script>
-
-
 <script>
 function validateType(form)
 {
@@ -196,11 +122,7 @@ function sort_div_attribute() {
 		<p>No results found!
 	</c:when>
 	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv">	
-                    
-                    <div id="map" style="height: 400px; width: 100%; border: 1px solid black">
-                    </div>
-
+		<div id="resultsDiv" class="resultsDiv">			
 			<c:forEach var="ad" items="${results}">
                             <%@include file="ad.jsp"%>
 			</c:forEach>
@@ -232,8 +154,9 @@ function sort_div_attribute() {
 		<form:checkbox name="type-sale" id="forSale" path="offerType" value="2"/><label>For Sale</label>
 		<br />
 		<label for="type-offer">Type:</label>
-		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
+		<form:checkbox name="type-room" id="room" path="type" value="room" /><label>Room</label>
+		<form:checkbox name="type-studio" id="studio" path="type" value="studio" /><label>Studio</label>
+		<form:checkbox name="type-property" id="property" path="type" value="property" /><label>Property</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>

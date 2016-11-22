@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:import url="template/header.jsp" />
 
@@ -25,9 +26,24 @@
 		var radius = document.getElementById('radiusInput');
 		
 		if(price.value == null || price.value == "" || price.value == "0")
-			price.value = "500";
+			price.value = "1500";
 		if(radius.value == null || radius.value == "" || radius.value == "0")
-			radius.value = "5";
+			radius.value = "400";
+                    
+                    
+		$("#field-earliestMoveInDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-latestMoveInDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-earliestMoveOutDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+		$("#field-latestMoveOutDate").datepicker({
+			dateFormat : 'dd-mm-yy'
+		});
+                
 	});
 </script>
 
@@ -56,9 +72,9 @@ function validateType(form)
 		<br />
 		
 		<label for="type-offer">Type:</label>
-		<form:checkbox name="type-room" id="room" path="room" /><label>Room</label>
-		<form:checkbox name="type-studio" id="studio" path="studio" /><label>Studio</label>
-		<form:checkbox style="display:none" name="filtered" id="filtered" path="filtered" />
+		<form:checkbox name="type-room" id="room" path="type" value="room" checked="checked" /><label>Room</label>
+		<form:checkbox name="type-studio" id="studio" path="type" value="studio" /><label>Studio</label>
+		<form:checkbox name="type-property" id="property" path="type" value="property" /><label>Property</label>
 		<br />
 	
 		<label for="city">City / zip code:</label>

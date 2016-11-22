@@ -31,6 +31,10 @@ public class SearchForm {
          return offerType;
      }
      public void setOfferType(int[] offerType) {
+    	 assert offerType.length == 1; 
+    	 assert offerType[0] == 1 || 
+    			 offerType[0] == 2 || 
+    			 offerType[0] == 3; 
          this.offerType = offerType;
      }
      

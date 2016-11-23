@@ -365,11 +365,11 @@
 				<td>
 					<c:choose>
 						<c:when test="${ad.dishwasher}">
-							<form:checkbox id="field-dishwasher" path="dishwasher"  checked="checked" /><label>WiFi available
+							<form:checkbox id="field-dishwasher" path="dishwasher"  checked="checked" /><label>Dishwasher
 							</label>
 						</c:when>
 						<c:otherwise>
-							<form:checkbox id="field-dishwasher" path="dishwasher" /><label>WiFi available</label>
+							<form:checkbox id="field-dishwasher" path="dishwasher" /><label>Dishwasher</label>
 						</c:otherwise>
 					</c:choose>
 				</td>

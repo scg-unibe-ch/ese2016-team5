@@ -8,14 +8,35 @@
 
 <!-- check if user is logged in -->
 <security:authorize var="loggedIn" url="/profile" />
-
 <c:import url="template/header.jsp" />
+
+<script type="text/javascript">
+    function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8080/tokensignin');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            var response = xhr.responseText.replace(/"/g, '').replace(/'/g, '"');
+            var json = JSON.parse(response);
+            if (json.status !== 'success') {
+                console.log(json.message);
+            }
+            else {
+                $('#field-email').val(json.email);
+                $('#field-password').val(json.password);
+                $('#login-form').submit();
+            }
+            
+        };
+        xhr.send('token=' + id_token);
+    }
+</script>
 
 <pre>
 	<a href="/">Home</a>   &gt;   Login</pre>
 
 <h1>Login</h1>
-
 <c:choose>
 	<c:when test="${loggedIn}">
 		<p>You are already logged in!</p>
@@ -26,6 +47,10 @@
 				and password.</p>
 			<br />
 		</c:if>
+                        
+                <div style="margin-top: 20px; margin-bottom: 10px">Sign in with Google:</div><div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <div style="margin-top: 25px; margin-bottom: 10px">Or sign in with our super secure authentication system:</div>
+                        
 		<form id="login-form" method="post" action="/j_spring_security_check">
 			<label for="field-email">Email:</label> <input name="j_username"
 				id="field-email" /> <label for="field-password">Password:</label> <input

@@ -8,6 +8,7 @@
 
 <!DOCTYPE html>
 <head>
+<meta name="google-signin-client_id" content="68304295039-fvgg84j5itsnfupqsfsbeb8ogu2d0vlg.apps.googleusercontent.com">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/css/main.css">
 <link rel="stylesheet" type="text/css"
@@ -24,6 +25,21 @@
 
 <script src="/js/unreadMessages.js"></script>
 
+<script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        window.location.href = '/logout';
+      });
+    }
+  
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 <style>
 /* ensure that autocomplete lists are not too long and have a scrollbar */
@@ -42,7 +58,6 @@
 <security:authorize var="loggedIn" url="/profile" />
 
 <!-- check if user has a profile picture -->
-
 <header>
 	<div class="left">
 		<a href="/"><img src="/img/logo.png"></a>
@@ -70,7 +85,7 @@
 								<li>
 								<% out.print("<a href=\"/user?id=" + realUser.getId() + "\">Public Profile</a>"); %>
 								</li>
-								<li><a href="/logout">Logout</a></li>
+								<li><a href="#" onclick="signOut()">Logout</a></li>
 							</ul></li>
 					</c:when>
 					<c:otherwise>

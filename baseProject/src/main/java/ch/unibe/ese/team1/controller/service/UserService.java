@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.UserDao;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 /**
  * Handles all database actions concerning users.
@@ -27,5 +29,11 @@ public class UserService {
 	public User findUserById(long id) {
 		return userDao.findUserById(id);
 	}
-
+        
+        @Transactional
+        public String createPassword() {
+            SecureRandom random = new SecureRandom();
+            return new BigInteger(130, random).toString(32).substring(0,12);
+        }
+        
 }

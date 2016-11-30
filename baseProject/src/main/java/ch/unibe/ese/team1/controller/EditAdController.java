@@ -27,7 +27,7 @@ import ch.unibe.ese.team1.controller.service.AlertService;
 import ch.unibe.ese.team1.controller.service.EditAdService;
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Ad;
-import ch.unibe.ese.team1.model.PictureMeta;
+import ch.unibe.ese.team1.model.comp.PictureMeta;
 import ch.unibe.ese.team1.model.User;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

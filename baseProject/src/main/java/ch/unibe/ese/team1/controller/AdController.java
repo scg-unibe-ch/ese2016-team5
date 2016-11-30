@@ -24,7 +24,6 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.dao.AdDao;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,9 +39,6 @@ public class AdController {
 
 	@Autowired
 	private AdService adService;
-	
-	@Autowired
-	private AdDao adDao;
 	
 	@Autowired
 	private UserService userService;
@@ -81,37 +77,36 @@ public class AdController {
 	@RequestMapping(value = "/ad/clearOldAuctions", method = RequestMethod.GET)
 	public String clearOldAuctions() {
 		
-		Date date = new Date();
-		Iterable<Ad> oldAuctions = adDao.findByStatusAndAuctionEndingDateBefore(1, date);
-		for (Ad ad : oldAuctions){
-	       if(ad.getLastBidder() == null){
-	    	   long adId = ad.getId();
-	    	   String title = ad.getTitle();
-	    	   User seller = ad.getUser();
-	    	   String subjectSeller = "Unfortunately your property wasn't sell during the auction";
-	    	   String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-	    	   messageService.sendMessage(seller, seller, subjectSeller, textSeller);
-	    	   ad.setStatus(0);
-	    	   adDao.save(ad);
-	    	   
-	       }
-	       else	{
-	    	   long adId = ad.getId();
-	    	   String title = ad.getTitle();
-	    	   int bid = ad.getLastBid();
-	    	   User bidder = ad.getLastBidder();
-	    	   User seller = ad.getUser();
-	    	   String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
-	    	   String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
-	    	   String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-	    	   String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-	    	   messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
-	    	   messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
-	    	   ad.setStatus(0);
-	    	   adDao.save(ad);
-			}
-		}
-		return "redirect:/";
+
+            Iterable<Ad> oldAuctions = adService.getOldAuctions();
+            for (Ad ad : oldAuctions) {
+                if (ad.getLastBidder() == null) {
+                    long adId = ad.getId();
+                    String title = ad.getTitle();
+                    User seller = ad.getUser();
+                    String subjectSeller = "Unfortunately your property wasn't sell during the auction";
+                    String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+                    messageService.sendMessage(seller, seller, subjectSeller, textSeller);
+                    ad.setStatus(0);
+                    adService.saveAd(ad);
+
+                } else {
+                    long adId = ad.getId();
+                    String title = ad.getTitle();
+                    int bid = ad.getLastBid();
+                    User bidder = ad.getLastBidder();
+                    User seller = ad.getUser();
+                    String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
+                    String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
+                    String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+                    String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+                    messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
+                    messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
+                    ad.setStatus(0);
+                    adService.saveAd(ad);
+                }
+            }
+            return "redirect:/";
 		
 	}
 	
@@ -248,7 +243,7 @@ public class AdController {
         	
         	Ad ad = adService.getAdById(id);
         	ad.setStatus(0);
-                adDao.save(ad);
+                adService.saveAd(ad);
         	
         	String address = ad.getStreet();
         	String city = ad.getCity();

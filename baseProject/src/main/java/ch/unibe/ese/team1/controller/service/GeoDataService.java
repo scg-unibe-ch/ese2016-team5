@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ch.unibe.ese.team1.model.Location;
+import ch.unibe.ese.team1.model.comp.Location;
 
 import com.jolbox.bonecp.BoneCPDataSource;
 

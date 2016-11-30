@@ -21,15 +21,13 @@ import ch.unibe.ese.team1.controller.pojos.forms.PlaceAdForm;
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.AdPicture;
-import ch.unibe.ese.team1.model.Location;
-import ch.unibe.ese.team1.model.Type;
+import ch.unibe.ese.team1.model.comp.Location;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
-import java.util.Arrays;
 
 /** Handles all persistence operations concerning ad placement and retrieval. */
 @Service
@@ -563,6 +561,18 @@ public class AdService {
 		return ads;
 	}
 
+        @Transactional
+	public Iterable<Ad> getOldAuctions() {
+            Date date = new Date();
+            Iterable<Ad> oldAuctions = adDao.findByStatusAndAuctionEndingDateBefore(1, date);
+            return oldAuctions;
+        }
+        
+        @Transactional
+        public void saveAd(Ad ad) {
+            adDao.save(ad);
+        }
+        
 	/** Returns all ads that were placed by the given user. */
 	public Iterable<Ad> getAdsByUser(User user) {
 		return adDao.findByUser(user);

@@ -242,6 +242,7 @@ fieldset {
 
 legend {
 	font-size: 1.1em;
+	text-shadow: 0px 0px 7px white;
 	font-weight: bold;
 	padding: 0 10px;
 }

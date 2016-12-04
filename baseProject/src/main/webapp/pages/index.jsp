@@ -9,10 +9,10 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome to FlatFindr</title>
+<title>Welcome to HomePortal</title>
 </head>
 <body>
-<h1>Welcome to FlatFindr!</h1>
+<h1>Welcome to HomePortal</h1>
 
 <c:choose>
 	<c:when test="${empty newest}">

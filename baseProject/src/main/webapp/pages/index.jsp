@@ -12,9 +12,6 @@
 <title>Welcome to FlatFindr</title>
 </head>
 <body>
-
-<pre>Home</pre>
-
 <h1>Welcome to FlatFindr!</h1>
 
 <c:choose>

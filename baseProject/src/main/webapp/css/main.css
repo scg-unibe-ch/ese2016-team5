@@ -302,7 +302,6 @@ header {
 	color: black;
 	background: #ffffff;
 	position: fixed;
-	opacity: 0.8;
 	top: 0px;
 	left: 0px;
 	right: 0px;
@@ -453,8 +452,7 @@ footer {
 	color: black;
 	background: #ffffff;
 	position: fixed;
-	opacity: 0.4;
-	bottom: 10px;
+	bottom: 0px;
 	left: 0px;
 	right: 0px;
 	height: 25px;

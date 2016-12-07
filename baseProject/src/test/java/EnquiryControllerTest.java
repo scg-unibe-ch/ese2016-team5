@@ -1,7 +1,6 @@
-package ch.unibe.ese.team1.controller.service;
-
 import static org.junit.Assert.*;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,12 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
+import ch.unibe.ese.team1.controller.EnquiryController;
+import ch.unibe.ese.team1.controller.service.EnquiryService;
+import ch.unibe.ese.team1.controller.service.UserService;
+import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.Type;
@@ -28,28 +27,30 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 import ch.unibe.ese.team1.model.dao.VisitDao;
 import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
 
-/**
- * 
- * Tests both Visit and VisitEnquiry functionality. Since one makes no sense
- * without the other, these tests were grouped into one suite.
- *
- */
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/config/springMVC.xml",
 		"file:src/main/webapp/WEB-INF/config/springData.xml",
 		"file:src/main/webapp/WEB-INF/config/springSecurity.xml"})
 @WebAppConfiguration
-public class EnquiryServiceTest {
+public class EnquiryControllerTest {
+
+	@Autowired
+	private EnquiryController enquiryController;
 	
 	@Autowired
-	VisitService visitService;
-	
+	private EnquiryService enquiryService;
+
 	@Autowired
-	EnquiryService enquiryService;
-	
+	private UserService userService;
+
 	@Autowired
-	AdDao adDao;
+	private VisitService visitService;
 	
 	@Autowired
 	UserDao userDao;
@@ -60,74 +61,17 @@ public class EnquiryServiceTest {
 	@Autowired
 	VisitEnquiryDao visitEnquiryDao;
 	
-	@Test
-	public void createVisits() throws Exception {		
-		//create user
-		User thomyF = createUser("thomy@f.ch", "password", "Thomy", "F",
-				Gender.MALE);
-		thomyF.setAboutMe("Supreme hustler");
-		userDao.save(thomyF);
-		
-		//save an ad
-		Date date = new Date();
-		Ad oltenResidence= new Ad();
-		oltenResidence.setZipcode(4600);
-		oltenResidence.setMoveInDate(date);
-		oltenResidence.setCreationDate(date);
-		oltenResidence.setPricePerMonth(1200);
-		oltenResidence.setSquareFootage(42);
-        oltenResidence.setType(Type.room);
-		oltenResidence.setSmokers(true);
-		oltenResidence.setAnimals(false);
-		oltenResidence.setRoomDescription("blah");
-		oltenResidence.setPreferences("blah");
-		oltenResidence.setUser(thomyF);
-		oltenResidence.setTitle("Olten Residence");
-		oltenResidence.setStreet("Florastr. 100");
-		oltenResidence.setCity("Olten");
-		oltenResidence.setGarden(false);
-		oltenResidence.setBalcony(false);
-		oltenResidence.setCellar(false);
-		oltenResidence.setFurnished(false);
-		oltenResidence.setCable(false);
-		oltenResidence.setGarage(false);
-		oltenResidence.setInternet(false);
-		adDao.save(oltenResidence);
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-		
-		//ad two possible visiting times ("visits") to the ad
-		Visit visit = new Visit();
-		visit.setAd(oltenResidence);
-		visit.setStartTimestamp(formatter.parse("16.12.2014 10:00"));
-		visit.setEndTimestamp(formatter.parse("16.12.2014 12:00"));
-		visitDao.save(visit);
-
-		Visit visit2 = new Visit();
-		visit2.setAd(oltenResidence);
-		visit2.setStartTimestamp(formatter.parse("18.12.2014 10:00"));
-		visit2.setEndTimestamp(formatter.parse("18.12.2014 12:00"));
-		visitDao.save(visit2);
-		
-		Iterable<Visit> oltenVisits = visitService.getVisitsByAd(oltenResidence);
-		ArrayList<Visit> oltenList = new ArrayList<Visit>();
-		for(Visit oltenvis: oltenVisits)
-			oltenList.add(oltenvis);
-		
-		assertEquals(2, oltenList.size());
-	}
+	@Autowired
+	AdDao adDao;
 	
 	@Test
-	public void enquireAndAcceptAndDeclineAndOpen() throws Exception {		
-		//create two users
+	public void enquiresPageTest() throws Exception{
+		
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
 				Gender.MALE);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
-		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE);
-		blocher.setAboutMe("I own you");
-		userDao.save(blocher);
 		
 		//save an ad
 		Date date = new Date();
@@ -184,23 +128,18 @@ public class EnquiryServiceTest {
 		
 		long venqID = ogiEnquiryList.get(0).getId();
 		
-		enquiryService.acceptEnquiry(venqID);
-		
-		assertEquals(VisitEnquiryState.ACCEPTED, visitEnquiryDao.findOne(venqID).getState());
-		
-		enquiryService.declineEnquiry(venqID);
-		assertEquals(VisitEnquiryState.DECLINED, visitEnquiryDao.findOne(venqID).getState());
-		
-		enquiryService.reopenEnquiry(venqID);
-		assertEquals(VisitEnquiryState.OPEN, visitEnquiryDao.findOne(venqID).getState());
 
-		assertTrue(enquiryService.getEnquiriesByRecipient(adolfOgi).iterator().hasNext());
+		//enquiryController.rateUser((Principal) adolfOgi, venqID, 2);
+		// get Rating
 		
-		//enquiryService.rate(blocher, adolfOgi, 2);
-		//assertEquals(enquiryService.getRatingByRaterAndRatee(blocher, adolfOgi),2);
+		enquiryController.acceptEnquiry(venqID);
+		enquiryController.declineEnquiry(venqID);
+		enquiryController.reopenEnquiry(venqID);
+		// Kann man nicht wirklich testen
+		//enquiryController.sendEnquiryForVisit(id, principal);
+		//enquiryController.enquiriesPage(principal)
+		
 	}
-	
-	//Lean user creating method
 	User createUser(String email, String password, String firstName,
 			String lastName, Gender gender) {
 		User user = new User();

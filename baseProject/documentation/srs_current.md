@@ -224,9 +224,21 @@ In order to better arrange visits and clarfiy questions about flats, there is th
 | Create new message           | **Expected**<br>Similarly to "Contact Advertiser", a user can select 'New' in the messaging section. A pop up will open where he can type in the username of another user (if not exsting there will be an error), subject and message.  <br><br>**Main Actor**<br>LIU                                                            | I |
 | New message indicator             | **Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix, e.g. One unread Message would be 'Messages (1)'. After reading the message, the brackets disappear.  <br><br>**Main Actor**<br>LIU | I |
 
-### 3.2 Non-functional requirements (external, performance, etc.)
+### 3.2 Non-functional requirements
+#### 3.2.1 Controller Logging
+The problem was solved with the root logger. By setting the log level to warning it is possible to catch the errors in the controller classes. For logging the status and the requests of the single methods. We simulate a warning with the specific informations.
 
-Not (yet) applicable.
+| Title                              | Description                      | Status |
+|:-----------------------------------|:---------------------------------|:---------|
+| AdController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| AlertController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| EditAdController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| EnquiryController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| IndexController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| MessageController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| PlaceAdController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| ProfileController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | I |
+| SearchController                 | **Request**<br>Logs the request with the method name and the id in a log file called controller.log <br><br>**Processed**<br>Logs that the request is processed with the method name, the id and the status in a log file called controller.log | PI |
 
 4. Questions
 ------------

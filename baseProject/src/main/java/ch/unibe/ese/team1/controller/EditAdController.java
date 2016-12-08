@@ -26,6 +26,7 @@ import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.AlertService;
 import ch.unibe.ese.team1.controller.service.EditAdService;
 import ch.unibe.ese.team1.controller.service.UserService;
+import ch.unibe.ese.team1.log.LogMain;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.comp.PictureMeta;
 import ch.unibe.ese.team1.model.User;
@@ -40,6 +41,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EditAdController {
 
 	private final static String IMAGE_DIRECTORY = PlaceAdController.IMAGE_DIRECTORY;
+	
+	LogMain mainlog = new LogMain();
 
 	@Autowired
 	private ServletContext servletContext;
@@ -65,6 +68,7 @@ public class EditAdController {
 	 */
 	@RequestMapping(value = "/profile/editAd", method = RequestMethod.GET)
 	public ModelAndView editAdPage(@RequestParam long id, Principal principal) {
+		mainlog.log.warning("EditAdController method editAdPage received a request with the following principal: " + principal.toString());
 		ModelAndView model = new ModelAndView("editAd");
 		Ad ad = adService.getAdById(id);
 		model.addObject("ad", ad);
@@ -77,7 +81,7 @@ public class EditAdController {
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
-
+		mainlog.log.warning("EditAdController method editAdPage processed request with the following principal: " + principal.toString());
 		return model;
 	}
 
@@ -88,6 +92,7 @@ public class EditAdController {
 	public ModelAndView editAdPageWithForm(@Valid PlaceAdForm placeAdForm,
 			BindingResult result, Principal principal,
 			RedirectAttributes redirectAttributes, @RequestParam long adId) {
+		mainlog.log.warning("EditAdController method editAdPageWithForm received a request with the following adId: " + adId);
 		ModelAndView model = new ModelAndView("placeAd");
 		if (!result.hasErrors()) {
 			String username = principal.getName();
@@ -110,7 +115,7 @@ public class EditAdController {
 			redirectAttributes.addFlashAttribute("confirmationMessage",
 					"Ad edited successfully. You can take a look at it below.");
 		}
-
+		mainlog.log.warning("EditAdController method editAdPageWithForm processed request with the following adId: " + adId);
 		return model;
 	}
 
@@ -121,6 +126,7 @@ public class EditAdController {
 	@RequestMapping(value = "/profile/editAd/deletePictureFromAd", method = RequestMethod.POST)
 	public @ResponseBody void deletePictureFromAd(@RequestParam long adId,
 			@RequestParam long pictureId) {
+		mainlog.log.warning("EditAdController method deletePictureFromAd received a request with the following adId: " + adId);
 		editAdService.deletePictureFromAd(adId, pictureId);
 	}
 
@@ -133,9 +139,12 @@ public class EditAdController {
 	 */
 	@RequestMapping(value = "/profile/editAd/getUploadedPictures", method = RequestMethod.POST)
 	public @ResponseBody List<PictureMeta> getUploadedPictures() {
+		mainlog.log.warning("EditAdController method getUploadedPictures received a request");
 		if (pictureUploader == null) {
+			mainlog.log.warning("EditAdController method getUploadedPictures returned null");
 			return null;
 		}
+		mainlog.log.warning("EditAdController method getUploadedPictures processed request");
 		return pictureUploader.getUploadedPictureMetas();
 	}
 
@@ -149,6 +158,7 @@ public class EditAdController {
 	@RequestMapping(value = "/profile/editAd/uploadPictures", method = RequestMethod.POST)
 	public @ResponseBody String uploadPictures(
 			MultipartHttpServletRequest request) {
+		mainlog.log.warning("EditAdController method uploadPictures received a request with the following request: " + request.toString());
 		List<MultipartFile> pictures = new LinkedList<>();
 		Iterator<String> iter = request.getFileNames();
 
@@ -165,9 +175,11 @@ public class EditAdController {
 			jsonResponse += objectMapper
 					.writeValueAsString(uploadedPicturesMeta);
 		} catch (JsonProcessingException e) {
+			mainlog.log.warning("EditAdController method uploadPictures caused an error with the following request: " + request.toString());
 			e.printStackTrace();
 		}
 		jsonResponse += "}";
+		mainlog.log.warning("EditAdController method uploadPictures processed with the following request: " + request.toString());
 		return jsonResponse;
 	}
 
@@ -177,10 +189,12 @@ public class EditAdController {
 	 */
 	@RequestMapping(value = "/profile/editAd/deletePicture", method = RequestMethod.POST)
 	public @ResponseBody void deleteUploadedPicture(@RequestParam String url) {
+		mainlog.log.warning("EditAdController method deleteUploadedPicture received a request with the following url: " + url);
 		if (pictureUploader != null) {
 			String realPath = servletContext.getRealPath(url);
 			pictureUploader.deletePicture(url, realPath);
 		}
+		mainlog.log.warning("EditAdController method deleteUploadedPicture processed request with the following url: " + url);
 	}
 
 }

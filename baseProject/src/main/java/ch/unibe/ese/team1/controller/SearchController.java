@@ -13,10 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ch.unibe.ese.team1.controller.pojos.forms.SearchForm;
 import ch.unibe.ese.team1.controller.service.AdService;
 import ch.unibe.ese.team1.controller.service.UserService;
+import ch.unibe.ese.team1.log.LogMain;
 
 /** Handles all requests concerning the search for ads. */
 @Controller
 public class SearchController {
+	
+	LogMain mainlog = new LogMain();
 
 	@Autowired
 	private AdService adService;
@@ -33,7 +36,9 @@ public class SearchController {
 	/** Shows the search ad page. */
 	@RequestMapping(value = "/searchAd", method = RequestMethod.GET)
 	public ModelAndView searchAd() {
+		mainlog.log.warning("SearchController method searchAd received a request");
 		ModelAndView model = new ModelAndView("searchAd");
+		mainlog.log.warning("SearchController method searchAd processed request");
 		return model;
 	}
 	
@@ -44,21 +49,26 @@ public class SearchController {
 	@RequestMapping(value = "/results", method = RequestMethod.POST)
 	public ModelAndView results(@Valid SearchForm searchForm,
 			BindingResult result) {
+		mainlog.log.warning("SearchController method results received a request with the following searchForm: " + searchForm.toString());
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
 			model.addObject("results", adService.queryResults(searchForm));
+			mainlog.log.warning("SearchController method results caused an error with the following searchForm: " + searchForm.toString());
 			return model;
 		} else {
 			// go back
+			mainlog.log.warning("SearchController method results processed request with the following searchForm: " + searchForm.toString());
 			return searchAd();
 		}
 	}
 
 	@ModelAttribute
 	public SearchForm getSearchForm() {
+		mainlog.log.warning("SearchController method getSearchForm received a request");
 		if (searchForm == null) {
 			searchForm = new SearchForm();
 		}
+		mainlog.log.warning("SearchController method getSearchForm processed a request");
 		return searchForm;
 	}
 }

@@ -52,7 +52,7 @@ public class SearchController {
 		mainlog.log.warning("SearchController method results received a request with the following searchForm: " + searchForm.toString());
 		if (!result.hasErrors()) {
 			ModelAndView model = new ModelAndView("results");
-			model.addObject("results", adService.queryResults(searchForm));
+			model.addObject("results", adService.searchAndFilter(searchForm));
 			mainlog.log.warning("SearchController method results caused an error with the following searchForm: " + searchForm.toString());
 			return model;
 		} else {

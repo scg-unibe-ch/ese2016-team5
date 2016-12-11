@@ -13,7 +13,6 @@ public interface AdDao extends CrudRepository<Ad, Long> {
 
     /** this will be used if only rooms or studios are searched */
     public Iterable<Ad> findByUser(User user);
-    
     public Iterable<Ad> findByStatus(int status);
     public Iterable<Ad> findByStatusAndAuctionEndingDateBefore(int i, Date date);
     public Iterable<Ad> findByOfferType(int type); 

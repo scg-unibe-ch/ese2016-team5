@@ -36,4 +36,15 @@ public class UserService {
             return new BigInteger(130, random).toString(32).substring(0,12);
         }
         
+        @Transactional
+        public void changePremium(User user) {
+            if (user.isPremiumUser()) {
+                user.setUserRole("ROLE_USER");
+            }
+            else {
+                user.setUserRole("ROLE_PREMIUM");
+            }
+            userDao.save(user);
+        }
+        
 }

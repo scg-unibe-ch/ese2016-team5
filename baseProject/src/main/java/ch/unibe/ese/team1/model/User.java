@@ -130,6 +130,14 @@ public class User {
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
+        
+        public void setUserRole(String role) {
+            Iterator<UserRole> iterator = userRoles.iterator();
+            while (iterator.hasNext()) {
+                    UserRole userRole = iterator.next();
+                    userRole.setRole(role);
+            }
+        }
 
 	public String getPassword() {
 		return password;

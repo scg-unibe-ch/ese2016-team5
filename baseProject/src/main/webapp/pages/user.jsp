@@ -50,6 +50,19 @@
 				})
 			}
 		});
+                
+                
+                $('#premiumSwitcher').on('click', function() {
+                    var premium = $(this).data('premium');
+                    var statements = {
+                        1: 'You sure you wanna get rid of your premium status?',
+                        0: 'Yo! This is your chance! Take it and run!!'
+                    };
+                    if (confirm(statements[premium])) {
+                        window.location.href = '/profile/changePremiumStatus?redirectUri=' + window.location.pathname + window.location.search;
+                    }
+                    return false;
+                });
 	});
 </script>
 
@@ -80,8 +93,18 @@
 				<c:choose>
 					<c:when test="${principalID eq user.id}">
 						<a class="button" href="/profile/editProfile">Edit Profile</a>
+                                                
+                                                <c:choose>
+                                                    <c:when test="${user.isPremiumUser()}">
+                                                        <button id="premiumSwitcher" data-premium="1">Disable Premium</button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button id="premiumSwitcher" data-premium="0">Enable Premium</button>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                
 					</c:when>
-					<c:otherwise></c:otherwise>
+					
 				</c:choose>
 
 			</c:when>

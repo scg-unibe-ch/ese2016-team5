@@ -256,4 +256,13 @@ public class ProfileController {
 		model.addObject("ad", ad);
 		return model;
 	}
+        
+	/** Returns the visitors page for the visit with the given id. */
+	@RequestMapping(value = "/profile/changePremiumStatus", method = RequestMethod.GET)
+	public String changePremiumStatus(Principal principal, @RequestParam("redirectUri") String redirectUri) {
+            String username = principal.getName();
+            User user = userService.findUserByUsername(username);
+            userService.changePremium(user);
+            return "redirect:" + redirectUri;
+	}
 }

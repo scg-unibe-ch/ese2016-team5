@@ -2,60 +2,62 @@ package ch.unibe.ese.team1.controller.pojos.forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-/** This form is used when a user wants to edit their profile. */
+/**
+ * This form is used when a user wants to edit their profile.
+ */
 public class EditProfileForm {
 
-	@NotBlank(message = "Required")
-	private String username;
-	
-	@NotBlank(message = "Required")
-	private String password;
+    @NotBlank(message = "Required")
+    private String username;
 
-	@NotBlank(message = "Required")
-	private String firstName;
+    @NotBlank(message = "Required")
+    private String password;
 
-	@NotBlank(message = "Required")
-	private String lastName;
-	
-	private String aboutMe;
+    @NotBlank(message = "Required")
+    private String firstName;
 
-	public String getPassword() {
-		return password;
-	}
+    @NotBlank(message = "Required")
+    private String lastName;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    private String aboutMe;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getAboutMe() {
-		return aboutMe;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setAboutMe(String aboutMe) {
-		this.aboutMe = aboutMe;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getAboutMe() {
+        return aboutMe;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

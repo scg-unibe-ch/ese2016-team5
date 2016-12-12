@@ -9,15 +9,15 @@ import javax.persistence.OneToOne;
 @Entity
 public class UserPicture extends Picture {
 
-	@OneToOne
-	private User user;
+    @OneToOne
+    private User user;
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

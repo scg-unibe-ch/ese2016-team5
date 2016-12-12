@@ -17,76 +17,78 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/** A visit for a flat, has a time window. */
+/**
+ * A visit for a flat, has a time window.
+ */
 @Entity
 public class Visit {
 
-	@Id
-	@GeneratedValue
-	private long id;
-	
-	@ManyToOne
-	private Ad ad;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@Fetch(FetchMode.SELECT)
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<User> searchers;
-	
-	@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date startTimestamp;
-	
-	@JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date endTimestamp;
+    @ManyToOne
+    private Ad ad;
 
-	public long getId() {
-		return id;
-	}
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<User> searchers;
 
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	public Ad getAd() {
-		return ad;
-	}
+    @JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startTimestamp;
 
-	public void setAd(Ad ad) {
-		this.ad = ad;
-	}
+    @JsonFormat(pattern = "HH:mm, dd.MM.yyyy")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endTimestamp;
 
-	public List<User> getSearchers() {
-		return searchers;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setSearchers(List<User> searchers) {
-		this.searchers = searchers;
-	}
-	
-	//used when an enquiry gets accepted
-	public void addToSearchers(User user) {
-		searchers.add(user);
-	}
-	
-	public void removeFromSearchers(User user){
-		searchers.remove(user);
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public Date getStartTimestamp() {
-		return startTimestamp;
-	}
+    public Ad getAd() {
+        return ad;
+    }
 
-	public void setStartTimestamp(Date startTimestamp) {
-		this.startTimestamp = startTimestamp;
-	}
+    public void setAd(Ad ad) {
+        this.ad = ad;
+    }
 
-	public Date getEndTimestamp() {
-		return endTimestamp;
-	}
+    public List<User> getSearchers() {
+        return searchers;
+    }
 
-	public void setEndTimestamp(Date endTimestamp) {
-		this.endTimestamp = endTimestamp;
-	}
-	
+    public void setSearchers(List<User> searchers) {
+        this.searchers = searchers;
+    }
+
+    //used when an enquiry gets accepted
+    public void addToSearchers(User user) {
+        searchers.add(user);
+    }
+
+    public void removeFromSearchers(User user) {
+        searchers.remove(user);
+    }
+
+    public Date getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public void setStartTimestamp(Date startTimestamp) {
+        this.startTimestamp = startTimestamp;
+    }
+
+    public Date getEndTimestamp() {
+        return endTimestamp;
+    }
+
+    public void setEndTimestamp(Date endTimestamp) {
+        this.endTimestamp = endTimestamp;
+    }
+
 }

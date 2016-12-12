@@ -7,6 +7,4 @@ import javax.persistence.Entity;
  * ad.
  */
 @Entity
-public class AdPicture extends Picture {
-
-}
+public class AdPicture extends Picture {}

@@ -3,7 +3,6 @@ package ch.unibe.ese.team1.controller.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.dao.UserDao;
 import java.math.BigInteger;
@@ -14,37 +13,50 @@ import java.security.SecureRandom;
  */
 @Service
 public class UserService {
-	
-	@Autowired
-	private UserDao userDao;
 
-	/** Gets the user with the given username. */
-	@Transactional
-	public User findUserByUsername(String username) {
-		return userDao.findByUsername(username);
-	}
-	
-	/** Gets the user with the given id. */
-	@Transactional
-	public User findUserById(long id) {
-		return userDao.findUserById(id);
-	}
-        
-        @Transactional
-        public String createPassword() {
-            SecureRandom random = new SecureRandom();
-            return new BigInteger(130, random).toString(32).substring(0,12);
+    @Autowired
+    private UserDao userDao;
+
+    /**
+     * Gets the user with the given username.
+     */
+    @Transactional
+    public User findUserByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    /**
+     * Gets the user with the given id.
+     */
+    @Transactional
+    public User findUserById(long id) {
+        return userDao.findUserById(id);
+    }
+
+    /**
+     * Creates a new, random password, used for Google Login.
+     * 
+     * @return The newly generated password.
+     */
+    @Transactional
+    public String createPassword() {
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32).substring(0, 12);
+    }
+
+    /**
+     * Changes between normal and premium user.
+     * 
+     * @param user 
+     */
+    @Transactional
+    public void changePremium(User user) {
+        if (user.isPremiumUser()) {
+            user.setUserRole("ROLE_USER");
+        } else {
+            user.setUserRole("ROLE_PREMIUM");
         }
-        
-        @Transactional
-        public void changePremium(User user) {
-            if (user.isPremiumUser()) {
-                user.setUserRole("ROLE_USER");
-            }
-            else {
-                user.setUserRole("ROLE_PREMIUM");
-            }
-            userDao.save(user);
-        }
-        
+        userDao.save(user);
+    }
+
 }

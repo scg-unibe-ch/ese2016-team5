@@ -1,5 +1,12 @@
 package ch.unibe.ese.team1.controller.pojos;
 
+/*
+NOTE: This class is not properly tested because it depends on HTTP-requests of multipartfiles
+which is difficult to reproduce. Even though it seems that Spring comes with mocking-functionality
+for this very purpose, implementation has proven difficult. It was therefore decided to spend
+more time with more pressing functionality.
+*/
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

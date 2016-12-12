@@ -7,40 +7,40 @@ package ch.unibe.ese.team1.model.comp;
  */
 public class PictureMeta {
 
-	private String name;
-	private String size;
-	private String type;
-	private String url;
+    private String name;
+    private String size;
+    private String type;
+    private String url;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getSize() {
-		return size;
-	}
+    public String getSize() {
+        return size;
+    }
 
-	public void setSize(String size) {
-		this.size = size;
-	}
+    public void setSize(String size) {
+        this.size = size;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

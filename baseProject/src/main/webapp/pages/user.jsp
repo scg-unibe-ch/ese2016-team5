@@ -96,10 +96,10 @@
                                                 
                                                 <c:choose>
                                                     <c:when test="${user.isPremiumUser()}">
-                                                        <button id="premiumSwitcher" data-premium="1">Disable Premium</button>
+                                                        <button style="margin-left: 20px" id="premiumSwitcher" data-premium="1">Disable Premium</button>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <button id="premiumSwitcher" data-premium="0">Enable Premium</button>
+                                                        <button style="margin-left: 20px" id="premiumSwitcher" data-premium="0">Enable Premium</button>
                                                     </c:otherwise>
                                                 </c:choose>
                                                 

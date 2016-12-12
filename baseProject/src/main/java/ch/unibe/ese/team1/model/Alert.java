@@ -14,93 +14,93 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Alert {
 
-	@Id
-	@GeneratedValue
-	private long id;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@ManyToOne
-	private User user;
+    @ManyToOne
+    private User user;
 
-	@Column(nullable = false)
-	private int zipcode;
+    @Column(nullable = false)
+    private int zipcode;
 
-	@Column(nullable = false)
-	private String city;
+    @Column(nullable = false)
+    private String city;
 
-	@Column(nullable = false)
-	private int price;
+    @Column(nullable = false)
+    private int price;
 
-	@Column(nullable = false)
-	private int radius;
-	
-	@Column 
-	private int offerType; 
-        
-        @Column (nullable = false)
-        private String type;
-	
-	public long getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private int radius;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    @Column
+    private int offerType;
 
-	public User getUser() {
-		return user;
-	}
+    @Column(nullable = false)
+    private String type;
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public int getZipcode() {
-		return zipcode;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setZipcode(int zipcode) {
-		this.zipcode = zipcode;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public int getZipcode() {
+        return zipcode;
+    }
 
-	public int getRadius() {
-		return radius;
-	}
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
 
-	public void setRadius(int radius) {
-		this.radius = radius;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public int getRadius() {
+        return radius;
+    }
 
-	public int getOfferType(){
-		return offerType; 
-	}
-	
-	public void setOfferType(int offerType){
-		this.offerType = offerType; 
-	}
-        
-        public Type getType() {
-            return Type.valueOf(this.type);
-        }
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
 
-        public void setType(Type type) {
-            this.type = type.name();
-        }
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getOfferType() {
+        return offerType;
+    }
+
+    public void setOfferType(int offerType) {
+        this.offerType = offerType;
+    }
+
+    public Type getType() {
+        return Type.valueOf(this.type);
+    }
+
+    public void setType(Type type) {
+        this.type = type.name();
+    }
 
 }

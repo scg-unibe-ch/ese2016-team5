@@ -1,209 +1,209 @@
 package ch.unibe.ese.team1.controller.pojos.forms;
 
-import ch.unibe.ese.team1.model.Type;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-/** This form is used for searching for an ad. */
+/**
+ * This form is used for searching for an ad.
+ */
 public class SearchForm {
 
-	private boolean filtered;
+    private boolean filtered;
 
-	private int[] offerType = new int[3];
-        private String[] type = new String[3];
+    private int[] offerType = new int[3];
+    private String[] type = new String[3];
 
-	@NotBlank(message = "Required")
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
-	private String city;
-	
-	@NotNull(message = "Requires a number")
-	@Min(value = 0, message = "Please enter a positive distance")
-	private Integer radius;
-	
-	@NotNull(message = "Requires a number")
-	@Min(value = 0, message = "In your dreams.")
-	private Integer price;
+    @NotBlank(message = "Required")
+    @Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF;]*", message = "Please pick a city from the list")
+    private String city;
 
-	 public int[] getOfferType() {
-         return offerType;
-     }
-     public void setOfferType(int[] offerType) {
-         this.offerType = offerType;
-     }
-     
-	public String getCity() {
-		return city;
-	}
+    @NotNull(message = "Requires a number")
+    @Min(value = 0, message = "Please enter a positive distance")
+    private Integer radius;
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    @NotNull(message = "Requires a number")
+    @Min(value = 0, message = "In your dreams.")
+    private Integer price;
 
-	public Integer getRadius() {
-		return radius;
-	}
+    public int[] getOfferType() {
+        return offerType;
+    }
 
-	public void setRadius(Integer radius) {
-		this.radius = radius;
-	}
+    public void setOfferType(int[] offerType) {
+        this.offerType = offerType;
+    }
 
-	public Integer getPrice() {
-		return price;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
+    public Integer getRadius() {
+        return radius;
+    }
 
-	// //////////////////
-	// Filtered results//
-	// //////////////////
+    public void setRadius(Integer radius) {
+        this.radius = radius;
+    }
 
-	public boolean getFiltered() {
-		return filtered;
-	}
+    public Integer getPrice() {
+        return price;
+    }
 
-	public void setFiltered(boolean filtered) {
-		this.filtered = filtered;
-	}
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
-	private String earliestMoveInDate;
-	private String latestMoveInDate;
-	private String earliestMoveOutDate;
-	private String latestMoveOutDate; 
+    // //////////////////
+    // Filtered results//
+    // //////////////////
+    public boolean getFiltered() {
+        return filtered;
+    }
 
-	private boolean smokers;
-	private boolean animals;
-	private boolean garden;
-	private boolean balcony;
-	private boolean cellar;
-	private boolean furnished;
-	private boolean cable;
-	private boolean garage;
-	private boolean internet;
-	private boolean dishwasher;
+    public void setFiltered(boolean filtered) {
+        this.filtered = filtered;
+    }
 
-	public boolean getSmokers() {
-		return smokers;
-	}
+    private String earliestMoveInDate;
+    private String latestMoveInDate;
+    private String earliestMoveOutDate;
+    private String latestMoveOutDate;
 
-	public void setSmokers(boolean smokers) {
-		this.smokers = smokers;
-	}
+    private boolean smokers;
+    private boolean animals;
+    private boolean garden;
+    private boolean balcony;
+    private boolean cellar;
+    private boolean furnished;
+    private boolean cable;
+    private boolean garage;
+    private boolean internet;
+    private boolean dishwasher;
 
-	public boolean getAnimals() {
-		return animals;
-	}
+    public boolean getSmokers() {
+        return smokers;
+    }
 
-	public void setAnimals(boolean animals) {
-		this.animals = animals;
-	}
+    public void setSmokers(boolean smokers) {
+        this.smokers = smokers;
+    }
 
-	public boolean getGarden() {
-		return garden;
-	}
+    public boolean getAnimals() {
+        return animals;
+    }
 
-	public void setGarden(boolean garden) {
-		this.garden = garden;
-	}
+    public void setAnimals(boolean animals) {
+        this.animals = animals;
+    }
 
-	public boolean getBalcony() {
-		return balcony;
-	}
+    public boolean getGarden() {
+        return garden;
+    }
 
-	public void setBalcony(boolean balcony) {
-		this.balcony = balcony;
-	}
+    public void setGarden(boolean garden) {
+        this.garden = garden;
+    }
 
-	public boolean getCellar() {
-		return cellar;
-	}
+    public boolean getBalcony() {
+        return balcony;
+    }
 
-	public void setCellar(boolean cellar) {
-		this.cellar = cellar;
-	}
+    public void setBalcony(boolean balcony) {
+        this.balcony = balcony;
+    }
 
-	public boolean getFurnished() {
-		return furnished;
-	}
+    public boolean getCellar() {
+        return cellar;
+    }
 
-	public void setFurnished(boolean furnished) {
-		this.furnished = furnished;
-	}
+    public void setCellar(boolean cellar) {
+        this.cellar = cellar;
+    }
 
-	public boolean getCable() {
-		return cable;
-	}
+    public boolean getFurnished() {
+        return furnished;
+    }
 
-	public void setCable(boolean cable) {
-		this.cable = cable;
-	}
+    public void setFurnished(boolean furnished) {
+        this.furnished = furnished;
+    }
 
-	public boolean getGarage() {
-		return garage;
-	}
+    public boolean getCable() {
+        return cable;
+    }
 
-	public void setGarage(boolean garage) {
-		this.garage = garage;
-	}
+    public void setCable(boolean cable) {
+        this.cable = cable;
+    }
 
-	public boolean getInternet() {
-		return internet;
-	}
+    public boolean getGarage() {
+        return garage;
+    }
 
-	public void setInternet(boolean internet) {
-		this.internet = internet;
-	}
-	
-	public boolean getDishwasher() {
-		return dishwasher;
-	}
+    public void setGarage(boolean garage) {
+        this.garage = garage;
+    }
 
-	public void setDishwasher(boolean dishwasher) {
-		this.dishwasher = dishwasher;
-	}
+    public boolean getInternet() {
+        return internet;
+    }
 
-	public String getEarliestMoveInDate() {
-		return earliestMoveInDate;
-	}
+    public void setInternet(boolean internet) {
+        this.internet = internet;
+    }
 
-	public void setEarliestMoveInDate(String earliestMoveInDate) {
-		this.earliestMoveInDate = earliestMoveInDate;
-	}
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
 
-	public String getLatestMoveInDate() {
-		return latestMoveInDate;
-	}
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
 
-	public void setLatestMoveInDate(String latestMoveInDate) {
-		this.latestMoveInDate = latestMoveInDate;
-	}
+    public String getEarliestMoveInDate() {
+        return earliestMoveInDate;
+    }
 
-	public String getEarliestMoveOutDate() {
-		return earliestMoveOutDate;
-	}
+    public void setEarliestMoveInDate(String earliestMoveInDate) {
+        this.earliestMoveInDate = earliestMoveInDate;
+    }
 
-	public void setEarliestMoveOutDate(String earliestMoveOutDate) {
-		this.earliestMoveOutDate = earliestMoveOutDate;
-	}
+    public String getLatestMoveInDate() {
+        return latestMoveInDate;
+    }
 
-	public String getLatestMoveOutDate() {
-		return latestMoveOutDate;
-	}
+    public void setLatestMoveInDate(String latestMoveInDate) {
+        this.latestMoveInDate = latestMoveInDate;
+    }
 
-	public void setLatestMoveOutDate(String latestMoveOutDate) {
-		this.latestMoveOutDate = latestMoveOutDate;
-	}
-        
-         public String[] getType() {
-            return type;
-        }
+    public String getEarliestMoveOutDate() {
+        return earliestMoveOutDate;
+    }
 
-        public void setType(String[] type) {
-            this.type = type;
-        }
+    public void setEarliestMoveOutDate(String earliestMoveOutDate) {
+        this.earliestMoveOutDate = earliestMoveOutDate;
+    }
+
+    public String getLatestMoveOutDate() {
+        return latestMoveOutDate;
+    }
+
+    public void setLatestMoveOutDate(String latestMoveOutDate) {
+        this.latestMoveOutDate = latestMoveOutDate;
+    }
+
+    public String[] getType() {
+        return type;
+    }
+
+    public void setType(String[] type) {
+        this.type = type;
+    }
 }

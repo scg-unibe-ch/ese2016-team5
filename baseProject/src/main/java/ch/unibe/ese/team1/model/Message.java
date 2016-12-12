@@ -13,99 +13,101 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/** Represents a message that is sent between two users. */
+/**
+ * Represents a message that is sent between two users.
+ */
 @Entity
 public class Message {
 
-	@Id
-	@GeneratedValue
-	private long id;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@Column(nullable = false)
-	private MessageState state;
+    @Column(nullable = false)
+    private MessageState state;
 
-	@Column(nullable = false)
-	private String subject;
+    @Column(nullable = false)
+    private String subject;
 
-	@Column(nullable = false)
-	@Lob
-	private String text;
+    @Column(nullable = false)
+    @Lob
+    private String text;
 
-	@JsonFormat(pattern = "HH:mm, dd.MM.yyyy", timezone = "CET" )
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateSent;
-        
-        @Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
-	private Date activationTime;
+    @JsonFormat(pattern = "HH:mm, dd.MM.yyyy", timezone = "CET")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateSent;
 
-	@ManyToOne
-	private User sender;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date activationTime;
 
-	@ManyToOne
-	private User recipient;
+    @ManyToOne
+    private User sender;
 
-	public long getId() {
-		return id;
-	}
+    @ManyToOne
+    private User recipient;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public MessageState getState() {
-		return state;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setState(MessageState state) {
-		this.state = state;
-	}
+    public MessageState getState() {
+        return state;
+    }
 
-	public String getSubject() {
-		return subject;
-	}
+    public void setState(MessageState state) {
+        this.state = state;
+    }
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+    public String getSubject() {
+        return subject;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public Date getDateSent() {
-		return dateSent;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public void setDateSent(Date dateSent) {
-		this.dateSent = dateSent;
-	}
+    public Date getDateSent() {
+        return dateSent;
+    }
 
-	public User getSender() {
-		return sender;
-	}
+    public void setDateSent(Date dateSent) {
+        this.dateSent = dateSent;
+    }
 
-	public void setSender(User sender) {
-		this.sender = sender;
-	}
+    public User getSender() {
+        return sender;
+    }
 
-	public User getRecipient() {
-		return recipient;
-	}
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
 
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
-	}
-        
-        public void setActivationTime(Date activationTime) {
-            this.activationTime = activationTime;
-        }
+    public User getRecipient() {
+        return recipient;
+    }
 
-        public Date getActivationTime() {
-            return activationTime;
-        }
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
+
+    public void setActivationTime(Date activationTime) {
+        this.activationTime = activationTime;
+    }
+
+    public Date getActivationTime() {
+        return activationTime;
+    }
 }

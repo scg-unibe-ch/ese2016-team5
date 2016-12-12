@@ -71,9 +71,7 @@ public class AdService {
         this.calendar = Calendar.getInstance();
         this.now = new DateTime();
     }
-    
-    
-    
+        
     /**
      * Creates an ad according to the form the user has filled out for ad
      * placement. All the characteristics concerning the ad that were set in the

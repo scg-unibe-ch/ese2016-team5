@@ -9,16 +9,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target({ TYPE, ANNOTATION_TYPE })
+@Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = { AdFormOfferTypeFieldsValidator.class })
+@Constraint(validatedBy = {AdFormOfferTypeFieldsValidator.class})
 @Documented
 public @interface AdFormOfferTypeFields {
 
-	String message() default "{ch.unibe.ese.team1.controller.pojos.forms.validation." +
-			"ValidPassengerCount.message}";
+    String message() default "{ch.unibe.ese.team1.controller.pojos.forms.validation."
+            + "ValidPassengerCount.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

@@ -9,266 +9,268 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-/** This form is used when a user wants to place a new ad. */
+/**
+ * This form is used when a user wants to place a new ad.
+ */
 @AdFormOfferTypeFields
 public class PlaceAdForm {
 
-	@NotBlank(message = "Required")
-	private String title;
+    @NotBlank(message = "Required")
+    private String title;
 
-	@NotBlank(message = "Required")
-	private String street;
+    @NotBlank(message = "Required")
+    private String street;
 
-	@Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
-	private String city;
+    @Pattern(regexp = "^[0-9]{4} - [-\\w\\s\\u00C0-\\u00FF]*", message = "Please pick a city from the list")
+    private String city;
 
-	private String moveInDate;
+    private String moveInDate;
 
-	private String moveOutDate;
+    private String moveOutDate;
 
-	private int price;
+    private int price;
 
-	@Min(value = 1, message = "Has to be equal to 1 or more")
-	private int squareFootage;
+    @Min(value = 1, message = "Has to be equal to 1 or more")
+    private int squareFootage;
 
-	@NotBlank(message = "Required")
-	private String roomDescription;
+    @NotBlank(message = "Required")
+    private String roomDescription;
 
-	private String preferences;
+    private String preferences;
 
-	// optional for input
-	private String roomFriends;
-        
-	private boolean smokers;
-	private boolean animals;
-	private boolean garden;
-	private boolean balcony;
-	private boolean cellar;
-	private boolean furnished;
-	private boolean cable;
-	private boolean garage;
-	private boolean internet;
-	private boolean dishwasher;
+    // optional for input
+    private String roomFriends;
 
-	private List<String> visits;
+    private boolean smokers;
+    private boolean animals;
+    private boolean garden;
+    private boolean balcony;
+    private boolean cellar;
+    private boolean furnished;
+    private boolean cable;
+    private boolean garage;
+    private boolean internet;
+    private boolean dishwasher;
 
-        private Type type;
-        
-	// Auction & Direct Buy
-	private String auctionEndingDate;
-	private int directBuyPrice;
-	private int auctionStartingPrice;
-	private int offerType;
+    private List<String> visits;
 
-	public String getAuctionEndingDate() {
-		return auctionEndingDate;
-	}
+    private Type type;
 
-	public void setAuctionEndingDate(String auctionEndingDate) {
-		this.auctionEndingDate = auctionEndingDate;
-	}
+    // Auction & Direct Buy
+    private String auctionEndingDate;
+    private int directBuyPrice;
+    private int auctionStartingPrice;
+    private int offerType;
 
-	public int getDirectBuyPrice() {
-		return directBuyPrice;
-	}
+    public String getAuctionEndingDate() {
+        return auctionEndingDate;
+    }
 
-	public void setDirectBuyPrice(int price) {
-		this.directBuyPrice = price;
-	}
+    public void setAuctionEndingDate(String auctionEndingDate) {
+        this.auctionEndingDate = auctionEndingDate;
+    }
 
-	public int getAuctionStartingPrice() {
-		return auctionStartingPrice;
-	}
+    public int getDirectBuyPrice() {
+        return directBuyPrice;
+    }
 
-	public void setAuctionStartingPrice(int price) {
-		this.auctionStartingPrice = price;
-	}
+    public void setDirectBuyPrice(int price) {
+        this.directBuyPrice = price;
+    }
 
-	public int getOfferType() {
-		return offerType;
-	}
+    public int getAuctionStartingPrice() {
+        return auctionStartingPrice;
+    }
 
-	public void setOfferType(int offerType) {
-		this.offerType = offerType;
-	}
+    public void setAuctionStartingPrice(int price) {
+        this.auctionStartingPrice = price;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public int getOfferType() {
+        return offerType;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setOfferType(int offerType) {
+        this.offerType = offerType;
+    }
 
-	public int getPrice() {
-		return price;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getRoomDescription() {
-		return roomDescription;
-	}
+    public int getPrice() {
+        return price;
+    }
 
-	public void setRoomDescription(String roomDescription) {
-		this.roomDescription = roomDescription;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public String getPreferences() {
-		return preferences;
-	}
+    public String getRoomDescription() {
+        return roomDescription;
+    }
 
-	public void setPreferences(String preferences) {
-		this.preferences = preferences;
-	}
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
+    }
 
-	public int getSquareFootage() {
-		return squareFootage;
-	}
+    public String getPreferences() {
+        return preferences;
+    }
 
-	public void setSquareFootage(int squareFootage) {
-		this.squareFootage = squareFootage;
-	}
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
+    }
 
-	public boolean isSmokers() {
-		return smokers;
-	}
+    public int getSquareFootage() {
+        return squareFootage;
+    }
 
-	public void setSmokers(boolean smoker) {
-		this.smokers = smoker;
-	}
+    public void setSquareFootage(int squareFootage) {
+        this.squareFootage = squareFootage;
+    }
 
-	public boolean isAnimals() {
-		return animals;
-	}
+    public boolean isSmokers() {
+        return smokers;
+    }
 
-	public void setAnimals(boolean animals) {
-		this.animals = animals;
-	}
+    public void setSmokers(boolean smoker) {
+        this.smokers = smoker;
+    }
 
-	public boolean getGarden() {
-		return garden;
-	}
+    public boolean isAnimals() {
+        return animals;
+    }
 
-	public void setGarden(boolean garden) {
-		this.garden = garden;
-	}
+    public void setAnimals(boolean animals) {
+        this.animals = animals;
+    }
 
-	public boolean getBalcony() {
-		return balcony;
-	}
+    public boolean getGarden() {
+        return garden;
+    }
 
-	public void setBalcony(boolean balcony) {
-		this.balcony = balcony;
-	}
+    public void setGarden(boolean garden) {
+        this.garden = garden;
+    }
 
-	public boolean getCellar() {
-		return cellar;
-	}
+    public boolean getBalcony() {
+        return balcony;
+    }
 
-	public void setCellar(boolean cellar) {
-		this.cellar = cellar;
-	}
+    public void setBalcony(boolean balcony) {
+        this.balcony = balcony;
+    }
 
-	public boolean isFurnished() {
-		return furnished;
-	}
+    public boolean getCellar() {
+        return cellar;
+    }
 
-	public void setFurnished(boolean furnished) {
-		this.furnished = furnished;
-	}
+    public void setCellar(boolean cellar) {
+        this.cellar = cellar;
+    }
 
-	public boolean getCable() {
-		return cable;
-	}
+    public boolean isFurnished() {
+        return furnished;
+    }
 
-	public void setCable(boolean cable) {
-		this.cable = cable;
-	}
+    public void setFurnished(boolean furnished) {
+        this.furnished = furnished;
+    }
 
-	public boolean getGarage() {
-		return garage;
-	}
+    public boolean getCable() {
+        return cable;
+    }
 
-	public void setGarage(boolean garage) {
-		this.garage = garage;
-	}
+    public void setCable(boolean cable) {
+        this.cable = cable;
+    }
 
-	public boolean getInternet() {
-		return internet;
-	}
+    public boolean getGarage() {
+        return garage;
+    }
 
-	public void setInternet(boolean internet) {
-		this.internet = internet;
-	}
+    public void setGarage(boolean garage) {
+        this.garage = garage;
+    }
 
-	public boolean getDishwasher() {
-		return dishwasher;
-	}
+    public boolean getInternet() {
+        return internet;
+    }
 
-	public void setDishwasher(boolean dishwasher) {
-		this.dishwasher = dishwasher;
-	}
+    public void setInternet(boolean internet) {
+        this.internet = internet;
+    }
 
-	public String getMoveInDate() {
-		return moveInDate;
-	}
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
 
-	public void setMoveInDate(String moveInDate) {
-		this.moveInDate = moveInDate;
-	}
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
 
-	public String getMoveOutDate() {
-		return moveOutDate;
-	}
+    public String getMoveInDate() {
+        return moveInDate;
+    }
 
-	public void setMoveOutDate(String moveOutDate) {
-		this.moveOutDate = moveOutDate;
-	}
+    public void setMoveInDate(String moveInDate) {
+        this.moveInDate = moveInDate;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getMoveOutDate() {
+        return moveOutDate;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setMoveOutDate(String moveOutDate) {
+        this.moveOutDate = moveOutDate;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getRoomFriends() {
-		return roomFriends;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setRoomFriends(String roomFriends) {
-		this.roomFriends = roomFriends;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public List<String> getVisits() {
-		return visits;
-	}
+    public String getRoomFriends() {
+        return roomFriends;
+    }
 
-	public void setVisits(List<String> visits) {
-		this.visits = visits;
-	}
-        
-        public Type getType() {
-            return type;
-        }
+    public void setRoomFriends(String roomFriends) {
+        this.roomFriends = roomFriends;
+    }
 
-        public void setType(String type) {
-            this.type = Type.valueOf(type);
-        }
-        
-        public void setType(Type type) {
-            this.type = type;
-        }
+    public List<String> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<String> visits) {
+        this.visits = visits;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = Type.valueOf(type);
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 }

@@ -72,9 +72,6 @@ public class BookmarkServiceTest {
 		
 		userDao.save(hans);
 		
-		
-		
-		
 		Ad ad = new Ad();
 		
 		ad.setAnimals(true);
@@ -105,13 +102,10 @@ public class BookmarkServiceTest {
 		ad.setMoveInDate(date);
 		adDao.save(ad);
 		
-		
-		
-		
 		assertEquals(book.getBookmarkStatus(ad, false, hans),3);
+		assertTrue(hans.getBookmarkedAds().contains(ad));
 		assertEquals(book.getBookmarkStatus(ad, true, hans),2);
-		
-		
+		assertFalse(hans.getBookmarkedAds().contains(ad));
 	}
 	
 	

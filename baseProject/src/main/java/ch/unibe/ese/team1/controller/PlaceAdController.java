@@ -30,6 +30,7 @@ import ch.unibe.ese.team1.controller.service.BookmarkService;
 import ch.unibe.ese.team1.controller.service.MessageService;
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
+import ch.unibe.ese.team1.log.LogMain;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.comp.PictureMeta;
 import ch.unibe.ese.team1.model.User;
@@ -43,6 +44,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Controller
 public class PlaceAdController {
+	
+	LogMain mainlog = new LogMain();
 
 	public static final String IMAGE_DIRECTORY = "/img/ads";
 
@@ -87,12 +90,14 @@ public class PlaceAdController {
 	/** Shows the place ad form. */
 	@RequestMapping(value = "/profile/placeAd", method = RequestMethod.GET)
 	public ModelAndView placeAd() throws IOException {
+		mainlog.log.warning("PlaceAdController method placeAd received a request");
 		ModelAndView model = new ModelAndView("placeAd");
 
 		String realPath = servletContext.getRealPath(IMAGE_DIRECTORY);
 		if (pictureUploader == null) {
 			pictureUploader = new PictureUploader(realPath, IMAGE_DIRECTORY);
 		}
+		mainlog.log.warning("PlaceAdController method placeAd processed a request");
 		return model;
 	}
 
@@ -106,6 +111,7 @@ public class PlaceAdController {
 	@RequestMapping(value = "/profile/placeAd/uploadPictures", method = RequestMethod.POST)
 	public @ResponseBody String uploadPictures(
 			MultipartHttpServletRequest request) {
+		mainlog.log.warning("PlaceAdController method uploadPictures received a request with the following request: " + request.toString());
 		List<MultipartFile> pictures = new LinkedList<>();
 		Iterator<String> iter = request.getFileNames();
 
@@ -129,6 +135,7 @@ public class PlaceAdController {
 			e.printStackTrace();
 		}
 		jsonResponse += "}";
+		mainlog.log.warning("PlaceAdController method uploadPictures processed request with the following request: " + request.toString());
 		return jsonResponse;
 	}
 
@@ -142,6 +149,7 @@ public class PlaceAdController {
 	public ModelAndView create(@Valid PlaceAdForm placeAdForm,
 			BindingResult result, RedirectAttributes redirectAttributes,
 			Principal principal) {
+		mainlog.log.warning("PlaceAdController method create received a request with the following principal: " + principal.toString());
 		ModelAndView model = new ModelAndView("placeAd");
 		if (!result.hasErrors()) {
 			String username = principal.getName();
@@ -164,6 +172,7 @@ public class PlaceAdController {
 		} else {
 			model = new ModelAndView("placeAd");
 		}
+		mainlog.log.warning("PlaceAdController method create processed request with the following principal: " + principal.toString());
 		return model;
 	}
 
@@ -176,9 +185,11 @@ public class PlaceAdController {
 	 */
 	@RequestMapping(value = "/profile/placeAd/getUploadedPictures", method = RequestMethod.POST)
 	public @ResponseBody List<PictureMeta> getUploadedPictures() {
+		mainlog.log.warning("PlaceAdController method getUploadedPictures received a request");
 		if (pictureUploader == null) {
 			return null;
 		}
+		mainlog.log.warning("PlaceAdController method getUploadedPictures processed a request");
 		return pictureUploader.getUploadedPictureMetas();
 	}
 
@@ -188,17 +199,21 @@ public class PlaceAdController {
 	 */
 	@RequestMapping(value = "/profile/placeAd/deletePicture", method = RequestMethod.POST)
 	public @ResponseBody void deleteUploadedPicture(@RequestParam String url) {
+		mainlog.log.warning("PlaceAdController method deleteUploadedPicture received a request with the following url: " + url);
 		if (pictureUploader != null) {
 			String realPath = servletContext.getRealPath(url);
 			pictureUploader.deletePicture(url, realPath);
 		}
+		mainlog.log.warning("PlaceAdController method deleteUploadedPicture processed a request with the following url: " + url);
 	}
 
 	@ModelAttribute("placeAdForm")
 	public PlaceAdForm placeAdForm() {
+		mainlog.log.warning("PlaceAdController method placeAdForm received a request");
 		if (placeAdForm == null) {
 			placeAdForm = new PlaceAdForm();
 		}
+		mainlog.log.warning("PlaceAdController method placeAdForm processed a request");
 		return placeAdForm;
 	}
 

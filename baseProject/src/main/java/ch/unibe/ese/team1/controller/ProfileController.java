@@ -22,6 +22,7 @@ import ch.unibe.ese.team1.controller.service.SignupService;
 import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.UserUpdateService;
 import ch.unibe.ese.team1.controller.service.VisitService;
+import ch.unibe.ese.team1.log.LogMain;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.User;
@@ -51,6 +52,8 @@ import org.springframework.security.provisioning.UserDetailsManager;
  */
 @Controller
 public class ProfileController {
+	
+	LogMain mainlog = new LogMain();
 
         private static final String DEFAULT_ROLE = "ROLE_USER";
         private static final String CLIENT = "68304295039-fvgg84j5itsnfupqsfsbeb8ogu2d0vlg.apps.googleusercontent.com";
@@ -79,7 +82,7 @@ public class ProfileController {
         /** Process token from Google */
         @RequestMapping(value = "/tokensignin", method = RequestMethod.POST)
         public @ResponseBody String googleLogin(@RequestParam("token") String token) throws GeneralSecurityException, IOException { //ModelAndView googleCallback() {
-            
+        	mainlog.log.warning("ProfileController method googleLogin received a request with the following token: " + token);
             JacksonFactory jacksonFactory = new JacksonFactory();
             NetHttpTransport transport = new NetHttpTransport();
             
@@ -123,10 +126,11 @@ public class ProfileController {
                     
                     userDao.save(user);
                 }
-                
+                mainlog.log.warning("ProfileController method googleLogin processed a request with the following token: " + token);
                 return "{'status':'success', 'email':'" + user.getUsername() + "', 'password':'" + user.getPassword() + "'}";
 
             } else {
+            	mainlog.log.warning("ProfileController method googleLogin caused an error with the following token: " + token);
               return "{'status':'error', message:'Invalid Token'";
             }
         }
@@ -134,15 +138,19 @@ public class ProfileController {
 	/** Returns the login page. */
 	@RequestMapping(value = "/login")
 	public ModelAndView loginPage() {
+		mainlog.log.warning("ProfileController method loginPage received a request");
 		ModelAndView model = new ModelAndView("login");
+		mainlog.log.warning("ProfileController method loginPage processed a request");
 		return model;
 	}
 
 	/** Returns the signup page. */
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public ModelAndView signupPage() {
+		mainlog.log.warning("ProfileController method signupPage received a request");
 		ModelAndView model = new ModelAndView("signup");
 		model.addObject("signupForm", new SignupForm());
+		mainlog.log.warning("ProfileController method signupPage processed a request");
 		return model;
 	}
 
@@ -150,6 +158,7 @@ public class ProfileController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signupResultPage(@Valid SignupForm signupForm,
 			BindingResult bindingResult) {
+		mainlog.log.warning("ProfileController method signupResultPage received a request with the following principal: " + signupForm.toString());
 		ModelAndView model;
 		if (!bindingResult.hasErrors()) {
 			signupService.saveFrom(signupForm);
@@ -159,23 +168,27 @@ public class ProfileController {
 			model = new ModelAndView("signup");
 			model.addObject("signupForm", signupForm);
 		}
+		mainlog.log.warning("ProfileController method signupResultPage processed request with the following principal: " + signupForm.toString());
 		return model;
 	}
 
 	/** Checks and returns whether a user with the given email already exists. */
 	@RequestMapping(value = "/signup/doesEmailExist", method = RequestMethod.POST)
 	public @ResponseBody boolean doesEmailExist(@RequestParam String email) {
+		mainlog.log.warning("ProfileController method doesEmailExist received a request with the following email: " + email);
 		return signupService.doesUserWithUsernameExist(email);
 	}
 
 	/** Shows the edit profile page. */
 	@RequestMapping(value = "/profile/editProfile", method = RequestMethod.GET)
 	public ModelAndView editProfilePage(Principal principal) {
+		mainlog.log.warning("AProfileController method editProfilePage received a request with the following principal: " + principal.toString());
 		ModelAndView model = new ModelAndView("editProfile");
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
 		model.addObject("editProfileForm", new EditProfileForm());
 		model.addObject("currentUser", user);
+		mainlog.log.warning("AProfileController method editProfilePage processed request with the following principal: " + principal.toString());
 		return model;
 	}
 
@@ -184,6 +197,7 @@ public class ProfileController {
 	public ModelAndView editProfileResultPage(
 			@Valid EditProfileForm editProfileForm,
 			BindingResult bindingResult, Principal principal) {
+		mainlog.log.warning("ProfileController method editProfileResultPage received a request with the following principal: " + principal.toString());
 		ModelAndView model;
 		String username = principal.getName();
 		User user = userService.findUserByUsername(username);
@@ -192,11 +206,13 @@ public class ProfileController {
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message", "Your Profile has been updated!");
 			model.addObject("currentUser", user);
+			mainlog.log.warning("ProfileController method editProfileResultPage processed request with the following principal: " + principal.toString());
 			return model;
 		} else {
 			model = new ModelAndView("updatedProfile");
 			model.addObject("message",
 					"Something went wrong, please contact the WebAdmin if the problem persists!");
+			mainlog.log.warning("ProfileController method editProfileResultPage caused an error with the following principal: " + principal.toString());
 			return model;
 		}
 	}
@@ -204,6 +220,7 @@ public class ProfileController {
 	/** Displays the public profile of the user with the given id. */
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public ModelAndView user(@RequestParam("id") long id, Principal principal) {
+		mainlog.log.warning("ProfileController method user received a request with the following id: " + id);
 		ModelAndView model = new ModelAndView("user");
 		User user = userService.findUserById(id);
 		if (principal != null) {
@@ -214,12 +231,14 @@ public class ProfileController {
 		}
 		model.addObject("user", user);
 		model.addObject("messageForm", new MessageForm());
+		mainlog.log.warning("ProfileController method user processed request with the following id: " + id);
 		return model;
 	}
 
 	/** Displays the schedule page of the currently logged in user. */
 	@RequestMapping(value = "/profile/schedule", method = RequestMethod.GET)
 	public ModelAndView schedule(Principal principal) {
+		mainlog.log.warning("ProfileController method schedule received a request with the following principal: " + principal.toString());
 		ModelAndView model = new ModelAndView("schedule");
 		User user = userService.findUserByUsername(principal.getName());
 
@@ -240,12 +259,14 @@ public class ProfileController {
 		}
 
 		model.addObject("presentations", usersPresentations);
+		mainlog.log.warning("ProfileController method schedule processed request with the following principal: " + principal.toString());
 		return model;
 	}
 
 	/** Returns the visitors page for the visit with the given id. */
 	@RequestMapping(value = "/profile/visitors", method = RequestMethod.GET)
 	public ModelAndView visitors(@RequestParam("visit") long id) {
+		mainlog.log.warning("ProfileController method visitors received a request with the following id: " + id);
 		ModelAndView model = new ModelAndView("visitors");
 		Visit visit = visitService.getVisitById(id);
 		Iterable<User> visitors = visit.getSearchers();
@@ -254,6 +275,7 @@ public class ProfileController {
 
 		Ad ad = visit.getAd();
 		model.addObject("ad", ad);
+		mainlog.log.warning("ProfileController method visitors processed request with the following id: " + id);
 		return model;
 	}
         

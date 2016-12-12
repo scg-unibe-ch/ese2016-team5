@@ -432,20 +432,31 @@ header nav {
 	opacity: 1.0;
 }
 
-/* Horizontal Menu */
+/* Admin Menu */
 header nav ul li {
     font-size: 0.9em;
 }
-.admin_menu {
+.admin_menu.horizontal {
     /*font-size: 0.8em;*/
     width: auto;
     padding: 0 5px;
 	opacity: 1.0;
 }
-.admin_menu.right {
+.admin_menu.horizontal.right {
     border-right: 1px solid black;
     padding-right: 15px;
 	opacity: 1.0;
+}
+.admin_menu.dropdown {
+    display:none;
+}
+@media (max-width: 1200px) {
+    .admin_menu.horizontal {
+        display: none;
+    }
+    .admin_menu.dropdown {
+        display: block;
+    }
 }
 
 footer {

@@ -26,257 +26,291 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * This controller handles all requests concerning displaying ads and
- * bookmarking them.
+ * This class is responsible for handling all requests concerning the displaying
+ * and book marking of the ad. Especially in scenarios where the the apartment
+ * of the ad is sold or likely. It uses the different service classes such as
+ * AdService, UserService, BookmarkService, MessageService and VisitService.
+ *
  */
 @Controller
 public class AdController {
-	
-    LogMain mainlog = new LogMain();
 
-    @Autowired
-    private AdService adService;
+	LogMain mainlog = new LogMain();
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private AdService adService;
 
-    @Autowired
-    private BookmarkService bookmarkService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private MessageService messageService;
+	@Autowired
+	private BookmarkService bookmarkService;
 
-    @Autowired
-    private VisitService visitService;
+	@Autowired
+	private MessageService messageService;
 
-    /** Gets the ad description page for the ad with the given id. */
-    @RequestMapping(value = "/ad", method = RequestMethod.GET)
-    public ModelAndView ad(@RequestParam("id") long id, Principal principal) {
-            mainlog.log.warning("AdController method ad received a request with the following id: " + id);
-            ModelAndView model = new ModelAndView("adDescription");
-            Ad ad = adService.getAdById(id);
-            model.addObject("shownAd", ad);
-            model.addObject("messageForm", new MessageForm());
-            String loggedInUserEmail = (principal == null) ? "" : principal
-                            .getName();
-            model.addObject("loggedInUserEmail", loggedInUserEmail);
-            model.addObject("visits", visitService.getVisitsByAd(ad));
-            mainlog.log.warning("AdController method ad processed request with the following id: " + id);
-            return model;
-    }
+	@Autowired
+	private VisitService visitService;
 
-    /**
-     * Clears the old auctions by setting the status of the ad to 0 and sends the messages to the both parties
-     * 
-     * @return return to index
-     */
-    @RequestMapping(value = "/ad/clearOldAuctions", method = RequestMethod.GET)
-    public String clearOldAuctions() {
-        mainlog.log.warning("AdController method clearOldAuction received a request");
+	/**
+	 * Gets the description page i.e. the details page of the ad to a given id.
+	 * 
+	 * @param id
+	 *            - Long. The id under which the ad can be found.
+	 * @param principal
+	 *            - Principal. The principal/user who opened the ad i.e. owns
+	 *            it.
+	 * @return the ModelAndView containing the description page of the ad.
+	 */
+	@RequestMapping(value = "/ad", method = RequestMethod.GET)
+	public ModelAndView ad(@RequestParam("id") long id, Principal principal) {
+		mainlog.log.warning("AdController method ad received a request with the following id: " + id);
+		ModelAndView model = new ModelAndView("adDescription");
+		Ad ad = adService.getAdById(id);
+		model.addObject("shownAd", ad);
+		model.addObject("messageForm", new MessageForm());
+		String loggedInUserEmail = (principal == null) ? "" : principal.getName();
+		model.addObject("loggedInUserEmail", loggedInUserEmail);
+		model.addObject("visits", visitService.getVisitsByAd(ad));
+		mainlog.log.warning("AdController method ad processed request with the following id: " + id);
+		return model;
+	}
 
-        Iterable<Ad> oldAuctions = adService.getOldAuctions();
-        for (Ad ad : oldAuctions) {
-            if (ad.getLastBidder() == null) {
-                long adId = ad.getId();
-                String title = ad.getTitle();
-                User seller = ad.getUser();
-                String subjectSeller = "Unfortunately your property wasn't sell during the auction";
-                String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-                messageService.sendMessage(seller, seller, subjectSeller, textSeller);
-                ad.setStatus(0);
-                adService.saveAd(ad);
-            }
-            else {
-                long adId = ad.getId();
-                String title = ad.getTitle();
-                int bid = ad.getLastBid();
-                User bidder = ad.getLastBidder();
-                User seller = ad.getUser();
-                String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
-                String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
-                String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-                String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-                messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
-                messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
-                ad.setStatus(0);
-                adService.saveAd(ad);
-            }
-        }
-        mainlog.log.warning("AdController method clearOldAuctions processed request");
-        return "redirect:/";
-    }
+	/**
+	 * Clears or rather closing auctions in case they reached their auction due
+	 * date without being sold or if they were successfully sold. Closing will
+	 * set the status of the ad to 0 and send the corresponding message to the
+	 * seller and if there is a buyer, also to the buyer.
+	 * 
+	 * @return String - redirects to the index
+	 */
+	@RequestMapping(value = "/ad/clearOldAuctions", method = RequestMethod.GET)
+	public String clearOldAuctions() {
+		mainlog.log.warning("AdController method clearOldAuction received a request");
 
-    /**
-     * Gets the ad description page for the ad with the given id and also
-     * validates and persists the message passed as post data.
-     */
-    @RequestMapping(value = "/ad", method = RequestMethod.POST)
-    public ModelAndView messageSent(@RequestParam("id") long id,
-                                    @Valid MessageForm messageForm,
-                                    BindingResult bindingResult) {
-        mainlog.log.warning("AdController method messageSent received a request with the following id: " + id);
+		Iterable<Ad> oldAuctions = adService.getOldAuctions();
+		for (Ad ad : oldAuctions) {
+			if (ad.getLastBidder() == null) {
+				long adId = ad.getId();
+				String title = ad.getTitle();
+				User seller = ad.getUser();
+				String subjectSeller = "Unfortunately your property wasn't sell during the auction";
+				String textSeller = "Unfortunately your property wasn't sell during the auction!\n\nTitle: " + title
+						+ "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+				messageService.sendMessage(seller, seller, subjectSeller, textSeller);
+				ad.setStatus(0);
+				adService.saveAd(ad);
+			} else {
+				long adId = ad.getId();
+				String title = ad.getTitle();
+				int bid = ad.getLastBid();
+				User bidder = ad.getLastBidder();
+				User seller = ad.getUser();
+				String subjectBidder = "Auction won: " + bid + " on '" + title + "'";
+				String subjectSeller = "Property sold: " + bid + " on '" + title + "'";
+				String textBidder = "Congratulations! You won!\n\nTitle: " + title + "\nBid: " + bid
+						+ "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+				String textSeller = "Congratulations! Someone bought your property!\n\nTitle: " + title + "\nBid: "
+						+ bid + "\nBidder: " + bidder.getUsername() + "\nURL: <a href='/ad?id=" + adId + "'>"
+						+ "/ad?id=" + adId + "</a>";
+				messageService.sendMessage(seller, bidder, subjectBidder, textBidder);
+				messageService.sendMessage(bidder, seller, subjectSeller, textSeller);
+				ad.setStatus(0);
+				adService.saveAd(ad);
+			}
+		}
+		mainlog.log.warning("AdController method clearOldAuctions processed request");
+		return "redirect:/";
+	}
 
-        ModelAndView model = new ModelAndView("adDescription");
-        Ad ad = adService.getAdById(id);
-        model.addObject("shownAd", ad);
-        model.addObject("messageForm", new MessageForm());
+	/**
+	 * Gets the ad description page for the ad with the given id and also
+	 * validates and persists the message passed as post data.
+	 */
 
-        if (!bindingResult.hasErrors()) {
-                messageService.saveFrom(messageForm);
-        }
+	/**
+	 * Gets the description/detail page of the ad to a given id. Also validates
+	 * and persists the message passed as post data.
+	 * 
+	 * @return the updated model
+	 */
+	@RequestMapping(value = "/ad", method = RequestMethod.POST)
+	public ModelAndView messageSent(@RequestParam("id") long id, @Valid MessageForm messageForm,
+			BindingResult bindingResult) {
+		mainlog.log.warning("AdController method messageSent received a request with the following id: " + id);
 
-        mainlog.log.warning("AdController method messageSent processed request with the following id: " + id);
-        return model;
-    }
+		ModelAndView model = new ModelAndView("adDescription");
+		Ad ad = adService.getAdById(id);
+		model.addObject("shownAd", ad);
+		model.addObject("messageForm", new MessageForm());
 
-    /**
-     * Checks if the adID passed as post parameter is already inside user's
-     * List bookmarkedAds. In case it is present, true is returned changing
-     * the "Bookmark Ad" button to "Bookmarked". If it is not present it is
-     * added to the List bookmarkedAds.
-     * 
-     * @return 0 and 1 for errors; 3 to update the button to bookmarked 3 and 2
-     *         for bookmarking or undo bookmarking respectively 4 for removing
-     *         button completly (because its the users ad)
-     */
-    @RequestMapping(value = "/bookmark", method = RequestMethod.POST)
-    @Transactional
-    @ResponseBody
-    public int isBookmarked(@RequestParam("id") long id,
-                            @RequestParam("screening") boolean screening,
-                            @RequestParam("bookmarked") boolean bookmarked,
-                            Principal principal) {
+		if (!bindingResult.hasErrors()) {
+			messageService.saveFrom(messageForm);
+		}
 
-        mainlog.log.warning("AdController method isBookmarked received a request with the following id: " + id);
+		mainlog.log.warning("AdController method messageSent processed request with the following id: " + id);
+		return model;
+	}
 
-        // Should never happen since no bookmark button when not logged in
-        if (principal == null) {
-                return 0;
-        }
+	/**
+	 * Checks if the adID passed as post parameter is already inside user's List
+	 * bookmarkedAds. In case it is present, true is returned changing the
+	 * "Bookmark Ad" button to "Bookmarked". If it is not present it is added to
+	 * the List bookmarkedAds.
+	 * 
+	 * @return 0 and 1 for errors; 3 to update the button to bookmarked 3 and 2
+	 *         for bookmarking or undo bookmarking respectively 4 for removing
+	 *         button completly (because its the users ad)
+	 */
+	@RequestMapping(value = "/bookmark", method = RequestMethod.POST)
+	@Transactional
+	@ResponseBody
+	public int isBookmarked(@RequestParam("id") long id, @RequestParam("screening") boolean screening,
+			@RequestParam("bookmarked") boolean bookmarked, Principal principal) {
 
-        // Should not happen either...
-        String username = principal.getName();
-        User user = userService.findUserByUsername(username);
-        if (user == null) {
-                return 1;
-        }
+		mainlog.log.warning("AdController method isBookmarked received a request with the following id: " + id);
 
-        List<Ad> bookmarkedAdsIterable = user.getBookmarkedAds();
-        if (screening) {
-                for (Ad ownAdIterable : adService.getAdsByUser(user)) {
-                        if (ownAdIterable.getId() == id) {
-                                return 4;
-                        }
-                }
-                for (Ad adIterable : bookmarkedAdsIterable) {
-                        if (adIterable.getId() == id) {
-                                return 3;
-                        }
-                }
-                return 2;
-        }
+		// Should never happen since no bookmark button when not logged in
+		if (principal == null) {
+			return 0;
+		}
 
-        Ad ad = adService.getAdById(id);
-        mainlog.log.warning("AdController method isBookmarked processed request with the following id: " + id);
-        return bookmarkService.getBookmarkStatus(ad, bookmarked, user);
-    }
+		// Should not happen either...
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+		if (user == null) {
+			return 1;
+		}
 
-    /**
-     * Fetches information about bookmarked rooms and own ads and attaches this
-     * information to the myRooms page in order to be displayed.
-     */
-    @RequestMapping(value = "/profile/myRooms", method = RequestMethod.GET)
-    public ModelAndView myRooms(Principal principal) {
+		List<Ad> bookmarkedAdsIterable = user.getBookmarkedAds();
+		if (screening) {
+			for (Ad ownAdIterable : adService.getAdsByUser(user)) {
+				if (ownAdIterable.getId() == id) {
+					return 4;
+				}
+			}
+			for (Ad adIterable : bookmarkedAdsIterable) {
+				if (adIterable.getId() == id) {
+					return 3;
+				}
+			}
+			return 2;
+		}
 
-        mainlog.log.warning("AdController method myRooms received a request with the following principal: " + principal.toString());
+		Ad ad = adService.getAdById(id);
+		mainlog.log.warning("AdController method isBookmarked processed request with the following id: " + id);
+		return bookmarkService.getBookmarkStatus(ad, bookmarked, user);
+	}
 
-        ModelAndView model;
-        User user;
-        if (principal != null) {
-                model = new ModelAndView("myRooms");
-                String username = principal.getName();
-                user = userService.findUserByUsername(username);
-                Iterable<Ad> ownAds = adService.getAdsByUser(user);
-                model.addObject("bookmarkedAdvertisements", user.getBookmarkedAds());
-                model.addObject("ownAdvertisements", ownAds);
-                return model;
-        } else {
-                model = new ModelAndView("home");
-        }
+	/**
+	 * Fetches information about bookmarked rooms and own ads and attaches this
+	 * information to the myRooms page in order to be displayed.
+	 * 
+	 * @param principal
+	 *            - the user/owner of the ads
+	 * @return the updated model containing the book marked and owned ads.
+	 */
+	@RequestMapping(value = "/profile/myRooms", method = RequestMethod.GET)
+	public ModelAndView myRooms(Principal principal) {
 
-        mainlog.log.warning("AdController method myRooms processed request with the following principal: " + principal.toString());
+		mainlog.log.warning("AdController method myRooms received a request from the principal");
 
-        return model;
-    }
+		ModelAndView model;
+		User user;
+		if (principal != null) {
+			model = new ModelAndView("myRooms");
+			String username = principal.getName();
+			user = userService.findUserByUsername(username);
+			Iterable<Ad> ownAds = adService.getAdsByUser(user);
+			model.addObject("bookmarkedAdvertisements", user.getBookmarkedAds());
+			model.addObject("ownAdvertisements", ownAds);
+			return model;
+		} else {
+			model = new ModelAndView("home");
+		}
 
-    /**
-     * Handles the placing of bids
-     */
-    @RequestMapping(value = "/profile/placeBid", method = RequestMethod.POST)
-    public String placeBid(@ModelAttribute("shownAd") @Validated Ad ad, BindingResult result, Principal principal, final RedirectAttributes redirectAttributes, @RequestParam long adId) {
+		mainlog.log.warning("AdController method myRooms processed request from the principal");
 
-        mainlog.log.warning("AdController method placeBid received a request with the following Adid: " + adId);
+		return model;
+	}
 
-        String username = principal.getName();
-        User user = userService.findUserByUsername(username);
-        adService.saveBid(ad, user, adId);
+	/**
+	 * Handles the placing of bids
+	 */
+	@RequestMapping(value = "/profile/placeBid", method = RequestMethod.POST)
+	public String placeBid(@ModelAttribute("shownAd") @Validated Ad ad, BindingResult result, Principal principal,
+			final RedirectAttributes redirectAttributes, @RequestParam long adId) {
 
-        Ad activeAd = adService.getAdById(adId);
-        String title = activeAd.getTitle();
-        int bid = activeAd.getLastBid();
-        String bidder = principal.getName();
-        String seller = activeAd.getUser().getUsername();
-        String subjectBidder = "Bidding confirmation: " + bid + " on '" + title + "'";
-        String subjectSeller = "New bid: " + bid + " on '" + title + "'";
-        String textBidder = "Congratulations! Your bid was accepted!\n\nTitle: " + title + "\nBid: " + bid + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-        String textSeller = "Congratulations! Someone just placed a bid on your property!\n\nTitle: " + title + "\nBid: " + bid + "\nBidder: " + bidder + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
-        User bidderObj = userService.findUserByUsername(bidder);
-        User sellerObj = userService.findUserByUsername(seller);
+		mainlog.log.warning("AdController method placeBid received a request with the following Adid: " + adId);
 
-        messageService.sendMessage(sellerObj, bidderObj, subjectBidder, textBidder);
-        messageService.sendMessage(bidderObj, sellerObj, subjectSeller, textSeller);
+		String username = principal.getName();
+		User user = userService.findUserByUsername(username);
+		adService.saveBid(ad, user, adId);
 
-        redirectAttributes.addFlashAttribute("confirmationMessage", "Congratulations! Your bid was accepted!");           
+		Ad activeAd = adService.getAdById(adId);
+		String title = activeAd.getTitle();
+		int bid = activeAd.getLastBid();
+		String bidder = principal.getName();
+		String seller = activeAd.getUser().getUsername();
+		String subjectBidder = "Bidding confirmation: " + bid + " on '" + title + "'";
+		String subjectSeller = "New bid: " + bid + " on '" + title + "'";
+		String textBidder = "Congratulations! Your bid was accepted!\n\nTitle: " + title + "\nBid: " + bid
+				+ "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId + "</a>";
+		String textSeller = "Congratulations! Someone just placed a bid on your property!\n\nTitle: " + title
+				+ "\nBid: " + bid + "\nBidder: " + bidder + "\nURL: <a href='/ad?id=" + adId + "'>" + "/ad?id=" + adId
+				+ "</a>";
+		User bidderObj = userService.findUserByUsername(bidder);
+		User sellerObj = userService.findUserByUsername(seller);
 
-        mainlog.log.warning("AdController method placeBid processed request with the following id: " + adId);
+		messageService.sendMessage(sellerObj, bidderObj, subjectBidder, textBidder);
+		messageService.sendMessage(bidderObj, sellerObj, subjectSeller, textSeller);
 
-        return "redirect:/ad?id=" + adId;
+		redirectAttributes.addFlashAttribute("confirmationMessage", "Congratulations! Your bid was accepted!");
 
-    }
+		mainlog.log.warning("AdController method placeBid processed request with the following id: " + adId);
 
-    /**
-     * Handles direct buying of properties by performing the following actions:
-     * 1. Sets ad status to 0 (inactive)
-     * 2. Generates two messages to be sent to both parties and sends them
-     * 3. Reloads the page and displays a message
-     */
-    @RequestMapping(value = "/profile/DirectBuy", method = RequestMethod.GET)
-    public String DirectBuy(@RequestParam("id") long id, Principal principal, RedirectAttributes redirectAttributes) {
+		return "redirect:/ad?id=" + adId;
 
-        mainlog.log.warning("AdController method DirectBuy received a request with the following id: " + id);
+	}
 
-        Ad ad = adService.getAdById(id);
-        ad.setStatus(0);
-        adService.saveAd(ad);
+	/**
+	 * Handles direct buying of properties by performing the following actions:
+	 * 1. Sets ad status to 0 (inactive) 2. Generates two messages to be sent to
+	 * both parties and sends them 3. Reloads the page and displays a message
+	 */
+	@RequestMapping(value = "/profile/DirectBuy", method = RequestMethod.GET)
+	public String directBuy(@RequestParam("id") long id, Principal principal, RedirectAttributes redirectAttributes) {
+		assert principal != null;
+		mainlog.log.warning("AdController method DirectBuy received a request with the following id: " + id);
 
-        String address = ad.getStreet();
-        String city = ad.getCity();
-        String buyerUsername = principal.getName();
-        String sellerUsername = ad.getUser().getUsername();
-        String subjectBuyer = "You have bought a property in "+city+" at "+address+".";
-        String subjectSeller = "Your property in "+city+" at "+address+" has been sold.";
-        String textBuyer = "Congratulations.\nYou have bought an actual property that exists in the real world. And you have done this with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nYour property is located in "+city+" at"+address+". Please contact the user "+sellerUsername+" to conclude your bargain.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Flatfindr system.\nPPS: Isn't the Internet amazing?";
-        String textSeller = "Congratulations.\nYour actual property that exists in the real world has been bought. And this was done with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nThe property you sold is located in "+city+" at"+address+". Please contact the user "+buyerUsername+" to conclude your sale.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Flatfindr system.\nPPS: Isn't the Internet amazing?";
-        User buyer = userService.findUserByUsername(buyerUsername);
-        User seller = userService.findUserByUsername(sellerUsername);
+		Ad ad = adService.getAdById(id);
+		ad.setStatus(0);
+		adService.saveAd(ad);
 
-        messageService.sendMessage(seller, buyer, subjectBuyer, textBuyer);
-        messageService.sendMessage(buyer, seller, subjectSeller, textSeller);
+		String address = ad.getStreet();
+		String city = ad.getCity();
+		String buyerUsername = principal.getName();
+		String sellerUsername = ad.getUser().getUsername();
+		String subjectBuyer = "You have bought a property in " + city + " at " + address + ".";
+		String subjectSeller = "Your property in " + city + " at " + address + " has been sold.";
+		String textBuyer = "Congratulations.\nYou have bought an actual property that exists in the real world. And you have done this with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nYour property is located in "
+				+ city + " at " + address + ". Please contact the user " + sellerUsername
+				+ " to conclude your bargain.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Home Portal system.\nPPS: Isn't the Internet amazing?";
+		String textSeller = "Congratulations.\nYour actual property that exists in the real world has been bought. And this was done with the amazing powers of the Internet. Did you know that in june 2016, over 3.6 billion users were logged on to the Internet? \nThe property you sold is located in "
+				+ city + " at " + address + ". Please contact the user " + buyerUsername
+				+ " to conclude your sale.\nYours truly, the amazing Flatfindr team\nPS: This  message was automatically created by the Home Portal system.\nPPS: Isn't the Internet amazing?";
+		User buyer = userService.findUserByUsername(buyerUsername);
+		User seller = userService.findUserByUsername(sellerUsername);
 
-        redirectAttributes.addFlashAttribute("confirmationMessage", "You have successfully bought this property. Check your message inbox for further details.");
+		messageService.sendMessage(seller, buyer, subjectBuyer, textBuyer);
+		messageService.sendMessage(buyer, seller, subjectSeller, textSeller);
 
-        mainlog.log.warning("AdController method DirectBuy processed request with the following id: " + id);
+		redirectAttributes.addFlashAttribute("confirmationMessage",
+				"You have successfully bought this property. Check your message inbox for further details.");
 
-        return "redirect:/ad?id=" + id;
-    }
+		mainlog.log.warning("AdController method DirectBuy processed request with the following id: " + id);
+
+		return "redirect:/ad?id=" + id;
+	}
+
 }

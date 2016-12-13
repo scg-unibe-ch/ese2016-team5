@@ -1,3 +1,4 @@
+package ch.unibe.ese.team1.test.controller;
 import static org.junit.Assert.*;
 
 import java.security.Principal;

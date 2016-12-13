@@ -30,8 +30,10 @@ import ch.unibe.ese.team1.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 /**
- * This controller handles all requests concerning editing ads.
+ * Handles all requests concerning the editing of ads. 
+ *
  */
 @Controller
 public class EditAdController {

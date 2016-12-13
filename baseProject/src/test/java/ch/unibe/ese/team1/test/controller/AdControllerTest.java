@@ -1,4 +1,4 @@
-package ch.unibe.ese.team1.controller.test;
+package ch.unibe.ese.team1.test.controller;
 
 import org.junit.Before;
 import org.junit.Test;

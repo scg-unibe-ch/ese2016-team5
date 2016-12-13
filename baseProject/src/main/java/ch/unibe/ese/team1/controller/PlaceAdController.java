@@ -217,4 +217,10 @@ public class PlaceAdController {
         mainlog.log.warning("PlaceAdController method placeAdForm processed a request");
         return placeAdForm;
     }
+    
+    
+    //--------------for testing only -----------------------------
+    public void setPictureUploader(PictureUploader uploader){
+    	this.pictureUploader = uploader; 
+    }
 }

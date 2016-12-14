@@ -22,6 +22,7 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 @WebAppConfiguration
 /**
  * Tests the functionality of the SignupService Class.
+ *  Has 100% Coverage.
  * @author loren
  *
  */
@@ -35,7 +36,7 @@ public class SignupServiceTest {
 	    private UserService us;
 	
 	@Test
-	public void Test() {
+	public void saveFromTest() {
 		
 		SignupForm sf = new SignupForm();
 		sf.setEmail("adolf@ogi.ch");

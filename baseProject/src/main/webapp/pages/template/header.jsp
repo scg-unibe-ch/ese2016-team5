@@ -87,7 +87,7 @@
                                                                     <li class="admin_menu dropdown right"><a href="/profile/alerts">Alerts</a></li>
                                                                     <li class="admin_menu dropdown"><a href="/profile/schedule">Schedule</a></li>
                                                                     <li class="admin_menu dropdown"><a href="/profile/enquiries">Enquiries</a></li>
-                                                                    <li class="admin_menu dropdown"><a id="messageLink" href="/profile/messages"></a></li>
+                                                                    <li class="admin_menu dropdown"><a class="messageLink" href="/profile/messages">Messages</a></li>
                                                                     <li class="admin_menu dropdown"><a href="/profile/myRooms">My rooms</a></li>
                                                                     <li class="admin_menu dropdown"><a href="/profile/placeAd">Place an ad</a></li>
                                                                 </c:when>
@@ -108,7 +108,7 @@
                                     <li class="admin_menu horizontal right"><a href="/profile/alerts">Alerts</a></li>
                                     <li class="admin_menu horizontal"><a href="/profile/schedule">Schedule</a></li>
                                     <li class="admin_menu horizontal"><a href="/profile/enquiries">Enquiries</a></li>
-                                    <li class="admin_menu horizontal"><a id="messageLink" href="/profile/messages"></a></li>
+                                    <li class="admin_menu horizontal"><a class="messageLink" href="/profile/messages">Messages</a></li>
                                     <li class="admin_menu horizontal"><a href="/profile/myRooms">My rooms</a></li>
                                     <li class="admin_menu horizontal"><a href="/profile/placeAd">Place an ad</a></li>
                                 </c:when>

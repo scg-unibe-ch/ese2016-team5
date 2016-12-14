@@ -18,7 +18,6 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
-import ch.unibe.ese.team1.model.Rating;
 import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;

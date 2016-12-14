@@ -68,9 +68,10 @@ public class EnquiryService {
         enquiryDao.save(visitEnquiry);
     }
 
-    /**
-     * Accepts the enquiry with the given id.
-     */
+ /**
+  * Accepts the enquiry with the given id.
+  * @param enquiryId of the enquiry that should be set to accepted.
+  */
     @Transactional
     public void acceptEnquiry(long enquiryId) {
         // accept visit
@@ -93,8 +94,10 @@ public class EnquiryService {
         ratingDao.save(rating);
     }
 
+
     /**
      * Declines the enquiry with the given id.
+     * @param enquiryId of the enquiry that schould be set to decline
      */
     @Transactional
     public void declineEnquiry(long enquiryId) {
@@ -103,9 +106,11 @@ public class EnquiryService {
         enquiryDao.save(enquiry);
     }
 
-    /**
+     /**
+     *  
      * Resets the enquiry with the given id, meaning that its state will be set
      * to open again.
+     * @param enquiryId the id of the enquiry that should be set to open
      */
     @Transactional
     public void reopenEnquiry(long enquiryId) {

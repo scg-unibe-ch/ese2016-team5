@@ -69,4 +69,5 @@
         <div class="info premium">
             <span>Premium</span>
         </div>
+	<div style="clear: both"></div>
 </div>

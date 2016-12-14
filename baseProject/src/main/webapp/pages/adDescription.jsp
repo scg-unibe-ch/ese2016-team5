@@ -229,7 +229,7 @@
                         <td><h2>Ending date</h2></td>
                         <td>${formattedAuctionEndingDate}</td>
                     </tr>
-                    <tr><td colspan="2"><hr style="margin-bottom: auto" /></td></tr>
+                    <tr><td colspan="2"><hr style="margin: 10px 0" /></td></tr>
 
                 </c:when>
 
@@ -331,8 +331,68 @@
 		<img src="/img/right-arrow.png" />
 	</div>
 </div>
-
+<div class="clearBoth"></div>
 <hr class="clearBoth" />
+
+<div id="adDetailGoogle"><div id="map"></div><div id="pano"></div><hr class="clearBoth" /></div>
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsq47dCVpI-c0Ct-PDLFdg0HWcIB-P69g&callback=initMap"></script>
+<script>
+	var map, sv;
+    function initMap() {
+        var address = "${shownAd.street}, ${shownAd.zipcode} ${shownAd.city}";
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+address+'&sensor=false', null, function (data) {
+            if (data.status === 'OK') {
+                var p = data.results[0].geometry.location;
+                var latlng = {lat: p.lat, lng: p.lng};
+                sv = new google.maps.StreetViewService();
+                panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
+				
+				// Set up the map.
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: latlng,
+					zoom: 16
+				});
+
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: map,
+					title: '${shownAd.title}'
+				});
+				
+				// Street View
+				sv.getPanorama({location: latlng, radius: 50}, processSVData);
+				
+            }
+			else {
+				$('#adDetailGoogle, #adDetailGoogle hr').remove();
+			}
+        });
+    }
+	
+	function processSVData(data, status) {
+		if (status === google.maps.StreetViewStatus.OK) {
+			panorama.setPano(data.location.pano);
+			panorama.setPov({
+				heading: 270,
+				pitch: 0
+			});
+			panorama.setVisible(true);
+			
+			map.addListener('click', function(event) {
+				sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
+			});
+			
+			map.setStreetView(panorama);
+		} else {
+			$('#adDetailGoogle #pano').remove();
+			$('#adDetailGoogle #map').css('width', '100%');
+			google.maps.event.trigger(map, "resize");
+		}
+	}
+</script>
 
 <section>
 	<div id="descriptionTexts">

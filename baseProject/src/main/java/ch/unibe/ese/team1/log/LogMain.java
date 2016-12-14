@@ -5,6 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
 
+/**
+ * This class is responsible for the logger setup. It sets the global/root logger level to warning 
+ * and creates a filehandler.
+ *
+ */
+
 public class LogMain {
 
     public Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -32,13 +38,5 @@ public class LogMain {
             }
         });
         root.addHandler(filehandler);
-    }
-
-    public Logger getLog() {
-        return log;
-    }
-
-    public void setLog(Logger log) {
-        this.log = log;
     }
 }

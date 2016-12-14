@@ -59,7 +59,7 @@
 
 	<tr>
 		<td class="spacingTable"><label for="about-me">About me:</label><a>&emsp;&thinsp;</a><br>
-		<form:textarea id="about-me" path="aboutMe" rows="10" cols="100" /></td>
+		<form:textarea id="about-me" path="aboutMe" rows="10" style="width: 100%" /></td>
 	</tr>
 </table>
 

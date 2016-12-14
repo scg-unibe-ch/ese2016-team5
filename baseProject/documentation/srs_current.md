@@ -235,6 +235,15 @@ In order to better arrange visits and clarfiy questions about flats, there is th
 | Create new message           | **Expected**<br>Similarly to "Contact Advertiser", a user can select 'New' in the messaging section. A pop up will open where he can type in the username of another user (if not exsting there will be an error), subject and message.  <br><br>**Main Actor**<br>Member/Premium                                                            | Done/Closed|
 | New message indicator             | **Expected**<br>If the user receives a new message, the 'Messaging' menu point shows the number of unread messages in brackets as a suffix, e.g. One unread Message would be 'Messages (1)'. After reading the message, the brackets disappear.  <br><br>**Main Actor**<br>Member/Premium | Done/Closed|
 
+#### 3.1.8 Clear old auctions
+The routine can periodically called by a service on the server it contains the follwing procedure
+
+| Title                              | Description                      | Priority |
+|:-----------------------------------|:---------------------------------|:---------|
+| ClearOldAuctions                  | **Procedure**<br>The Routine checks the database for finished auctions and sets their status to obsolete. <br><br> | Done/Closed|
+| Contact the parties          | **Procedure**<br>All members will be contacted when their ad was not succesfully sold on the auction or both parties will be contacted when an auction was succesfull.<br><br>**Main Actor**<br>Member/Premium                            | Done/Closed|
+
+
 ### 3.2 Non-functional requirements
 #### 3.2.1 Controller Logging
 The problem was solved with the root logger. By setting the log level to warning it is possible to catch the errors in the controller classes. For logging the status and the requests of the single methods. We simulate a warning with the specific informations.
@@ -254,10 +263,4 @@ The problem was solved with the root logger. By setting the log level to warning
 # 4. Questions
 ------------
 ##### Meeting Minutes (Discussed Questions)
-* Ads for properties to be sold: What are differences in respect to their fields, compared to rentals? - *Just be reasonsable*
-* Auctions: Which specific features / modes are to be supported (e.g. direct buy, ...)? - *Plain auction, nothing fancy*
-* Closing: What happens if a deal is established, both, in reference to rentals and sells. - *Nothing, really... except probably a message to inform the parties*
-* Extend search to include more filter critieria - which ones? - *the more important ones of those already in the filter that shows with the results*
-* Should features for site admins be planned? Their capabilities would include unrestricted user, flat- and property management. - *Not at this stage*
-* Alerts: When normal users get alerts "a bit late" - how much late? - *No clear answer, make it an option*
-* How are deals established - *Send an e-mail to both parties and remove ad*
+- no more open questions

@@ -30,7 +30,7 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 import ch.unibe.ese.team1.model.dao.VisitDao;
 import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
 
-import static org.mockito.Mockito.*;
+
 
 /**
  * 

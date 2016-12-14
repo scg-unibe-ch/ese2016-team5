@@ -1,16 +1,12 @@
 package ch.unibe.ese.team1.controller.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +16,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.Message;
-import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
-import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 
@@ -160,14 +154,5 @@ public class MessageServiceTest {
 		user.setUserRoles(userRoles);
 		return user;
 	}
-	
-	//Lean message creating method
-	Message createMessage(User sender, User recipient, String subject, String text){
-		Message message = new Message();
-		message.setSender(sender);
-		message.setRecipient(recipient);
-		message.setSubject(subject);
-		message.setText(text);
-		return message;
-	}
+
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import ch.unibe.ese.team1.controller.pojos.forms.AlertForm;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Alert;
 import ch.unibe.ese.team1.model.Gender;
@@ -46,35 +48,36 @@ public class AlertServiceTest {
 	@Autowired
 	AlertService alertService;
 	
-	@Test
-	public void createAlerts() {
-		ArrayList<Alert> alertList = new ArrayList<Alert>();
-		
+	static User adolfOgi;
+	
+	@Before
+	public void setup() {
 		// Create user Adolf Ogi
-		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi", Gender.MALE);
+		adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi", Gender.MALE);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
 		// Create 2 alerts for Adolf Ogi
-		Alert alert = new Alert();
-		alert.setUser(adolfOgi);
-		alert.setType(Type.studio);
-		alert.setOfferType(0);
-		alert.setCity("Bern");
-		alert.setZipcode(3000);
-		alert.setPrice(1500);
-		alert.setRadius(100);
-		alertDao.save(alert);
 		
-		alert = new Alert();
-		alert.setUser(adolfOgi);
-		alert.setType(Type.studio);
-		alert.setOfferType(2);
-		alert.setCity("Bern");
-		alert.setZipcode(3002);
-		alert.setPrice(1000);
-		alert.setRadius(5);
-		alertDao.save(alert);
+		AlertForm alertForm = new AlertForm();
+		alertForm.setType("studio");
+		alertForm.setOfferType(0);
+		alertForm.setCity("3000 - Bern");
+		alertForm.setPrice(1500);
+		alertForm.setRadius(100);
+		alertService.saveFrom(alertForm, adolfOgi);
+		
+		alertForm = new AlertForm();
+		alertForm.setType("studio");
+		alertForm.setOfferType(2);
+		alertForm.setCity("3002 - Bern");
+		alertForm.setPrice(1000);
+		alertForm.setRadius(5);
+		alertService.saveFrom(alertForm, adolfOgi);
+	}
+
+	public void getAlertsByUser(){
+		ArrayList<Alert> alertList = new ArrayList<Alert>();
 		
 		//copy alerts to a list
 		Iterable<Alert> alerts = alertService.getAlertsByUser(adolfOgi);

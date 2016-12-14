@@ -28,6 +28,9 @@ import ch.unibe.ese.team1.model.dao.AdDao;
 import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 
+/**
+ * Tests the AlertService class. It covers about 85%
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/config/springMVC.xml",

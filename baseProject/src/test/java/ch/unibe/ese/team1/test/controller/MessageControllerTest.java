@@ -10,24 +10,28 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import ch.unibe.ese.team1.model.User;
+
 import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Tests the AlertController class
+ * Tests the MessageController class
  */
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/config/springMVC.xml",
 		"file:src/main/webapp/WEB-INF/config/springData.xml",
 		"file:src/main/webapp/WEB-INF/config/springSecurity.xml" })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AlertControllerTest {
+public class MessageControllerTest {
 	
 	private MockMvc mock;
 	
@@ -36,36 +40,37 @@ public class AlertControllerTest {
 	
 	@Before
 	public void setup(){
+		
 		this.mock = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
 	@Test
-	public void getAlerts() throws Exception{
+	public void getMessages() throws Exception{
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn("ese@ese.ch");
 		
-		this.mock.perform(get("/profile/alerts")
+		this.mock.perform(get("/profile/messages")
 				.principal(principal))
-				.andExpect(model().attributeExists("alerts", "alertForm"))
+				.andExpect(model().attributeExists("messages", "messageForm"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("alerts"));
+				.andExpect(view().name("messages"));
 	}
 	
 	@Test
-	public void postAlertsWithoutErrorsTest() throws Exception{
+	public void sendMessages() throws Exception{
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn("ese@ese.ch");
 		
-		this.mock.perform(post("/profile/alerts")
+		User recipient = mock(User.class);
+		when(recipient.getUsername()).thenReturn("test@test.ch");
+		
+		this.mock.perform(post("/profile/messages/sendMessage")
 				.principal(principal)
-				.param("type", "studio")
-				.param("city", "3000 - Bern")
-				.param("price", "1000")
-				.param("radius", "500")
-				.param("offerType", "1")
-				)
-				.andExpect(status().isOk())
-				.andExpect(view().name("alerts"))
-				.andExpect(model().attributeHasNoErrors("alertForm"));
+				.param("subject","hallo")
+				.param("text", "velo")
+				.param("recipient", recipient.getUsername())
+				.param("principal", principal.getName())
+				);
 	}
+	
 }

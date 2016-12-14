@@ -21,6 +21,9 @@ import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 
+/**
+ * Tests the MessageService class. It covers about 95%
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/config/springMVC.xml",

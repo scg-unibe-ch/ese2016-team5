@@ -104,6 +104,8 @@ public class VisitServiceTest  {
 				assertFalse(visitService.getVisitorsForVisit(visit.getId()).iterator().hasNext());
 				
 	}
+	
+	
 	User createUser(String email, String password, String firstName,
 			String lastName, Gender gender) {
 		User user = new User();

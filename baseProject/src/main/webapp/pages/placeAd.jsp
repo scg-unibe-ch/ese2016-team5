@@ -232,16 +232,14 @@
 			</tr>
 		</table>
 		<br />
-		<form:textarea path="roomDescription" rows="10" cols="100"
-			placeholder="Room Description" />
+		<form:textarea path="roomDescription" rows="10" style="width: 100%" placeholder="Room Description" />
 		<form:errors path="roomDescription" cssClass="validationErrorText" />
 	</fieldset>
 
 	<br />
 	<fieldset>
 		<legend>Preferences (optional)</legend>
-		<form:textarea path="preferences" rows="5" cols="100"
-			placeholder="Preferences"></form:textarea>
+		<form:textarea path="preferences" rows="5" style="width: 100%" placeholder="Preferences"></form:textarea>
 	</fieldset>
 
 	<fieldset>

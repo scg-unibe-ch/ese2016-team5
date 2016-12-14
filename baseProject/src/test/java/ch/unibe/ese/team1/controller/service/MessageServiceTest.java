@@ -1,16 +1,12 @@
 package ch.unibe.ese.team1.controller.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +16,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.Message;
-import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
-import ch.unibe.ese.team1.model.dao.AlertDao;
 import ch.unibe.ese.team1.model.dao.MessageDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 
@@ -82,6 +76,12 @@ public class MessageServiceTest {
 		String text2 = "Nein, nein, nein";
 		messageService.sendMessage(sender2, recipient2, subject2, text2);
 		
+		User recipient3 = rogerKoeppel;
+		User sender3 = adolfOgi;
+		String subject3 = "Früher";
+		String text3 = "Ja, da wars noch besser";
+		messageService.sendMessage(sender3, recipient3, subject3, text3);
+		
 		setupDone = true;
 	}
 	
@@ -101,7 +101,7 @@ public class MessageServiceTest {
 		assertEquals(rogerKoeppel, messageList.get(1).getSender());
 		assertEquals("SVP", messageList.get(0).getSubject());
 	}
-	
+
 	@Test
 	public void testOutbox(){
 		ArrayList<Message> messageList = new ArrayList<Message>();
@@ -124,16 +124,16 @@ public class MessageServiceTest {
 		ArrayList<Message> messageList = new ArrayList<Message>();
 		
 		//test unread
-				assertEquals(2, messageService.unread(adolfOgi.getId()));
+				assertEquals(1, messageService.unread(rogerKoeppel.getId()));
 
 		//get inbox for adolfOgi
-				Iterable<Message> messages = messageService.getInboxForUser(adolfOgi);
+				Iterable<Message> messages = messageService.getInboxForUser(rogerKoeppel);
 				for(Message returnedMessage: messages)
 					messageList.add(returnedMessage);
 				
 		//test readMessage
 				messageService.readMessage(messageList.get(0).getId());
-				assertEquals(1, messageService.unread(adolfOgi.getId()));
+				assertEquals(0, messageService.unread(rogerKoeppel.getId()));
 	}
 
 	//Lean user creating method
@@ -154,14 +154,5 @@ public class MessageServiceTest {
 		user.setUserRoles(userRoles);
 		return user;
 	}
-	
-	//Lean message creating method
-	Message createMessage(User sender, User recipient, String subject, String text){
-		Message message = new Message();
-		message.setSender(sender);
-		message.setRecipient(recipient);
-		message.setSubject(subject);
-		message.setText(text);
-		return message;
-	}
+
 }

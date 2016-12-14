@@ -13,6 +13,6 @@ function unreadMessages(place) {
 		if(place == "messages")
 			$("#inbox").html(message);
 		else
-			$("#messageLink").html(message);
+			$(".messageLink").html(message);
 	});
 }

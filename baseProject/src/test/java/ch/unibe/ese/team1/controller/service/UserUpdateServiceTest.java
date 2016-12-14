@@ -19,8 +19,8 @@ import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
 /**
- * Tests the update method.
- * @author loren
+ * Tests the update method of the UserUpdate Service.
+ * @author lorenzo
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)

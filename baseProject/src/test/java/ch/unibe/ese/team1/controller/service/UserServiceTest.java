@@ -19,7 +19,8 @@ import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
 /**
  * Tests the two Find methods and the change method of the  User Role.
- * @author loren
+ * Complete Coverage except the generation of the password in UserService, because it just generates a password.
+ * @author lorenzo
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +40,7 @@ public class UserServiceTest {
 	private UserService us;
 	
 	@Test
-	public void test() {
+	public void changePremiumTest() {
 		
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
 				Gender.MALE);

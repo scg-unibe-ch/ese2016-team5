@@ -127,7 +127,7 @@ public class EnquiryServiceTest {
 	}
 	
 	@Test
-	public void enquireAndAcceptAndDeclineAndOpen() throws Exception {		
+	public void enquireAndAcceptAndDeclineAndOpenAndRatingTest() throws Exception {		
 		//create two users
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
 				Gender.MALE);

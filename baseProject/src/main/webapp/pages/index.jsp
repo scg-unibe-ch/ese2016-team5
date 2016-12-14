@@ -19,7 +19,7 @@
 		<h2>No ads placed yet</h2>
 	</c:when>
 	<c:otherwise>
-		<div id="resultsDiv" class="resultsDiv">	
+		<div id="resultsDiv" class="home resultsDiv">	
 			<h2>Our newest ads:</h2>		
 			<c:forEach var="ad" items="${newest}">
                             <%@include file="ad.jsp"%>

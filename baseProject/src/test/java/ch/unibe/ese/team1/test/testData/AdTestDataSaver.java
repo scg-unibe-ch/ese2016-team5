@@ -473,7 +473,7 @@ public class AdTestDataSaver {
         adAarau.setPreferences(roomPreferences9);
         adAarau.setUser(oprah);
         adAarau.setTitle("Beautiful studio in Aarau");
-        adAarau.setStreet("Bruderholzstrasse 32");
+        adAarau.setStreet("Sengelbachweg 20");
         adAarau.setCity("Aarau");
         adAarau.setGarden(false);
         adAarau.setBalcony(true);

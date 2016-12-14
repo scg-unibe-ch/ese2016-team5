@@ -28,7 +28,7 @@ import ch.unibe.ese.team1.model.UserRole;
  * Responsible for testing all aspects of the BookmarkService.class.
  * It tests if the ad is placed and removed from the List of the bookmarked ads.
  * It covers nearly the whole of the BookmarkService Class.
- *  The only branch not covered is the default return value.
+ * The only branch not covered is the default return value.
  * @author lorenzo
  *
  */

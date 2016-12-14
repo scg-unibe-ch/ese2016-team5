@@ -22,7 +22,6 @@ import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
 
 /**
  * Provides access to enquiries saved in the database.
- * Has nearly complete Coverage. Exception is the compare part of the Code.
  */
 @Service
 public class EnquiryService {

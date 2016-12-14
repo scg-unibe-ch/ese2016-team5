@@ -1,3 +1,4 @@
+package ch.unibe.ese.team1.controller.service;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

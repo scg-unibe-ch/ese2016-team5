@@ -154,7 +154,7 @@ public class EnquiryControllerTest {
 
 		
 		// Kann man nicht wirklich testen
-		enquiryController.sendEnquiryForVisit(id, principal);
+		//enquiryController.sendEnquiryForVisit(id, principal);
 		//enquiryController.enquiriesPage(principal)
 
 		

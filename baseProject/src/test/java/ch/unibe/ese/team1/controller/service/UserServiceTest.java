@@ -1,3 +1,4 @@
+package ch.unibe.ese.team1.controller.service;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
@@ -10,15 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import ch.unibe.ese.team1.controller.pojos.forms.EditProfileForm;
+import ch.unibe.ese.team1.controller.service.BookmarkService;
 import ch.unibe.ese.team1.controller.service.UserService;
-import ch.unibe.ese.team1.controller.service.UserUpdateService;
 import ch.unibe.ese.team1.model.Gender;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
 /**
- * Tests the update method.
+ * Tests the two Find methods and the change method of the  User Role.
  * @author loren
  *
  */
@@ -30,40 +30,32 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 @WebAppConfiguration
 
 
-public class UserUpdateServiceTest {
+public class UserServiceTest {
 
+	@Autowired
+    private UserDao userDao;
 	
-	   @Autowired
-	    private UserDao userDao;
-	   @Autowired
-	    private UserUpdateService uus;
-	   @Autowired
-	    private UserService userService;
-
+	@Autowired
+	private UserService us;
+	
 	@Test
-	public void updateFromTest() {
-
-		
-		EditProfileForm editProfile = new EditProfileForm();
+	public void test() {
 		
 		User adolfOgi = createUser("adolf@ogi.ch", "password", "Adolf", "Ogi",
 				Gender.MALE);
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
-		editProfile.setFirstName("Dolf");
-		editProfile.setLastName("Ogo");
-		editProfile.setPassword("word");
-		editProfile.setUsername("adolf@ogi.ch");
-		editProfile.setAboutMe("Nichts");
+		assertEquals(us.findUserByUsername("adolf@ogi.ch"),adolfOgi);
+		assertEquals(us.findUserById(adolfOgi.getId()),adolfOgi);
 		
-		uus.updateFrom(editProfile);
-		
-		assertEquals(userService.findUserByUsername("adolf@ogi.ch").getFirstName(),"Dolf");
-		assertEquals(userService.findUserByUsername("adolf@ogi.ch").getLastName(),"Ogo");
-		assertEquals(userService.findUserByUsername("adolf@ogi.ch").getPassword(),"word");
-		assertEquals(userService.findUserByUsername("adolf@ogi.ch").getAboutMe(),"Nichts");
+		assertEquals(us.findUserByUsername("adolf@ogi.ch").getUserRoles().iterator().next().getRole(),"ROLE_USER");
+		us.changePremium(adolfOgi);
+		assertEquals(us.findUserByUsername("adolf@ogi.ch").getUserRoles().iterator().next().getRole(),"ROLE_PREMIUM");
+		us.changePremium(adolfOgi);
+		assertEquals(us.findUserByUsername("adolf@ogi.ch").getUserRoles().iterator().next().getRole(),"ROLE_USER");
 	}
+
 
 	User createUser(String email, String password, String firstName,
 			String lastName, Gender gender) {

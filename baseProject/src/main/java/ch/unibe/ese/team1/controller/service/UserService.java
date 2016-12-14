@@ -10,7 +10,7 @@ import java.security.SecureRandom;
 
 /**
  * Handles all database actions concerning users.
- * Complete Coverage except the generation of the password in the UserServiceTest.
+ * 
  * 
  */
 @Service

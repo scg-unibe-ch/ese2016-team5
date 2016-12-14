@@ -42,6 +42,7 @@ The following section describes the behaviour of the Home Platform Application. 
 
 #### 2.1.1 User Management
 The following section provides an overview of the basic behavior of becoming a member of Home Platform.
+
 | Title                              | Description                            | Priority |
 |:-----------------------------------|:---------------------------------------|:--------|
 | Users without account can sign up  | **Trigger**<br>User clicked on 'Sign up' Link which is found in top right corner<br><br>**Expected**<br>User has selected 'Login' in menu bar on home screen and afterwards selected 'Sign Up' on login page. Registration page opens where user can enter his personal information to create an account.<br><br>**Main Actor**<br>User                                     | HIGH |

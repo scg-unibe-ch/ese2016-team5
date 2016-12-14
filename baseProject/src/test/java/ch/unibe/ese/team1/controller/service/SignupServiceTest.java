@@ -10,10 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team1.controller.pojos.forms.SignupForm;
 import ch.unibe.ese.team1.controller.service.SignupService;
-import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.model.Gender;
-import ch.unibe.ese.team1.model.User;
-import ch.unibe.ese.team1.model.dao.UserDao;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/config/springMVC.xml",
@@ -22,20 +19,19 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 @WebAppConfiguration
 /**
  * Tests the functionality of the SignupService Class.
- * @author loren
+ *  Has 100% Coverage.
+ * @author lorenzo
  *
  */
 public class SignupServiceTest {
 
-	 @Autowired
-	    private UserDao userDao;
+
 	 @Autowired
 	    private SignupService ss;
-	 @Autowired
-	    private UserService us;
+
 	
 	@Test
-	public void Test() {
+	public void saveFromTest() {
 		
 		SignupForm sf = new SignupForm();
 		sf.setEmail("adolf@ogi.ch");

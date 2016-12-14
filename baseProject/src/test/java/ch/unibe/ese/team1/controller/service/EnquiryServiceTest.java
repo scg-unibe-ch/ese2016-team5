@@ -17,6 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
+import ch.unibe.ese.team1.model.Rating;
 import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
@@ -24,14 +25,18 @@ import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.VisitEnquiry;
 import ch.unibe.ese.team1.model.VisitEnquiryState;
 import ch.unibe.ese.team1.model.dao.AdDao;
+import ch.unibe.ese.team1.model.dao.RatingDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 import ch.unibe.ese.team1.model.dao.VisitDao;
 import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
+
+import static org.mockito.Mockito.*;
 
 /**
  * 
  * Tests both Visit and VisitEnquiry functionality. Since one makes no sense
  * without the other, these tests were grouped into one suite.
+ * It covers neary the whole code except, the comparing of enquiries.
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,6 +62,10 @@ public class EnquiryServiceTest {
 	@Autowired
 	VisitDao visitDao;
 	
+	@Autowired
+	UserService us;
+	@Autowired
+	RatingDao rd;
 	@Autowired
 	VisitEnquiryDao visitEnquiryDao;
 	
@@ -175,7 +184,8 @@ public class EnquiryServiceTest {
 		enquiry.setVisit(visit);
 		enquiry.setSender(adolfOgi);
 		enquiry.setState(VisitEnquiryState.OPEN);
-		visitEnquiryDao.save(enquiry);
+		enquiryService.saveVisitEnquiry(enquiry);
+
 		
 		Iterable<VisitEnquiry> ogiEnquiries = visitEnquiryDao.findBySender(adolfOgi);
 		ArrayList<VisitEnquiry> ogiEnquiryList = new ArrayList<VisitEnquiry>();
@@ -196,8 +206,16 @@ public class EnquiryServiceTest {
 
 		assertTrue(enquiryService.getEnquiriesByRecipient(adolfOgi).iterator().hasNext());
 		
-		//enquiryService.rate(blocher, adolfOgi, 2);
-		//assertEquals(enquiryService.getRatingByRaterAndRatee(blocher, adolfOgi),2);
+
+		Rating r = new Rating();
+		r.setRater(blocher);
+		r.setRatee(adolfOgi);
+		r.setRating(2);
+		rd.save(r);
+		assertEquals(enquiryService.getRatingsByRater(blocher).iterator().next().getRating(),2);
+		enquiryService.rate(us.findUserById(blocher.getId()), us.findUserById(adolfOgi.getId()), 3);
+		assertEquals(enquiryService.getRatingsByRater(blocher).iterator().next().getRating(),3);
+
 	}
 	
 	//Lean user creating method

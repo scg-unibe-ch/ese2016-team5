@@ -13,6 +13,7 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 
 /**
  * Handles updating a user's profile.
+ * Has 100% Coverage in the Test.
  */
 @Service
 public class UserUpdateService {

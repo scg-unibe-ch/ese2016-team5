@@ -5,6 +5,7 @@ import javax.persistence.OneToOne;
 
 /**
  * Represents a picture that is linked to a user
+ * Doesn't have a Test because there is only a get and set method.
  */
 @Entity
 public class UserPicture extends Picture {

@@ -1,4 +1,6 @@
+package ch.unibe.ese.team1.test.controller;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -16,6 +18,7 @@ import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
+import ch.unibe.ese.team1.model.Rating;
 import ch.unibe.ese.team1.model.Type;
 import ch.unibe.ese.team1.model.User;
 import ch.unibe.ese.team1.model.UserRole;
@@ -23,21 +26,33 @@ import ch.unibe.ese.team1.model.Visit;
 import ch.unibe.ese.team1.model.VisitEnquiry;
 import ch.unibe.ese.team1.model.VisitEnquiryState;
 import ch.unibe.ese.team1.model.dao.AdDao;
+import ch.unibe.ese.team1.model.dao.RatingDao;
 import ch.unibe.ese.team1.model.dao.UserDao;
 import ch.unibe.ese.team1.model.dao.VisitDao;
 import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
 
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+/**
+ * Tests the Enquiry Controller functionality.
+ * The methods of  acceptEnquiry, declineEnquiry, reopenEnquiry and rateUser are already in the EnquiryService Class, 
+ * so they don't need to be tested again.
+ * 
+ * 
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 		"file:src/main/webapp/WEB-INF/config/springMVC.xml",
 		"file:src/main/webapp/WEB-INF/config/springData.xml",
 		"file:src/main/webapp/WEB-INF/config/springSecurity.xml"})
 @WebAppConfiguration
+
+
 public class EnquiryControllerTest {
 
 	@Autowired
@@ -63,6 +78,8 @@ public class EnquiryControllerTest {
 	
 	@Autowired
 	AdDao adDao;
+	@Autowired
+	RatingDao rd;
 	
 	@Test
 	public void enquiresPageTest() throws Exception{
@@ -72,6 +89,9 @@ public class EnquiryControllerTest {
 		adolfOgi.setAboutMe("Wallis rocks");
 		userDao.save(adolfOgi);
 		
+		User blocher = createUser("christoph@blocher.eu", "svp", "Christoph", "Blocher", Gender.MALE);
+		blocher.setAboutMe("I own you");
+		userDao.save(blocher);
 		
 		//save an ad
 		Date date = new Date();
@@ -128,16 +148,15 @@ public class EnquiryControllerTest {
 		
 		long venqID = ogiEnquiryList.get(0).getId();
 		
-
-		//enquiryController.rateUser((Principal) adolfOgi, venqID, 2);
-		// get Rating
 		
-		enquiryController.acceptEnquiry(venqID);
-		enquiryController.declineEnquiry(venqID);
-		enquiryController.reopenEnquiry(venqID);
+		Principal test = Mockito.mock(Principal.class);
+		when(test.getName()).thenReturn("adolf@ogi.ch");
+
+		
 		// Kann man nicht wirklich testen
 		//enquiryController.sendEnquiryForVisit(id, principal);
 		//enquiryController.enquiriesPage(principal)
+
 		
 	}
 	User createUser(String email, String password, String firstName,

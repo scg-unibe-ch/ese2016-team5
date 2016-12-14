@@ -18,6 +18,7 @@ public class LogMain {
     public LogMain() {
         Logger root = Logger.getLogger("");
         FileHandler filehandler = null;
+        // exception only when there are no write permissions, difficult to test
         try {
             filehandler = new FileHandler("controller.log");
         } catch (SecurityException | IOException e) {

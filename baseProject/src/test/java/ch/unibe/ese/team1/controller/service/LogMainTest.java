@@ -13,7 +13,8 @@ import ch.unibe.ese.team1.log.LogMain;
 
 /**
  * This class is responsible for testing the LogMain class. Everything is covered except the try and catch exception
- * of the filehandler. 
+ * of the filehandler. The only way to force this error is when the filehandler doesn't have write permission.
+ * Otherwise it will make backup logs and merge it later. It was to difficult to test this. 
  * 
  * With this testscenario every other test e.g. in the controller tests is not necessary for the logging procedure.
  * 

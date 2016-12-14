@@ -82,6 +82,12 @@ public class MessageServiceTest {
 		String text2 = "Nein, nein, nein";
 		messageService.sendMessage(sender2, recipient2, subject2, text2);
 		
+		User recipient3 = rogerKoeppel;
+		User sender3 = adolfOgi;
+		String subject3 = "Früher";
+		String text3 = "Ja, da wars noch besser";
+		messageService.sendMessage(sender3, recipient3, subject3, text3);
+		
 		setupDone = true;
 	}
 	
@@ -101,7 +107,7 @@ public class MessageServiceTest {
 		assertEquals(rogerKoeppel, messageList.get(1).getSender());
 		assertEquals("SVP", messageList.get(0).getSubject());
 	}
-	
+
 	@Test
 	public void testOutbox(){
 		ArrayList<Message> messageList = new ArrayList<Message>();
@@ -124,16 +130,16 @@ public class MessageServiceTest {
 		ArrayList<Message> messageList = new ArrayList<Message>();
 		
 		//test unread
-				assertEquals(2, messageService.unread(adolfOgi.getId()));
+				assertEquals(1, messageService.unread(rogerKoeppel.getId()));
 
 		//get inbox for adolfOgi
-				Iterable<Message> messages = messageService.getInboxForUser(adolfOgi);
+				Iterable<Message> messages = messageService.getInboxForUser(rogerKoeppel);
 				for(Message returnedMessage: messages)
 					messageList.add(returnedMessage);
 				
 		//test readMessage
 				messageService.readMessage(messageList.get(0).getId());
-				assertEquals(1, messageService.unread(adolfOgi.getId()));
+				assertEquals(0, messageService.unread(rogerKoeppel.getId()));
 	}
 
 	//Lean user creating method

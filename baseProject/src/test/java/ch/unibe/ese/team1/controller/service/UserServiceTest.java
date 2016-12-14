@@ -19,7 +19,7 @@ import ch.unibe.ese.team1.model.UserRole;
 import ch.unibe.ese.team1.model.dao.UserDao;
 /**
  * Tests the two Find methods and the change method of the  User Role.
- * @author loren
+ * @author lorenzo
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)

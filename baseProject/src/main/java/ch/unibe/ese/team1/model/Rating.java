@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 /**
  * Describes a rating that was given to a ratee by a rater.
+ * Has no Test because there are only set and get methods.
  */
 @Entity
 public class Rating {

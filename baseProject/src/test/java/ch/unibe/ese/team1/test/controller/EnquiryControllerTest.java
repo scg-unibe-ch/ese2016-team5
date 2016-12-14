@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ch.unibe.ese.team1.controller.EnquiryController;
 import ch.unibe.ese.team1.controller.service.EnquiryService;
-import ch.unibe.ese.team1.controller.service.UserService;
 import ch.unibe.ese.team1.controller.service.VisitService;
 import ch.unibe.ese.team1.model.Ad;
 import ch.unibe.ese.team1.model.Gender;
@@ -42,7 +41,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * The methods of  acceptEnquiry, declineEnquiry, reopenEnquiry and rateUser are already in the EnquiryService Class, 
  * so they don't need to be tested again.
  * 
- * 
+ * Unfortunately I have not quite an idea how to correctly test the rest of the functionality.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -58,15 +57,6 @@ public class EnquiryControllerTest {
 	private EnquiryController enquiryController;
 	
 	@Autowired
-	private EnquiryService enquiryService;
-
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private VisitService visitService;
-	
-	@Autowired
 	UserDao userDao;
 	
 	@Autowired
@@ -79,6 +69,8 @@ public class EnquiryControllerTest {
 	AdDao adDao;
 	@Autowired
 	RatingDao rd;
+	@Autowired
+	EnquiryService enquiryService;
 	
 	@Test
 	public void enquiresPageTest() throws Exception{
@@ -152,8 +144,9 @@ public class EnquiryControllerTest {
 		when(test.getName()).thenReturn("adolf@ogi.ch");
 
 		
-		// Kann man nicht wirklich testen
-		//enquiryController.sendEnquiryForVisit(id, principal);
+		// Keine Ahung wie testen
+		enquiryController.sendEnquiryForVisit(venqID, test);
+		assertEquals(enquiryService.getEnquiriesByRecipient(adolfOgi).iterator().next().getState(),VisitEnquiryState.OPEN);
 		//enquiryController.enquiriesPage(principal)
 
 		

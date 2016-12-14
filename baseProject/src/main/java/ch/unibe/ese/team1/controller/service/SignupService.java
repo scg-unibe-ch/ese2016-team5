@@ -14,7 +14,9 @@ import ch.unibe.ese.team1.model.dao.UserDao;
 
 /**
  * Handles the persisting of new users
+ * Has 100% Coverage in it's Test.
  */
+
 @Service
 public class SignupService {
 

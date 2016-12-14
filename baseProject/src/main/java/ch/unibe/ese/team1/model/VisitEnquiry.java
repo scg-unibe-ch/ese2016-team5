@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Models an enquiry for a visit between an advertiser and an ad searcher.
+ * Has only get and set methods, so there is no need for a Test.
  */
 @Entity
 public class VisitEnquiry {

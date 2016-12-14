@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 /**
  * Describes a user on the platform.
+ * Doesn't have a Test because only get, set and boolean methods.
  */
 @Entity
 @Table(name = "users")

@@ -10,6 +10,7 @@ import javax.persistence.Table;
 /**
  * Desribes the role a of user concerning Spring security. For example, a user
  * can be a normal user or also an administrator.
+ * Doesn't have a Test because there are only get and set methods.
  */
 @Entity
 @Table(name = "user_roles")

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * A visit for a flat, has a time window.
+ * Has only get and set methods, so there is no need for a Test.
  */
 @Entity
 public class Visit {

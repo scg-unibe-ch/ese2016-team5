@@ -16,7 +16,7 @@ import ch.unibe.ese.team1.model.dao.VisitDao;
 import ch.unibe.ese.team1.model.dao.VisitEnquiryDao;
 
 /**
- * Provides operations for getting and saving visits
+ * Provides operations for getting and saving visits.
  */
 @Service
 public class VisitService {
